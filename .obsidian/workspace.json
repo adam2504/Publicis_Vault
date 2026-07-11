@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2.Areas/TODO.md",
+                "file": "2026-07-11.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "TODO"
+              "title": "2026-07-11"
             }
           }
         ]
@@ -209,7 +209,7 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "9f186e7f6da29a19",
+  "active": "bc66fcc4ca087833",
   "lastOpenFiles": [
     "2026-07-11.md",
     "2.Areas/Accomplissements.md",
