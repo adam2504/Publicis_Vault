@@ -1,0 +1,12 @@
+{
+  "templates_folder": "_Templates",
+  "syntax_highlighting": true,
+  "trigger_on_file_creation": false,
+  "auto_jump_to_cursor": true,
+  "enable_folder_templates": false,
+  "folder_templates": [],
+  "enable_system_commands": false,
+  "templates_pairs": [],
+  "enabled_templates_hotkeys": [],
+  "startup_templates": []
+}

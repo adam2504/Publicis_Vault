@@ -1,0 +1,39 @@
+---
+type: area
+---
+# TODO
+
+## MINE - MMM AI Agent
+
+- [ ] Demander aux Data Scientists où en sont les MMMs de Longchamp et Stellantis (Stellantis est live sur Opel DE et Peugeot DE, à voir avec Katia et Ines)
+- [ ] Parler à Clarisse (Longchamp) et Katia (Stellantis) une fois que les data sont dispo, pour introduire sujet avec ouverture conseil
+- [ ] Réaliser passation/ouverture au conseil, puis demander questions qu'ils ont/client pourrait avoir, ce qu'ils pensent des réponses, ce qui pourrait être améliorer etc
+- [ ] Améliorer l'agent avec feedbacks
+	- [ ] canal "Media total" n'est pas un vrai canal
+	- [ ] Durcir contre l'hallucination de tool (root cause `no_answer` trouvée : `schema_agent` hallucine `execute_sql`) → scoper le `BUSINESS_CONTEXT` de `schema_agent` (+ instruction « get_table_info only », + retry backend éventuel)
+	- [ ] Enrichir le `BUSINESS_CONTEXT` avec les DS (définitions variables/données)
+	- [ ] Tools saturation + allocation + aide lecture graphiques / narratif
+## MINE - FeedGen Catégorisation
+
+- [ ] Vrai jeu d'éval avec Manu (GPC vérifié à la main + titre brut si possible)
+- [ ] Explorer le cross-encoder en prod (serving batch + fine-tuning)
+- [ ] Se rapprocher de Dan : brancher le RAG en amont de sa solution LLM
+## MINE × L'OREAL - AMC Analytics
+
+- [x] Rédiger la note d'ingestion pour Khadija (prochains extracts BQ) : nommage de table `<étude>__<marque>__<période>`, transfo CSV (décimales/dates/`;`/`path`), MAJ du registre par sa Cloud Function — détails dans [[AMC Analytics]]
+- [ ] Finaliser étude Full Funnel avec bons graphiques, une fois que prez finale validée
+- [ ] Traduire dashboards Looker en native React
+- [ ] Ajouter étude Brand Store
+
+## L'OREAL - Passation Basma & Audiences
+
+- [ ] Continuer les points de passation Basma → remplir le knowledge avec le réel (le schéma est fait, les vraies données manquent)
+- [ ] Nettoyer / segmenter le knowledge une fois rempli
+- [ ] Brancher le Copilot de Manu (le plus avancé) sur le knowledge + tester l'aide à la création — *débloquer l'autorisation d'ajout de fichier avec Bradley*
+- [ ] *(Optionnel)* ajouter du knowledge connexe (historique audiences, doc LiveRamp)
+- [ ] *(Plus tard)* évaluer un module ConnectedHub — API LiveRamp directe ou agent connecté au knowledgeok
+## Réseau/Rencontres
+
+- [ ] Parler avec Sidy Diallo
+- [ ] Parler avec Anael Cabrol
+- [ ] Parler avec Yann Legrand

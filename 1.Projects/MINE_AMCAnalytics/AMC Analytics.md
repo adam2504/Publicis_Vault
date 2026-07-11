@@ -1,0 +1,131 @@
+﻿---
+type: project
+statut: en cours
+discipline: dev
+implication: lead
+client: LOREAL
+---
+
+Plateforme : [[Mine Platform]]
+
+## Objectif du module
+
+Centraliser **tout ce qui touche à Amazon Marketing Cloud** sur Mine : analyses, dashboards et (à terme) extraction de données directement depuis la plateforme AMC.
+
+Le module est pensé pour plusieurs types d'utilisateurs :
+
+- **Équipes data** : création d'analyses, traitement des données AMC
+- **Traders** : exploration des résultats, insights campagnes
+- **Équipes conseil** : lecture des dashboards, fourniture d'insights aux clients
+
+## Structure du module
+
+Le module est organisé en **sections accessibles via un hub central** :
+
+### 1. Analyses
+
+Le **Full Funnel** lit désormais ses données **directement depuis BigQuery** (sélection d'une table étude × marque × période), en remplacement de l'upload CSV manuel ; rendu en deck, sortie PowerPoint à archi fixe. Voir **Architecture data (BigQuery)** plus bas.
+
+- **Full Funnel** — analyse multi-canal, media mix, path to conversion, time of conversion (branché sur BQ)
+- **Campaign Focus** — (à venir)
+
+### 2. Dashboards
+
+Migration des dashboards Looker (Khadija) vers React. Embarqués en iframe dans un premier temps, puis migrés progressivement.
+
+**Client L'Oréal :**
+
+- **Audiences Insights** — seul dashboard accessible à L'Oréal (MM & P2C ne contient pas de data L'Oréal)
+
+**Client Publicis (équipes commerce internes) :**
+
+- **Audiences Insights**
+- **MM & P2C**
+- **Etude Efficacite Video Amazon**
+
+> Matrice d'accès révisée le 2026-07-09 (voir Décisions clés). Les données sont isolées par dataset BQ dédié au client (voir Architecture data ci-dessous).
+
+### 3. Data Querying _(futur)_
+
+Requêtage et extraction de données directement depuis la plateforme AMC, sans passer par un export manuel. Premier test effectué par Brieg avec un agent ayant accès à un MCP avec APIs Amazon Ads, peu concluant pour l'instant.
+
+## Gestion des accès
+
+Système à deux niveaux :
+
+**Niveau client** (`availableDashboards`) — stocké dans `customers/{id}/products/amazon-marketing-cloud-analytics`. Définit quels dashboards existent pour ce client. Configurable depuis la page Settings (admins plateforme) ou directement en Firestore.
+
+**Niveau utilisateur** (`allowedDashboards`) — stocké dans `users/{id}/products/amazon-marketing-cloud-analytics`. Définit, parmi les dashboards disponibles pour le client, lesquels chaque utilisateur voit. Remplace l'ancien `dashboards: boolean`.
+
+La page **Settings** (admins module + admins plateforme) permet de gérer les deux niveaux. Les checkboxes utilisateur sont automatiquement filtrées par le périmètre client — impossible d'accorder un dashboard hors périmètre.
+
+Les équipes conseil n'ont pas accès aux sous-modules d'analyses.
+
+**Partage des dashboards Looker (iframe).** Les dashboards sont embarqués via un lien de partage Looker. Un lien à partage **restreint** n'est accessible qu'aux personnes ayant *déjà* l'accès au Looker **et un compte Google lié à leur adresse Publicis** — ce qui exclut les utilisateurs sans compte Google (cas rencontré avec Nicolas Vivies, PMO Retail Media). Pour que l'iframe soit accessible à **toute personne ayant accès au sous-module** dans ConnectedHub, le dashboard doit être partagé en **« unlisted »** côté Looker (toute personne avec le lien y accède). C'est le paramètre à appliquer sur les dashboards embarqués. *(Résolu avec Khadija le 2026-07-09.)*
+
+## Architecture data (BigQuery)
+
+Le module lit ses données dans **BigQuery** (projet `amira-test`, région **EU**), via des **routes backend** — le client ne touche jamais BQ.
+
+- **Isolation par client** : **un dataset par locataire ConnectedHub**, dérivé du customerId → `AMC_ConnectedHub_<customerId>`. L'Oréal = `AMC_ConnectedHub_7cR1jE`. Un client ne peut atteindre la data d'un autre (frontière dataset/IAM). *(Le split dev/prod initial a été abandonné le 2026-07-09 : un seul dataset par client.)*
+- **Nomenclature des tables** :
+  - Analyses (volatiles) : `<étude>__<marque>__<période>` — ex. `full_funnel__mugler__2025_q4` (`__` entre dimensions, `_` simple à l'intérieur).
+  - Dashboards natifs (futurs, fixes) : préfixe `dash_` — ex. `dash_audiences_insights`.
+- **Registre** : table `registry` dans chaque dataset, une ligne par table analyse (libellés UI, dates réelles, `row_count`, `is_active`). Le module la lit pour bâtir la sélection ; l'UI affiche les libellés, pas le nom BQ brut. La date « dernière modif » vient de `__TABLES__.last_modified_time`.
+- **Routes** : `GET /analyses` (catalogue via registre) et `GET /analyses/:tableId` (lecture d'une table, `tableId` validé contre le registre, valeurs sérialisées en string → réutilise le pipeline CSV existant côté client).
+- **Ingestion** : CSV AMC transformés (`;`, décimales virgule→point, dates ISO, `path` intact) puis chargés non partitionnés. Données actuelles : Mugler (298 l.) + Azzaro (1366 l.). ⚠️ le registre doit être mis à jour à chaque nouvel import (manuel aujourd'hui).
+
+## Stack technique
+
+- **Client** : React 19 + TypeScript, React Router 7
+- **Routing** : `client/src/app/routes/app/amazon-marketing-cloud-analytics/`
+- **Feature** : `client/src/features/amazon-marketing-cloud-analytics/`
+- **Backend** : Express — `server/src/features/amazon-marketing-cloud-analytics/`
+- **Data** : BigQuery, projet `amira-test` (EU), dataset `AMC_ConnectedHub_7cR1jE` — voir Architecture data
+- **Branches** : `feature/AMC-Analytics` (accès dashboards, mergée) ; `feat/amc-full-funnel-bigquery` (Full Funnel × BQ, mergée sur `main` — PR #1653/#1654)
+
+## Décisions clés
+
+| Date       | Décision                                                               | Raison                                                                                                                           |
+| ---------- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-06-19 | Renommage "Amazon Marketing Cloud analyses" → **AMC Analytics**        | Nom trop long, pas cohérent entre les pages                                                                                      |
+| 2026-06-19 | Icône **Layers** (couches empilées)                                    | Représente le caractère multi-couches de la plateforme (analyses + dashboards + data) — plus fidèle que l'ancien icône camembert |
+| 2026-06-19 | Nouvelle description hub                                               | Reflète l'élargissement du module au-delà de la seule analyse full funnel                                                        |
+| 2026-06-25 | Accès dashboards : `allowedDashboards: string[]` par utilisateur       | Remplace le boolean `dashboards` — permet un contrôle granulaire par dashboard                                                   |
+| 2026-06-25 | Périmètre client : `availableDashboards` dans le doc Firestore client  | Empêche d'accorder à un user un dashboard hors périmètre de son client                                                           |
+| 2026-06-25 | Module ouvert à Publicis (1 dashboard) + L'Oréal limité à 2 dashboards | Séparation commerce (Publicis) / data-trading (L'Oréal)                                                                          |
+| 2026-07-09 | **Matrice d'accès révisée** : L'Oréal = Audience Insights **seul** ; Publicis (commerce) = **les 3** (Audience Insights + MM & P2C + Étude Vidéo) | MM & P2C ne contient pas de data L'Oréal (accès demandé par curiosité, non accordé) ; les études commerce sont côté Publicis. Remplace la répartition du 25/06 |
+| 2026-07-09 | **Data BQ** : un dataset par client (`AMC_ConnectedHub_<customerId>`, EU), tables analyse `<étude>__<marque>__<période>` + registre ; Full Funnel lit BQ via routes backend | Isolation par client au niveau dataset ; découpler nom BQ / libellé UI ; remplacer l'upload CSV |
+| 2026-07-09 | Abandon du split dev/prod (`_dev`) → un seul dataset par client | Simplicité (un client, faible volume) ; contrepartie : plus d'isolation staging |
+
+## Personnes clés
+
+| Rôle dans le projet                         | Personne    |
+| ------------------------------------------- | ----------- |
+| Dev — module Mine                           | Adam, Eddie |
+| Data / dashboards Looker, pipeline AMC      | Khadija     |
+| Data Strat — référent L'Oréal               | Pierre      |
+| AMC Modeled Audiences, backup data querying | Hajar       |
+
+## Questions ouvertes
+
+- [ ] Calendrier de migration des dashboards Looker → React (dépend de Khadija)
+- [ ] Périmètre exact du Campaign Focus
+- [ ] Faisabilité et accès API pour le data querying direct AMC
+- [x] Créer module client Publicis avec dashboard "Etude Efficacite Video Amazon" → système d'accès implémenté, reste à configurer Firestore + utilisateurs Publicis
+- [x] Clarifier accès aux dashboards L'Oréal → **révisé 2026-07-09** : L'Oréal = Audience Insights **seul** (MM & P2C sans data L'Oréal). ~~Ancienne réponse (25/06) : audiences-insights + mm-p2c.~~
+- [x] Quelles équipes auront accès à quoi ? → **révisé 2026-07-09** : Publicis (commerce) = les 3 dashboards ; L'Oréal = Audience Insights seul. ~~Ancienne réponse (25/06) : Publicis 1 dashboard / L'Oréal 2.~~
+
+## Évolutions envisagées
+
+- **Traçabilité de version des études** *(idée, écartée pour l'instant)* : à chaque import, la Cloud Function horodate la table (`loaded_at`) dans le registre, et le module **estampille le deck / l'export PowerPoint** (« données extraites le X · chargées le Y · N lignes »). But : savoir sur quelle version de la donnée repose un deck et détecter les ré-imports. On a déjà ~80% (la tuile « Last Updated » lit `last_modified_time`). Version lourde — **régénérer** un ancien deck à l'identique — = conserver des **snapshots BQ** par import (registre → `snapshot_ref`). À rattacher au futur **contrat d'ingestion / note Khadija** (nommage, transfo CSV, MAJ du registre par la CF).
+
+## Réunions
+
+- [[2026-06-25 Point AMC Khadija]]
+- [[2026-07-07 Onboarding AMC Khadija]]
+
+## Ressources
+
+- Notions sur l'outil AMC (comptes, instances, tables, API) : [[AMC — Notions]]
+- Documentation API AMC : https://advertising.amazon.com/API/docs/en-us/reference/api-overview

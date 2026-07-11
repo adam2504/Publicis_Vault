@@ -1,0 +1,34 @@
+{
+  "sharedFolders": [],
+  "endpoints": {},
+  "relayOnPrem": {
+    "enabled": true,
+    "servers": [
+      {
+        "id": "evc-team-relay",
+        "name": "EVC Team Relay",
+        "controlPlaneUrl": "https://cp.tr.entire.vc",
+        "isValidated": false
+      }
+    ],
+    "defaultServerId": "evc-team-relay"
+  },
+  "enableDocumentStatus": false,
+  "enableNewLinkFormat": false,
+  "enableDeltaLogging": false,
+  "enableDocumentHistory": false,
+  "enableEditorTweens": false,
+  "enableNetworkLogging": false,
+  "enableCanvasSync": false,
+  "enableVerifyUploads": false,
+  "enableAutomaticDiffResolution": true,
+  "enableDiscordLogin": false,
+  "enableSelfManageHosts": true,
+  "enableToasts": true,
+  "enablePresenceAvatars": true,
+  "enableLiveEmbeds": true,
+  "enablePreviewViewHooks": true,
+  "enableMetadataViewHooks": true,
+  "enableKanbanView": true,
+  "debugging": false
+}

@@ -1,0 +1,269 @@
+{
+  "main": {
+    "id": "402058a318bab726",
+    "type": "split",
+    "children": [
+      {
+        "id": "5f4b5f3325de2f4e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bc66fcc4ca087833",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "2.Areas/TODO.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "TODO"
+            }
+          },
+          {
+            "id": "7e2b4973214e4ea7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "1.Projects/MINE_AMCAnalytics/Réunions/2026-07-07 Onboarding AMC Khadija.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2026-07-07 Onboarding AMC Khadija"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "de3fd899cc2cbf95",
+    "type": "split",
+    "children": [
+      {
+        "id": "ca15b055aa19b6b2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c1986407e5ff7253",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "40bf47abc1d2cd72",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Rechercher"
+            }
+          },
+          {
+            "id": "d1428fa632f53faa",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Signets"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 293.5
+  },
+  "right": {
+    "id": "6c6f7d492fc04625",
+    "type": "split",
+    "children": [
+      {
+        "id": "006dd468852030b4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f560c27f37c07ef2",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "_Templates/Session.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Rétrolien pour Session"
+            }
+          },
+          {
+            "id": "4c229c30a39f25d7",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "_Templates/Session.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Liens sortants de Session"
+            }
+          },
+          {
+            "id": "73395d5d1c37ea4a",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Mots-clés"
+            }
+          },
+          {
+            "id": "b3a0cafe293a5799",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Toutes les propriétés"
+            }
+          },
+          {
+            "id": "9d84fe6b8b84a396",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "_Templates/Session.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Plan de Session"
+            }
+          },
+          {
+            "id": "e168336e2531712e",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
+            }
+          },
+          {
+            "id": "9f186e7f6da29a19",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
+          }
+        ],
+        "currentTab": 6
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "evc-team-relay:Relay settings": false,
+      "obsidian-git:Open Git source control": false,
+      "pdf-plus:PDF++: Toggle auto-copy": false,
+      "pdf-plus:PDF++: Toggle auto-focus": false,
+      "pdf-plus:PDF++: Toggle auto-paste": false,
+      "templater-obsidian:Templater": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false
+    }
+  },
+  "active": "c1986407e5ff7253",
+  "lastOpenFiles": [
+    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md",
+    "1.Projects/MINE_MMMAIAgent/Architecture technique.md",
+    "2.Areas/TODO.md",
+    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.7304092e7715",
+    "1.Projects/MINE_MMMAIAgent/Architecture technique.md.tmp.39496.f6bfcca4a36a",
+    "1.Projects/MINE_MMMAIAgent/Architecture technique.md.tmp.39496.df9253508e2e",
+    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.c73f4d70cc60",
+    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.b8d219cf7fde",
+    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.8348f7417b07",
+    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.f941308aacc2",
+    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.21b90311abfa",
+    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.04cca03367e0",
+    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.4b1ad9e03fc3",
+    "1.Projects/MINE_MMMAIAgent/Testings Internes.md",
+    "2.Areas/Accomplissements.md",
+    "2.Areas/Bilan.md",
+    "3.Resources/AMC/AMC — Notions.md",
+    "3.Resources/Onboardings/VERISURE_CreativeInsights/Réunions/2026-06-18 Point avec Léonie & Hajar.md",
+    "3.Resources/Onboardings/VERISURE_CreativeInsights/Creative Insights Verisure.md",
+    "4.Archive/LOREAL_ViralBeauty/Réunions/2026-06-29 Pré-read Viral Beauty.md",
+    "4.Archive/LOREAL_ViralBeauty/Réunions/2026-06-25 Point avec Basma.md",
+    "4.Archive/LOREAL_ViralBeauty/Réunions/2026-06-16 Point avec Basma.md",
+    "4.Archive/LOREAL_ViralBeauty/Réunions/2026-06-18 Point avec Basma et Pierre.md",
+    "4.Archive/LOREAL_ViralBeauty/Viral Beauty.md",
+    "3.Resources/AMC/Contrat d'ingestion BQ.md",
+    "_Attachments/2026-07-09-nicolas-vivies-remerciement-acces-looker.png",
+    "1.Projects/MINE_AMCAnalytics/Sessions/Session 2026-07-09.md",
+    "1.Projects/MINE_AMCAnalytics/Architecture Data BQ.md",
+    "1.Projects/MINE_AMCAnalytics/Spec Module BQ Full Funnel.md",
+    "1.Projects/MINE_AMCAnalytics/Sous Module - Full Funnel.md",
+    "1.Projects/MINE_AMCAnalytics/Plan Implementation Data BQ.md",
+    "1.Projects/MINE_AMCAnalytics/Plan Module BQ Full Funnel.md",
+    "1.Projects/LOREAL_ViralBeauty/Réunions/2026-06-29 Pré-read Viral Beauty.md",
+    "1.Projects/LOREAL_ViralBeauty/Réunions/2026-06-18 Point avec Basma et Pierre.md",
+    "1.Projects/MINE_MMMAIAgent/MMM AI Agent.md",
+    "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-08.md",
+    "_Attachments/message_basma_slide44.png",
+    "_Attachments/message_basma_VB.png",
+    "message_basma_VB.png"
+  ]
+}
