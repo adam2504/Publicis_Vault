@@ -20,23 +20,8 @@
               "icon": "lucide-file",
               "title": "TODO"
             }
-          },
-          {
-            "id": "7e2b4973214e4ea7",
-            "type": "leaf",
-            "state": {
-              "type": "split-diff-view",
-              "state": {
-                "aFile": ".obsidian/workspace.json",
-                "bFile": ".obsidian/workspace.json",
-                "aRef": ""
-              },
-              "icon": "diff",
-              "title": "Diff: workspace.json  (Working Tree)"
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -224,10 +209,10 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "7e2b4973214e4ea7",
+  "active": "9f186e7f6da29a19",
   "lastOpenFiles": [
-    "2.Areas/Accomplissements.md",
     "2026-07-11.md",
+    "2.Areas/Accomplissements.md",
     "1.Projects/MINE_AMCAnalytics/Réunions/2026-07-07 Onboarding AMC Khadija.md",
     "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md",
     "1.Projects/MINE_MMMAIAgent/Architecture technique.md",
