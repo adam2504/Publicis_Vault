@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1.Projects/MINE_AMCAnalytics/Réunions/2026-07-07 Onboarding AMC Khadija.md",
+                "file": "2026-07-11.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-07-07 Onboarding AMC Khadija"
+              "title": "2026-07-11"
             }
           }
         ],
@@ -205,7 +205,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -224,8 +224,10 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "c1986407e5ff7253",
+  "active": "7e2b4973214e4ea7",
   "lastOpenFiles": [
+    "1.Projects/MINE_AMCAnalytics/Réunions/2026-07-07 Onboarding AMC Khadija.md",
+    "2026-07-11.md",
     "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md",
     "1.Projects/MINE_MMMAIAgent/Architecture technique.md",
     "2.Areas/TODO.md",
@@ -261,7 +263,6 @@
     "1.Projects/LOREAL_ViralBeauty/Réunions/2026-06-29 Pré-read Viral Beauty.md",
     "1.Projects/LOREAL_ViralBeauty/Réunions/2026-06-18 Point avec Basma et Pierre.md",
     "1.Projects/MINE_MMMAIAgent/MMM AI Agent.md",
-    "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-08.md",
     "_Attachments/message_basma_slide44.png",
     "_Attachments/message_basma_VB.png",
     "message_basma_VB.png"
