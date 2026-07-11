@@ -25,14 +25,14 @@
             "id": "7e2b4973214e4ea7",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "split-diff-view",
               "state": {
-                "file": "2026-07-11.md",
-                "mode": "source",
-                "source": false
+                "aFile": ".obsidian/workspace.json",
+                "bFile": ".obsidian/workspace.json",
+                "aRef": ""
               },
-              "icon": "lucide-file",
-              "title": "2026-07-11"
+              "icon": "diff",
+              "title": "Diff: workspace.json  (Working Tree)"
             }
           }
         ],
@@ -226,8 +226,9 @@
   },
   "active": "7e2b4973214e4ea7",
   "lastOpenFiles": [
-    "1.Projects/MINE_AMCAnalytics/Réunions/2026-07-07 Onboarding AMC Khadija.md",
+    "2.Areas/Accomplissements.md",
     "2026-07-11.md",
+    "1.Projects/MINE_AMCAnalytics/Réunions/2026-07-07 Onboarding AMC Khadija.md",
     "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md",
     "1.Projects/MINE_MMMAIAgent/Architecture technique.md",
     "2.Areas/TODO.md",
@@ -242,7 +243,6 @@
     "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.04cca03367e0",
     "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.4b1ad9e03fc3",
     "1.Projects/MINE_MMMAIAgent/Testings Internes.md",
-    "2.Areas/Accomplissements.md",
     "2.Areas/Bilan.md",
     "3.Resources/AMC/AMC — Notions.md",
     "3.Resources/Onboardings/VERISURE_CreativeInsights/Réunions/2026-06-18 Point avec Léonie & Hajar.md",
