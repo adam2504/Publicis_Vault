@@ -30,7 +30,9 @@ type: area
 - [ ] Nettoyer / segmenter le knowledge une fois rempli
 - [ ] Brancher le Copilot de Manu (le plus avancé) sur le knowledge + tester l'aide à la création — *débloquer l'autorisation d'ajout de fichier avec Bradley*
 - [ ] *(Optionnel)* ajouter du knowledge connexe (historique audiences, doc LiveRamp)
-- [ ] *(Plus tard)* évaluer un module ConnectedHub — API LiveRamp directe ou agent connecté au knowledgeok
+- [x] ~~évaluer un module ConnectedHub via API LiveRamp directe~~ → **fermé** (réponse LiveRamp / Julien Guého 20/07 : création audience = UI only, distribution API réservée aux plateformes tierces). Détail : [[2026-06-30 Onboarding Audiences LiveRamp]]
+- [ ] *(Seule piste tech restante)* instruire **Analytics Environment → Customer Profiles** avec les DS (Lydia/Hajar)
+- [ ] *(Veille)* offres **MCP + agents LiveRamp** à venir — Julien Guého revient vers moi
 ## Réseau/Rencontres
 
 - [ ] Parler avec Sidy Diallo
