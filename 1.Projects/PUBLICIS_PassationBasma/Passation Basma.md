@@ -113,4 +113,6 @@ Dossier OneDrive/SharePoint synchronisé localement (`…/CLIENTS/LOREAL/BASMA K
 - [ ] Nettoyer / segmenter le knowledge une fois rempli.
 - [ ] Brancher le Copilot sur le knowledge + tester l'aide à la création — *débloquer l'autorisation d'ajout de fichier avec Bradley*.
 - [ ] *(Optionnel)* ajouter du knowledge connexe (historique audiences, doc LiveRamp).
-- [ ] *(Plus tard)* évaluer un module ConnectedHub — API LiveRamp directe ou agent connecté au knowledge.
+- [x] ~~*(Plus tard)* évaluer un module ConnectedHub via **API LiveRamp directe**~~ → **tranché (réponse Julien Guého, 20/07)** : création d'audience = **UI only** (pas d'API), distribution API **réservée aux plateformes tierces**. Piste API directe **fermée**. Voir [[2026-06-30 Onboarding Audiences LiveRamp#Réponse LiveRamp (Julien Guého, 20/07)]].
+- [ ] *(Seule piste tech restante)* instruire **Analytics Environment → Customer Profiles** (automatisation partielle, module DS — voir Lydia/Hajar).
+- [ ] *(Veille)* offres **MCP + agents LiveRamp** à venir — Julien Guého revient vers moi ; converge avec la direction agent/Copilot du projet.
