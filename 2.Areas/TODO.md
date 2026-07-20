@@ -4,7 +4,6 @@ type: area
 # TODO
 
 ## MINE - MMM AI Agent
-
 - [ ] Demander aux Data Scientists où en sont les MMMs de Longchamp et Stellantis (Stellantis est live sur Opel DE et Peugeot DE, à voir avec Katia et Ines)
 - [ ] Parler à Clarisse (Longchamp) et Katia (Stellantis) une fois que les data sont dispo, pour introduire sujet avec ouverture conseil
 - [ ] Réaliser passation/ouverture au conseil, puis demander questions qu'ils ont/client pourrait avoir, ce qu'ils pensent des réponses, ce qui pourrait être améliorer etc

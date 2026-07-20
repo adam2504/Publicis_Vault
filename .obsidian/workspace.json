@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "5f4b5f3325de2f4e",
+        "id": "fdb554de6bc031b4",
         "type": "tabs",
         "children": [
           {
-            "id": "bc66fcc4ca087833",
+            "id": "667c31d653baece6",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -209,14 +209,19 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "bc66fcc4ca087833",
+  "active": "c1986407e5ff7253",
   "lastOpenFiles": [
+    "dummy.md.tmp.25264.198a244f6222",
+    "dummy.md",
+    "dummy.md.tmp.25264.e39425e63489",
+    "2.Areas/TODO.md",
+    "2026-07-20.md",
+    "2026-07-20.md.tmp.41912.8f316f3837ff",
     "2026-07-11.md",
     "2.Areas/Accomplissements.md",
     "1.Projects/MINE_AMCAnalytics/Réunions/2026-07-07 Onboarding AMC Khadija.md",
     "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md",
     "1.Projects/MINE_MMMAIAgent/Architecture technique.md",
-    "2.Areas/TODO.md",
     "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.7304092e7715",
     "1.Projects/MINE_MMMAIAgent/Architecture technique.md.tmp.39496.f6bfcca4a36a",
     "1.Projects/MINE_MMMAIAgent/Architecture technique.md.tmp.39496.df9253508e2e",
@@ -225,8 +230,6 @@
     "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.8348f7417b07",
     "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.f941308aacc2",
     "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.21b90311abfa",
-    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.04cca03367e0",
-    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.4b1ad9e03fc3",
     "1.Projects/MINE_MMMAIAgent/Testings Internes.md",
     "2.Areas/Bilan.md",
     "3.Resources/AMC/AMC — Notions.md",
@@ -245,9 +248,6 @@
     "1.Projects/MINE_AMCAnalytics/Sous Module - Full Funnel.md",
     "1.Projects/MINE_AMCAnalytics/Plan Implementation Data BQ.md",
     "1.Projects/MINE_AMCAnalytics/Plan Module BQ Full Funnel.md",
-    "1.Projects/LOREAL_ViralBeauty/Réunions/2026-06-29 Pré-read Viral Beauty.md",
-    "1.Projects/LOREAL_ViralBeauty/Réunions/2026-06-18 Point avec Basma et Pierre.md",
-    "1.Projects/MINE_MMMAIAgent/MMM AI Agent.md",
     "_Attachments/message_basma_slide44.png",
     "_Attachments/message_basma_VB.png",
     "message_basma_VB.png"
