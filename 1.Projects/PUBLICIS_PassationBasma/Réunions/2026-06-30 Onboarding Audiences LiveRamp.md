@@ -36,6 +36,7 @@ Onboarding mené par Basma sur la création d'audiences via LiveRamp, dans le ca
 
 | Contact | Email | Rôle |
 | --- | --- | --- |
+| Julien Guého | julien.gueho@liveramp.com | **Head of Customer Success Continental Europe & LATAM** (+33 6 70 55 60 39) — a **consolidé et répondu** au mail du 01/07 (réponse du 20/07). Interlocuteur senior CS, au-dessus de Younes. |
 | Thomas Guerre | thomas.guerre@liveramp.com | **Product Operations @ LiveRamp** — connaît les capacités/options du produit (distribution d'audiences, tables de données, data science) → interlocuteur clé pour la faisabilité API / automatisation |
 | Younes Ahagoul | younes.ahagoul@liveramp.com | **CSM / commercial** — contrat, droits, dérogations (provisioning API) |
 | Ali Lamamra | ali.lamamra@liveramp.com | Alternant LiveRamp, rôle inconnu (secondaire) |
