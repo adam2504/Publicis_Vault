@@ -125,8 +125,28 @@ Safe Haven ≠ LiveRamp Clean Room (ex-Habu) ≠ Connect : 3 produits distincts.
 **En cours :**
 
 - [x] **Pierre** : a validé que Thomas & Younes sont les bons contacts. N'avait pas l'info « API au contrat » lui-même → bascule sur Younes.
-- [x] **Mail envoyé à Thomas + Younes** (01/07) → en attente de retour.
+- [x] **Mail envoyé à Thomas + Younes** (01/07) → **réponse reçue le 20/07** (voir ci-dessous).
 
 Questions posées dans le mail (pour mémoire) :
 - **Thomas (Product Ops)** — (1) API pour **créer une audience Safe Haven** à partir des données déjà présentes (Clean Room API / autre) ou UI only ? (2) **distribution par API** des audiences Safe Haven vers Meta/Snap/Amazon (Activation API les voit-elle) ?
 - **Younes (CSM)** — option API **incluse au contrat, et sur quels comptes** (L'Oreal FR, CRF L'Oreal, marques) ? sinon coût / périmètre / négociable ?
+
+### Réponse LiveRamp (Julien Guého, 20/07)
+
+Réponse consolidée non par Thomas/Younes mais par **Julien Guého — Head of Customer Success Continental Europe & LATAM** (julien.gueho@liveramp.com, +33 6 70 55 60 39), soit au-dessus de Younes côté CS.
+
+**1. Création d'audience Safe Haven → pas d'API.** Confirme la lecture doc du 30/06 : aucune API ne reproduit l'**Audience Builder** depuis les taxonomies permissionnées / My Data. La **Clean Room API ne couvre PAS** ce cas (elle pilote clean rooms / questions / flows / requêtes, pas la construction de **Customer Profiles**). → création = **UI Audience Builder**.
+- ⚠️ **Voie d'automatisation partielle (nouveau)** : via l'**Analytics Environment**, des segments peuvent être **construits puis publiés vers Customer Profiles** (selon le cas d'usage). C'est le module **data science** (Lydia / Hajar) → un pont existe donc entre le module DS et les audiences, alors qu'on les avait explicitement séparés. **Seule piste programmatique réelle qui subsiste.**
+
+**2. Distribution par API → non pour nous.** L'**Activation API** existe pour gérer la distribution dans l'univers programmatique, **mais réservée aux développeurs de plateformes tierces** (partenaires tech de LiveRamp) — pas à un client qui veut piloter sa propre distribution. → repli = **Always-On / Scheduled dans l'UI** (déjà identifié).
+
+**3. Contrat → pas binaire.** Le **MSA L'Oréal** couvre *certains* usages de services opérés via API, mais l'éligibilité à une API LiveRamp donnée se **confirme au niveau produit + contrat d'application / avenant applicable**. → nuance le « option cochée / pas cochée » de Jules : c'est produit par produit.
+
+**4. À surveiller.** LiveRamp prépare des **offres MCP + agents spécialisés** (segmentation, activation, orchestration d'audiences) conçus pour exécuter ces cas d'usage plus directement. Julien **reviendra vers Adam** quand il y aura de la visibilité. → converge avec la direction Copilot/agent du projet plutôt qu'avec l'API brute.
+
+**Conclusion.** La piste « **module ConnectedHub via API LiveRamp directe** » (étape 5, optionnelle) est **largement fermée aujourd'hui** :
+- création d'audience = UI only (ou partielle via Analytics Environment → Customer Profiles) ;
+- distribution API = non accessible côté client ;
+- pas de blocage « option non souscrite » simple : c'est un sujet produit/avenant.
+
+→ Repli assumé (déjà cadré) : **capture knowledge + Copilot**, **standardisation par templates**, distribution via **Always-On/Scheduled UI**, ConnectedHub limité à l'**amont** (parsing des briefs mail). Seule piste tech à instruire : **Analytics Environment → Customer Profiles** (à voir avec les DS). + **veille MCP LiveRamp**.
