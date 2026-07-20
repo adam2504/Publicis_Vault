@@ -103,7 +103,7 @@ Les trois pistes suivantes convergent vers **une même brique** : une couche de 
 
 **Immédiat — débloquer le go :**
 - [x] **Validation DS — isolation inter-clients** : OK (test Dan 07/07, Opel DE → Peugeot refusé).
-- [ ] **Débloquer l'observabilité** : obtenir le grant `telemetry.tracesWriter` au SA `mmm-agent-sa` (ticket support), puis faire rejouer à Dan ses questions multi-canaux en prod pour confirmer la cause du `no_answer`.
+- [x] **Débloquer l'observabilité** : obtenir le grant `telemetry.tracesWriter` au SA `mmm-agent-sa` (ticket support), puis faire rejouer à Dan ses questions multi-canaux en prod pour confirmer la cause du `no_answer`.
 - [ ] **Validation DS — guardrail « je ne sais pas »** : faire valider le refus de combler (donnée hors modèle) et de juger sans benchmark.
 - [ ] **Enrichir le `BUSINESS_CONTEXT`** avec les DS (Dan / Hajar) : définitions des variables et des données du modèle.
 - [ ] **Trancher les deux niveaux d'accès** (reco interne / factuel client) avec Baptiste + data strats — point d'agenda du go.
