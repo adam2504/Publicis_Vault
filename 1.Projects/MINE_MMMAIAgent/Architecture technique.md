@@ -189,7 +189,7 @@ Débloqué le 08/07 par le grant IAM sur le SA (cf. [[Session 2026-07-08]]).
 - Tracing **intégré ADK** (`GOOGLE_CLOUD_AGENT_ENGINE_ENABLE_TELEMETRY=1`) → **un span par sous-agent** : `invocation` (run complet) → `invoke_agent <sous-agent>` → `call_llm` / `generate_content gemini-*` / `execute_tool`. ~48 spans / question, ~47 s pour une réponse normale.
 - Les spans partent dans le **nouveau store `telemetry.googleapis.com`** (pas le Cloud Trace classique v1). Se lisent via le Trace Explorer, pas en API v1.
 - ⚠️ Span status **toujours `UNSET`** (normal en OTEL). ADK ne stampe pas forcément `ERROR` sur un échec → **ne pas diagnostiquer par le status** mais par durée / waterfall / events.
-- Bruit : les spans `/` viennent de `cf-budget-allocator-prod` (Cloud Function DS), pas de l'agent → filtrer `service.name = 6073359184206757888`.
+- Bruit : les spans `/` viennent de `cf-budget-allocator-prod` (Cloud Function DS), pas de l'agent → filtrer `service.name = 2659050124520456192` (l'engine live).
 
 ### Sources de diagnostic
 
