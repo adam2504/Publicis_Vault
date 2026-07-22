@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1.Projects/MINE_MMMAIAgent/Synthèse & Roadmap Testing.md",
+                "file": "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Synthèse & Roadmap Testing"
+              "title": "Testing Conseil (proxy client)"
             }
           },
           {
@@ -226,9 +226,10 @@
   },
   "active": "667c31d653baece6",
   "lastOpenFiles": [
+    "1.Projects/MINE_MMMAIAgent/Synthèse & Roadmap Testing.md",
+    "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-20.md.tmp.30584.028a4c6aa15d",
     "2.Areas/TODO.md",
     "1.Projects/MINE_MMMAIAgent/MMM AI Agent.md.tmp.30584.7aa577b8139b",
-    "1.Projects/MINE_MMMAIAgent/Synthèse & Roadmap Testing.md",
     "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-20.md",
     "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-20.md.tmp.30584.9a2acbf1aaf6",
     "1.Projects/PUBLICIS_PassationBasma/Réunions/2026-06-30 Onboarding Audiences LiveRamp.md.tmp.27828.3ba5eac49194",
@@ -245,7 +246,6 @@
     "1.Projects/MINE_AMCAnalytics/Réunions/2026-07-07 Onboarding AMC Khadija.md",
     "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md",
     "1.Projects/MINE_MMMAIAgent/Architecture technique.md",
-    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.7304092e7715",
     "1.Projects/MINE_MMMAIAgent/Testings Internes.md",
     "2.Areas/Bilan.md",
     "3.Resources/AMC/AMC — Notions.md",
