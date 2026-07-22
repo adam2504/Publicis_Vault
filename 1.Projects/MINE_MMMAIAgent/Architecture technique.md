@@ -73,7 +73,25 @@ MMM_agent — LlmAgent (Gemini 2.5 Flash) — gatekeeper
 | `validator_agent` | Flash | `exit_loop` | Valide le résultat ou relance le loop |
 | `answer_agent` | **Pro** | aucun | Synthèse en langage naturel |
 
-**~9 à 17 appels LLM par question**, dont 2 en Gemini 2.5 Pro (`query_writer` + `answer`). Contexte métier partagé (`BUSINESS_CONTEXT`) réinjecté dans plusieurs agents. Voir le détail coût en **§5 Coût technique** ci-dessous.
+**~9 à 17 appels LLM par question**, dont 2 en Gemini 2.5 Pro (`query_writer` + `answer`). Voir le détail coût en **§5 Coût technique** ci-dessous.
+
+### Contexte métier scopé par sous-agent (20-22/07)
+
+Le `BUSINESS_CONTEXT` monolithique a été **décomposé en blocs composables** (`CTX_INTRO`, `CTX_DISPLAY`, `CTX_DISCOVERY_NOTE`, `CTX_SQL_RULES`, `CTX_FIELDS`, `CTX_METRICS`, `CTX_KPI_SELECTION`), injectés **sélectivement** :
+
+| Agent | Contexte injecté |
+| --- | --- |
+| `schema_agent` | **aucun** (`CTX_NONE`) + « exactly one tool: `get_table_info` » |
+| `discovery_agent` | `CTX_NO_SQL` + « exactly one tool: `run_discovery` » |
+| `query_writer_agent` | `CTX_FULL` (le **seul** avec `CTX_SQL_RULES`) |
+| `validator_agent` | `CTX_NO_SQL` |
+| `answer_agent` | `CTX_NO_SQL` **+ `CTX_MODULE_VIZ`** |
+| `root_agent` (`MMM_agent`) | `CTX_NO_SQL` **+ `CTX_MODULE_VIZ`** |
+
+- **`CTX_SQL_RULES`** + la syntaxe SQL (`SELECT MAX`, `SAFE_DIVIDE`) ne vont **qu'au `query_writer`** → retire l'amorce qui faisait halluciner les agents à toolset limité (cf. §6).
+- **`CTX_MODULE_VIZ`** : nouveau bloc **bilingue EN/FR** (libellés sourcés des fichiers i18n) décrivant les graphes du module + leurs contrôles → l'agent aide à la **lecture des graphiques**. Générique (aucune variable client). Injecté `answer` + `root`.
+- **Root routing durci** : `root_agent` **délègue au `data_pipeline` dès qu'un chiffre est nécessaire** (ne répond seul que pour les questions pures d'interface) → évite le « chart-only » sur une question data.
+- **`run_discovery`** exclut la ligne agrégée `name = 'Media total'` (faux canal).
 
 ### Isolation inter-client (défense en profondeur)
 
