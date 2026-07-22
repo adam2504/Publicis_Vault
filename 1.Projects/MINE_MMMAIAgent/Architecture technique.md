@@ -112,13 +112,20 @@ Isolation validée en test (07/07, Dan) : depuis Opel DE, une requête Peugeot a
 
 | | |
 | --- | --- |
-| Reasoning Engine (live) | `projects/868239246901/locations/europe-west1/reasoningEngines/6073359184206757888` |
-| Framework | `google-adk` — entrypoint `agent_engine_app.adk_app` |
+| Reasoning Engine (live) | `…/reasoningEngines/2659050124520456192` — display name `MMM_Agent_v2_geospatial_context` |
+| Framework | `google-adk` **pinné `==1.26.0`** — entrypoint `agent_engine_app.adk_app` |
 | Service Account | `mmm-agent-sa@med-dtam-prd-mg.iam.gserviceaccount.com` |
 | Région | `europe-west1` (RGPD) |
-| Déploiement | `adk deploy agent_engine MMM_Agent` (config `.env` + `.agent_engine_config.json`) |
+| Déploiement | `PYTHONUTF8=1 adk deploy agent_engine MMM_Agent --validate-agent-import` |
 
-> Le repo perso `Agent MMM` documente un ancien ID (`4105…`) — périmé. Le live est `6073…` (celui référencé dans `agent.ts`).
+**Historique engines** : `6073…` (avril, rollback lointain) → `7899…` (scoping, 20/07) → **`2659…` (viz + fixes, 21-22/07, prod actuelle)**. `agent.ts` pointe sur `2659…`. Table engine↔commit dans le README du repo agent.
+
+**Pièges de déploiement (appris 20-22/07)** :
+- `adk deploy` lit le `requirements.txt` du **dossier agent** (`MMM_Agent/requirements.txt`), pas la racine → le pin va là. Sans pin, `google-adk 2.x` s'installe et **crash au démarrage** (`google.cloud.dataplex_v1` manquant).
+- `--validate-agent-import` valide l'import **avant** de créer l'engine (échec rapide, pas d'engine mort).
+- `PYTHONUTF8=1` : sinon le `✅` de fin plante sur la console Windows (cp1252) → « Deploy failed » alors que l'engine est bien créé.
+- **Update en place** (sans re-pointer le backend) : `adk deploy … --agent_engine_id <id> --project med-dtam-prd-mg` — le `--project` explicite est **obligatoire** (sinon 404 mauvais projet).
+- L'**ADC expire** (relogin `gcloud auth application-default login` d'un jour à l'autre).
 
 ---
 
