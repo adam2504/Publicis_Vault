@@ -7,10 +7,12 @@ type: area
 
 - [ ] Réaliser passation/ouverture au conseil, puis demander questions qu'ils ont/client pourrait avoir, ce qu'ils pensent des réponses, ce qui pourrait être améliorer etc
 - [ ] Améliorer l'agent avec feedbacks
-	- [ ] canal "Media total" n'est pas un vrai canal
-	- [ ] Durcir contre l'hallucination de tool (root cause `no_answer` trouvée : `schema_agent` hallucine `execute_sql`) → scoper le `BUSINESS_CONTEXT` de `schema_agent` (+ instruction « get_table_info only », + retry backend éventuel)
+	- [x] canal "Media total" n'est pas un vrai canal — exclu de la discovery + noté comme agrégat (22/07)
+	- [x] Durcir contre l'hallucination de tool — scoping `BUSINESS_CONTEXT` par sous-agent + durcissement (schema, discovery) + **filet retry backend** (bug non-déterministe qui migre → retry = fix uniforme). En prod (22/07)
+	- [x] Aide à la lecture des graphiques — bloc `CTX_MODULE_VIZ` (bilingue EN/FR) livré (22/07)
 	- [ ] Enrichir le `BUSINESS_CONTEXT` avec les DS (définitions variables/données)
-	- [ ] Tools saturation + allocation + aide lecture graphiques / narratif
+	- [ ] Tools saturation + allocation (`cf-budget-allocator-prod`) + registre narratif
+	- [ ] *(Backlog)* live-suivi UI (feature B) ; knowledge par client
 ## MINE - FeedGen Catégorisation
 
 - [ ] Vrai jeu d'éval avec Manu (GPC vérifié à la main + titre brut si possible)
