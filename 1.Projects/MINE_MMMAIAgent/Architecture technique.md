@@ -207,7 +207,7 @@ jsonPayload.metric="mmm_agent_exchange" AND jsonPayload.status="no_answer"
 
 Lecture des events d'une session (rétroactif) :
 ```
-GET https://europe-west1-aiplatform.googleapis.com/v1beta1/projects/med-dtam-prd-mg/locations/europe-west1/reasoningEngines/6073359184206757888/sessions/<adkSessionId>/events
+GET https://europe-west1-aiplatform.googleapis.com/v1beta1/projects/med-dtam-prd-mg/locations/europe-west1/reasoningEngines/2659050124520456192/sessions/<adkSessionId>/events
 ```
 
 ### Recette de diagnostic d'un `no_answer`
