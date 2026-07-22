@@ -241,7 +241,7 @@ Projet GCP `med-dtam-prd-mg` **mutualisé** (pôle DTAM) — le Notebook (~$155/
 | **Tokens Gemini** | **variable**, par question | ~$0,05/question |
 | Artifact Registry (images, partagé) + GCS + Scheduler + Secret Manager | continu | ~$6/mois |
 
-**Coût par question ≈ $0,05** (jusqu'à ~$0,10 avec retries) : l'agent est un **pipeline multi-agents ADK** (7 sous-agents LLM principaux — 9 `LlmAgent` au total avec les gardes, cf. §2 —, **9 à 17 appels LLM/question**, dont **2 en `gemini-2.5-pro`** : `query_writer` + `answer`). Le `BUSINESS_CONTEXT` est réinjecté dans 6 agents et les résultats BQ (jusqu'à 200 lignes) sont trimballés jusqu'aux appels finaux → ce sont les 2 appels Pro et le contexte accumulé qui dominent le coût.
+**Coût par question ≈ $0,05** (jusqu'à ~$0,10 avec retries) : l'agent est un **pipeline multi-agents ADK** (7 sous-agents LLM principaux — 9 `LlmAgent` au total avec les gardes, cf. §2 —, **9 à 17 appels LLM/question**, dont **2 en `gemini-2.5-pro`** : `query_writer` + `answer`). Le contexte métier (blocs `CTX_*`, **scopé par sous-agent** — cf. §2) et les résultats BQ (jusqu'à 200 lignes) sont trimballés jusqu'aux appels finaux → ce sont les 2 appels Pro et le contexte accumulé qui dominent le coût.
 
 **Coût par client, en prod** (1 client, base fixe portée entièrement par lui) :
 
