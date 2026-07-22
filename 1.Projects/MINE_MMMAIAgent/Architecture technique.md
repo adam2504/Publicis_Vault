@@ -145,6 +145,7 @@ Route **SSE** `POST /marketing-mix-modeling/agent` (`{ message, session_id }`). 
    - À chaque changement d'`author` → envoi d'un event SSE `status` (mapping `AUTHOR_STATUS` / `FUNCTION_STATUS` → clés i18n) pour l'UX de progression.
    - Détection de la réponse finale (`isTerminal` + texte + pas de function_call + author `answer_agent`/`MMM_agent`) → event `done`.
    - Timeout **270 s** (AbortController) ; gestion du `client_disconnect` (`req.on('close')`).
+   - **Filet retry (22/07)** : la tentative de stream est enveloppée dans une **boucle (1 retry, `MAX_ATTEMPTS=2`)** qui **ne retente que le `no_answer` transitoire** (pas les erreurs HTTP/stream, timeout, disconnect) — même session. Champs **`attempt` / `retried`** ajoutés aux logs `mmm_agent_exchange`. Logique de décision pure dans `routes/retry.ts` (`shouldRetryExchange`) + tests unitaires (vitest).
 6. **Diagnostics & persistance** — sur chaque échange :
    - **GCS** `mmm-agent-chat-logs` (projet `med-dtam-prd-mg`), un JSON par échange, chemin `{clientId}/{ts}_{sessionId8}.json`. Schéma `ExchangeLog` : `timestamp, clientId, userId, sessionId, adkSessionId, userMessage, answer, status, durationMs, requestId`. `status ∈ success | error | timeout | no_answer | client_disconnect`.
    - **Cloud Logging** (projet `pmed-portal-prd-mg`) via `logger`, champ `metric: mmm_agent_exchange` + diagnostics (`authors`, `chunkCount`, `streamErrors`, `lastChunk`) sur les échecs.
