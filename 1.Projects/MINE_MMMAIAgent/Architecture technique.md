@@ -96,7 +96,7 @@ Le `BUSINESS_CONTEXT` monolithique a été **décomposé en blocs composables** 
 
 - **`CTX_SQL_RULES`** + la syntaxe SQL (`SELECT MAX`, `SAFE_DIVIDE`) ne vont **qu'au `query_writer`** → retire l'amorce qui faisait halluciner les agents à toolset limité (cf. §6).
 - **`CTX_MODULE_VIZ`** : bloc **bilingue EN/FR** (libellés sourcés des fichiers i18n) décrivant les graphes du module + leurs contrôles → l'agent aide à la **lecture des graphiques**. Générique (aucune variable client). Injecté `answer` + `root`.
-- **`CTX_UI_SCOPE`** (23/07) : scope écran **live** de l'utilisateur → contrat détaillé en §3. Injecté `query_writer` (pour le filtre SQL par défaut), `answer` et `root`.
+- **`CTX_UI_SCOPE`** (23/07) : scope écran **live** de l'utilisateur → contrat détaillé en §3bis. Injecté `query_writer` (pour le filtre SQL par défaut), `answer` et `root`.
 - **Root routing durci** : `root_agent` **délègue au `data_pipeline` dès qu'un chiffre est nécessaire** (ne répond seul que pour les questions pures d'interface) → évite le « chart-only » sur une question data.
 - **`run_discovery`** exclut la ligne agrégée `name = 'Media total'` (faux canal). Il reste **volontairement non scopé** par le scope écran : il dit ce qui *existe* (KPIs, dates, canaux), donc le scoper casserait les réponses à « qu'est-ce que je peux regarder d'autre ? ».
 
