@@ -143,7 +143,7 @@ La partie **non** documentée par le repo agent : comment l'agent est branché d
 
 ### Backend — `server/src/features/marketing-mix-modeling/routes/agent.ts`
 
-Route **SSE** `POST /marketing-mix-modeling/agent` (`{ message, session_id }`). Étapes :
+Route **SSE** `POST /marketing-mix-modeling/agent` (`{ message, session_id, ui_context? }`). Étapes :
 
 1. **Feature flag** — lecture Firestore `customers/{id}/products/marketing-mix-modeling` → champ `MMM_AI_Assistant`. Si absent/false → `403` (le frontend affiche la preview). C'est la feature payante.
 2. **Auth Vertex** — `GoogleAuth` (`MASTER_CREDENTIALS`, scope `cloud-platform`) → token pour appeler l'Agent Engine (cross-project vers `med-dtam-prd-mg`).
