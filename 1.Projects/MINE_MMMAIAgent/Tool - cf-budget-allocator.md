@@ -45,7 +45,17 @@ En mode **`goal`** (« Atteindre un objectif »), deux différences :
 - `target_goal` remplace `budget`
 - les bornes hautes sont **écrasées à `1e9`** : `[[...mins], [...maxs.map(() => 1000000000)]]`, donc de fait non bornées vers le haut.
 
-**Réponse** : `number[]` — un budget par média.
+**Réponse** : `number[]` — un budget par média, positionnel.
+
+### Ce que la source apprend (et que l'appelant ne disait pas)
+
+- **`market` est en fait le `level` du modèle.** La CF fait `level = request_json["market"]` puis interroge `tb_model_configuration WHERE client_id AND level AND kpi`. **Ça referme la question laissée ouverte le 23/07** sur le nom de la colonne marché : il n'y a pas de colonne « market », c'est `level`.
+- **`inflations` est en POURCENTS**, pas en ratio : la CF calcule `1.0 + inflations / 100`. Envoyer `5` pour 5 %, surtout pas `0.05`. Erreur silencieuse garantie sinon.
+- **`t` est un `t_start`**, un indice de départ dans la timeline du modèle, pas une durée. Le front envoie `historicDates.length - noHistoricDates.length + 1`.
+- **Exactement un** de `budget` / `target_goal`. Les deux ensemble → `ValueError: Allocation to reach a target with a budget is not yet supported`. Aucun des deux → `ValueError` aussi.
+- **La CF va chercher le `model_configuration` elle-même** dans BigQuery (dernier `training_date`). L'agent n'a donc **pas** à fournir la config du modèle, seulement le triplet `client_id` / `market` / `kpi`.
+- Champs requis : `client_id`, `market`, `kpi`, `t`, `bounds`, `inflations`. Il n'y a **aucune valeur par défaut côté CF** : les défauts (`min 0`, `max = budget`, `inflation 0`) sont une convention du **front**, à réimplémenter côté agent si on veut le même comportement.
+- Le solveur vient de `dtam==0.1.12`, un package privé d'Artifact Registry → **impossible de répliquer l'optimisation en local**, il faut appeler la CF.
 
 **Origine de chaque paramètre côté UI :**
 
