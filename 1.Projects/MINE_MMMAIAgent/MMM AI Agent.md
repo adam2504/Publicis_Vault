@@ -36,7 +36,7 @@ Ajout d'un assistant IA conversationnel dans le module MMM de ConnectedHub. L'ag
 
 ## Ce qui reste ouvert
 
-- [ ] Ajouter `cf-budget-allocator-prod` (GCF d'optimisation budget) comme tool de l'agent
+- [ ] Ajouter `cf-budget-allocator-prod` (GCF d'optimisation budget) comme tool de l'agent — contrat relevé et points durs dans [[Tool - cf-budget-allocator]]. **Deux préalables non techniques** : le grant IAM `run.invoker` sur la CF, et trancher si l'agent a le droit de *lancer* une optimisation (recommandation) ou seulement de lire
 - [ ] Mémoire persistante par utilisateur (reprendre une ancienne conversation)
 - [ ] **Cadrage produit — recommandation** : jusqu'où l'agent recommande vs se limite aux faits (surtout côté client) — à trancher avec Baptiste + data strats
 - [ ] **Chip de contexte** dans le chatbot (`Contexte : ROAS · juin 2025 – mai 2026`) : rend le scope visible en permanence, sans coût en tokens, et signale un décalage avant même la lecture de la réponse. Complément visuel de l'annonce faite par l'agent (23/07)
