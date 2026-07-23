@@ -73,23 +73,37 @@ En mode **`goal`** (« Atteindre un objectif »), deux différences :
 
 ### 1. Tout est **positionnel** — c'est le vrai risque
 
-`bounds`, `inflations` et la **réponse** sont des tableaux alignés sur l'ordre de `model[0].media`. Rien dans le payload ne nomme les médias. Si l'agent construit ces tableaux dans un ordre différent de celui qu'attend la CF, il attribue silencieusement le budget de Search à la TV : **des chiffres faux, sans erreur**.
+`bounds`, `inflations` et la **réponse** sont des tableaux positionnels. Rien dans le payload ne nomme les médias. Ordre différent = le budget de Search atterrit sur la TV : **des chiffres faux, sans erreur**. Même classe de bug que la définition de semaine trouvée le 23/07 (cf. [[Session 2026-07-23]]).
 
-C'est exactement la même classe de bug que la définition de semaine trouvée le 23/07 (cf. [[Session 2026-07-23]]). À traiter avec la même méthode : ne pas faire reconstruire l'ordre par le LLM, le dériver en Python depuis une source unique, et le vérifier.
+**Bonne nouvelle : l'ordre est dérivable, pas à deviner.** La CF lit `model_configuration` depuis `tb_model_configuration` (dernier `training_date` pour le triplet `client_id`/`level`/`kpi`). L'agent peut interroger **exactement la même ligne** pour reconstruire l'ordre des médias en Python. Donc : ne jamais laisser le LLM composer ces tableaux, les assembler depuis la même source que la CF, et vérifier la longueur avant l'appel.
 
-### 2. `temporal` n'existe pas côté agent
+### 2. `t` (le `t_start`) n'existe pas côté agent
 
-Il vient de la logique de dates du frontend (`useDates`, `historicDates` / `noHistoricDates`). L'agent n'a pas cet objet. Trois options à évaluer : recalculer côté Python depuis les données du modèle, le faire passer par le `ui_context` (le front le connaît déjà), ou le dériver dans la CF elle-même.
+Il vient de la logique de dates du frontend (`useDates`, `historicDates` / `noHistoricDates`). L'agent n'a pas cet objet. Options : recalculer côté Python depuis la config du modèle, ou le faire passer par le `ui_context`.
 
-> La piste `ui_context` est tentante puisque le tuyau existe depuis la feature B, mais attention : ce serait la **première** valeur du scope écran qui sert à *calculer* et non à *filtrer*. À peser.
+> La piste `ui_context` est tentante puisque le tuyau existe depuis la feature B, mais ce serait la **première** valeur du scope écran qui sert à *calculer* et non à *filtrer*. À peser, et ça rendrait le tool dépendant du front.
 
-### 3. Isolation `client_id`
+### 3. Isolation `client_id` — et une injection SQL en embuscade
 
-La CF prend un `client_id` en payload. Même règle que partout ailleurs : **injecté en Python depuis le session state**, jamais fourni par le LLM. Reprendre le patron de `run_discovery`.
+La CF prend un `client_id` en payload. Même règle que partout : **injecté en Python depuis le session state**, jamais fourni par le LLM. Patron de `run_discovery`.
 
-### 4. IAM à demander
+⚠️ Raison supplémentaire, trouvée dans la source : la CF interpole le `client_id` **directement dans le SQL**, sans paramètre :
 
-L'agent tourne sous `mmm-agent-sa@med-dtam-prd-mg`. Pour invoquer la CF il lui faut **`roles/run.invoker`** sur le service Cloud Run, et savoir émettre un **token OIDC** (pas le token d'accès utilisé pour BigQuery). C'est un grant à demander, comme celui du tracing obtenu le 08/07. **À anticiper : c'est le seul point bloquant qui ne dépend pas de nous.**
+```python
+WHERE client_id = '{client_id}' AND level = '{level}' AND kpi = '{kpi}'
+```
+
+Aujourd'hui c'est sans risque, la valeur vient du backend Mine. Mais si un jour un `client_id` (ou un `kpi`, ou un `market`) issu du LLM atteignait ce payload, ce serait une **injection SQL exploitable**, exécutée avec le SA `internal@med-dtam-prd-mg`. Ça élève le « injecter depuis le session state » du niveau bonne pratique au niveau **obligation**.
+
+### 4. IAM à demander — bloquant, à lancer en premier
+
+Vérifié côté GCP :
+
+- La policy IAM **du service est vide**, et **personne n'a `roles/run.invoker`** au niveau projet.
+- `mmm-agent-sa@med-dtam-prd-mg` a 7 rôles (`aiplatform.user`, `bigquery.dataViewer`, `bigquery.jobUser`, `cloudtrace.agent`, `logging.logWriter`, `monitoring.metricWriter`, `telemetry.tracesWriter`) — **aucun ne permet d'invoquer la CF**.
+- Si le backend Mine y arrive aujourd'hui, c'est via `interface@pmed-portal-prd-mg` qui porte **`roles/cloudfunctions.developer`** sur le projet.
+
+**Ne pas demander le même rôle pour l'agent** : `cloudfunctions.developer` permettrait aussi de déployer et modifier des functions. La demande juste est **`roles/run.invoker` sur le seul service `cf-budget-allocator-prod`**. Même type de démarche que le grant de tracing obtenu le 08/07.
 
 ## Questions produit à trancher
 
