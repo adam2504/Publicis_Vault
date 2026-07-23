@@ -118,7 +118,7 @@ Isolation validée en test (07/07, Dan) : depuis Opel DE, une requête Peugeot a
 
 | | |
 | --- | --- |
-| Reasoning Engine (live) | `…/reasoningEngines/2659050124520456192` — display name `MMM_Agent_v2_geospatial_context` |
+| Reasoning Engine (live) | `…/reasoningEngines/6241382153116975104` — display name `MMM_Agent_v3_live_ui_scope` |
 | Framework | `google-adk` **pinné `==1.26.0`** — entrypoint `agent_engine_app.adk_app` |
 | Service Account | `mmm-agent-sa@med-dtam-prd-mg.iam.gserviceaccount.com` |
 | Région | `europe-west1` (RGPD) |
