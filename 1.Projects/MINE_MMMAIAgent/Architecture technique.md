@@ -129,7 +129,11 @@ Isolation validée en test (07/07, Dan) : depuis Opel DE, une requête Peugeot a
 | Région | `europe-west1` (RGPD) |
 | Déploiement | `PYTHONUTF8=1 adk deploy agent_engine MMM_Agent --validate-agent-import` |
 
-**Historique engines** : `6073…` (avril, rollback lointain) → `7899…` (scoping, 20/07, supprimable) → `2659…` (viz + fixes, 21-22/07, **rollback actuel**) → **`6241…` (scope écran live, 23/07, prod actuelle)**. `agent.ts` pointe sur `6241…`. Table engine↔commit dans le README du repo agent.
+**Historique engines** : ~~`6073…`~~ (avril) → ~~`7899…`~~ (scoping, 20/07) → `2659…` (viz + fixes, 21-22/07, **rollback actuel**) → **`6241…` (scope écran live, 23/07, prod actuelle)**. `agent.ts` pointe sur `6241…`. Table engine↔commit dans le README du repo agent.
+
+**Ménage du 23/07** : `6073` et `7899` **supprimés**. Chaque engine déployé facture son runtime en continu (~$35/mois même idle), donc laisser traîner des versions mortes coûte réellement. Il n'en reste que **deux** : la prod et son rollback. Règle : ne supprimer l'ancien qu'une fois le nouveau prouvé en monitoring.
+
+⚠️ **Piège `display_name`** : `--display_name` n'est appliqué **qu'au moment où il est passé**. Un `adk deploy --agent_engine_id …` sans le flag retombe sur le `display_name` de `MMM_Agent/.agent_engine_config.json` et **écrase silencieusement** le nom versionné. Constaté le 23/07 : après l'update en place, l'engine v3 était redevenu `MMM_Agent`, recréant l'ambiguïté que le nommage versionné avait justement supprimée le 22/07. Le nom versionné vit maintenant dans le fichier de config, **à bumper à chaque nouvelle version**.
 
 **Quand créer un nouvel engine plutôt qu'un update en place (23/07)** : dès que le changement touche **tout le trafic** et pas seulement la feature ajoutée, et que la vérification ne peut se faire qu'**après** déploiement. C'est le cas du correctif de regex `client_id` : un update en place de la prod aurait exposé tous les clients avant toute vérification. Nouvel engine → test en local dessus → cutover par PR. À l'inverse, un changement inerte sans la feature (ex. la règle de transparence) peut être poussé en place tant que la prod ne pointe pas encore dessus.
 
