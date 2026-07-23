@@ -205,7 +205,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -224,11 +225,11 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "9f186e7f6da29a19",
+  "active": "7bea941805608efd",
   "lastOpenFiles": [
     "CONTEXT.md",
-    "2.Areas/TODO.md",
     "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-22.md",
+    "2.Areas/TODO.md",
     "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-22.md.tmp.30584.df3795c5f940",
     "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-22.md.tmp.30584.c1577dbcdd45",
     "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-08.md",
