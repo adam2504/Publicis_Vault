@@ -194,7 +194,8 @@ Route **SSE** `POST /marketing-mix-modeling/agent` (`{ message, session_id, ui_c
 
 ### Frontend — `client/src/features/marketing-mix-modeling/` + `routes/app/marketing-mix-modeling/`
 
-- **`api/use-agent-mutation.ts`** — hook TanStack Query. `POST` SSE (`Accept: text/event-stream`, `responseType: text`), parsing du stream via `onDownloadProgress` d'axios (accumulation du `responseText`, découpage des lignes `event:` / `data:`). Events : `status` → callback `onStatus`, `done` → réponse, `error` → throw.
+- **`api/use-agent-mutation.ts`** — hook TanStack Query. `POST` SSE (`Accept: text/event-stream`, `responseType: text`), parsing du stream via `onDownloadProgress` d'axios (accumulation du `responseText`, découpage des lignes `event:` / `data:`). Events : `status` → callback `onStatus`, `done` → réponse, `error` → throw. Prend un argument optionnel `ui_context` transmis dans le body (23/07).
+- **`context/data-context.tsx`** — le provider qui porte **à la fois** l'état du module (`currentScope`, `treatedResults`, `scopes`) **et** l'état du chat (`sendMessage`, `chatMessages`, `chatSessionId`). C'est ce qui rend la feature B triviale à câbler : le chatbot, même flottant, lit le scope sans plomberie. `buildUiContext()` y assemble le scope envoyé à chaque question. ⚠️ Le bloc mutation du chat a dû être **déplacé sous `currentScopeWithSettings`** (il était défini ~500 lignes avant la valeur qu'il doit lire).
 - **`components/chatbot-floating.tsx`** — le chatbot **flottant** (reste visible en changeant de tab du module).
 - **`components/markdown-message.tsx`** + `copy-button.tsx` — rendu markdown des réponses + copie.
 - **`components/thinking-animation.tsx`** / `text-shimmer.tsx` + `hooks/use-loading-timer.ts` — animation de progression alimentée par les events `status` (montre l'étape en cours).
