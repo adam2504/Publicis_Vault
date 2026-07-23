@@ -2,7 +2,9 @@
 
 Projet : [[MMM AI Agent]]
 
-Note de préparation (23/07) pour l'item de backlog **« GCF as tools »** : brancher la Cloud Function d'optimisation budget comme outil de l'agent. Rien n'est encore implémenté — ce document rassemble le contrat réel, relevé dans le code existant, et les questions à trancher avant de coder.
+Note de préparation (23/07) pour l'item de backlog **« GCF as tools »** : brancher la Cloud Function d'optimisation budget comme outil de l'agent. Rien n'est encore implémenté — ce document rassemble le contrat, les contraintes IAM et les questions à trancher avant de coder.
+
+> Contrat **lu dans la source de la CF** (`gs://run-sources-med-dtam-prd-mg-europe-west1/services/cf-budget-allocator-prod/…zip` → `main.py`), pas déduit de l'appelant. C'est la référence.
 
 ## La ressource
 
