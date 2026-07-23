@@ -31,6 +31,8 @@ Ajout d'un assistant IA conversationnel dans le module MMM de ConnectedHub. L'ag
 - Ajout dans Firebase
 - Diagnostics d'observabilité sur le stream de l'agent (`no_answer` / `stream_error` : `authors`, `chunkCount`, `reachedAnswerAgent`, `streamErrors`, `lastChunk`) — livrés en prod (07/07)
 - Message d'erreur du chatbot pointant vers l'alias support `help.connectedhub@publicismedia.com` (tranché par Eddie, client-safe)
+- Aide à la lecture des graphiques (bloc `CTX_MODULE_VIZ`, bilingue EN|FR) — en prod le 22/07
+- **Scope écran live (feature B)** : l'agent connaît le KPI, la période, l'onglet et la langue affichés et répond dans ce scope par défaut, surchargeable dimension par dimension. Annonce le scope utilisé sur sa 1re réponse. En prod le 23/07 (engine `6241`) — cf. [[Session 2026-07-23]]
 
 ## Ce qui reste ouvert
 
