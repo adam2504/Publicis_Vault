@@ -36,10 +36,11 @@ Ajout d'un assistant IA conversationnel dans le module MMM de ConnectedHub. L'ag
 
 ## Ce qui reste ouvert
 
-- [ ] Guardrails pour éviter double injection de `client_id` — *isolation inter-client validée en test par Dan le 07/07 (depuis Opel DE, requête Peugeot refusée proprement) ; reste à formaliser le guardrail*
 - [ ] Ajouter `cf-budget-allocator-prod` (GCF d'optimisation budget) comme tool de l'agent
 - [ ] Mémoire persistante par utilisateur (reprendre une ancienne conversation)
 - [ ] **Cadrage produit — recommandation** : jusqu'où l'agent recommande vs se limite aux faits (surtout côté client) — à trancher avec Baptiste + data strats
+- [ ] **Chip de contexte** dans le chatbot (`Contexte : ROAS · juin 2025 – mai 2026`) : rend le scope visible en permanence, sans coût en tokens, et signale un décalage avant même la lecture de la réponse. Complément visuel de l'annonce faite par l'agent (23/07)
+- [x] ~~Guardrails pour éviter double injection de `client_id`~~ — *formalisé le 23/07 avec la feature B : extraction Python par regex ancrée + repli, le premier marqueur gagne, donc un marqueur forgé dans le texte utilisateur ne peut pas la détourner. Whitelist stricte sur tout ce qui vient du navigateur (exclut `[`, `]`, `;`, `=`, retours à la ligne). Isolation déjà validée en test par Dan le 07/07*
 
 > Testing interne clôturé (06/07). Base de connaissances + roadmap priorisée dans [[Synthèse & Roadmap Testing]]. Phase 2 (profils conseil / proxy client) en cours dans [[Testing Conseil (proxy client)]] — Amaury Stellian (conseil, Avène) testé le 07/07 (adhésion), puis point sponsor avec Fabien Bourrely (DG Starcom) le 08/07.
 
