@@ -10,13 +10,18 @@ Note de préparation (23/07) pour l'item de backlog **« GCF as tools »** : bra
 
 | | |
 | --- | --- |
-| Service | `cf-budget-allocator-prod` (Cloud Run, gen2) |
+| Service | `cf-budget-allocator-prod` — **service Cloud Run**, pas une Cloud Function enregistrée (`gcloud functions describe` renvoie 404). Déployée depuis source, base `python312`, function-target `main` |
 | URL prod | `https://cf-budget-allocator-prod-868239246901.europe-west1.run.app` |
 | URL dev | `https://cf-budget-allocator-dev-868239246901.europe-west1.run.app` |
 | Région | `europe-west1` |
-| Auth | **Token OIDC** (`getIdTokenClient`), pas un access token |
+| SA d'exécution | `internal@med-dtam-prd-mg` (c'est **elle** qui lit BigQuery, pas l'appelant) |
+| Auth appelant | **Token OIDC** (`getIdTokenClient`), pas un access token |
+| Ressources | 1 vCPU / 1 Gi, `maxScale: 5` |
+| Déployée par | brilhost@publicisgroupe.net, janvier 2026 |
 
 > Une variante **dev** existe : idéale pour développer et tester le tool sans toucher la prod.
+
+> `maxScale: 5` + un solveur JAX : ce n'est pas un endpoint à marteler. Si l'agent peut le déclencher, prévoir que ça reste un appel rare.
 
 ## Contrat réel (relevé dans le code, pas supposé)
 
