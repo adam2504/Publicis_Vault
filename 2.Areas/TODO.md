@@ -9,7 +9,7 @@ type: area
 - [ ] Améliorer l'agent avec feedbacks
 	- [ ] Enrichir le `BUSINESS_CONTEXT` avec les DS (définitions variables/données)
 	- [ ] Tools saturation + allocation (`cf-budget-allocator-prod`) + registre narratif
-	- [ ] *(Backlog)* live-suivi UI  
+	- [x] *(Backlog)* live-suivi UI  
 	- [ ] Explorer possibilité de knowledge par client
 ## MINE - FeedGen Catégorisation
 
