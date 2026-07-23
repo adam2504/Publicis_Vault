@@ -101,14 +101,18 @@ La table BQ contient tous les clients. L'isolation ne repose **pas** sur des tab
 
 | Couche | Mécanisme | Force |
 | --- | --- | --- |
-| Backend Mine (`agent.ts`) | Préfixe `[MINE_CLIENT_ID: <id>]` au message | **Hard** (serveur) |
-| `extract_and_set_client_context` | Regex Python extrait le `client_id` | **Hard** |
+| Backend Mine (`agent.ts`) | Préfixe `[MINE_CLIENT_ID: <id>]` au message, **toujours en première ligne** | **Hard** (serveur) |
+| `extract_and_set_client_context` | Regex Python extrait le `client_id` — **leftmost match** | **Hard** |
 | `run_discovery` | SQL hardcodé `WHERE client_id = @client_id` | **Hard** |
 | `validate_client_filter` | Vérif Python avant toute exécution BQ | **Hard** |
 | `sql_guard` (SequentialAgent) | Garantit checker avant executor | **Hard** |
 | `query_writer_agent` | Instruction d'inclure `client_id` dans le SQL | Soft |
 
 Isolation validée en test (07/07, Dan) : depuis Opel DE, une requête Peugeot a été refusée proprement. Guardrail P0.
+
+**Ce qui donne réellement la garantie (précisé le 23/07)** : c'est le **leftmost match**, pas l'ancrage de la regex. Le backend émettant toujours sa ligne en premier, un marqueur forgé plus loin dans le texte utilisateur ne peut pas détourner l'extraction.
+
+⚠️ Piège identifié en revue : **ancrer la regex en début de ligne *sans repli* est une régression**, pas un durcissement. Le `raw_message` est fourni **par un LLM** (`context_setter_agent` reçoit « le texte du premier message ») ; si Flash ajoute un préambule, des guillemets ou une espace, une regex ancrée seule échoue et renvoie une erreur fatale → **toutes** les questions data cassent, pas seulement celles avec un scope. Implémentation retenue : **ancrée, puis repli sur le motif large**.
 
 ### Déploiement
 
