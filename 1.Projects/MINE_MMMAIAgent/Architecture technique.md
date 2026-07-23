@@ -23,12 +23,17 @@ Deux moitiés :
 
 ```
 Utilisateur → module MMM (frontend React)
+   → { message, session_id, ui_context } — le scope écran est joint à la question
    → backend Mine (agent.ts, stream SSE)
+      → validation whitelist du ui_context, composition des lignes
+        [MINE_CLIENT_ID] + [MINE_UI_CONTEXT]
       → Vertex Agent Engine (streamQuery, pipeline ADK)
       ← chunks (un par étape de sous-agent)
    ← SSE : status (progression) / done (réponse) / error
 ← réponse rendue en markdown dans le chatbot
 ```
+
+> Le `ui_context` est capturé **à l'envoi**, pas en continu : une réponse prend ~47 s, l'utilisateur peut changer de KPI entre-temps. C'est pourquoi l'agent annonce le scope qu'il a utilisé, et sait l'expliquer si l'utilisateur signale un décalage.
 
 ---
 
