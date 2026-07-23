@@ -124,7 +124,9 @@ Isolation validée en test (07/07, Dan) : depuis Opel DE, une requête Peugeot a
 | Région | `europe-west1` (RGPD) |
 | Déploiement | `PYTHONUTF8=1 adk deploy agent_engine MMM_Agent --validate-agent-import` |
 
-**Historique engines** : `6073…` (avril, rollback lointain) → `7899…` (scoping, 20/07) → **`2659…` (viz + fixes, 21-22/07, prod actuelle)**. `agent.ts` pointe sur `2659…`. Table engine↔commit dans le README du repo agent.
+**Historique engines** : `6073…` (avril, rollback lointain) → `7899…` (scoping, 20/07, supprimable) → `2659…` (viz + fixes, 21-22/07, **rollback actuel**) → **`6241…` (scope écran live, 23/07, prod actuelle)**. `agent.ts` pointe sur `6241…`. Table engine↔commit dans le README du repo agent.
+
+**Quand créer un nouvel engine plutôt qu'un update en place (23/07)** : dès que le changement touche **tout le trafic** et pas seulement la feature ajoutée, et que la vérification ne peut se faire qu'**après** déploiement. C'est le cas du correctif de regex `client_id` : un update en place de la prod aurait exposé tous les clients avant toute vérification. Nouvel engine → test en local dessus → cutover par PR. À l'inverse, un changement inerte sans la feature (ex. la règle de transparence) peut être poussé en place tant que la prod ne pointe pas encore dessus.
 
 **Pièges de déploiement (appris 20-22/07)** :
 - `adk deploy` lit le `requirements.txt` du **dossier agent** (`MMM_Agent/requirements.txt`), pas la racine → le pin va là. Sans pin, `google-adk 2.x` s'installe et **crash au démarrage** (`google.cloud.dataplex_v1` manquant).
