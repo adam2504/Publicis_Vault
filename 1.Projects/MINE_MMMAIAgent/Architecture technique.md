@@ -162,7 +162,35 @@ Route **SSE** `POST /marketing-mix-modeling/agent` (`{ message, session_id, ui_c
    - **Filet retry (22/07)** : la tentative de stream est enveloppée dans une **boucle (1 retry, `MAX_ATTEMPTS=2`)** qui **ne retente que le `no_answer` transitoire** (pas les erreurs HTTP/stream, timeout, disconnect) — même session. Champs **`attempt` / `retried`** ajoutés aux logs `mmm_agent_exchange`. Logique de décision pure dans `routes/retry.ts` (`shouldRetryExchange`) + tests unitaires (vitest).
 6. **Diagnostics & persistance** — sur chaque échange :
    - **GCS** `mmm-agent-chat-logs` (projet `med-dtam-prd-mg`), un JSON par échange, chemin `{clientId}/{ts}_{sessionId8}.json`. Schéma `ExchangeLog` : `timestamp, clientId, userId, sessionId, adkSessionId, userMessage, answer, status, durationMs, requestId`. `status ∈ success | error | timeout | no_answer | client_disconnect`.
-   - **Cloud Logging** (projet `pmed-portal-prd-mg`) via `logger`, champ `metric: mmm_agent_exchange` + diagnostics (`authors`, `chunkCount`, `streamErrors`, `lastChunk`) sur les échecs.
+   - **Cloud Logging** (projet `pmed-portal-prd-mg`) via `logger`, champ `metric: mmm_agent_exchange` + diagnostics (`authors`, `chunkCount`, `streamErrors`, `lastChunk`) sur les échecs. Depuis le 23/07 : **`uiScopePresent`**, **`uiScope`** (sanitizé, sur les échecs) et **`uiScopeRejected`** (champs refusés par la whitelist).
+
+### 3bis. Contrat du scope écran (`ui_context`) — 23/07
+
+**Ce que le front envoie** (tous les champs optionnels, l'objet entier peut être absent) :
+
+| Champ | Source (`currentScopeWithSettings`) | Exemple | Usage |
+| --- | --- | --- | --- |
+| `kpi` | `name` | `Sell-out` | filtre SQL (scope contraignant) |
+| `kpi_label` | `KPI_name` (traduit) | `Ventes` | nommer le KPI à l'utilisateur |
+| `date_min` / `date_max` | **min/max réels** des lignes du scope | `2025-06-02` | filtre SQL (scope contraignant) |
+| `tab` | route courante | `results` | déictique + navigation |
+| `lang` | `i18next.language` | `fr` | langue de réponse |
+| `market` / `market_label` | **conditionnel** : seulement si `Object.keys(scopes).length > 1` | `FR` | nommage uniquement, **jamais en SQL** |
+
+⚠️ **Piège de nommage** : `currentScope.date_min` / `date_max` sont des **clés de semaine** (`2025-W23`) malgré leur nom, pas des dates. Ne jamais les envoyer telles quelles. Les vraies bornes se calculent depuis les `date` des lignes de `treatedResults.data`, où les DATE BigQuery arrivent en `{ value: 'YYYY-MM-DD' }` (même forme que `training_date`).
+
+**Pourquoi des dates et pas des semaines** : la table n'a **ni colonne `year` ni colonne `week`** — elles sont dérivées côté ConnectedHub dans `get-data.ts` (`EXTRACT`). Et les deux bornes utilisaient deux définitions de semaine différentes (ISO vraie vs `EXTRACT(WEEK)` de BigQuery, dimanche/0-53), ce qui produisait des chiffres faux **sans erreur visible**. Passer en dates réelles supprime la question du contrat. A nécessité de ne plus exclure `date` du SELECT de `get-data.ts`.
+
+**Sécurité** — `ui_context` **vient du navigateur**, donc non fiable, et atterrit juste à côté du garde-fou d'isolation :
+
+- Whitelist stricte, **rejet** et non nettoyage : `^[\p{L}\p{N} _\-./&'(),%:+|]{1,64}$` pour les libellés, `^\d{4}-\d{2}-\d{2}$` pour les dates, énumérations pour `tab` et `lang`.
+- Exclure `[`, `]`, `;`, `=` et les retours à la ligne rend un faux marqueur **structurellement inexprimable**. **C'est toute la propriété de sécurité, ne jamais la relâcher.**
+- Rejet **champ par champ** : un `tab` invalide est ignoré, il ne casse jamais la conversation. Les champs rejetés sont loggés (sinon un rejet systématique de libellé serait invisible).
+- Testé contre homoglyphes Unicode de crochets, caractères de contrôle, RTL override, astuces `toString`/prototype.
+
+**Comportement de l'agent** (bloc `CTX_UI_SCOPE`) : scope **par défaut**, pas contrainte — la formulation explicite de l'utilisateur gagne toujours, **dimension par dimension**. Seule la ligne du **message courant** compte (les tours précédents sont de l'historique, pas une source de défaut). L'agent **annonce le scope sur sa 1re réponse** d'une conversation, puis se contente d'une courte incise.
+
+> **Dégradation** : absent ou invalide → comportement strictement identique à l'avant-feature. Ce n'est pas un cas limite : `currentScope` est `undefined` tant que l'effet d'init n'a pas tourné alors que le chatbot est déjà joignable, donc les requêtes sans scope sont du **trafic normal**.
 
 ### Frontend — `client/src/features/marketing-mix-modeling/` + `routes/app/marketing-mix-modeling/`
 
