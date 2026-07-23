@@ -148,7 +148,13 @@ Route **SSE** `POST /marketing-mix-modeling/agent` (`{ message, session_id, ui_c
 1. **Feature flag** — lecture Firestore `customers/{id}/products/marketing-mix-modeling` → champ `MMM_AI_Assistant`. Si absent/false → `403` (le frontend affiche la preview). C'est la feature payante.
 2. **Auth Vertex** — `GoogleAuth` (`MASTER_CREDENTIALS`, scope `cloud-platform`) → token pour appeler l'Agent Engine (cross-project vers `med-dtam-prd-mg`).
 3. **Session** — `getOrCreateVertexSession` : `Map` **en mémoire** clé `userId:session_id` → `adkSessionId` (via `async_create_session`). ⚠️ En mémoire → **perdue au redémarrage du backend** (cf. Bugs).
-4. **Isolation** — `isolatedMessage = [MINE_CLIENT_ID: ${customerId}]\n${message}` : injection serveur, jamais fournie par l'utilisateur.
+4. **Isolation + scope écran** — `composeAgentMessage(customerId, message, ui_context)` (module pur `routes/ui-context.ts`) compose :
+   ```
+   [MINE_CLIENT_ID: opel_fr]
+   [MINE_UI_CONTEXT: kpi=…; kpi_label=…; period=2025-06-02..2026-05-11; tab=results; lang=fr]   (optionnelle)
+   <question>
+   ```
+   Le `client_id` reste dérivé serveur, jamais fourni par l'utilisateur. Voir §3bis pour le contrat du scope.
 5. **Streaming** — appel `:streamQuery` (`async_stream_query`), lecture du stream chunk par chunk :
    - À chaque changement d'`author` → envoi d'un event SSE `status` (mapping `AUTHOR_STATUS` / `FUNCTION_STATUS` → clés i18n) pour l'UX de progression.
    - Détection de la réponse finale (`isTerminal` + texte + pas de function_call + author `answer_agent`/`MMM_agent`) → event `done`.
