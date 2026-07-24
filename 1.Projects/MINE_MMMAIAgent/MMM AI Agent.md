@@ -93,7 +93,7 @@ Le forfait fixe colle à la structure de coût (majoritairement fixe) ; le fair-
 | Data Scientist — testing                  | Hajar                         |
 | Head of Data (futur pôle études & mesure) | Baptiste                      |
 | Data Strat — Stellantis MMM               | Inès                          |
-| Data Strat — Stellantis MMM               | Katya                         |
+| Data Strat — Stellantis MMM               | Katia                         |
 | Web Analyst — ex-Analyste Consultante MMM | Elsa                          |
 
 ## Contexte de reprise
