@@ -158,8 +158,8 @@ Vérifié côté GCP :
 ## Prochaine étape
 
 Brainstorm de cadrage, dans cet ordre :
-1. **Architecture** : option A (invoquer) vs B (embarquer) — recommandation A, à valider.
+1. **Architecture** : décision prise de prototyper **A et B** puis comparer. Monter A d'abord.
 2. **Périmètre produit** : l'agent lit-il seulement, ou lance-t-il une optimisation ? (à trancher avec Baptiste).
 3. Puis spec.
 
-Ne pas commencer par le code. Les deux points bloquants sont le grant IAM et la question produit, pas la plomberie. Une fois A + périmètre validés, la demande de grant (`run.invoker`) peut partir en parallèle du reste.
+Ne pas commencer par le code avant le périmètre produit. La demande de grant `run.invoker` (pour A) peut partir en parallèle dès maintenant. Pour B, vérifier au plus tôt que l'accès à l'AR privé `dtam` est faisable côté build.
