@@ -27,15 +27,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-23.md",
+                "file": "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-20.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Session 2026-07-23"
+              "title": "Session 2026-07-20"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -224,8 +225,11 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "c35177a2e7ea8ae0",
+  "active": "7bea941805608efd",
   "lastOpenFiles": [
+    "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-23.md",
+    "2026-07-23.md",
+    "1.Projects/MINE_MMMAIAgent/Tool - cf-budget-allocator.md.tmp.18860.879109d419ee",
     "1.Projects/MINE_MMMAIAgent/Tool - cf-budget-allocator.md.tmp.18860.a648ec986185",
     "1.Projects/MINE_MMMAIAgent/Tool - cf-budget-allocator.md.tmp.18860.8167b908645b",
     "1.Projects/MINE_MMMAIAgent/Tool - cf-budget-allocator.md.tmp.18860.09210190ee13",
@@ -237,12 +241,8 @@
     "Pasted image 20260723173222.png",
     "Pasted image 20260723173205.png",
     "2.Areas/TODO.md",
-    "2026-07-23.md",
-    "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-23.md",
     "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-23.md.tmp.18860.12b8bbda02e5",
     "1.Projects/MINE_MMMAIAgent/Architecture technique.md.tmp.18860.7a23a5972acf",
-    "1.Projects/MINE_MMMAIAgent/Architecture technique.md.tmp.18860.7c52e9d3eefa",
-    "1.Projects/MINE_MMMAIAgent/Architecture technique.md.tmp.18860.4b9f7256c350",
     "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-22.md",
     "CONTEXT.md",
     "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-08.md",

@@ -93,13 +93,18 @@ L'agent réimplémente l'orchestration de `main.py` (parse, lecture BQ, appel so
 - **Fragilité de déploiement** : ajouter JAX à l'Agent Engine, dont le déploiement est **déjà fragile** (cf. saga `google-adk 2.x` / `dataplex` du 20-22/07). Si JAX ne s'initialise pas, c'est **tout l'agent** qui peut refuser de démarrer, pas juste ce tool.
 - **Pour** : pas de dépendance à la dispo de la CF ; latence in-process ; et on pourrait **corriger l'injection SQL** (point 3) en paramétrant la requête au passage.
 
-### Recommandation (à valider)
+### Décision (24/07, après échange avec Hajar) : **prototyper les deux**
 
-**Option A.** Trois raisons décisives : (1) agent et UI partagent un seul solveur → les chiffres ne peuvent pas diverger ; (2) les DS restent propriétaires de la logique, pas de dérive ni de redéploiement à chaque bump ; (3) on n'alourdit pas un déploiement d'agent déjà fragile avec JAX. Le grant `run.invoker` sur un seul service est plus propre et plus étroit que d'injecter l'accès AR privé dans le build **plus** le risque de déploiement.
+Pas assez de certitude pour trancher sur le papier → on monte **A et B** et on décide sur pièces. C'est jouable : les deux partagent le **contrat de payload** et les mêmes pièges (positionnel, pourcentages, `t_start`), donc le second coûte surtout ses dépendances et son accès data, pas une réécriture.
 
-Le seul vrai gain de B (supprimer le hop réseau et la dépendance à la CF) ne compense pas la dérive + la fragilité + la perte de cohérence avec l'UI.
+**Sur le papier, mon analyse penche A** (agent et UI partagent un seul solveur → chiffres non divergents ; DS propriétaires → pas de dérive ; pas de JAX dans un déploiement d'agent déjà fragile). Mais deux inconnues ne se lèvent qu'en prototypant, et ce sont justement les deux qui feraient basculer :
 
-> **Voie médiane** : partir sur A **et** signaler l'injection SQL (point 3) aux DS pour qu'ils la corrigent dans la CF. On garde les bénéfices de A sans laisser la faille en l'état.
+- **B est-il seulement déployable ?** Ajouter `jax`/`jaxlib` + `dtam` privé à l'Agent Engine peut casser le démarrage (cf. saga `google-adk`/`dataplex`). Si le déploiement ne survit pas à JAX, **B se décide tout seul**.
+- **A a-t-il un cold-start rédhibitoire ?** Mesurer la latence réelle d'un appel CF à froid (`maxScale 5` + init JAX) dans le flux de l'agent.
+
+**Séquencement conseillé** : monter **A d'abord** (aucune dépendance nouvelle → baseline fonctionnelle rapide, et le grant `run.invoker` peut partir en parallèle), puis tenter **B** et voir si le déploiement tient. Comparer sur latence, justesse (les deux doivent renvoyer les mêmes chiffres que l'UI), et douleur de maintenance.
+
+> **Quelle que soit l'option retenue** : signaler l'injection SQL (point 3) aux DS pour qu'ils paramètrent la requête dans la CF. En A elle reste hors de notre contrôle sinon ; en B on peut la corriger en réimplémentant.
 
 > Le reste de cette note (points durs, IAM, questions produit) est écrit **pour l'option A**. Si on bascule sur B, l'IAM et la partie « lecture BQ » changent, mais le contrat de payload et les pièges positionnels/pourcentages restent identiques.
 
