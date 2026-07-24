@@ -74,8 +74,11 @@ _Section mise à jour au fil des sessions._
 **Contexte / narratif au-delà des chiffres** _(Amaury 07/07)_
 Un profil conseil bute non pas sur les chiffres mais sur le **pourquoi** : quand il demande ce qui explique une contre-perf, l'agent reste sur les chiffres sans relier aux facteurs exogènes ni à « ce qui s'est passé ». → Renforcer la piste contexte (P1) : au-delà de la définition des variables, un registre explicatif qui fait le lien avec l'environnement (événements, saisonnalité, contexte marché).
 
-**Deux niveaux d'accès : reco interne / factuel client** _(idée Amaury 07/07)_
+**Deux niveaux d'accès : reco interne / factuel client** _(idée Amaury 07/07, esquissée avec Fabien)_
 Différencier le comportement selon le compte : interne (mail Publicis) → l'agent donne des **recommandations** ; externe (client) → **pas de reco**, faits seulement. → Opérationnalise le guardrail « jugement/reco » (P0) et sécurise l'ouverture client. À creuser comme brique de la trajectoire interne → client.
+
+**Alternative plus simple : assistant pur, aucune reco** _(24/07)_
+L'agent reste un **pur assistant** et ne recommande **jamais** (ni interne ni client) ; l'expertise et la reco restent côté humain. Évite d'avoir à gérer deux comportements selon le compte, et coupe court au risque « l'agent qui conseille mal ». Coût : on renonce à la valeur « reco » en interne (allocation, arbitrage). **Les deux options sont à arbitrer avec Baptiste** ; c'est la même décision que le « recommande vs faits » de [[MMM AI Agent]], et elle conditionne le tool d'allocation budget (cf. [[Tool - cf-budget-allocator]]).
 
 **Rollout conseil d'abord, client ensuite** _(idée Fabien 09/07)_
 Ouvrir l'agent au **conseil en interne** avant tout accès client. À la signature d'un client : demander au data strat si le conseil est impliqué ; si oui, leur ouvrir un accès pour utiliser / valider avant d'exposer le client. → Réduit le **risque « effet gadget »** (déception client si les réponses sont en deçà de l'annonce) et complète les deux niveaux d'accès.
