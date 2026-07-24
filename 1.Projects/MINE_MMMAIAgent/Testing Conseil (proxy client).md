@@ -141,8 +141,9 @@ Directeur Général Starcom France. **Registre différent des sessions précéde
 
 **Suite — next steps (message envoyé à Baptiste, 09/07)**
 Résumé du point à Baptiste : Fabien a kiffé l'assistant et ses réponses ; pour lui la next step est d'**ouvrir l'assistant aux personnes du conseil ayant un client MMM signé** (ex. Stellantis). Étape suivante convenue : demander aux DS où en sont les MMM de **Longchamp** et **Stellantis**.
-- [ ] Demander aux Data Scientists où en sont les MMM de Longchamp et Stellantis
-- [ ] Parler à **Clarisse (Longchamp)** et **Katia (Stellantis)** une fois les données dispo, pour introduire le sujet avec l'ouverture conseil
+- [x] ~~Demander aux DS où en sont les MMM de Longchamp et Stellantis~~ → **Longchamp** : MMM v2 **juste signé**, pas encore de modèle dispo. **Stellantis** : modèle **dispo**, mais **plus de retour du conseil** (DE / Zenith silencieux depuis le mail deck).
+- [ ] **Stellantis (le thread vivant)** : le modèle existe, donc rien ne bloque côté data. **Relancer le conseil DE** (Katia + Zenith) qui ne répond plus, pour caler la session d'initiation à l'assistant.
+- [ ] **Longchamp** : recaler avec **Clarisse** une fois le modèle v2 livré (rien à montrer avant).
 - [ ] Réaliser la passation / ouverture au conseil, puis recueillir : leurs questions (et celles qu'un client pourrait poser), leur avis sur les réponses, ce qui pourrait être amélioré
 
 ---
