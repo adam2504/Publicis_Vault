@@ -98,7 +98,7 @@ Le forfait fixe colle à la structure de coût (majoritairement fixe) ; le fair-
 
 ## Contexte de reprise
 
-Projet désarchivé le 23/06/2026. Baptiste (futur head of études et mesures) a suggéré lors d'un 1-to-1 d'organiser des **sessions de testing internes** ([[Testings Internes]]) avec des profils variés (data strats, DS) avant toute mise en avant client. Inès et Katya identifiées via Hajar comme data strats actives sur le MMM Stellantis. Elsa identifiée par Adam — Web Analyst avec un background Analyste Consultante MMM. Premières cibles pour les sessions de testing.
+Projet désarchivé le 23/06/2026. Baptiste (futur head of études et mesures) a suggéré lors d'un 1-to-1 d'organiser des **sessions de testing internes** ([[Testings Internes]]) avec des profils variés (data strats, DS) avant toute mise en avant client. Inès et Katia identifiées via Hajar comme data strats actives sur le MMM Stellantis. Elsa identifiée par Adam — Web Analyst avec un background Analyste Consultante MMM. Premières cibles pour les sessions de testing.
 
 ## Réunions
 
