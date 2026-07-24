@@ -69,6 +69,40 @@ En mode **`goal`** (« Atteindre un objectif »), deux différences :
 | `budget_total` | saisie utilisateur | `1` |
 | `what` | toggle des deux modes | `budget` |
 
+## Deux architectures possibles (LA décision à trancher en premier)
+
+Avant tout le reste : « brancher la CF comme tool » recouvre **deux montages très différents**. Le choix conditionne l'IAM, les dépendances, la maintenance et même la justesse des chiffres. À trancher avant de coder quoi que ce soit.
+
+### Option A — l'agent **invoque** la CF déployée
+
+Le tool de l'agent fait un POST OIDC sur l'URL Cloud Run, comme le backend Mine aujourd'hui. La CF fait le travail (lecture BQ du `model_configuration`, solveur JAX), renvoie le tableau.
+
+- **Dépendances agent** : aucune nouvelle (juste un client HTTP + OIDC).
+- **IAM** : `roles/run.invoker` sur le service (cf. point 4).
+- **Maintenance** : la logique reste chez les DS. L'agent appelle **toujours la version courante**.
+- **Justesse** : l'agent et l'onglet Simulation appellent **le même** solveur → **impossible qu'ils divergent**. Un utilisateur qui lance l'optimisation dans l'UI puis interroge l'agent obtient les mêmes chiffres, par construction. **Argument fort.**
+- **Contre** : un hop réseau + un cold start possible (Cloud Run `maxScale 5`, init JAX) ; dépend de la dispo de la CF ; l'injection SQL (point 3) reste dans la CF, hors de notre contrôle.
+
+### Option B — l'agent **embarque** la logique comme tool in-process
+
+L'agent réimplémente l'orchestration de `main.py` (parse, lecture BQ, appel solveur) **dans son propre process**, en dépendant du package privé `dtam` + `jax`/`jaxlib`/`numpy`. Pas de hop réseau, pas d'appel externe.
+
+- **Dépendances agent** : **lourdes** — `jax`/`jaxlib` (gros binaires) + `dtam==0.1.12` depuis l'**Artifact Registry privé** (`--extra-index-url https://europe-python.pkg.dev/med-dtam-prd-mg/dtam/simple`).
+- **IAM** : pas de `run.invoker`. En revanche le **build** `adk deploy` doit pouvoir lire l'AR privé `dtam`, et l'agent SA a déjà l'accès BQ (`dataViewer` + `jobUser`) pour lire le `model_configuration` lui-même. Donc **un autre grant**, pas zéro.
+- **Maintenance** : l'agent fige un **snapshot** de `dtam 0.1.12` + de l'orchestration. Quand les DS bumpent le package ou changent la CF, l'agent tourne en **logique périmée** jusqu'au prochain redéploiement. **Risque de dérive**, et l'agent et l'UI peuvent alors renvoyer des chiffres différents pour les mêmes entrées.
+- **Fragilité de déploiement** : ajouter JAX à l'Agent Engine, dont le déploiement est **déjà fragile** (cf. saga `google-adk 2.x` / `dataplex` du 20-22/07). Si JAX ne s'initialise pas, c'est **tout l'agent** qui peut refuser de démarrer, pas juste ce tool.
+- **Pour** : pas de dépendance à la dispo de la CF ; latence in-process ; et on pourrait **corriger l'injection SQL** (point 3) en paramétrant la requête au passage.
+
+### Recommandation (à valider)
+
+**Option A.** Trois raisons décisives : (1) agent et UI partagent un seul solveur → les chiffres ne peuvent pas diverger ; (2) les DS restent propriétaires de la logique, pas de dérive ni de redéploiement à chaque bump ; (3) on n'alourdit pas un déploiement d'agent déjà fragile avec JAX. Le grant `run.invoker` sur un seul service est plus propre et plus étroit que d'injecter l'accès AR privé dans le build **plus** le risque de déploiement.
+
+Le seul vrai gain de B (supprimer le hop réseau et la dépendance à la CF) ne compense pas la dérive + la fragilité + la perte de cohérence avec l'UI.
+
+> **Voie médiane** : partir sur A **et** signaler l'injection SQL (point 3) aux DS pour qu'ils la corrigent dans la CF. On garde les bénéfices de A sans laisser la faille en l'état.
+
+> Le reste de cette note (points durs, IAM, questions produit) est écrit **pour l'option A**. Si on bascule sur B, l'IAM et la partie « lecture BQ » changent, mais le contrat de payload et les pièges positionnels/pourcentages restent identiques.
+
 ## Les points durs
 
 ### 1. Tout est **positionnel** — c'est le vrai risque
