@@ -2,7 +2,7 @@ Projet : [[MMM AI Agent]]
 
 # Testing interne
 
-> **Phase clôturée le 06/07/2026.** 8 profils testés (Inès, Katya, Clarisse, Lydia, Léonie, Stanislas, Lara + Hajar sur la V1). Synthèse (base de connaissances + roadmap) dans [[Synthèse & Roadmap Testing]]. Cette note reste l'archive de la phase 1.
+> **Phase clôturée le 06/07/2026.** 8 profils testés (Inès, Katia, Clarisse, Lydia, Léonie, Stanislas, Lara + Hajar sur la V1). Synthèse (base de connaissances + roadmap) dans [[Synthèse & Roadmap Testing]]. Cette note reste l'archive de la phase 1.
 
 Objectif : faire tester l'agent MMM par des profils internes non-techniques avant toute mise en avant client. Approche suggérée par Baptiste lors du point du 22/06.
 
@@ -13,7 +13,7 @@ Objectif : faire tester l'agent MMM par des profils internes non-techniques avan
 | Personne  | Profil                                    | Statut          |
 | --------- | ----------------------------------------- | --------------- |
 | Inès      | Data Strat — MMM Stellantis (actif)       | Fait 23/06      |
-| Katya     | Data Strat — MMM Stellantis (actif)       | Fait 30/06      |
+| Katia     | Data Strat — MMM Stellantis (actif)       | Fait 30/06      |
 | Elsa      | Web Analyst — ex-Analyste Consultante MMM | À contacter     |
 | Hajar     | Data Scientist — testing V1               | Déjà au courant |
 | Lydia     | Data Scientist                            | Fait 30/06      |
@@ -116,7 +116,7 @@ Lead Data Strategist (scope L'Oréal), active sur le MMM Longchamp.
 
 **Profils**
 - Stanislas (Lead Data Strat) + Léonie (Data Strat) → sur une **propale MMM pour Feu Vert**, client qui hésite et regarde la concurrence. Angle commercial.
-- Katia (= Katya) → active sur le MMM Stellantis.
+- Katia → active sur le MMM Stellantis.
 - Lydia (Data Scientist) → angle fiabilité / confiance dans les réponses.
 
 **Préparation / angle du point**

@@ -38,7 +38,10 @@ Ajout d'un assistant IA conversationnel dans le module MMM de ConnectedHub. L'ag
 
 - [ ] Ajouter `cf-budget-allocator-prod` (GCF d'optimisation budget) comme tool de l'agent — contrat relevé et points durs dans [[Tool - cf-budget-allocator]]. **Deux préalables non techniques** : le grant IAM `run.invoker` sur la CF, et trancher si l'agent a le droit de *lancer* une optimisation (recommandation) ou seulement de lire
 - [ ] Mémoire persistante par utilisateur (reprendre une ancienne conversation)
-- [ ] **Cadrage produit — recommandation** : jusqu'où l'agent recommande vs se limite aux faits (surtout côté client) — à trancher avec Baptiste + data strats
+- [ ] **Cadrage produit, recommandation** : jusqu'où l'agent recommande vs se limite aux faits. Deux modèles sur la table, à trancher avec Baptiste :
+	- **A. Deux niveaux selon le compte** (déjà proposé, vu avec Fabien et Amaury) : reco pleine en interne (conseil inclus) ; côté client, faits seulement, aucune reco.
+	- **B. Assistant pur, aucune reco** (option plus simple, 24/07) : l'agent ne recommande jamais, ni interne ni client. L'expertise et la reco restent côté humain. Évite d'avoir à gérer deux comportements selon le compte.
+	- Décision structurante : elle conditionne aussi le tool d'allocation budget (lancer une optimisation = recommander). En option B, ce tool ne pourrait que lire/expliquer une allocation, jamais en proposer une. Cf. [[Tool - cf-budget-allocator]].
 - [ ] **Chip de contexte** dans le chatbot (`Contexte : ROAS · juin 2025 – mai 2026`) : rend le scope visible en permanence, sans coût en tokens, et signale un décalage avant même la lecture de la réponse. Complément visuel de l'annonce faite par l'agent (23/07)
 - [x] ~~Guardrails pour éviter double injection de `client_id`~~ — *formalisé le 23/07 avec la feature B : extraction Python par regex ancrée + repli, le premier marqueur gagne, donc un marqueur forgé dans le texte utilisateur ne peut pas la détourner. Whitelist stricte sur tout ce qui vient du navigateur (exclut `[`, `]`, `;`, `=`, retours à la ligne). Isolation déjà validée en test par Dan le 07/07*
 
