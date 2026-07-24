@@ -146,7 +146,7 @@ Vérifié côté GCP :
 
 ## Questions produit à trancher
 
-- **Est-ce que l'agent doit pouvoir *lancer* une optimisation, ou seulement *lire* et expliquer une allocation existante ?** Lancer une optimisation, c'est produire une recommandation budgétaire, pas répondre à un fait. Ça touche directement l'item de roadmap ouvert « jusqu'où l'agent recommande vs se limite aux faits », à trancher avec Baptiste. **À clarifier avant de coder**, sinon on livre une capacité que le cadrage produit refusera peut-être.
+- **Est-ce que l'agent doit pouvoir *lancer* une optimisation, ou seulement *lire* et expliquer une allocation existante ?** Lancer une optimisation, c'est produire une recommandation budgétaire, pas répondre à un fait. Ça touche directement la décision produit « recommande vs faits » (cf. [[MMM AI Agent]] et [[Testing Conseil (proxy client)]]) : **en option B (assistant pur, aucune reco), ce tool ne peut que lire/expliquer une allocation, jamais en proposer une** ; en option A (deux niveaux), il pourrait lancer en interne mais pas côté client. À trancher avec Baptiste **avant de coder** : sinon on livre une capacité que le cadrage produit refusera peut-être.
 - Si oui : les **deux modes** (ventiler un budget / atteindre un objectif) ou seulement le premier ?
 - Que fait l'agent des **contraintes** ? Les demander à l'utilisateur en langage naturel est une conversation à plusieurs tours, ce que le pipeline actuel ne fait pas. Version simple : n'accepter que les défauts (min 0, max = budget, inflation 0) et renvoyer vers l'onglet Simulation dès qu'il faut des contraintes fines.
 - Le coût : un appel CF + un tour LLM de plus. Marginal face aux ~$0,05/question, mais à vérifier si l'optimisation devient fréquente.
