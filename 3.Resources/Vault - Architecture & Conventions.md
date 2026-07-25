@@ -72,6 +72,21 @@ LOREAL_BrandStore/Brand Store v2.md
 
 Les sous-dossiers `Sessions/` et `Réunions/` ne sont créés que si le projet a du volume. Un petit projet peut n'avoir qu'une note principale.
 
+### `## Dernières sessions` — résumé rolling dans la note principale
+
+Chaque note de projet qui a des sessions doit inclure une section `## Dernières sessions` **à la fin de la note principale** (après Réunions / Ressources). Format : une ligne par session, du plus récent au plus ancien, limitée aux 4-6 dernières.
+
+```markdown
+## Dernières sessions
+
+- **YYYY-MM-DD** — [résumé en 1-2 phrases : ce qui a été fait, décisions clés, état laissé]
+- **YYYY-MM-DD** — ...
+```
+
+**But** : permettre de lire l'état récent d'un projet sans ouvrir les notes Sessions/ individuelles. Les sessions restent la trace détaillée ; cette section est le résumé navigable.
+
+**Convention de mise à jour** : à compléter à la fin de chaque session de travail, en ajoutant la nouvelle entrée en tête de liste.
+
 ### Frontmatter des notes de projet
 
 ```yaml

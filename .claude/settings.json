@@ -1,0 +1,30 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"/Users/adam/Desktop/Vie Pro/Publicis_Vault\" && if ! git pull --ff-only origin main 2>/dev/null; then echo '{\"systemMessage\": \"⚠️ Vault pull failed — local and remote have diverged. Run: git pull --rebase origin main\"}'; fi",
+            "timeout": 15,
+            "statusMessage": "Pulling latest vault..."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"/Users/adam/Desktop/Vie Pro/Publicis_Vault\" && if ! git diff --quiet || ! git diff --staged --quiet || [ -n \"$(git ls-files --others --exclude-standard)\" ]; then git add -A; if ! git commit -m \"vault backup: $(date '+%Y-%m-%d %H:%M:%S')\" 2>/dev/null; then echo '{\"systemMessage\": \"⚠️ Vault commit failed — check git status in the vault.\"}'; elif ! git push origin main 2>/dev/null; then echo '{\"systemMessage\": \"⚠️ Vault push failed — remote is ahead. Run: git pull --rebase origin main && git push\"}'; fi; fi",
+            "timeout": 30,
+            "statusMessage": "Syncing vault to GitHub..."
+          }
+        ]
+      }
+    ]
+  }
+}
