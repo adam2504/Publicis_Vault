@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "5f4b5f3325de2f4e",
+        "id": "e6f0168ae23fb455",
         "type": "tabs",
         "children": [
           {
-            "id": "bc66fcc4ca087833",
+            "id": "cdedca85bb3098ec",
             "type": "leaf",
             "state": {
-              "type": "split-diff-view",
-              "state": {
-                "aFile": "CONTEXT.md",
-                "bFile": "CONTEXT.md",
-                "aRef": ""
-              },
-              "icon": "diff",
-              "title": "Diff: CONTEXT  (Working Tree)"
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Nouvel onglet"
             }
           }
         ]
@@ -211,8 +207,8 @@
   },
   "active": "9f186e7f6da29a19",
   "lastOpenFiles": [
-    "Pasted image 20260723173222.png",
     "Pasted image 20260723173205.png",
+    "Pasted image 20260723173222.png",
     "CONTEXT.md",
     "2026-07-23.md",
     "1.Projects/MINE_MMMAIAgent/Tool - cf-budget-allocator.md",
