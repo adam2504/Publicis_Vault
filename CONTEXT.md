@@ -1,6 +1,6 @@
 ---
 type: context
-Dernière mise à jour: 2026-07-25
+Dernière mise à jour: 2026-07-29
 ---
 
 # CONTEXT — Vault d'Adam
@@ -35,11 +35,11 @@ Agent IA conversationnel dans le module MMM de ConnectedHub (Vertex AI Agent Eng
 
 Catégorisation automatique des produits e-commerce dans la taxonomie GPC (Google Product Categories) via un pipeline RAG + LLM reranker, en aval de FeedGen.
 
-**Statut (06/07 — stalled)** : V3 LLM reranking livré et benchmarké sur jeu gold Kérastase (294 produits, titres optimisés + GPC corrigé). Résultat : **88,8 % hiérarchique** (Gemini Flash reranker, arm A) vs 75,9 % bi-encoder seul. Cross-encoder (arm B) : meilleur exact-ID (24,1 %) mais pire hiérarchique (60,5 %), levier réel uniquement fine-tuné. Architecture stabilisée sur **BQ natif** (hors Vertex AI Vector Search, trop coûteux à idle). Repo `feedgen-categorisation-rag` propre, commit `25073d1`. Aucune session depuis le 06/07 (19 jours).
+**Statut (06/07 — stalled)** : V3 LLM reranking livré et benchmarké sur jeu gold Kérastase (294 produits, titres optimisés + GPC corrigé). Résultat : **88,8 % hiérarchique** (Gemini Flash reranker, arm A) vs 75,9 % bi-encoder seul. Cross-encoder (arm B) : meilleur exact-ID (24,1 %) mais pire hiérarchique (60,5 %), levier réel uniquement fine-tuné. Architecture stabilisée sur **BQ natif** (hors Vertex AI Vector Search, trop coûteux à idle). Repo `feedgen-categorisation-rag` propre, commit `25073d1`. Aucune session depuis le 06/07 (23 jours).
 
 **Prochaine action** : construire un vrai jeu d'éval avec Manu (GPC vérifié à la main + titre brut — sortir du plafond "titres opti" et du mono-flux Kérastase) ; explorer le cross-encoder en prod (serving batch + fine-tuning) ; approcher Dan pour brancher le RAG en amont de sa solution LLM.
 
-**Blocker** : dépendance à Manu pour le jeu d'éval multi-flux et en titres bruts. Projet en attente sans session depuis 19 jours.
+**Blocker** : dépendance à Manu pour le jeu d'éval multi-flux et en titres bruts. Projet en attente sans session depuis 23 jours.
 
 ---
 
@@ -48,7 +48,7 @@ Catégorisation automatique des produits e-commerce dans la taxonomie GPC (Googl
 
 Module ConnectedHub centralisant les analyses Amazon Marketing Cloud (Full Funnel depuis BigQuery) et les dashboards Looker (en iframe). Deux types d'utilisateurs : équipes data (Full Funnel) et équipes conseil/traders (dashboards).
 
-**Statut (09/07 — stable)** : Full Funnel branché sur BigQuery — PR **#1653** (`develop`) et **#1654** (`main`) mergées. Architecture data : projet `amira-test` (EU), dataset `AMC_ConnectedHub_7cR1jE` par client, tables `<étude>__<marque>__<période>` + registre. Données chargées : Mugler (298 l.) + Azzaro (1 366 l.). Matrice d'accès révisée : L'Oréal = Audiences Insights seul ; Publicis commerce = les 3 dashboards. Accès Looker de Nicolas Vivies (PMO Retail Media L'Oréal) débloqué (partage "unlisted" côté Looker avec Khadija). Aucune session depuis le 09/07 (16 jours).
+**Statut (09/07 — stable)** : Full Funnel branché sur BigQuery — PR **#1653** (`develop`) et **#1654** (`main`) mergées. Architecture data : projet `amira-test` (EU), dataset `AMC_ConnectedHub_7cR1jE` par client, tables `<étude>__<marque>__<période>` + registre. Données chargées : Mugler (298 l.) + Azzaro (1 366 l.). Matrice d'accès révisée : L'Oréal = Audiences Insights seul ; Publicis commerce = les 3 dashboards. Accès Looker de Nicolas Vivies (PMO Retail Media L'Oréal) débloqué (partage "unlisted" côté Looker avec Khadija). Aucune session depuis le 09/07 (20 jours).
 
 **Prochaine action** : automatiser la sync du registre BQ à chaque import (manuel aujourd'hui) ; configurer Firestore + comptes utilisateurs Publicis via Settings ; cadrer le calendrier de migration dashboards Looker → React natif avec Khadija.
 
