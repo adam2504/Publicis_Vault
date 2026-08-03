@@ -47,8 +47,6 @@ Trois recouvrements directs avec ce que je fais, ce n'est pas un mentor généri
 
 ## Agenda de la session (30 min)
 
-> Le Mentorship Commitment **n'est pas un formulaire séparé à remplir à la main** (confirmé par l'assistant Marcel). C'est la conversation elle-même : se mettre d'accord sur ce qu'on attend l'un de l'autre et sur le rythme. Ne pas perdre de temps à chercher une case à cocher.
-
 | Temps | Séquence |
 | --- | --- |
 | 5 min | Présentations croisées, et **pourquoi on a matché** |

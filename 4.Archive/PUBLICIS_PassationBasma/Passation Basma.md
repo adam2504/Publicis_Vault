@@ -1,6 +1,6 @@
 ---
 type: project
-statut: en cours
+statut: archivé
 discipline:
   - data-analyst
   - data-science
@@ -10,6 +10,16 @@ aliases:
   - Assistant Audiences
 ---
 # Passation Basma
+
+## Statut — archivé le 2026-08-03
+
+Projet clos. Basma a quitté Publicis le **23/07** sans que le knowledge ait été rempli : le schéma reste scaffoldé par IA (`[À COMPLÉTER]` partout), la fenêtre de capture est définitivement close et il n'existe plus de source directe. Les deux pistes de sortie sont fermées ou abandonnées : l'API LiveRamp (création d'audience = UI only, confirmé par Julien Guého le 20/07) et Docmost (abandonné le 09/07).
+
+Le volet Copilot / audiences est **abandonné côté Adam** : branchement du Copilot de Manu, knowledge connexe, piste Analytics Environment → Customer Profiles. Décision cohérente avec le positionnement DS/IA (priorité au MMM, pas de rôle de transition sur les audiences). Les tâches correspondantes ont été retirées du [[TODO]].
+
+Note conservée pour la trace : arbitrage de scope avec Jules, analyse Docmost, et cartographie des agents Copilot restent réutilisables.
+
+---
 
 Départ de Basma le **23/07** (référente analyse L'Oréal, dont [[Viral Beauty]]). Double objectif, désormais un seul fil :
 
