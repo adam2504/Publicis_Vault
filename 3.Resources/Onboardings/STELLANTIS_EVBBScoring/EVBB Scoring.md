@@ -7,6 +7,8 @@ client: STELLANTIS
 ---
 # EVBB Scoring
 
+Client : [[STELLANTIS]]
+
 **EVBB** = Enhanced Value-Based Bidding. Stellantis utilise le VBB pour définir une valeur de conversion sur plusieurs micro-conversions. L'objectif est de construire un modèle prédictif pour définir la valeur de chaque micro-conversion et modèle de voiture, afin d'optimiser le custom bidding entre pages (pas versus concurrents).
 
 Dragonfly (équipe interne UK) gérait les POC EVBB en France. Désormais le marché européen est divisé : Publicis prend en charge certains pays avec sa propre méthodologie.
