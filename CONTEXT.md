@@ -30,20 +30,7 @@ Agent IA conversationnel dans le module MMM de ConnectedHub (Vertex AI Agent Eng
 
 ---
 
-### 2. FeedGen Catégorisation — MINE
-**implication : lead** | discipline : data-science | client : MINE
-
-Catégorisation automatique des produits e-commerce dans la taxonomie GPC (Google Product Categories) via un pipeline RAG + LLM reranker, en aval de FeedGen.
-
-**Statut (06/07 — stalled)** : V3 LLM reranking livré et benchmarké sur jeu gold Kérastase (294 produits, titres optimisés + GPC corrigé). Résultat : **88,8 % hiérarchique** (Gemini Flash reranker, arm A) vs 75,9 % bi-encoder seul. Cross-encoder (arm B) : meilleur exact-ID (24,1 %) mais pire hiérarchique (60,5 %), levier réel uniquement fine-tuné. Architecture stabilisée sur **BQ natif** (hors Vertex AI Vector Search, trop coûteux à idle). Repo `feedgen-categorisation-rag` propre, commit `25073d1`. Aucune session depuis le 06/07 (26 jours).
-
-**Prochaine action** : construire un vrai jeu d'éval avec Manu (GPC vérifié à la main + titre brut — sortir du plafond "titres opti" et du mono-flux Kérastase) ; explorer le cross-encoder en prod (serving batch + fine-tuning) ; approcher Dan pour brancher le RAG en amont de sa solution LLM.
-
-**Blocker** : dépendance à Manu pour le jeu d'éval multi-flux et en titres bruts. Projet en attente sans session depuis 26 jours.
-
----
-
-### 3. AMC Analytics — MINE × L'ORÉAL
+### 2. AMC Analytics — MINE × L'ORÉAL
 **implication : lead** | discipline : dev | client : LOREAL
 
 Module ConnectedHub centralisant les analyses Amazon Marketing Cloud (Full Funnel depuis BigQuery) et les dashboards Looker (en iframe). Deux types d'utilisateurs : équipes data (Full Funnel) et équipes conseil/traders (dashboards).
