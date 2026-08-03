@@ -45,11 +45,40 @@ Trois recouvrements directs avec ce que je fais, ce n'est pas un mentor généri
 
 ---
 
-## Ce que le programme impose en session 1
+## Agenda de la session (30 min)
 
-1. **Compléter le Mentorship Commitment** ensemble pendant l'appel.
-2. **Poser mes objectifs de carrière à 6 mois.**
-3. Caler cadence et canal (30 min par mois, Teams).
+> Le Mentorship Commitment **n'est pas un formulaire séparé à remplir à la main** (confirmé par l'assistant Marcel). C'est la conversation elle-même : se mettre d'accord sur ce qu'on attend l'un de l'autre et sur le rythme. Ne pas perdre de temps à chercher une case à cocher.
+
+| Temps | Séquence |
+| --- | --- |
+| 5 min | Présentations croisées, et **pourquoi on a matché** |
+| 5 min | Mon contexte actuel et ce qui coince |
+| 10 min | Mes deux questions de fond |
+| 5 min | Ce que j'attends du mentorat, ce que lui attend |
+| 5 min | Rythme, canal, et **un next step concret** pour la prochaine fois |
+
+**Pourquoi on a matché, ma lecture à dire d'entrée** : le matching Marcel a croisé mon profil data et IA appliquée avec son scope data et tech. Concrètement il a construit côté annonceur ce que je construis à mon échelle côté agence, un produit analytics interne avec un enjeu d'adoption, et il a possédé la mesure marketing que mon agent IA essaie d'outiller. C'est ça le point de contact, le dire tôt donne le ton.
+
+---
+
+## Mon contexte actuel, en trois phrases
+
+**Ce sur quoi je suis** : un module d'analytics livré en production dans notre plateforme interne, le premier agent IA de la plateforme déployé sur Vertex AI au-dessus du module MMM, et de la classification de flux produits par LLM et embeddings.
+
+**Ce qui est difficile** : mon label officiel est « data analyst », mais mon travail réel est déjà de l'IA appliquée et de l'intégration produit. L'organisation est en transition et un nouveau pôle études & mesures se dessine en septembre. Ma trajectoire est lisible pour moi, pas encore pour ceux qui vont figer les périmètres.
+
+**À quoi ressemble le succès** : en février, avoir une contribution ML réelle livrée (pas seulement de l'IA appliquée), et un rôle décrit pour ce qu'il est plutôt que par défaut.
+
+---
+
+## Ce que j'attends du mentorat
+
+À formuler explicitement, c'est une des attentes du programme.
+
+- **Perspective, en priorité.** Un regard extérieur à ma ligne hiérarchique sur mes arbitrages de trajectoire. Personne dans mon environnement immédiat n'est neutre sur mon dossier, lui l'est.
+- **Accountability sur mon axe de croissance.** Le ML est ce qui saute en premier quand la charge monte. Avoir quelqu'un à qui je dois un point d'avancement chaque mois est exactement le mécanisme qui manque.
+- **Pas d'introductions pour l'instant.** Trop tôt, et il est sur un autre pays. À rouvrir plus tard si un sujet Groupe s'y prête.
+- **Ce que j'apporte en retour** : un retour terrain sur ce que produit concrètement une équipe data d'agence en France, et sur ce que donne un agent IA branché sur du MMM en conditions réelles. Il est nouveau dans le Groupe, ça a une valeur pour lui.
 
 ---
 
