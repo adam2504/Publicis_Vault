@@ -1,6 +1,6 @@
 ---
 type: context
-Dernière mise à jour: 2026-07-22
+Dernière mise à jour: 2026-08-01
 ---
 
 # CONTEXT — Vault d'Adam
@@ -22,11 +22,11 @@ Adam Jouini, apprenti Data & Dev chez Publicis Media (alternance), rattaché à 
 
 Agent IA conversationnel dans le module MMM de ConnectedHub (Vertex AI Agent Engine). Répond aux questions ROI/média des clients sur leurs données MMM.
 
-**Statut (22/07)** : Engine **2659** en prod depuis le 22/07. Livraisons du cycle 20-22/07 : aide à la lecture des graphiques (`CTX_MODULE_VIZ`, bilingue EN/FR, sourcé des fichiers i18n), retry backend sur `no_answer` non-déterministe (1 retry, logs `attempt`/`retried`), fix hallucination `execute_sql` via décomposition du `BUSINESS_CONTEXT` en blocs scopés par sous-agent, polish chatbot (questions recommandées data/interprétation/navigation, fix portail z-index chatbot flottant, repositionnement si panneau droit ouvert). PRs #1682→#1683 (retry + eng 2659) et #1685→#1686 (polish) mergées sur main.
+**Statut (23/07)** : Engine **6241** en prod depuis le 23/07 (`MMM_Agent_v3_live_ui_scope`). Feature B (scope écran live) livrée : l'agent connaît désormais le KPI, la période, l'onglet et la langue affichés à l'écran, et répond dans ce scope par défaut (surchargeable dimension par dimension, annonce le scope sur sa 1re réponse). Défaut critique corrigé en revue de branche : les bornes de période passent en dates réelles (`WHERE date BETWEEN`) — les colonnes `year`/`week` n'existent pas dans `tb_model_contributions`. Guardrails whitelist durcis (`[`, `]`, `;`, `=`, newlines exclus), security review validée. PRs #1688 (`develop`) → #1689 (`main`) mergées. Rollback disponible sur engine `2659` sans redéploiement.
 
-**Prochaine action** : surveiller le monitoring (`no_answer` + `retried:true` en prod) ; supprimer les anciens engines (6073 supprimable, 7899 rollback jusqu'à preuve de 2659) ; démarrer le backlog priorisé dans cet ordre : live-suivi UI (feature B), enrichissement `BUSINESS_CONTEXT` avec les DS, `cf-budget-allocator-prod` en tool, knowledge par client.
+**Prochaine action** : surveiller le monitoring (`no_answer` + `uiScopeRejected` en prod) ; mettre au backlog le chip de contexte chatbot (`Contexte : ROAS · juin 2025 – mai 2026`) ; relancer le conseil DE Stellantis (Zenith Media — Marit, Janina, Virginia silencieux depuis le mail deck) pour l'initiation agent ; suite du backlog : enrichissement `BUSINESS_CONTEXT` avec les DS (Dan/Hajar), `cf-budget-allocator-prod` en tool, knowledge par client.
 
-**Blocker** : cadrage "recommandation" (jusqu'où l'agent recommande vs se limite aux faits côté client) à trancher avec Baptiste + data strats. Validation formelle complète pas encore signée avant mise en avant client.
+**Blocker** : cadrage "recommandation" à trancher avec Baptiste — option A (deux niveaux interne/client : reco pleine en interne, faits seulement côté client) vs option B (assistant pur, aucune reco ni interne ni client). Décision structurante : conditionne le tool d'allocation budget (`cf-budget-allocator-prod`). Conseil DE Stellantis ne répond plus depuis le mail deck.
 
 ---
 
@@ -35,11 +35,11 @@ Agent IA conversationnel dans le module MMM de ConnectedHub (Vertex AI Agent Eng
 
 Catégorisation automatique des produits e-commerce dans la taxonomie GPC (Google Product Categories) via un pipeline RAG + LLM reranker, en aval de FeedGen.
 
-**Statut (06/07)** : V3 LLM reranking livré et benchmarké sur jeu gold Kérastase (294 produits, titres optimisés main + GPC corrigé). Résultat : **88,8 % hiérarchique** (Gemini Flash reranker, arm A) vs 75,9 % bi-encoder seul. Cross-encoder (arm B) : meilleur exact-ID (24,1 %) mais pire hiérarchique (60,5 %), levier réel uniquement fine-tuné. Architecture stabilisée sur **BQ natif** (hors Vertex AI Vector Search, trop coûteux à idle). Repo `feedgen-categorisation-rag` propre, commit `25073d1`. V1 propre à rejouer via BQ (ancien baseline non fiable).
+**Statut (06/07 — stalled)** : V3 LLM reranking livré et benchmarké sur jeu gold Kérastase (294 produits, titres optimisés + GPC corrigé). Résultat : **88,8 % hiérarchique** (Gemini Flash reranker, arm A) vs 75,9 % bi-encoder seul. Cross-encoder (arm B) : meilleur exact-ID (24,1 %) mais pire hiérarchique (60,5 %), levier réel uniquement fine-tuné. Architecture stabilisée sur **BQ natif** (hors Vertex AI Vector Search, trop coûteux à idle). Repo `feedgen-categorisation-rag` propre, commit `25073d1`. Aucune session depuis le 06/07 (26 jours).
 
 **Prochaine action** : construire un vrai jeu d'éval avec Manu (GPC vérifié à la main + titre brut — sortir du plafond "titres opti" et du mono-flux Kérastase) ; explorer le cross-encoder en prod (serving batch + fine-tuning) ; approcher Dan pour brancher le RAG en amont de sa solution LLM.
 
-**Blocker** : dépendance à Manu pour le jeu d'éval multi-flux et en titres bruts. Aucune session depuis le 06/07 (16 jours).
+**Blocker** : dépendance à Manu pour le jeu d'éval multi-flux et en titres bruts. Projet en attente sans session depuis 26 jours.
 
 ---
 
@@ -48,7 +48,7 @@ Catégorisation automatique des produits e-commerce dans la taxonomie GPC (Googl
 
 Module ConnectedHub centralisant les analyses Amazon Marketing Cloud (Full Funnel depuis BigQuery) et les dashboards Looker (en iframe). Deux types d'utilisateurs : équipes data (Full Funnel) et équipes conseil/traders (dashboards).
 
-**Statut (09/07)** : Full Funnel branché sur BigQuery — PR **#1653** (`develop`) et **#1654** (`main`) mergées. Architecture data : projet `amira-test` (EU), dataset `AMC_ConnectedHub_7cR1jE` par client, tables `<étude>__<marque>__<période>` + registre. Données chargées : Mugler (298 l.) + Azzaro (1 366 l.). Matrice d'accès révisée : L'Oréal = Audiences Insights seul ; Publicis commerce = les 3 dashboards. Accès Looker de Nicolas Vivies (PMO Retail Media L'Oréal) débloqué (partage "unlisted" côté Looker avec Khadija).
+**Statut (09/07 — stable)** : Full Funnel branché sur BigQuery — PR **#1653** (`develop`) et **#1654** (`main`) mergées. Architecture data : projet `amira-test` (EU), dataset `AMC_ConnectedHub_7cR1jE` par client, tables `<étude>__<marque>__<période>` + registre. Données chargées : Mugler (298 l.) + Azzaro (1 366 l.). Matrice d'accès révisée : L'Oréal = Audiences Insights seul ; Publicis commerce = les 3 dashboards. Accès Looker de Nicolas Vivies (PMO Retail Media L'Oréal) débloqué (partage "unlisted" côté Looker avec Khadija). Aucune session depuis le 09/07 (23 jours).
 
 **Prochaine action** : automatiser la sync du registre BQ à chaque import (manuel aujourd'hui) ; configurer Firestore + comptes utilisateurs Publicis via Settings ; cadrer le calendrier de migration dashboards Looker → React natif avec Khadija.
 
@@ -59,13 +59,13 @@ Module ConnectedHub centralisant les analyses Amazon Marketing Cloud (Full Funne
 ### 4. Passation Basma — PUBLICIS
 **implication : lead** | discipline : data-analyst + data-science | client : PUBLICIS
 
-Double objectif : capturer le knowledge audiences LiveRamp de Basma avant son départ le **23/07**, puis brancher le Copilot de Manu sur ce knowledge pour assister la remplaçante à la création d'audiences.
+Capturer le knowledge audiences LiveRamp de Basma avant son départ, puis brancher le Copilot de Manu sur ce knowledge pour assister la remplaçante à la création d'audiences.
 
-**Statut (20/07)** : Basma part **demain (23/07)**. Réponse LiveRamp (Julien Guého, Head CS Continental Europe, 20/07) : création d'audience Safe Haven = **UI only**, distribution API = réservée aux plateformes tierces. Piste ConnectedHub via API directe **fermée**. Seule voie programmatique partielle : Analytics Environment → Customer Profiles (à instruire avec Lydia/Hajar DS). Knowledge : 5 fichiers `.md` avec schéma excellent mais données réelles absentes (`[À COMPLÉTER]` partout). Copilot de Manu retenu (plus avancé) ; autorisation ajout fichiers bloquée avec Bradley.
+**Statut (post-23/07)** : Basma a quitté Publicis le 23/07 — la fenêtre de capture est close. Le dossier knowledge existe (5 fichiers `.md` : nomenclature, fishing rules, segments, exemples brief→audience, glossaire) mais les données réelles n'ont pas été remplies (`[À COMPLÉTER]` partout — schéma scaffoldé par IA). Piste ConnectedHub via API LiveRamp **fermée** (Julien Guého, 20/07 : création d'audience = UI only, distribution API réservée aux plateformes tierces). Copilot de Manu retenu comme prochaine brique ; autorisation ajout fichiers bloquée par Bradley. Seule piste tech restante : Analytics Environment → Customer Profiles (à instruire avec Lydia/Hajar DS).
 
-**Prochaine action** : exploiter les dernières heures de passation avant le 23/07 pour remplir le knowledge ; nettoyer/segmenter ensuite ; brancher le Copilot de Manu ; instruire la piste Analytics Environment → Customer Profiles avec les DS.
+**Prochaine action** : tenter de remplir le knowledge depuis d'autres sources (historique, doc LiveRamp) ; nettoyer/segmenter une fois rempli ; brancher le Copilot de Manu (débloquer avec Bradley) ; instruire la piste Analytics Environment → Customer Profiles avec les DS. Veille sur les offres MCP + agents LiveRamp (Julien Guého revient).
 
-**Blocker** : temps écoulé — Basma part le 23/07. Autorisation ajout fichier Copilot bloquée par Bradley.
+**Blocker** : knowledge non rempli et fenêtre Basma close — plus de source directe. Autorisation ajout fichier Copilot bloquée par Bradley.
 
 ---
 
@@ -74,7 +74,7 @@ Double objectif : capturer le knowledge audiences LiveRamp de Basma avant son d�
 
 Étude L'Oréal Brand Store. Adam est participant (suivi, pas de livrable porté).
 
-**Statut** : aucune session dans le vault, aucun TODO actif côté Adam. Sujet porté par d'autres (Basma historiquement, désormais en transition avec son départ). Pas d'action prévue de la part d'Adam.
+**Statut** : aucune session dans le vault, aucun TODO actif côté Adam. Sujet porté par d'autres. Pas d'action prévue de la part d'Adam.
 
 ---
 
@@ -82,13 +82,13 @@ Double objectif : capturer le knowledge audiences LiveRamp de Basma avant son d�
 
 | Blocker | Projet(s) | Qui débloque |
 |---|---|---|
-| Cadrage "recommandation" agent (scope côté client) | MMM AI Agent | Baptiste + data strats |
-| Validation formelle agent avant go client | MMM AI Agent | Baptiste, Hajar, Dan |
-| Autorisation ajout fichiers Copilot | Passation Basma | Bradley |
-| Départ Basma le 23/07 — knowledge pas encore rempli | Passation Basma | Basma (urgence) |
+| Cadrage "recommandation" agent — option A (deux niveaux interne/client) vs option B (assistant pur, aucune reco) | MMM AI Agent | Baptiste |
+| Conseil DE Stellantis silencieux — Zenith Media ne répond plus depuis le mail deck | MMM AI Agent | Katia + Zenith Media DE |
 | Jeu d'éval multi-flux FeedGen (GPC brut + titre brut) | FeedGen Catégorisation | Manu |
 | Ingestion BQ AMC manuelle (registre non automatisé) | AMC Analytics | Khadija (ingestion) |
-| API LiveRamp fermée — seule piste DS : Analytics Env → Customer Profiles | Passation Basma | Lydia / Hajar |
+| Knowledge Basma non rempli — fenêtre de passation close (départ 23/07) | Passation Basma | — (source disparue) |
+| Autorisation ajout fichiers Copilot | Passation Basma | Bradley |
+| Analytics Environment → Customer Profiles à instruire (seule piste tech restante) | Passation Basma | Lydia / Hajar |
 
 ---
 
@@ -101,12 +101,13 @@ Double objectif : capturer le knowledge audiences LiveRamp de Basma avant son d�
 | Eddie | Lead dev ConnectedHub — archi frontend/backend, décisions infra | MMM AI Agent, AMC Analytics |
 | Khadija | Data Analyst — dashboards Looker AMC, ingestion BQ | AMC Analytics |
 | Dan | Data Scientist — testing MMM Agent, FeedGen scoring existant | MMM AI Agent, FeedGen |
-| Hajar | Data Scientist — testing MMM, AMC modeled audiences, EVBB | MMM AI Agent, AMC Analytics |
-| Manu | AI Office — Copilot audiences, arbitrage scope Passation | Passation Basma, FeedGen (jeu d'éval) |
-| Basma | Data Analyst L'Oréal — départ 23/07 | Passation Basma |
+| Hajar | Data Scientist — testing MMM, AMC modeled audiences, piste Customer Profiles | MMM AI Agent, AMC Analytics, Passation Basma |
+| Manu | AI Office — Copilot audiences, jeu d'éval FeedGen | Passation Basma, FeedGen |
+| Inès | Data Strat Stellantis — contact ouverture conseil MMM | MMM AI Agent |
+| Katia | Data Strat Stellantis — contact ouverture conseil MMM | MMM AI Agent |
 | Pierre | Data Strat L'Oréal — référent AMC, Brand Store | AMC Analytics |
 | Bradley | ? — autorisation ajout fichiers Copilot | Passation Basma |
-| Julien Guého | Head CS Continental Europe, LiveRamp — a confirmé no API | Passation Basma |
+| Julien Guého | Head CS Continental Europe, LiveRamp — a confirmé no API ; veille MCP agents à venir | Passation Basma |
 | Brieg | Lead DS (parti 12/06/2026) — a initié MMM Agent avec Adam et Hajar | MMM AI Agent (historique) |
 
 ---
@@ -115,12 +116,11 @@ Double objectif : capturer le knowledge audiences LiveRamp de Basma avant son d�
 
 | Date | Fait |
 |---|---|
-| 2026-07-22 | Engine MMM Agent **2659** en prod : `CTX_MODULE_VIZ` (aide lecture graphiques bilingue), retry backend, polish chatbot (suggestions thématiques + fix portail z-index flottant). PRs #1685/#1686 mergées. |
-| 2026-07-20 | MMM Agent v2 : `BUSINESS_CONTEXT` décomposé en blocs scopés par sous-agent — hallucination `execute_sql` fixée, validée en prod (engine 7899 puis cutover vers 2659). |
-| 2026-07-20 | LiveRamp (Julien Guého) confirme : création d'audience Safe Haven = UI only, Activation API réservée aux plateformes tierces. Piste API ConnectedHub fermée ; veille MCP LiveRamp agents en cours. |
+| 2026-07-23 | Feature B (scope écran live) livrée en prod : engine **6241**. L'agent connaît KPI, période, onglet et langue de l'écran. Défaut critique corrigé : bornes de période en dates réelles (colonnes `year`/`week` absentes de BQ). PRs #1688/#1689 mergées. |
+| 2026-07-23 | Basma quitte Publicis — knowledge audiences LiveRamp non rempli à son départ (schéma scaffoldé, `[À COMPLÉTER]` partout). Fenêtre de capture définitivement close. |
+| 2026-07-22 | Engine MMM Agent **2659** en prod : `CTX_MODULE_VIZ` (aide lecture graphiques bilingue EN/FR), retry backend `no_answer`, polish chatbot. PRs #1685/#1686 mergées. |
+| 2026-07-20 | `BUSINESS_CONTEXT` décomposé en blocs `CTX_*` scopés par sous-agent — hallucination `execute_sql` fixée. LiveRamp (Julien Guého) : création d'audience = UI only, API fermée. |
 | 2026-07-09 | Full Funnel AMC branché sur BigQuery (PR #1653/#1654 mergées sur main). Accès Looker Nicolas Vivies débloqué (partage "unlisted" avec Khadija). |
-| 2026-07-07 | Testing MMM Agent avec Dan : isolation inter-client validée (Opel vs Peugeot refusé proprement). Démo Fabien Bourrely (DG Starcom) → intérêt confirmé au-delà de l'équipe. |
-| 2026-07-06 | FeedGen V3 LLM reranking : 88,8 % hiérarchique (Gemini Flash) vs 75,9 % baseline. Jeu gold Kérastase construit (`tb_kerastase_eval`, 294 produits). |
 
 ---
 
