@@ -58,11 +58,7 @@ Module ConnectedHub centralisant les analyses Amazon Marketing Cloud (Full Funne
 |---|---|---|
 | Cadrage "recommandation" agent — option A (deux niveaux interne/client) vs option B (assistant pur, aucune reco) | MMM AI Agent | Baptiste |
 | Conseil DE Stellantis silencieux — Zenith Media ne répond plus depuis le mail deck | MMM AI Agent | Katia + Zenith Media DE |
-| Jeu d'éval multi-flux FeedGen (GPC brut + titre brut) | FeedGen Catégorisation | Manu |
 | Ingestion BQ AMC manuelle (registre non automatisé) | AMC Analytics | Khadija (ingestion) |
-| Knowledge Basma non rempli — fenêtre de passation close (départ 23/07) | Passation Basma | — (source disparue) |
-| Autorisation ajout fichiers Copilot | Passation Basma | Bradley |
-| Analytics Environment → Customer Profiles à instruire (seule piste tech restante) | Passation Basma | Lydia / Hajar |
 
 ---
 
