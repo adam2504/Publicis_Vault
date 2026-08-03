@@ -237,7 +237,7 @@ Trois types de nœuds dans le graphe :
 3.Resources/
   Vault - Architecture & Conventions.md   ← ce fichier
   Équipe & Contacts.md                    ← annuaire de l'équipe (aucun lien sortant)
-  Asana - Sync & Conventions.md           ← mapping vault → Asana (cf. /asana-sync)
+  Asana - Sync & Conventions.md           ← mapping vault → Asana (cf. /asana-sync) : [[Asana - Sync & Conventions]]
   MMM — Notions.md                        ← notions métier MMM
   Mine Platform/    ← hub ConnectedHub : modules actifs & archivés, stack, incidents
   AMC/              ← doc Amazon Marketing Cloud : notions, contrat d'ingestion BQ
