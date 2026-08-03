@@ -6,7 +6,7 @@ implication: lead
 client: LOREAL
 ---
 
-Plateforme : [[Mine Platform]]
+Plateforme : [[Mine Platform]] · Client : [[LOREAL]]
 
 ## Objectif du module
 
