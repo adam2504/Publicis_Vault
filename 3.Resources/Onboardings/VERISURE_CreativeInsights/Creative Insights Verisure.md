@@ -8,6 +8,8 @@ client: VERISURE
 
 # Creative Insights Verisure
 
+Client : [[VERISURE]]
+
 Analyse et définition des features pour le projet Creative Insights côté Verisure.
 
 > ⚪ Note principale à compléter au fil du projet.
