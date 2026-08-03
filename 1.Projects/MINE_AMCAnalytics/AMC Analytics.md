@@ -128,6 +128,7 @@ Le module lit ses données dans **BigQuery** (projet `amira-test`, région **EU*
 ## Ressources
 
 - Notions sur l'outil AMC (comptes, instances, tables, API) : [[AMC — Notions]]
+- Procédure d'ajout d'un extract (nommage, transfo CSV, MERGE du registre) : [[Contrat d'ingestion BQ]]
 - Documentation API AMC : https://advertising.amazon.com/API/docs/en-us/reference/api-overview
 
 ## Dernières sessions
