@@ -182,3 +182,7 @@ Résultat sauvegardé dans `tb_evbb_scores` (1 ligne par micro-conversion × mod
 | Data Strategist            | Pierre   |
 | Data Scientist             | Dan      |
 
+## Réunions
+
+- [[2026-06-24 Onboarding EVBB Scoring]]
+
