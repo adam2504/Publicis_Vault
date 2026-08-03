@@ -43,20 +43,7 @@ Module ConnectedHub centralisant les analyses Amazon Marketing Cloud (Full Funne
 
 ---
 
-### 4. Passation Basma — PUBLICIS
-**implication : lead** | discipline : data-analyst + data-science | client : PUBLICIS
-
-Capturer le knowledge audiences LiveRamp de Basma avant son départ, puis brancher le Copilot de Manu sur ce knowledge pour assister la remplaçante à la création d'audiences.
-
-**Statut (post-23/07)** : Basma a quitté Publicis le 23/07 — la fenêtre de capture est close. Le dossier knowledge existe (5 fichiers `.md` : nomenclature, fishing rules, segments, exemples brief→audience, glossaire) mais les données réelles n'ont pas été remplies (`[À COMPLÉTER]` partout — schéma scaffoldé par IA). Piste ConnectedHub via API LiveRamp **fermée** (Julien Guého, 20/07 : création d'audience = UI only, distribution API réservée aux plateformes tierces). Copilot de Manu retenu comme prochaine brique ; autorisation ajout fichiers bloquée par Bradley. Seule piste tech restante : Analytics Environment → Customer Profiles (à instruire avec Lydia/Hajar DS).
-
-**Prochaine action** : tenter de remplir le knowledge depuis d'autres sources (historique, doc LiveRamp) ; nettoyer/segmenter une fois rempli ; brancher le Copilot de Manu (débloquer avec Bradley) ; instruire la piste Analytics Environment → Customer Profiles avec les DS. Veille sur les offres MCP + agents LiveRamp (Julien Guého revient).
-
-**Blocker** : knowledge non rempli et fenêtre Basma close — plus de source directe. Autorisation ajout fichier Copilot bloquée par Bradley.
-
----
-
-### 5. Brand Store v2 — L'ORÉAL
+### 3. Brand Store v2 — L'ORÉAL
 **implication : participant** | discipline : data-analyst | client : LOREAL
 
 Étude L'Oréal Brand Store. Adam est participant (suivi, pas de livrable porté).
