@@ -187,10 +187,11 @@ Usage : ouvrir une note → `Ctrl+P` → _Templater: Open Insert Template Modal_
 
 ### Règles générales
 
-- **`3.Resources/Clients/LOREAL.md`** et les notes de type MOC utilisent des chemins complets : `[[1.Projects/MINE_AMCAnalytics/AMC Analytics]]`
+- **Les notes de `3.Resources/Clients/`** et les notes de type MOC (hubs : `Mine Platform`) utilisent des chemins complets : `[[1.Projects/MINE_AMCAnalytics/AMC Analytics]]`
 - **Partout ailleurs**, utiliser le nom de fichier seul (Obsidian résout automatiquement) : `[[AMC Analytics]]`
 - Toujours lier une session vers son projet en en-tête : `[[AMC Analytics]]`
-- **Ne pas lister les sessions depuis la note principale du projet** — trop répétitif, ça bruite le graphe. Elles restent accessibles via leur lien d'en-tête et le panneau backlinks. Les **réunions** (jalons, peu nombreuses) peuvent, elles, être listées.
+- **Ne pas lister les sessions en bloc depuis la note principale du projet** — trop répétitif, ça bruite le graphe. Elles restent accessibles via leur lien d'en-tête et le panneau backlinks. Les **réunions** (jalons, peu nombreuses) peuvent, elles, être listées.
+	- **Exception : la citation inline est autorisée.** Un `cf. [[Session 2026-07-23]]` accroché à une affirmation précise (une décision, un chiffre, un correctif) est de la traçabilité, pas du listing. Ce qui est proscrit, c'est la *section* qui énumère toutes les sessions — le rolling `## Dernières sessions` la remplace.
 - Les personnes sont mentionnées en **texte brut** (prénom suffit) — pas de lien vers Équipe & Contacts
 
 ### Liens avec alias (texte affiché différent du nom de fichier)
