@@ -129,3 +129,10 @@ Le module lit ses données dans **BigQuery** (projet `amira-test`, région **EU*
 
 - Notions sur l'outil AMC (comptes, instances, tables, API) : [[AMC — Notions]]
 - Documentation API AMC : https://advertising.amazon.com/API/docs/en-us/reference/api-overview
+
+## Dernières sessions
+
+- **2026-07-09** — Full Funnel branché sur BQ (dataset par client, nomenclature `<étude>__<marque>__<période>`, registre, routes backend) ; PR #1653/#1654 mergées sur main. Matrice d'accès révisée (L'Oréal = Audience Insights seul, Publicis commerce = les 3 dashboards). Incident Looker résolu : partage basculé en « unlisted » avec Khadija après blocage de Nicolas Vivies (PMO L'Oréal, pas de compte Google). Split dev/prod abandonné.
+- **2026-06-25** — Système d'accès à deux niveaux : `availableDashboards` par client + `allowedDashboards` par utilisateur (remplace le boolean). Settings UI mise à jour, 18 tests serveur. L'Oréal → audiences-insights + mm-p2c ; Publicis → etude-efficacite-video-amazon.
+- **2026-06-22** — Intégration des vrais dashboards Looker (URLs fournies par Khadija) : Audiences Insights, MM & P2C, Étude Efficacité Vidéo Amazon. Composant `LookerDashboard` avec navigation multi-pages par onglets. Masquage du bandeau natif Looker par clip CSS.
+- **2026-06-19** — Migration `AutomaticPageHeaderBeta`, rebranding complet en « AMC Analytics », nouvelle icône Layers, premier dashboard fonctionnel (`dashboardRegistry` opérationnel), résolution de 56 erreurs ESLint, merge PR sur develop.

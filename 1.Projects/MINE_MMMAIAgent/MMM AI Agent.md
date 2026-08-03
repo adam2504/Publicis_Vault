@@ -109,3 +109,11 @@ Projet désarchivé le 23/06/2026. Baptiste (futur head of études et mesures) a
 - [[2026-04-15 Point avec Brieg]]
 - [[2026-04-20 Point avec Brieg et Hajar]]
 - [[2026-04-27 Point avec Brieg]]
+
+## Dernières sessions
+
+- **2026-07-23** : Feature B (scope écran live) cadrée, implémentée et livrée en prod (engine `6241`). Défaut critique corrigé : bornes de période passent en dates réelles (colonnes `year`/`week` inexistantes dans BQ). Guardrails whitelist durcis, security review validée. Monitoring à surveiller (`no_answer`, `uiScopeRejected`).
+- **2026-07-22** : Bloc `CTX_MODULE_VIZ` (aide à la lecture des graphiques, bilingue EN/FR) livré. Retry backend sur `no_answer` transitoire implémenté. Engine `2659` en prod. UI polish : suggestions refaites, chatbot flottant repositionné, bug z-index portail corrigé.
+- **2026-07-20** : Durcissement anti-hallucination. `BUSINESS_CONTEXT` décomposé en blocs `CTX_*` scopés par sous-agent. Engine v2 `7899` déployé. Deux bugs d'infra corrigés : deps pinnées (`google-adk==1.26.0`) et faux négatif Windows console.
+- **2026-07-08** : Grant IAM accordé sur `mmm-agent-sa`, tracing par sous-agent opérationnel (Cloud Trace, ~48 spans/question). Zéro redéploiement nécessaire. Sessions API et GCS confirmés complémentaires pour le diagnostic `no_answer`.
+- **2026-07-07** : Validation DS par Dan. Isolation inter-client OK (Opel DE ne peut pas requêter Peugeot). Diagnostics stream (`authors`, `chunkCount`, `streamErrors`, `lastChunk`) livrés en prod. Bug `no_answer` multi-canaux confirmé intermittent et transitoire.

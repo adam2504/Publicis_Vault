@@ -171,6 +171,15 @@ Pattern **retrieve → rerank** : stage 1 (bi-encoder, top-10) inchangé, 2ᵉ �
 - **LLM rerank (arm A)** = meilleure sécurité de branche (+13 pts), rapide, sans infra → **retenu pour la prod**. Corrige les noms-tête ambigus (Huile, Masque…) via le contexte marque.
 - **Cross-encoder (arm B)** = meilleur exact-ID mais pire hiérarchique (*sous* le baseline) : aveugle au domaine capillaire. Potentiel réel **seulement fine-tuné** (levier futur, coût GPU).
 
+## Dernières sessions
+
+- **2026-07-06** — Jeu gold `tb_kerastase_eval` construit (294 produits, GPC corrigé). Métrique hiérarchique définie (vs exact-match trompeur). V3 livré : benchmark retrieve→rerank sur 3 bras — LLM rerank (Gemini Flash) retenu : hiérarchique 75,9 %→**88,8 %**. Cross-encoder (bge) meilleur exact-ID mais pire hiérarchique → futur fine-tuning seulement.
+- **2026-07-05** — Archi BQ finalisée : `classify.py` branché sur `bq_search`, cache d'embeddings (`title_embeddings_cache.parquet`), cluster Vertex supprimé du repo. Découverte : baseline juin non fiable (dérive embeddings). `task_type` enterré (cos default/RETRIEVAL_QUERY = 1.0 → aucun effet). Commit `c03ac82`.
+- **2026-07-02** — Incident cost Vertex AI : 2 index laissés déployés → ~$70/jour. Undeploy des index. Décision archi prod : **BQ natif** (VECTOR_SEARCH) remplace Vertex. Table `tb_taxonomy_embeddings` + VECTOR_SEARCH validés de bout en bout.
+- **2026-06-26** — V2 RETRIEVAL_DOCUMENT testée → pire que V1. Repo extrait (`feedgen-categorisation-rag`), refacto propre. Tables BQ de test créées (`tb_test_raw_titles`, `tb_test_feedgen_titles`). V1 lancée sur raw titles. Décision : V3 = LLM reranker sur top-k.
+- **2026-06-25** — Endpoint Vertex déployé, tests embedding sur vrais produits : limitation critique identifiée (matching lexical, « table » → sport). Approches Adam/Dan = complémentaires (titres vs descriptions).
+- **2026-06-24** — Lecture code Dan, embeddings EN+FR générés (5595 vecteurs), index Vertex AI Brute Force créé. Bucket dédié `pmed-portal-feedgen-embeddings` en europe-west1.
+
 ## Prochaines étapes
 
 - [ ] Établir un V1 propre reproductible (raw + feedgen) via le chemin BQ
