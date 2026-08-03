@@ -1,4 +1,10 @@
+---
+type: resource
+---
+
 # Contrat d'ingestion AMC → BigQuery
+
+Projet : [[AMC Analytics]] · Notions outil : [[AMC — Notions]]
 
 *Comment ajouter un nouvel extract AMC pour qu'il apparaisse dans le module AMC Analytics (Full Funnel).*
 
