@@ -70,14 +70,12 @@ Module ConnectedHub centralisant les analyses Amazon Marketing Cloud (Full Funne
 | Baptiste | Head of Data (futur pôle études & mesure) — go agent, cadrage reco | MMM AI Agent |
 | Eddie | Lead dev ConnectedHub — archi frontend/backend, décisions infra | MMM AI Agent, AMC Analytics |
 | Khadija | Data Analyst — dashboards Looker AMC, ingestion BQ | AMC Analytics |
-| Dan | Data Scientist — testing MMM Agent, FeedGen scoring existant | MMM AI Agent, FeedGen |
-| Hajar | Data Scientist — testing MMM, AMC modeled audiences, piste Customer Profiles | MMM AI Agent, AMC Analytics, Passation Basma |
-| Manu | AI Office — Copilot audiences, jeu d'éval FeedGen | Passation Basma, FeedGen |
+| Dan | Data Scientist — testing MMM Agent, EVBB Stellantis | MMM AI Agent, EVBB Scoring |
+| Hajar | Data Scientist — testing MMM, AMC modeled audiences, Creative Insights | MMM AI Agent, AMC Analytics |
+| Manu | AI Office / manager direct DA — Copilot audiences | (transverse) |
 | Inès | Data Strat Stellantis — contact ouverture conseil MMM | MMM AI Agent |
 | Katia | Data Strat Stellantis — contact ouverture conseil MMM | MMM AI Agent |
 | Pierre | Data Strat L'Oréal — référent AMC, Brand Store | AMC Analytics |
-| Bradley | ? — autorisation ajout fichiers Copilot | Passation Basma |
-| Julien Guého | Head CS Continental Europe, LiveRamp — a confirmé no API ; veille MCP agents à venir | Passation Basma |
 | Brieg | Lead DS (parti 12/06/2026) — a initié MMM Agent avec Adam et Hajar | MMM AI Agent (historique) |
 
 ---
