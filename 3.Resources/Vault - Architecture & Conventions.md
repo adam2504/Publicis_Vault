@@ -105,6 +105,21 @@ client: LOREAL # LOREAL | MINE | VERISURE | PUBLICIS
 
 `discipline` permet de filtrer les projets par type de travail dans la vue Propriétés d'Obsidian. Valeurs possibles : `dev`, `data-analyst`, `data-science` (liste YAML si hybride).
 
+### `type` — toute note en a une
+
+La vue Propriétés d'Obsidian ne sert à rien si des notes n'ont pas de `type`. **Aucune note ne doit être créée sans frontmatter**, même une note thématique de deux lignes.
+
+| `type` | Pour quoi | Champs en plus |
+| ------ | --------- | -------------- |
+| `project` | Note principale d'un projet | `statut`, `discipline`, `implication`, `client` |
+| `meeting` | Réunion **et** session de travail | `date`, `projet` |
+| `note` | Note thématique dans un dossier projet | `projet` |
+| `area` | Note-index durable de `2.Areas/` | — |
+| `resource` | Référence réutilisable de `3.Resources/` | — |
+| `client` | Note-hub d'un client dans `3.Resources/Clients/` | — |
+| `idea` | Piste dans `2.Areas/Idées de Projets/` | `statut`, `client` |
+| `context` | `CONTEXT.md` — synthèse régénérée | `Dernière mise à jour` |
+
 ### `implication` — mon niveau d'implication réel
 
 Champ **obligatoire** sur toute note de projet. Il dit ce que *moi* (Adam) je fais sur le projet — indépendamment du volume ou du détail de la note.
