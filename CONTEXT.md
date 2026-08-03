@@ -18,9 +18,9 @@ Adam Jouini, apprenti Data & Dev chez Publicis Media (alternance), rattaché à 
 ## Projets actifs
 
 ### 1. MMM AI Agent — MINE
-**implication : lead** | discipline : dev + data-science | client : MINE (L'Oréal et autres)
+**implication : lead** | discipline : dev + data-science | client : **MINE** — produit plateforme, **pas un projet L'Oréal**
 
-Agent IA conversationnel dans le module MMM de ConnectedHub (Vertex AI Agent Engine). Répond aux questions ROI/média des clients sur leurs données MMM.
+Agent IA conversationnel dans le module MMM de ConnectedHub (Vertex AI Agent Engine). Répond aux questions ROI/média des clients sur leurs données MMM. C'est une **feature de la plateforme**, vendue en add-on à tout client ayant un MMM signé — la cible de déploiement est **Stellantis** (Opel DE / Peugeot DE), puis Longchamp.
 
 **Statut (23/07)** : Engine **6241** en prod depuis le 23/07 (`MMM_Agent_v3_live_ui_scope`). Feature B (scope écran live) livrée : l'agent connaît désormais le KPI, la période, l'onglet et la langue affichés à l'écran, et répond dans ce scope par défaut (surchargeable dimension par dimension, annonce le scope sur sa 1re réponse). Défaut critique corrigé en revue de branche : les bornes de période passent en dates réelles (`WHERE date BETWEEN`) — les colonnes `year`/`week` n'existent pas dans `tb_model_contributions`. Guardrails whitelist durcis (`[`, `]`, `;`, `=`, newlines exclus), security review validée. PRs #1688 (`develop`) → #1689 (`main`) mergées. Rollback disponible sur engine `2659` sans redéploiement.
 
