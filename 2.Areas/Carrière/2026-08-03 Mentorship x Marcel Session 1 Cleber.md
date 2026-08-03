@@ -136,6 +136,13 @@ Il y a 30 minutes et un Commitment à remplir. **Deux questions maximum ce soir*
 - **Prochaine session** : la poser dans le calendrier maintenant.
 - **Mon engagement** : arriver à chaque session avec un sujet concret, pas un point d'avancement. Avec quelqu'un à ce niveau, c'est la seule façon que ça dure.
 
+### Le next step concret à proposer
+
+Le programme attend une action précise pour la prochaine conversation. Ma proposition, dans l'ordre de préférence :
+
+1. **Le mieux** : « Pour la prochaine fois, je te montre ce que mon agent MMM répond réellement, et tu me dis ce qui manquerait si tu étais encore du côté annonceur à recevoir ça. » Ça exploite exactement ce qu'il a fait pendant dix ans, ça me donne un feedback introuvable en interne, et ça lui donne un rôle utile dès la session 2.
+2. **Repli léger s'il préfère cadrer d'abord** : je lui envoie une page unique avec mes trois briques et mes objectifs à six mois, il réagit à froid avant qu'on se reparle.
+
 ---
 
 ## Points de vigilance
