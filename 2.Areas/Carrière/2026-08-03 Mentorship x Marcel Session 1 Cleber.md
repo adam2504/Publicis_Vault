@@ -3,106 +3,119 @@ type: meeting
 date: 2026-08-03
 ---
 
-# Mentorship x Marcel, session 1 (Cleber)
+# Mentorship x Marcel, session 1 (Cleber Dantas)
 
-Première session du programme de mentorat Groupe. **Lundi 03/08/2026, 17:00.** Mentor attribué par matching Marcel : Cleber (agence et géographie à confirmer).
+Première session du programme de mentorat Groupe. **Lundi 03/08/2026, 17:00 Paris** (12:00 São Paulo, à vérifier sur l'invit). Mentor attribué par matching Marcel : **Cleber Dantas, Chief Data and Technology Officer, Publicis Groupe Brasil.**
 
 Voir aussi : [[Note de Positionnement]] · [[2026-07-01 adamscience — Positionnement & Orga]] · [[2026-07-03 Point positionnement & coordination Adam]]
 
 ---
 
-## Ce que le programme est (et n'est pas)
+## Qui est Cleber (lu sur son profil)
 
-- **Cross-agences et cross-géographies** : le mentor vient d'ailleurs dans Publicis Groupe, pas de ma ligne hiérarchique. C'est le point clé.
-- **Holistique**, pas du coaching technique : croissance professionnelle globale, pas apprentissage d'un craft.
-- **~30 min par mois**, communication hors Marcel (Teams).
-- **Non évalué** dans les assessments carrière. Le partage à mon manager est à ma main, mais un regard de mentor peut nourrir une Career Conversation.
+**Poste actuel** : CDTO Publicis Groupe Brasil, depuis février 2025. C'est un C-level pays. Il n'est dans le Groupe que depuis ~1 an et demi, il vient du côté annonceur.
 
-**Ce que ça m'apporte de spécifique** : un avis non politique sur mon positionnement. Jules, Manu, Baptiste et Hajar ont tous un intérêt dans ma trajectoire. Cleber n'en a aucun. C'est le seul endroit où je peux poser la question « est-ce que ma lecture de la situation est juste ? » sans conséquence.
+**Parcours** : Bachelor Information Systems / Computer Science (São Paulo), MBA, puis 9 ans chez **AB InBev** :
 
-**Ce que ce n'est pas** : un canal pour se plaindre de l'orga, ni un levier pour court-circuiter la ligne. Rester factuel, comme partout ailleurs.
+| Période | Poste | Ce qu'il y a fait |
+| --- | --- | --- |
+| 2016-2018 | Global Director Martech (São Paulo) | A créé l'org Martech d'AB InBev de zéro, CDP Treasure Data, segmentation d'audiences |
+| 2018-2021 | Global Director Consumer Data & CRM (NY) | A bâti le data lake marketing, produits digitaux Performance / Innovation |
+| 2021-2024 | Global Senior Director Analytics for Strategy & Insights (NY) | **Produit analytics global déployé sur 30 pays** ; mesure marketing, allocation de ressources, optimisation de portefeuille |
+| 2024 | VP Martech (NY) | Analytics + Engineering + Martech, équipe de data scientists, reporting au CMO |
 
----
+**Ce qu'il met en avant lui-même** : « solid technical foundation », piloter des équipes croisées marketing / data science / engineering, et surtout **traduire des analyses complexes en insights stratégiques pour la communication executive**. Il se décrit comme quelqu'un qui transforme des problèmes ouverts en stratégies structurées.
 
-## À faire pendant cette première session (imposé par le programme)
-
-1. **Compléter le Mentorship Commitment** (obligatoire, à faire ensemble pendant l'appel).
-2. **Poser mes objectifs de carrière à 6 mois** (voir ci-dessous).
-3. Caler le mode de fonctionnement : cadence, canal, langue.
+**Langue** : anglais (pas de français). **La session se fera en anglais.**
 
 ---
 
-## Avant 17:00 (5 min de prep)
+## Pourquoi ce match est très bon (et ce que ça change)
 
-- Regarder le profil Marcel de Cleber : rôle, agence, pays, séniorité. Ça change tout le cadrage de la conversation.
-- Vérifier la **langue** : le prénom suggère un profil lusophone. Prévoir que la session se fasse en anglais.
-- Avoir sous la main mes trois preuves : AMC Analytics (livré en prod), MMM AI Agent (Vertex AI), FeedGen Catégorisation.
+Trois recouvrements directs avec ce que je fais, ce n'est pas un mentor générique :
+
+1. **Il a construit exactement le type de produit que je construis, en bien plus gros.** Son job 2021-2024, c'est un produit analytics interne unifiant les opérations data de 30 pays, avec un enjeu d'**adoption**. AMC Analytics, l'intégration des dashboards Looker dans ConnectedHub, l'automatisation Brand Store : même nature, autre échelle. Ma brique 3 lui parle immédiatement.
+2. **Il était le client, et l'acheteur de la mesure.** Chez AB InBev il possédait le processus de mesure marketing, l'allocation de ressources et l'optimisation de portefeuille. C'est-à-dire qu'il **consommait du MMM au niveau exec**. Je construis un agent IA au-dessus d'un module MMM : il est la meilleure personne que je puisse avoir en face pour me dire si mon agent répond aux vraies questions d'un décideur.
+3. **Sa trajectoire est la réponse à ma question.** Il est parti d'un cursus informatique et il est arrivé CDTO, sans jamais être « data scientist pur ». Il a monté par la **construction de plateformes et la traduction vers le business**. C'est précisément ma tension actuelle : est-ce que je dois viser le ML pur, ou est-ce que mon vrai différenciateur est ailleurs ?
+
+**Ce que ça change dans ma posture** : je parle à un C-level, pas à un pair. Deux conséquences.
+
+- **Être structuré et court.** Il valorise explicitement la structuration de problèmes ouverts. Arriver avec un cadrage propre (mes 3 briques, offre / demande) le mettra dans son terrain.
+- **Ne rien lui demander d'opérationnel.** Il n'a aucun levier sur ma réorg de septembre à Paris, et c'est très bien : il n'a aucun intérêt dans mon dossier. Sa valeur est le recul et la vue Groupe, pas l'intervention.
 
 ---
 
-## Ma présentation en 60 secondes
+## Ce que le programme impose en session 1
 
-> Alternant chez Publicis Media France, pôle Data, label officiel Data Analyst, école d'ingé Data & IA (fin d'alternance juin 2027).
-> Concrètement je ne fais pas que de l'analyse, je construis : j'ai livré un module d'analytics dans notre plateforme interne ConnectedHub, et déployé le premier agent IA de la plateforme sur Vertex AI.
-> Là où je veux aller : l'IA appliquée et la data science. Là où j'en suis : de l'expérience réelle sur l'IA appliquée et l'intégration produit, le ML « pur » restant mon axe d'apprentissage.
+1. **Compléter le Mentorship Commitment** ensemble pendant l'appel.
+2. **Poser mes objectifs de carrière à 6 mois.**
+3. Caler cadence et canal (30 min par mois, Teams).
 
-**Ne pas surjouer « data scientist »** (pas encore d'xp ML pro) et **ne pas renier le label DA**. Le cadrage offre / demande des 3 briques marche aussi bien ici qu'avec Baptiste.
+---
+
+## Mon intro en 60 secondes (en anglais)
+
+> I am an apprentice at Publicis Media France, in the Data team, officially titled Data Analyst, and studying data engineering and AI in Paris until June 2027.
+> In practice I do not only analyse, I build. I shipped an analytics module into our internal platform ConnectedHub, and I deployed the platform's first AI agent on Vertex AI, on top of our MMM module.
+> Where I want to go is applied AI and data science. Where I stand today: I have real experience in applied AI and product integration, and machine learning itself is still my learning axis, not something I claim.
+
+**Ne pas surjouer « data scientist »** (pas d'xp ML pro), **ne pas renier le label DA** non plus. Le cadrage offre / demande vaut ici comme avec Baptiste, et il est encore plus lisible pour un profil qui pense en termes de valeur livrée.
 
 | Brique | Statut | Rôle dans le discours |
 | --- | --- | --- |
 | ML / DS pure | Curiosité, pas d'xp pro | Ma **demande** (axe de croissance) |
-| Applied AI / agentic | Xp réelle (MMM Agent, FeedGen) | Mon **offre**, mon différenciateur |
+| Applied AI / agentic | Xp réelle (MMM Agent, FeedGen Catégo) | Mon **offre**, mon différenciateur |
 | Intégration Mine / automatisation | Xp réelle (AMC, Brand Store) | Mon **offre**, valeur produit immédiate |
 
 ---
 
 ## Mes objectifs à 6 mois (août 2026 à février 2027)
 
-À poser tels quels pendant la session, c'est le livrable attendu.
+C'est le livrable attendu de la session, à poser tel quel.
 
-1. **Atterrir la réorg de septembre du bon côté.** Que le pôle études & mesures que construit Baptiste m'intègre comme profil applied-AI et intégration, pas comme un DA généraliste de plus. Échéance dure : ~septembre.
-2. **Faire passer le ML de « curiosité » à « expérience ».** Une contribution ML réelle et livrée, pas un side project : jeu d'éval FeedGen avec Manu, puis cross-encoder en prod (serving batch et fine-tuning).
+1. **Atterrir la réorg de septembre du bon côté.** Que le pôle études & mesures en construction m'intègre comme profil applied-AI et intégration, pas comme un DA généraliste. Échéance dure : septembre.
+2. **Faire passer le ML de « curiosité » à « expérience ».** Une contribution ML réelle et livrée : jeu d'éval FeedGen avec Manu, puis cross-encoder en production (serving batch et fine-tuning).
 3. **Consolider le MMM AI Agent comme preuve d'IA appliquée.** Passation au conseil, boucle de feedback, enrichissement des tools (saturation, allocation budgétaire).
-4. **Réduire les analyses PowerPoint et Excel.** Négatif assumé, à tenir maintenant que la passation Basma est faite.
+4. **Réduire les analyses PowerPoint et Excel.** Négatif assumé, tenable maintenant que la passation Basma est faite.
 5. **Préparer la sortie d'alternance (juin 2027).** Savoir d'ici février quel rôle est réellement ouvrable pour moi dans le Groupe, et à quelles conditions.
 
 ---
 
-## Questions à poser à Cleber
+## Questions à poser (calibrées sur son parcours)
 
-**Sur lui (les 10 premières minutes, sincèrement curieux)**
+Il y a 30 minutes et un Commitment à remplir. **Deux questions maximum ce soir**, le reste tiendra sur les sessions suivantes.
 
-- Son parcours, son agence, ce qui l'a amené à mentorer.
-- Ce qu'il aurait aimé savoir à mon niveau.
+**Les deux à garder en priorité**
 
-**Sur ma situation (le cœur)**
+- **Sur sa trajectoire** : « Tu es parti d'un cursus informatique et tu diriges aujourd'hui la data et la tech d'un pays entier, sans jamais avoir été data scientist au sens strict. Qu'est-ce qui t'a fait monter : la profondeur technique, ou la capacité à traduire vers le business ? » → c'est ma question la plus utile, et elle le met sur son sujet préféré.
+- **Sur mon dilemme** : « J'hésite entre approfondir le ML pur et pousser mon différenciateur actuel, l'IA appliquée branchée sur du produit. Vu d'où tu es, lequel des deux vaut le plus dans le Groupe aujourd'hui ? »
 
-- Comment passer d'un label large et confortable à un rôle spécialisé, dans une orga qui a intérêt à garder les gens polyvalents ? C'est exactement ma situation avec le label « data analyst ».
-- Dans le Groupe, qu'est-ce qui est réellement valorisé chez un profil technique : la spécialisation ou l'hybridation ?
-- Comment il lit une réorg vue de l'extérieur : qu'est-ce qui se joue vraiment quand un nouveau head cartographie des scopes ?
+**En réserve pour les sessions suivantes**
 
-**Sur le Groupe (l'avantage cross-agences)**
-
-- Où sont les vrais sujets IA et data science dans le Groupe, au-delà de Publicis Media France ?
-- La mobilité interne pour un alternant qui sort d'alternance : ça se prépare quand, et comment ?
+- **Adoption** (son sujet 2021-2024) : « Ton produit analytics global sur 30 pays, le plus dur c'était la tech ou l'adoption ? » Je vis exactement ça à mon échelle avec les modules ConnectedHub.
+- **MMM vu du client** : « Tu as possédé la mesure marketing chez un annonceur global. Quand tu recevais du MMM, quelles questions restaient sans réponse ? » → matière directe pour améliorer mon agent, et une raison de le recontacter avec un résultat.
+- **Regard neuf sur le Groupe** : il n'y est que depuis février 2025 et vient du côté annonceur. « Qu'est-ce qui t'a surpris en arrivant dans le Groupe, en venant de chez un annonceur ? »
+- **Mobilité** : où sont les vrais sujets IA et data science dans le Groupe au-delà de la France, et comment se prépare une mobilité interne en sortie d'alternance.
 
 ---
 
 ## Mode de fonctionnement à caler avant de raccrocher
 
-- **Cadence** : 30 min par mois est le minimum du programme. Proposer un mensuel fixe plutôt que « quand on peut ».
-- **Canal** : Teams. Récupérer son contact direct.
-- **Prochaine session** : la poser dans le calendrier maintenant, pas « on se recale ».
-- **Ce que j'apporte à chaque session** : un sujet concret, pas un point d'avancement. Sinon ça meurt en deux mois.
+- **Cadence** : proposer un mensuel fixe, pas « quand on peut ». Avec un C-level dans un autre fuseau, ce qui n'est pas calé n'arrive pas.
+- **Créneau** : 17:00 Paris tombe à midi à São Paulo. Vérifier que ça lui va durablement, sinon proposer plus tôt dans ma journée.
+- **Canal** : Teams, récupérer son contact direct.
+- **Prochaine session** : la poser dans le calendrier maintenant.
+- **Mon engagement** : arriver à chaque session avec un sujet concret, pas un point d'avancement. Avec quelqu'un à ce niveau, c'est la seule façon que ça dure.
 
 ---
 
 ## Points de vigilance
 
-- **Ne pas déballer toute la politique interne en session 1.** Poser le contexte factuellement (orga en transition, réorg en septembre) sans nommer de tensions.
-- **Ne pas tout demander d'un coup** : 30 min, un ou deux sujets max, le reste tiendra sur les sessions suivantes.
-- **Statut alternant** : c'est un atout ici (droit à l'apprentissage assumé), pas une excuse. Mener par ce que j'ai déjà construit.
-- **Le programme permet de désélectionner un mentor** si le match ne prend pas. Si après 2 sessions ça ne donne rien, ne pas s'accrocher par politesse.
+- **Ne pas déballer la politique interne.** Poser le contexte factuellement (orga en transition, réorg en septembre) sans nommer de tensions ni de personnes. Il est dans un autre pays, ça se saurait vite et ça ne servirait à rien.
+- **Ne rien lui demander d'opérationnel.** Pas d'intervention, pas de mise en relation en session 1.
+- **Ne pas noyer les 30 min dans le détail technique.** Il vient du niveau exec : niveau valeur et structure, pas niveau implémentation. Le détail technique seulement s'il creuse.
+- **Statut alternant** : c'est un atout ici, pas une excuse. Mener par ce que j'ai déjà livré.
+- **Le programme permet de désélectionner un mentor.** Peu probable ici, mais si après 2 sessions rien ne se passe, ne pas s'accrocher par politesse.
 
 ---
 
