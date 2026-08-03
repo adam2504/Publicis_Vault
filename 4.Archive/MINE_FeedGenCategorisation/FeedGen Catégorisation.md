@@ -1,11 +1,21 @@
 ---
 type: project
-statut: en cours
+statut: archivé
 discipline: data-science
 implication: lead
 client: MINE
 ---
 Plateforme : [[Mine Platform]]
+
+## Statut — archivé le 2026-08-03
+
+Projet parqué. Dernière session le **06/07** (28 jours). L'exploration RAG est arrivée après coup : la solution LLM de Dan était déjà en intégration côté Feed Manager, ce qui laisse peu de place au RAG en amont. Le déblocage restant (vrai jeu d'éval multi-flux, GPC et titres bruts) dépend de Manu et n'a pas avancé.
+
+Les acquis techniques restent valides et réutilisables : architecture BQ natif (`VECTOR_SEARCH`) actée contre Vertex AI Vector Search pour raison de coût idle, métrique hiérarchique plutôt qu'exact-match, et V3 retrieve→rerank benchmarké (LLM Gemini Flash : hiérarchique 75,9 % → **88,8 %**). Repo `feedgen-categorisation-rag` propre au commit `25073d1`.
+
+Réactivation possible si Manu fournit le jeu d'éval ou si Dan ouvre le sujet du RAG en amont. Tâches retirées du [[TODO]].
+
+---
 
 ## Objectif du module
 
