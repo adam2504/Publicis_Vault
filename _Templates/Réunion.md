@@ -1,10 +1,13 @@
 ---
+type: meeting
 date: <% tp.date.now("YYYY-MM-DD") %>
 projet: 
 participants: 
 ---
 
 # <% tp.file.title %>
+
+Projet : [[]]
 
 ## Participants
 
