@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "e6f0168ae23fb455",
+        "id": "fdb554de6bc031b4",
         "type": "tabs",
         "children": [
           {
-            "id": "cdedca85bb3098ec",
+            "id": "c35177a2e7ea8ae0",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "2.Areas/TODO.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Nouvel onglet"
+              "title": "TODO"
             }
           }
         ]
@@ -37,10 +41,12 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
-              "title": "Explorateur de fichiers"
+              "title": "Files"
             }
           },
           {
@@ -167,8 +173,8 @@
             "state": {
               "type": "calendar",
               "state": {},
-              "icon": "lucide-ghost",
-              "title": "calendar"
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
             }
           },
           {
@@ -190,47 +196,53 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Ouvrir le sélecteur rapide": false,
-      "graph:Ouvrir la vue graphique": false,
-      "canvas:Créer une nouvelle toile": false,
-      "daily-notes:Ouvrir la note quotidienne": false,
-      "command-palette:Ouvrir la palette de commandes": false,
-      "bases:Créer une nouvelle base": false,
-      "templater-obsidian:Templater": false,
-      "table-editor-obsidian:Advanced Tables Toolbar": false,
       "evc-team-relay:Relay settings": false,
       "obsidian-git:Open Git source control": false,
       "pdf-plus:PDF++: Toggle auto-copy": false,
       "pdf-plus:PDF++: Toggle auto-focus": false,
-      "pdf-plus:PDF++: Toggle auto-paste": false
+      "pdf-plus:PDF++: Toggle auto-paste": false,
+      "templater-obsidian:Templater": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "9f186e7f6da29a19",
+  "active": "c35177a2e7ea8ae0",
   "lastOpenFiles": [
-    "Pasted image 20260723173205.png",
-    "Pasted image 20260723173222.png",
-    "CONTEXT.md",
-    "2026-07-23.md",
-    "1.Projects/MINE_MMMAIAgent/Tool - cf-budget-allocator.md",
-    "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-23.md",
-    "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-22.md",
-    "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-20.md",
+    "conflict-files-obsidian-git.md",
     "2.Areas/TODO.md",
+    "2026-07-23.md",
+    "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-20.md",
+    "1.Projects/MINE_MMMAIAgent/Tool - cf-budget-allocator.md.tmp.18860.6dbc8110bcb3",
+    "1.Projects/MINE_MMMAIAgent/MMM AI Agent.md.tmp.18860.6b0d30bfd458",
+    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.18860.195dacf88923",
+    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.18860.21c3e4905600",
+    "1.Projects/MINE_MMMAIAgent/MMM AI Agent.md.tmp.18860.18be50d2ac30",
+    "1.Projects/MINE_MMMAIAgent/9Hs0HgAO",
+    "1.Projects/MINE_MMMAIAgent/MMM AI Agent.md.tmp.18860.2d795dabd87b",
+    "1.Projects/MINE_MMMAIAgent/MMM AI Agent.md.tmp.18860.7fe97067c998",
+    "1.Projects/MINE_MMMAIAgent/Tool - cf-budget-allocator.md.tmp.18860.90002c0aeac7",
+    "1.Projects/MINE_MMMAIAgent/Tool - cf-budget-allocator.md.tmp.18860.f4510191c5d0",
+    "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-23.md",
+    "1.Projects/MINE_MMMAIAgent/Tool - cf-budget-allocator.md",
+    "Pasted image 20260723173222.png",
+    "Pasted image 20260723173205.png",
+    "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-22.md",
+    "CONTEXT.md",
+    "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-08.md",
+    "1.Projects/MINE_MMMAIAgent/MMM AI Agent.md",
+    "1.Projects/MINE_MMMAIAgent/Synthèse & Roadmap Testing.md",
+    "1.Projects/MINE_MMMAIAgent/Architecture technique.md",
+    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md",
+    "dummy.md",
+    "2026-07-20.md",
     "2026-07-11.md",
     "2.Areas/Accomplissements.md",
     "1.Projects/MINE_AMCAnalytics/Réunions/2026-07-07 Onboarding AMC Khadija.md",
-    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md",
-    "1.Projects/MINE_MMMAIAgent/Architecture technique.md",
-    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.7304092e7715",
-    "1.Projects/MINE_MMMAIAgent/Architecture technique.md.tmp.39496.f6bfcca4a36a",
-    "1.Projects/MINE_MMMAIAgent/Architecture technique.md.tmp.39496.df9253508e2e",
-    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.c73f4d70cc60",
-    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.b8d219cf7fde",
-    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.8348f7417b07",
-    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.f941308aacc2",
-    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.21b90311abfa",
-    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.04cca03367e0",
-    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.4b1ad9e03fc3",
     "1.Projects/MINE_MMMAIAgent/Testings Internes.md",
     "2.Areas/Bilan.md",
     "3.Resources/AMC/AMC — Notions.md",
@@ -239,12 +251,7 @@
     "4.Archive/LOREAL_ViralBeauty/Réunions/2026-06-29 Pré-read Viral Beauty.md",
     "4.Archive/LOREAL_ViralBeauty/Réunions/2026-06-25 Point avec Basma.md",
     "4.Archive/LOREAL_ViralBeauty/Réunions/2026-06-16 Point avec Basma.md",
-    "4.Archive/LOREAL_ViralBeauty/Réunions/2026-06-18 Point avec Basma et Pierre.md",
-    "4.Archive/LOREAL_ViralBeauty/Viral Beauty.md",
-    "3.Resources/AMC/Contrat d'ingestion BQ.md",
     "_Attachments/2026-07-09-nicolas-vivies-remerciement-acces-looker.png",
-    "1.Projects/MINE_AMCAnalytics/Sessions/Session 2026-07-09.md",
-    "1.Projects/MINE_AMCAnalytics/Architecture Data BQ.md",
     "_Attachments/message_basma_slide44.png",
     "_Attachments/message_basma_VB.png",
     "message_basma_VB.png"
