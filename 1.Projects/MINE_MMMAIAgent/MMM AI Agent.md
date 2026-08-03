@@ -5,11 +5,13 @@ discipline:
   - dev
   - data-science
 implication: lead
-client: LOREAL
+client: MINE
 ---
 # MMM AI Agent
 
-Plateforme : [[Mine Platform]] · Clients : [[LOREAL]], [[STELLANTIS]]
+Plateforme : [[Mine Platform]] · Déploiement visé : [[STELLANTIS]] (Opel DE / Peugeot DE), puis Longchamp
+
+> Produit **plateforme**, pas projet client : l'agent est une feature du module MMM de ConnectedHub, vendue en add-on à n'importe quel client ayant un MMM signé. D'où `client: MINE`. **Ce n'est pas un projet L'Oréal.**
 
 Ajout d'un assistant IA conversationnel dans le module MMM de ConnectedHub. L'agent répond à des questions sur les données MMM du client (ROI par média, comparaisons périodiques, etc.) en accédant aux données via Vertex AI Agent Engine.
 
