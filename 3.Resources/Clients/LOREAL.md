@@ -8,11 +8,10 @@ Principal client Publicis. Plusieurs projets actifs en parallèle, portés par d
 
 ## Projets actifs
 
-| Projet         | Discipline         | Implication | Note                                            |
-| -------------- | ------------------ | ----------- | ----------------------------------------------- |
-| MMM AI Agent   | dev, data-science  | lead        | [[1.Projects/MINE_MMMAIAgent/MMM AI Agent]]     |
-| AMC Analytics  | dev                | lead        | [[1.Projects/MINE_AMCAnalytics/AMC Analytics]]  |
-| Brand Store v2 | data-analyst       | participant | [[1.Projects/LOREAL_BrandStore/Brand Store v2]] |
+| Projet         | Discipline   | Implication | Note                                            |
+| -------------- | ------------ | ----------- | ----------------------------------------------- |
+| AMC Analytics  | dev          | lead        | [[1.Projects/MINE_AMCAnalytics/AMC Analytics]]  |
+| Brand Store v2 | data-analyst | participant | [[1.Projects/LOREAL_BrandStore/Brand Store v2]] |
 
 ## Projets archivés
 
