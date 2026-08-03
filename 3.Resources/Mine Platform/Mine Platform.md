@@ -36,6 +36,10 @@ Plateforme interne Publicis — anciennement appelée **Mine**, renommée **Conn
 - **Infra** : GCP — Cloud Build, Firestore, BigQuery, Cloud Functions
 - **Branches** : `develop` → staging auto-deploy / `main` → production
 
+## Pistes de modules
+
+- [[Creative Insights Leapmotor]] — en attente d'Abhishek
+
 ## Incidents & notes techniques
 
 - [[Workflow Git & Merge]]
