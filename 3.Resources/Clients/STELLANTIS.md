@@ -6,7 +6,7 @@ type: client
 
 Groupe automobile (Peugeot, Citroën, Opel, Fiat…). Publicis reprend une partie des marchés européens sur le custom bidding, avec sa propre méthodologie — Dragonfly (équipe interne UK) gérait auparavant les POC EVBB en France.
 
-Le compte apparaît aussi côté [[1.Projects/MINE_MMMAIAgent/MMM AI Agent]] : le conseil Stellantis DE (Zenith Media) est une piste d'ouverture de l'agent MMM hors L'Oréal.
+Stellantis est la **première cible de déploiement** de [[1.Projects/MINE_MMMAIAgent/MMM AI Agent]] : le modèle MMM est dispo (Opel DE / Peugeot DE), rien ne bloque côté data. Le conseil / activation DE (Zenith Media) a déjà accès au module MMM de ConnectedHub, mais ne répond plus depuis le mail deck — à relancer via Inès et Katia.
 
 ## Projets
 
