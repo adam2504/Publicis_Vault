@@ -237,15 +237,19 @@ Trois types de nœuds dans le graphe :
 3.Resources/
   Vault - Architecture & Conventions.md   ← ce fichier
   Équipe & Contacts.md                    ← annuaire de l'équipe (aucun lien sortant)
-  Mine Platform/    ← hub ConnectedHub : modules actifs, stack, incidents
-  Clients/          ← une note par client (LOREAL.md, VERISURE.md…)
+  Asana - Sync & Conventions.md           ← mapping vault → Asana (cf. /asana-sync)
+  MMM — Notions.md                        ← notions métier MMM
+  Mine Platform/    ← hub ConnectedHub : modules actifs & archivés, stack, incidents
+  AMC/              ← doc Amazon Marketing Cloud : notions, contrat d'ingestion BQ
+  Clients/          ← une note par client : LOREAL, STELLANTIS, VERISURE
   Onboardings/      ← projets où je suis onboardé sans encore produire (implication: onboardé)
 ```
+
+**Chaque note client est un hub** : elle liste les projets actifs et archivés du compte (chemins complets) + les contacts. Tout projet doit être atteignable depuis sa note client — un projet qu'aucun hub ne référence est une note orpheline.
 
 Dossiers à créer selon les besoins :
 
 ```
-  AMC/      → doc Amazon Marketing Cloud, clean room, APIs
   Looker/   → dashboards, embedding iframes
   Métier/   → glossaire, définitions KPIs, conventions media
 ```
