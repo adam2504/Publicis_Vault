@@ -1,3 +1,7 @@
+---
+type: resource
+---
+
 # Vault — Architecture & Conventions
 
 Référence à consulter quand tu crées un projet, une note, ou que tu hésites où mettre quelque chose.
@@ -46,7 +50,7 @@ LOREAL_ViralBeauty
 VERISURE_CreativeInsights
 ```
 
-Clients connus : `LOREAL`, `MINE`, `VERISURE`, `PUBLICIS`
+Clients connus : `LOREAL`, `MINE`, `VERISURE`, `PUBLICIS`, `STELLANTIS`, `LEAPMOTOR`
 
 ---
 

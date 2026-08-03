@@ -1,3 +1,8 @@
+---
+type: note
+projet: MMM AI Agent
+---
+
 # Architecture technique
 
 Projet : [[MMM AI Agent]]

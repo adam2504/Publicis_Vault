@@ -1,3 +1,7 @@
+---
+type: resource
+---
+
 # Équipe & Contacts
 
 ## Pôle Data

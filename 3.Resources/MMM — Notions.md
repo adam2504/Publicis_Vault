@@ -1,3 +1,7 @@
+---
+type: resource
+---
+
 # MMM — Notions
 
 Notions de référence sur le Marketing Mix Modeling, réutilisables sur tous les sujets MMM (modèles clients, [[MMM AI Agent]], propales).

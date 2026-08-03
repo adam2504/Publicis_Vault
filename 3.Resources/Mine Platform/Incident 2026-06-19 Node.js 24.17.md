@@ -1,3 +1,7 @@
+---
+type: resource
+---
+
 # Incident Plateforme — 19 juin 2026
 
 ## Rupture BigQuery sur /develop · Node.js 24.17.0

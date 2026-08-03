@@ -1,3 +1,8 @@
+---
+type: note
+projet: MMM AI Agent
+---
+
 # Tool `cf-budget-allocator` — cadrage intégration
 
 Projet : [[MMM AI Agent]]

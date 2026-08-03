@@ -1,3 +1,7 @@
+---
+type: resource
+---
+
 # Asana — Sync & Conventions
 
 Référence pour la synchro **vault → Asana**. But : donner de la visibilité aux managers (Manu, Jules) sur les projets ouverts et leurs grandes étapes, **sans sur-organiser**.

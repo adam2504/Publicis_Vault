@@ -1,3 +1,8 @@
+---
+type: note
+projet: MMM AI Agent
+---
+
 Projet : [[MMM AI Agent]]
 
 # Testing interne

@@ -1,3 +1,7 @@
+---
+type: resource
+---
+
 # AMC — Notions
 
 Notions de référence sur **Amazon Marketing Cloud** (l'outil d'Amazon Ads), réutilisables sur tous les sujets AMC (module [[AMC Analytics]], dashboards, audiences, data querying).
