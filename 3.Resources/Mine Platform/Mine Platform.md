@@ -15,10 +15,16 @@ Plateforme interne Publicis — anciennement appelée **Mine**, renommée **Conn
 
 ## Modules actifs
 
-| Module                 | Projet                                                           | Statut          |
-| ---------------------- | ---------------------------------------------------------------- | --------------- |
-| AMC Analytics          | [[1.Projects/MINE_AMCAnalytics/AMC Analytics]]                   | 🟢 Actif        |
-| FeedGen Catégorisation | [[1.Projects/MINE_FeedGenCategorisation/FeedGen Catégorisation]] | ⚪ À documenter |
+| Module        | Projet                                         | Statut   |
+| ------------- | ---------------------------------------------- | -------- |
+| MMM AI Agent  | [[1.Projects/MINE_MMMAIAgent/MMM AI Agent]]    | 🟢 Actif |
+| AMC Analytics | [[1.Projects/MINE_AMCAnalytics/AMC Analytics]] | 🟢 Actif |
+
+## Modules archivés
+
+| Module                 | Projet                                                           | Archivé le |
+| ---------------------- | ---------------------------------------------------------------- | ---------- |
+| FeedGen Catégorisation | [[4.Archive/MINE_FeedGenCategorisation/FeedGen Catégorisation]] | 2026-08-03 |
 
 ---
 
