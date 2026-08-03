@@ -264,4 +264,10 @@ Quand archiver un projet :
 - Projet annulé ou indéfiniment suspendu
 - Plus aucune action prévue dans les 3 prochains mois
 
-Action : déplacer le dossier entier dans `4.Archive/`. Ne pas modifier le contenu.
+**Procédure d'archivage** — les 5 étapes, dans l'ordre. Archiver n'est pas qu'un déplacement de dossier : c'est ce qui décroche le projet des hubs et du TODO. En sauter une laisse des liens qui mentent.
+
+1. Déplacer le dossier entier dans `4.Archive/` (`git mv` pour garder l'historique).
+2. Passer `statut: archivé` dans la frontmatter de la note principale.
+3. Ajouter en tête de la note principale une section **`## Statut — archivé le YYYY-MM-DD`** : pourquoi c'est clos, ce qui reste réutilisable, et à quelle condition ça pourrait repartir. Le reste du contenu n'est pas modifié.
+4. **Mettre à jour les hubs** : déplacer la ligne de « Projets actifs » vers « Projets archivés » dans la note client, et dans `Mine Platform` si c'est un module ConnectedHub.
+5. **Retirer les tâches du [[TODO]]** — sinon le projet reste vivant dans Asana et dans les weeklies.
