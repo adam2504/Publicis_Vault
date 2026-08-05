@@ -1,6 +1,6 @@
 ---
 type: context
-Dernière mise à jour: 2026-08-03
+Dernière mise à jour: 2026-08-05
 ---
 
 # CONTEXT — Vault d'Adam
@@ -22,7 +22,7 @@ Adam Jouini, apprenti Data & Dev chez Publicis Media (alternance), rattaché à 
 
 Agent IA conversationnel dans le module MMM de ConnectedHub (Vertex AI Agent Engine). Répond aux questions ROI/média des clients sur leurs données MMM. C'est une **feature de la plateforme**, vendue en add-on à tout client ayant un MMM signé — la cible de déploiement est **Stellantis** (Opel DE / Peugeot DE), puis Longchamp.
 
-**Statut (23/07)** : Engine **6241** en prod depuis le 23/07 (`MMM_Agent_v3_live_ui_scope`). Feature B (scope écran live) livrée : l'agent connaît désormais le KPI, la période, l'onglet et la langue affichés à l'écran, et répond dans ce scope par défaut (surchargeable dimension par dimension, annonce le scope sur sa 1re réponse). Défaut critique corrigé en revue de branche : les bornes de période passent en dates réelles (`WHERE date BETWEEN`) — les colonnes `year`/`week` n'existent pas dans `tb_model_contributions`. Guardrails whitelist durcis (`[`, `]`, `;`, `=`, newlines exclus), security review validée. PRs #1688 (`develop`) → #1689 (`main`) mergées. Rollback disponible sur engine `2659` sans redéploiement.
+**Statut (23/07)** : Engine **6241** en prod depuis le 23/07 (`MMM_Agent_v3_live_ui_scope`). Feature B (scope écran live) livrée : l'agent connaît désormais le KPI, la période, l'onglet et la langue affichés à l'écran, et répond dans ce scope par défaut (surchargeable dimension par dimension, annonce le scope sur sa 1re réponse). Défaut critique corrigé en revue de branche : les bornes de période passent en dates réelles (`WHERE date BETWEEN`) — les colonnes `year`/`week` n'existent pas dans `tb_model_contributions`. Guardrails whitelist durcis (`[`, `]`, `;`, `=`, newlines exclus), security review validée. PRs #1688 (`develop`) → #1689 (`main`) mergées. Rollback disponible sur engine `2659` sans redéploiement. Aucune session depuis le 23/07 (13 jours).
 
 **Prochaine action** : surveiller le monitoring (`no_answer` + `uiScopeRejected` en prod) ; mettre au backlog le chip de contexte chatbot (`Contexte : ROAS · juin 2025 – mai 2026`) ; relancer le conseil DE Stellantis (Zenith Media — Marit, Janina, Virginia silencieux depuis le mail deck) pour l'initiation agent ; suite du backlog : enrichissement `BUSINESS_CONTEXT` avec les DS (Dan/Hajar), `cf-budget-allocator-prod` en tool, knowledge par client.
 
@@ -35,7 +35,7 @@ Agent IA conversationnel dans le module MMM de ConnectedHub (Vertex AI Agent Eng
 
 Module ConnectedHub centralisant les analyses Amazon Marketing Cloud (Full Funnel depuis BigQuery) et les dashboards Looker (en iframe). Deux types d'utilisateurs : équipes data (Full Funnel) et équipes conseil/traders (dashboards).
 
-**Statut (09/07 — stable)** : Full Funnel branché sur BigQuery — PR **#1653** (`develop`) et **#1654** (`main`) mergées. Architecture data : projet `amira-test` (EU), dataset `AMC_ConnectedHub_7cR1jE` par client, tables `<étude>__<marque>__<période>` + registre. Données chargées : Mugler (298 l.) + Azzaro (1 366 l.). Matrice d'accès révisée : L'Oréal = Audiences Insights seul ; Publicis commerce = les 3 dashboards. Accès Looker de Nicolas Vivies (PMO Retail Media L'Oréal) débloqué (partage "unlisted" côté Looker avec Khadija). Aucune session depuis le 09/07 (23 jours).
+**Statut (09/07 — stable)** : Full Funnel branché sur BigQuery — PR **#1653** (`develop`) et **#1654** (`main`) mergées. Architecture data : projet `amira-test` (EU), dataset `AMC_ConnectedHub_7cR1jE` par client, tables `<étude>__<marque>__<période>` + registre. Données chargées : Mugler (298 l.) + Azzaro (1 366 l.). Matrice d'accès révisée : L'Oréal = Audiences Insights seul ; Publicis commerce = les 3 dashboards. Accès Looker de Nicolas Vivies (PMO Retail Media L'Oréal) débloqué (partage "unlisted" côté Looker avec Khadija). Aucune session depuis le 09/07 (27 jours).
 
 **Prochaine action** : automatiser la sync du registre BQ à chaque import (manuel aujourd'hui) ; configurer Firestore + comptes utilisateurs Publicis via Settings ; cadrer le calendrier de migration dashboards Looker → React natif avec Khadija.
 
