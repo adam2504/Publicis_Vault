@@ -152,7 +152,9 @@ Le module lit ses données dans **BigQuery** (projet `amira-test`, région **EU*
 
 ## Évolutions envisagées
 
-- **Traçabilité de version des études** _(idée, écartée pour l'instant)_ : à chaque import, la Cloud Function horodate la table (`loaded_at`) dans le registre, et le module **estampille le deck / l'export PowerPoint** (« données extraites le X · chargées le Y · N lignes »). But : savoir sur quelle version de la donnée repose un deck et détecter les ré-imports. On a déjà ~80% (la tuile « Last Updated » lit `last_modified_time`). Version lourde — **régénérer** un ancien deck à l'identique — = conserver des **snapshots BQ** par import (registre → `snapshot_ref`). À rattacher au [[Contrat d'ingestion BQ]] (nommage, transfo CSV, MAJ du registre par la CF).
+- **Traçabilité de version des études** _(idée, écartée pour l'instant)_ : à chaque import, la Cloud Function horodate la table (`loaded_at`) dans le registre, et le module **estampille l'export Excel** (« données extraites le X · chargées le Y · N lignes »). But : savoir sur quelle version de la donnée repose une étude et détecter les ré-imports. On a déjà ~80% (la tuile « Last Updated » lit `last_modified_time`). Version lourde — **régénérer** une ancienne étude à l'identique — = conserver des **snapshots BQ** par import (registre → `snapshot_ref`). À rattacher au [[Contrat d'ingestion BQ]] (nommage, transfo CSV, MAJ du registre par la CF). _(Depuis le passage au workspace pivot, l'URL porte déjà la vue — il ne manque que la version de la donnée.)_
+- **Conversions assistées depuis `Place of channel`** : attribuées = `Finisher` + `Solo`, assistées = `Beginner` + `Intermediate`. Même raisonnement que « Place des leviers » — utiliser la donnée du trading plutôt que de la dériver des parcours. Non tranché.
+- **i18n du module** : tout le workspace est en français codé en dur, alors que le module a ses fichiers `fr`/`en` et que Jules travaille en anglais sur ConnectedHub. Pas prioritaire, à ne pas oublier.
 
 ## Réunions
 
