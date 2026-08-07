@@ -44,14 +44,14 @@ Le parcours est `sélection de l'analyse → regroupement des leviers → worksp
 
 Elles viennent des notes de méthode du classeur de Jules et de l'exploration de la donnée. Les enfreindre produit des chiffres faux **sans rien casser à l'écran** — d'où leur présence dans le moteur plutôt que dans la vigilance de l'utilisateur.
 
-| Règle | Pourquoi |
-| --- | --- |
-| Les ratios se calculent après agrégation | La moyenne des taux n'est pas le taux du total |
-| Le dénominateur du taux de conversion est réglable (reach ou impressions) | « selon ce qui est pertinent » |
-| Les clics ne sont jamais dénominateur d'un taux | Les formats vidéo sont optimisés à la vue, pas au clic |
-| Un seul `analysis_level` à la fois | Une table empile sept analyses ; `Path to conversion` et `Media Mix` portent exactement le même reach et les mêmes conversions |
-| Une seule `granularity` à la fois | `Format` et `Channel` sont la même population à deux mailles (reach identique à moins de 1,5 %) |
-| Avertissement dès que le reach est sommé sur plusieurs parcours | C'est un dédoublonné d'utilisateurs, la somme est théoriquement fausse |
+| Règle                                                                     | Pourquoi                                                                                                                       |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Les ratios se calculent après agrégation                                  | La moyenne des taux n'est pas le taux du total                                                                                 |
+| Le dénominateur du taux de conversion est réglable (reach ou impressions) | « selon ce qui est pertinent »                                                                                                 |
+| Les clics ne sont jamais dénominateur d'un taux                           | Les formats vidéo sont optimisés à la vue, pas au clic                                                                         |
+| Un seul `analysis_level` à la fois                                        | Une table empile sept analyses ; `Path to conversion` et `Media Mix` portent exactement le même reach et les mêmes conversions |
+| Une seule `granularity` à la fois                                         | `Format` et `Channel` sont la même population à deux mailles (reach identique à moins de 1,5 %)                                |
+| Avertissement dès que le reach est sommé sur plusieurs parcours           | C'est un dédoublonné d'utilisateurs, la somme est théoriquement fausse                                                         |
 
 ### 2. Dashboards
 
@@ -85,13 +85,13 @@ La page **Settings** (admins module + admins plateforme) permet de gérer les de
 
 Les équipes conseil n'ont pas accès aux sous-modules d'analyses.
 
-**Partage des dashboards Looker (iframe).** Les dashboards sont embarqués via un lien de partage Looker. Un lien à partage **restreint** n'est accessible qu'aux personnes ayant *déjà* l'accès au Looker **et un compte Google lié à leur adresse Publicis** — ce qui exclut les utilisateurs sans compte Google (cas rencontré avec Nicolas Vivies, PMO Retail Media). Pour que l'iframe soit accessible à **toute personne ayant accès au sous-module** dans ConnectedHub, le dashboard doit être partagé en **« unlisted »** côté Looker (toute personne avec le lien y accède). C'est le paramètre à appliquer sur les dashboards embarqués. *(Résolu avec Khadija le 2026-07-09.)*
+**Partage des dashboards Looker (iframe).** Les dashboards sont embarqués via un lien de partage Looker. Un lien à partage **restreint** n'est accessible qu'aux personnes ayant _déjà_ l'accès au Looker **et un compte Google lié à leur adresse Publicis** — ce qui exclut les utilisateurs sans compte Google (cas rencontré avec Nicolas Vivies, PMO Retail Media). Pour que l'iframe soit accessible à **toute personne ayant accès au sous-module** dans ConnectedHub, le dashboard doit être partagé en **« unlisted »** côté Looker (toute personne avec le lien y accède). C'est le paramètre à appliquer sur les dashboards embarqués. _(Résolu avec Khadija le 2026-07-09.)_
 
 ## Architecture data (BigQuery)
 
 Le module lit ses données dans **BigQuery** (projet `amira-test`, région **EU**), via des **routes backend** — le client ne touche jamais BQ.
 
-- **Isolation par client** : **un dataset par locataire ConnectedHub**, dérivé du customerId → `AMC_ConnectedHub_<customerId>`. L'Oréal = `AMC_ConnectedHub_7cR1jE`. Un client ne peut atteindre la data d'un autre (frontière dataset/IAM). *(Le split dev/prod initial a été abandonné le 2026-07-09 : un seul dataset par client.)*
+- **Isolation par client** : **un dataset par locataire ConnectedHub**, dérivé du customerId → `AMC_ConnectedHub_<customerId>`. L'Oréal = `AMC_ConnectedHub_7cR1jE`. Un client ne peut atteindre la data d'un autre (frontière dataset/IAM). _(Le split dev/prod initial a été abandonné le 2026-07-09 : un seul dataset par client.)_
 - **Nomenclature des tables** :
   - Analyses (volatiles) : `<étude>__<marque>__<période>` — ex. `full_funnel__mugler__2025_q4` (`__` entre dimensions, `_` simple à l'intérieur).
   - Dashboards natifs (futurs, fixes) : préfixe `dash_` — ex. `dash_audiences_insights`.
@@ -106,21 +106,22 @@ Le module lit ses données dans **BigQuery** (projet `amira-test`, région **EU*
 - **Feature** : `client/src/features/amazon-marketing-cloud-analytics/`
 - **Backend** : Express — `server/src/features/amazon-marketing-cloud-analytics/`
 - **Data** : BigQuery, projet `amira-test` (EU), dataset `AMC_ConnectedHub_7cR1jE` — voir Architecture data
-- **Branches** : `feature/AMC-Analytics` (accès dashboards, mergée) ; `feat/amc-full-funnel-bigquery` (Full Funnel × BQ, mergée sur `main` — PR #1653/#1654)
+- **Branches** : `feature/AMC-Analytics` (accès dashboards, mergée) ; `feat/amc-full-funnel-bigquery` (Full Funnel × BQ, mergée sur `main` — PR #1653/#1654) ; `feat/amc-pivot-workspace` (workspace pivot — PR #1719 à #1722, mergées sur `develop`, **pas encore sur `main`**)
+- **Moteur pivot** : `client/src/features/amazon-marketing-cloud-analytics/pivot/` — couche pure, sans React, ~390 tests
 
 ## Décisions clés
 
-| Date       | Décision                                                               | Raison                                                                                                                           |
-| ---------- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| 2026-06-19 | Renommage "Amazon Marketing Cloud analyses" → **AMC Analytics**        | Nom trop long, pas cohérent entre les pages                                                                                      |
-| 2026-06-19 | Icône **Layers** (couches empilées)                                    | Représente le caractère multi-couches de la plateforme (analyses + dashboards + data) — plus fidèle que l'ancien icône camembert |
-| 2026-06-19 | Nouvelle description hub                                               | Reflète l'élargissement du module au-delà de la seule analyse full funnel                                                        |
-| 2026-06-25 | Accès dashboards : `allowedDashboards: string[]` par utilisateur       | Remplace le boolean `dashboards` — permet un contrôle granulaire par dashboard                                                   |
-| 2026-06-25 | Périmètre client : `availableDashboards` dans le doc Firestore client  | Empêche d'accorder à un user un dashboard hors périmètre de son client                                                           |
-| 2026-06-25 | Module ouvert à Publicis (1 dashboard) + L'Oréal limité à 2 dashboards | Séparation commerce (Publicis) / data-trading (L'Oréal)                                                                          |
-| 2026-07-09 | **Matrice d'accès révisée** : L'Oréal = Audience Insights **seul** ; Publicis (commerce) = **les 3** (Audience Insights + MM & P2C + Étude Vidéo) | MM & P2C ne contient pas de data L'Oréal (accès demandé par curiosité, non accordé) ; les études commerce sont côté Publicis. Remplace la répartition du 25/06 |
-| 2026-07-09 | **Data BQ** : un dataset par client (`AMC_ConnectedHub_<customerId>`, EU), tables analyse `<étude>__<marque>__<période>` + registre ; Full Funnel lit BQ via routes backend | Isolation par client au niveau dataset ; découpler nom BQ / libellé UI ; remplacer l'upload CSV |
-| 2026-07-09 | Abandon du split dev/prod (`_dev`) → un seul dataset par client | Simplicité (un client, faible volume) ; contrepartie : plus d'isolation staging |
+| Date       | Décision                                                                                                                                                                    | Raison                                                                                                                                                         |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-06-19 | Renommage "Amazon Marketing Cloud analyses" → **AMC Analytics**                                                                                                             | Nom trop long, pas cohérent entre les pages                                                                                                                    |
+| 2026-06-19 | Icône **Layers** (couches empilées)                                                                                                                                         | Représente le caractère multi-couches de la plateforme (analyses + dashboards + data) — plus fidèle que l'ancien icône camembert                               |
+| 2026-06-19 | Nouvelle description hub                                                                                                                                                    | Reflète l'élargissement du module au-delà de la seule analyse full funnel                                                                                      |
+| 2026-06-25 | Accès dashboards : `allowedDashboards: string[]` par utilisateur                                                                                                            | Remplace le boolean `dashboards` — permet un contrôle granulaire par dashboard                                                                                 |
+| 2026-06-25 | Périmètre client : `availableDashboards` dans le doc Firestore client                                                                                                       | Empêche d'accorder à un user un dashboard hors périmètre de son client                                                                                         |
+| 2026-06-25 | Module ouvert à Publicis (1 dashboard) + L'Oréal limité à 2 dashboards                                                                                                      | Séparation commerce (Publicis) / data-trading (L'Oréal)                                                                                                        |
+| 2026-07-09 | **Matrice d'accès révisée** : L'Oréal = Audience Insights **seul** ; Publicis (commerce) = **les 3** (Audience Insights + MM & P2C + Étude Vidéo)                           | MM & P2C ne contient pas de data L'Oréal (accès demandé par curiosité, non accordé) ; les études commerce sont côté Publicis. Remplace la répartition du 25/06 |
+| 2026-07-09 | **Data BQ** : un dataset par client (`AMC_ConnectedHub_<customerId>`, EU), tables analyse `<étude>__<marque>__<période>` + registre ; Full Funnel lit BQ via routes backend | Isolation par client au niveau dataset ; découpler nom BQ / libellé UI ; remplacer l'upload CSV                                                                |
+| 2026-07-09 | Abandon du split dev/prod (`_dev`) → un seul dataset par client                                                                                                             | Simplicité (un client, faible volume) ; contrepartie : plus d'isolation staging                                                                                |
 
 ## Personnes clés
 
@@ -142,7 +143,7 @@ Le module lit ses données dans **BigQuery** (projet `amira-test`, région **EU*
 
 ## Évolutions envisagées
 
-- **Traçabilité de version des études** *(idée, écartée pour l'instant)* : à chaque import, la Cloud Function horodate la table (`loaded_at`) dans le registre, et le module **estampille le deck / l'export PowerPoint** (« données extraites le X · chargées le Y · N lignes »). But : savoir sur quelle version de la donnée repose un deck et détecter les ré-imports. On a déjà ~80% (la tuile « Last Updated » lit `last_modified_time`). Version lourde — **régénérer** un ancien deck à l'identique — = conserver des **snapshots BQ** par import (registre → `snapshot_ref`). À rattacher au [[Contrat d'ingestion BQ]] (nommage, transfo CSV, MAJ du registre par la CF).
+- **Traçabilité de version des études** _(idée, écartée pour l'instant)_ : à chaque import, la Cloud Function horodate la table (`loaded_at`) dans le registre, et le module **estampille le deck / l'export PowerPoint** (« données extraites le X · chargées le Y · N lignes »). But : savoir sur quelle version de la donnée repose un deck et détecter les ré-imports. On a déjà ~80% (la tuile « Last Updated » lit `last_modified_time`). Version lourde — **régénérer** un ancien deck à l'identique — = conserver des **snapshots BQ** par import (registre → `snapshot_ref`). À rattacher au [[Contrat d'ingestion BQ]] (nommage, transfo CSV, MAJ du registre par la CF).
 
 ## Réunions
 
