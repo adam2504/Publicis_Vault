@@ -24,10 +24,34 @@ Le module est organisé en **sections accessibles via un hub central** :
 
 ### 1. Analyses
 
-Le **Full Funnel** lit désormais ses données **directement depuis BigQuery** (sélection d'une table étude × marque × période), en remplacement de l'upload CSV manuel ; rendu en deck, sortie PowerPoint à archi fixe. Voir **Architecture data (BigQuery)** plus bas.
+Le **Full Funnel** lit ses données **directement depuis BigQuery** (sélection d'une table étude × marque × période). Voir **Architecture data (BigQuery)** plus bas.
 
-- **Full Funnel** — analyse multi-canal, media mix, path to conversion, time of conversion (branché sur BQ)
+Depuis août 2026, ce n'est plus un deck de slides figées mais un **workspace pivot** : moteur d'agrégation paramétrable, cas d'usage pré-réglés, filtres, slicers de page et export Excel. Le deck et la sortie PowerPoint ont été supprimés.
+
+- **Full Funnel** — workspace pivot : parcours, place des leviers, synergie, conversions assistées, recrutement NTB
 - **Campaign Focus** — (à venir)
+
+#### Workspace pivot — principes
+
+Le parcours est `sélection de l'analyse → regroupement des leviers → workspace`.
+
+- **Moteur pur et testé**, en trois étages : normalisation (une fois par analyse) → dérivation (au changement de mapping ou de niveau) → agrégation (à chaque réglage). Calcul côté client, les tables font moins de 50 000 lignes.
+- **Cas d'usage** = un `PivotView` littéral, jamais une impasse : la barre de réglages édite le même objet.
+- **La vue vit dans l'URL** — un tableau filtré est un lien partageable, le bouton retour est un annuler.
+- **Slicers de page** hors de la vue pivot : changer de cas d'usage ne les efface pas, comme un slicer Excel tient à travers tous les TCD d'une feuille.
+
+#### Règles de justesse encodées
+
+Elles viennent des notes de méthode du classeur de Jules et de l'exploration de la donnée. Les enfreindre produit des chiffres faux **sans rien casser à l'écran** — d'où leur présence dans le moteur plutôt que dans la vigilance de l'utilisateur.
+
+| Règle | Pourquoi |
+| --- | --- |
+| Les ratios se calculent après agrégation | La moyenne des taux n'est pas le taux du total |
+| Le dénominateur du taux de conversion est réglable (reach ou impressions) | « selon ce qui est pertinent » |
+| Les clics ne sont jamais dénominateur d'un taux | Les formats vidéo sont optimisés à la vue, pas au clic |
+| Un seul `analysis_level` à la fois | Une table empile sept analyses ; `Path to conversion` et `Media Mix` portent exactement le même reach et les mêmes conversions |
+| Une seule `granularity` à la fois | `Format` et `Channel` sont la même population à deux mailles (reach identique à moins de 1,5 %) |
+| Avertissement dès que le reach est sommé sur plusieurs parcours | C'est un dédoublonné d'utilisateurs, la somme est théoriquement fausse |
 
 ### 2. Dashboards
 
