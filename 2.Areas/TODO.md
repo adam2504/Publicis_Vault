@@ -18,6 +18,5 @@ type: area
 
 ## Réseau/Rencontres
 
-- [ ] Parler avec Sidy Diallo
 - [ ] Parler avec Anael Cabrol
 - [ ] Parler avec Yann Legrand
