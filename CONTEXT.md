@@ -1,6 +1,6 @@
 ---
 type: context
-Dernière mise à jour: 2026-08-05
+Dernière mise à jour: 2026-08-08
 ---
 
 # CONTEXT — Vault d'Adam
@@ -22,7 +22,7 @@ Adam Jouini, apprenti Data & Dev chez Publicis Media (alternance), rattaché à 
 
 Agent IA conversationnel dans le module MMM de ConnectedHub (Vertex AI Agent Engine). Répond aux questions ROI/média des clients sur leurs données MMM. C'est une **feature de la plateforme**, vendue en add-on à tout client ayant un MMM signé — la cible de déploiement est **Stellantis** (Opel DE / Peugeot DE), puis Longchamp.
 
-**Statut (23/07)** : Engine **6241** en prod depuis le 23/07 (`MMM_Agent_v3_live_ui_scope`). Feature B (scope écran live) livrée : l'agent connaît désormais le KPI, la période, l'onglet et la langue affichés à l'écran, et répond dans ce scope par défaut (surchargeable dimension par dimension, annonce le scope sur sa 1re réponse). Défaut critique corrigé en revue de branche : les bornes de période passent en dates réelles (`WHERE date BETWEEN`) — les colonnes `year`/`week` n'existent pas dans `tb_model_contributions`. Guardrails whitelist durcis (`[`, `]`, `;`, `=`, newlines exclus), security review validée. PRs #1688 (`develop`) → #1689 (`main`) mergées. Rollback disponible sur engine `2659` sans redéploiement. Aucune session depuis le 23/07 (13 jours).
+**Statut (23/07 — aucune session depuis)** : Engine **6241** en prod depuis le 23/07 (`MMM_Agent_v3_live_ui_scope`). Feature B (scope écran live) livrée : l'agent connaît désormais le KPI, la période, l'onglet et la langue affichés à l'écran, et répond dans ce scope par défaut (surchargeable dimension par dimension, annonce le scope sur sa 1re réponse). Défaut critique corrigé en revue de branche : les bornes de période passent en dates réelles (`WHERE date BETWEEN`) — les colonnes `year`/`week` n'existent pas dans `tb_model_contributions`. Guardrails whitelist durcis (`[`, `]`, `;`, `=`, newlines exclus), security review validée. PRs #1688 (`develop`) → #1689 (`main`) mergées. Rollback disponible sur engine `2659` sans redéploiement. Aucune session depuis le 23/07 (16 jours).
 
 **Prochaine action** : surveiller le monitoring (`no_answer` + `uiScopeRejected` en prod) ; mettre au backlog le chip de contexte chatbot (`Contexte : ROAS · juin 2025 – mai 2026`) ; relancer le conseil DE Stellantis (Zenith Media — Marit, Janina, Virginia silencieux depuis le mail deck) pour l'initiation agent ; suite du backlog : enrichissement `BUSINESS_CONTEXT` avec les DS (Dan/Hajar), `cf-budget-allocator-prod` en tool, knowledge par client.
 
@@ -35,11 +35,11 @@ Agent IA conversationnel dans le module MMM de ConnectedHub (Vertex AI Agent Eng
 
 Module ConnectedHub centralisant les analyses Amazon Marketing Cloud (Full Funnel depuis BigQuery) et les dashboards Looker (en iframe). Deux types d'utilisateurs : équipes data (Full Funnel) et équipes conseil/traders (dashboards).
 
-**Statut (09/07 — stable)** : Full Funnel branché sur BigQuery — PR **#1653** (`develop`) et **#1654** (`main`) mergées. Architecture data : projet `amira-test` (EU), dataset `AMC_ConnectedHub_7cR1jE` par client, tables `<étude>__<marque>__<période>` + registre. Données chargées : Mugler (298 l.) + Azzaro (1 366 l.). Matrice d'accès révisée : L'Oréal = Audiences Insights seul ; Publicis commerce = les 3 dashboards. Accès Looker de Nicolas Vivies (PMO Retail Media L'Oréal) débloqué (partage "unlisted" côté Looker avec Khadija). Aucune session depuis le 09/07 (27 jours).
+**Statut (07/08 — actif)** : **Refonte majeure du Full Funnel** en **workspace pivot** suite au retour de Jules (« on ne peut pas faire ce qu'on veut »). Deck de 5 slides figées supprimé. Nouveau moteur pur en trois étages (normalisation → dérivation → agrégation), règles de méthode encodées (ratios après agrégation, clics jamais dénominateur, avertissement sur somme de reach), mapping des leviers éditable dans l'app (Firestore, niveau customer). Trois double-comptes corrigés en session du 07/08 : `analysis_level` (7 analyses empilées dans une table — `Path to conversion` et `Media Mix` portent les mêmes chiffres), `granularity` (2 mailles de la même population), slicer mono-sélection qui affichait sa valeur sans l'appliquer. Vue dans l'URL via `nuqs` (partageable, bouton retour = annuler). « Place des leviers » lit désormais les lignes `Place of channel` du trading (données source, pas des chiffres dérivés). PRs #1719 (pivot workspace), #1720 (noms de colonnes bruts), #1721 (slicers, correctifs double-comptes) mergées sur `develop`. PR **#1722** ouverte (cohérence slicers entre niveaux). PR sur `main` jamais faite pour ce chantier (`develop` accuse ~59 commits d'avance). Aucune vérification visuelle faite — tout validé par tests, typage et build uniquement.
 
-**Prochaine action** : automatiser la sync du registre BQ à chaque import (manuel aujourd'hui) ; configurer Firestore + comptes utilisateurs Publicis via Settings ; cadrer le calendrier de migration dashboards Looker → React natif avec Khadija.
+**Prochaine action** : merger PR #1722 ; ouvrir la PR `develop → main` ; **vérifier le module à l'écran** (personne ne l'a encore ouvert) ; prévenir Jules que les totaux affichés sont plus bas (les correctifs arrêtent d'additionner ce qui ne devait pas l'être) ; configurer Firestore + comptes utilisateurs Publicis via Settings ; cadrer le calendrier de migration dashboards Looker → React natif avec Khadija.
 
-**Blocker** : ingestion BQ et mise à jour du registre sont manuelles aujourd'hui (aucune Cloud Function dédiée). Migration Looker → React dépend du calendrier Khadija.
+**Blocker** : PR #1722 ouverte, aucune vérification visuelle faite. Migration Looker → React dépend du calendrier Khadija. Ingestion BQ et mise à jour du registre sont manuelles (aucune Cloud Function dédiée).
 
 ---
 
@@ -58,6 +58,8 @@ Module ConnectedHub centralisant les analyses Amazon Marketing Cloud (Full Funne
 |---|---|---|
 | Cadrage "recommandation" agent — option A (deux niveaux interne/client) vs option B (assistant pur, aucune reco) | MMM AI Agent | Baptiste |
 | Conseil DE Stellantis silencieux — Zenith Media ne répond plus depuis le mail deck | MMM AI Agent | Katia + Zenith Media DE |
+| PR #1722 + PR develop→main AMC jamais faite (~59 commits d'avance) | AMC Analytics | Adam |
+| Aucune vérification visuelle du workspace pivot (tests verts, mais module non ouvert) | AMC Analytics | Adam |
 | Ingestion BQ AMC manuelle (registre non automatisé) | AMC Analytics | Khadija (ingestion) |
 
 ---
@@ -84,11 +86,11 @@ Module ConnectedHub centralisant les analyses Amazon Marketing Cloud (Full Funne
 
 | Date | Fait |
 |---|---|
+| 2026-08-07 | Session AMC Analytics : **trois double-comptes corrigés** (`analysis_level`, `granularity`, slicer sans effet). Vue dans l'URL via `nuqs`. « Place des leviers » lit désormais `Place of channel` du trading. PRs #1720/#1721 mergées, #1722 ouverte. |
+| 2026-08-06 | **Refonte Full Funnel AMC en workspace pivot** suite retour de Jules (« on ne peut pas faire ce qu'on veut »). Deck de slides supprimé. Moteur pur 3 étages avec règles de méthode encodées. 0 divergence vs classeur Jules sur 200 lignes. PR #1719 mergée sur develop. |
 | 2026-07-23 | Feature B (scope écran live) livrée en prod : engine **6241**. L'agent connaît KPI, période, onglet et langue de l'écran. Défaut critique corrigé : bornes de période en dates réelles (colonnes `year`/`week` absentes de BQ). PRs #1688/#1689 mergées. |
 | 2026-07-23 | Basma quitte Publicis — knowledge audiences LiveRamp non rempli à son départ (schéma scaffoldé, `[À COMPLÉTER]` partout). Fenêtre de capture définitivement close. |
 | 2026-07-22 | Engine MMM Agent **2659** en prod : `CTX_MODULE_VIZ` (aide lecture graphiques bilingue EN/FR), retry backend `no_answer`, polish chatbot. PRs #1685/#1686 mergées. |
-| 2026-07-20 | `BUSINESS_CONTEXT` décomposé en blocs `CTX_*` scopés par sous-agent — hallucination `execute_sql` fixée. LiveRamp (Julien Guého) : création d'audience = UI only, API fermée. |
-| 2026-07-09 | Full Funnel AMC branché sur BigQuery (PR #1653/#1654 mergées sur main). Accès Looker Nicolas Vivies débloqué (partage "unlisted" avec Khadija). |
 
 ---
 
