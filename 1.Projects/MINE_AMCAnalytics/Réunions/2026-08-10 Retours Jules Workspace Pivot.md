@@ -48,6 +48,7 @@ Premier passage en revue du workspace pivot par Jules après le merge des PR #17
 | Ajouter la question traitée en tête de chaque vue | Adam | À définir |
 | Place des leviers : graphique allongé + bascule relatif / absolu | Adam | À définir |
 | Inverser la hiérarchie des score cards | Adam | À définir |
+| Retirer l'avertissement sur la somme des reach | Adam | À définir |
 | Ajouter le cas d'usage entrée / sortie des leviers | Adam | À définir |
 | Ajouter des cas d'usage sur les analysis levels non utilisés | Adam | À définir |
 | Retirer le slicer analysis level + créer un onglet exploration libre | Adam | À définir |
