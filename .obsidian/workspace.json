@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1.Projects/MINE_AMCAnalytics/Réunions/2026-08-10 Retours Jules Workspace Pivot.md",
+                "file": "1.Projects/MINE_AMCAnalytics/Sessions/Session 2026-08-10.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-08-10 Retours Jules Workspace Pivot"
+              "title": "Session 2026-08-10"
             }
           }
         ]
@@ -224,9 +224,13 @@
   },
   "active": "fe2b05c7c67fae94",
   "lastOpenFiles": [
+    "1.Projects/MINE_AMCAnalytics/Réunions/2026-08-10 Retours Jules Workspace Pivot.md",
+    "1.Projects/MINE_AMCAnalytics/AMC Analytics.md.tmp.19732.c8881f5b2da9",
+    "1.Projects/MINE_AMCAnalytics/AMC Analytics.md.tmp.19732.2c56ec7234a5",
+    "1.Projects/MINE_AMCAnalytics/Sessions/Session 2026-08-10.md",
+    "1.Projects/MINE_AMCAnalytics/Sessions/Session 2026-08-10.md.tmp.19732.19063601ce7d",
     "2026-08-10.md",
     "1.Projects/MINE_AMCAnalytics/AMC Analytics.md.tmp.40264.a01193fc0d19",
-    "1.Projects/MINE_AMCAnalytics/Réunions/2026-08-10 Retours Jules Workspace Pivot.md",
     "1.Projects/MINE_AMCAnalytics/Réunions/2026-08-10 Retours Jules Workspace Pivot.md.tmp.40264.2f71c88458c4",
     "1.Projects/MINE_AMCAnalytics/Sessions/Session 2026-06-19.md",
     "2.Areas/TODO.md",
@@ -236,9 +240,6 @@
     "1.Projects/MINE_CreativeInsights/Creative Insights.md.tmp.28380.9c4fef157c2e",
     "1.Projects/MINE_CreativeInsights/Existant technique GCP.md",
     "1.Projects/MINE_CreativeInsights/Existant technique GCP.md.tmp.28380.d887cb6d00d2",
-    "2.Areas/TODO.md.tmp.28380.294b71d13a9f",
-    "1.Projects/MINE_CreativeInsights/Creative Insights.md.tmp.28380.7e28057a3d03",
-    "1.Projects/MINE_CreativeInsights/Creative Insights.md.tmp.28380.7745fbef5bb2",
     "1.Projects/MINE_CreativeInsights/Patterns ConnectedHub réutilisables.md",
     "1.Projects/MINE_CreativeInsights/Creative Insights.md",
     "1.Projects/MINE_CreativeInsights/Réunions/2026-08-10 Cadrage module Creative Insights.md",
@@ -258,7 +259,6 @@
     "4.Archive/MINE_FeedGenCategorisation/Sessions/Session 2026-06-26.md",
     "4.Archive/MINE_FeedGenCategorisation/Sessions/Session 2026-06-25.md",
     "4.Archive/MINE_FeedGenCategorisation/Sessions/Session 2026-06-24.md",
-    "4.Archive/MINE_FeedGenCategorisation/FeedGen Catégorisation.md",
     "Pasted image 20260723173222.png",
     "Pasted image 20260723173205.png",
     "_Attachments/2026-07-09-nicolas-vivies-remerciement-acces-looker.png",

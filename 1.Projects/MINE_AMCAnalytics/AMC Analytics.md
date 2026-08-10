@@ -50,7 +50,7 @@ Elles viennent des notes de méthode du classeur de Jules et de l'exploration de
 | Le dénominateur du taux de conversion est réglable (reach ou impressions) | « selon ce qui est pertinent » — réglage moteur, **plus exposé dans l'UI depuis le 2026-08-10** ; `reach` partout             |
 | Les clics ne sont jamais dénominateur d'un taux                           | Les formats vidéo sont optimisés à la vue, pas au clic                                                                         |
 | Un seul `analysis_level` à la fois                                        | Une table empile sept analyses ; `Path to conversion` et `Media Mix` portent exactement le même reach et les mêmes conversions |
-| Une seule `granularity` à la fois                                         | `Format` et `Channel` sont la même population à deux mailles (reach identique à moins de 1,5 %)                                |
+| Une seule `granularity` à la fois                                         | `Format` et `Channel` sont la même population à deux mailles (reach identique à moins de 1,5 %). **Épinglée et masquée depuis le 2026-08-10** : elle filtre toujours, mais c'est le niveau de regroupement que l'analyste choisit |
 | Avertissement dès que le reach est sommé sur plusieurs parcours           | C'est un dédoublonné d'utilisateurs, la somme est théoriquement fausse                                                         |
 
 ### 2. Dashboards
