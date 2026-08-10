@@ -83,6 +83,7 @@ Une partie de la chaîne tourne déjà et a servi sur des cas passés. À cartog
 3. **Coût de l'extraction multimodale.** Un prompt Gemini sur des centaines de vidéos n'est pas gratuit, aucun chiffrage fait.
 4. **Notebooks en backend de production.** Fragile par nature : versioning, exécution, maintenance quand ils cassent.
 5. **Seuil « assez de données »** pour déclencher la notification : non défini, décision DS.
+6. **Où vit l'état du projet.** SIMBA le met en BigQuery, feed-manager en Firestore. Les deux modules du repo ont fait des choix opposés, il faut trancher avec Eddie. Détail dans [[Patterns ConnectedHub réutilisables]].
 
 ---
 
