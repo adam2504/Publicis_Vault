@@ -18,13 +18,16 @@ type: area
 
 ## MINE - Creative Insights
 
-- [ ] Demander à Hajar les pointeurs GCP : cloud functions Meta/TikTok/Snapchat, buckets GCS des cas passés
-- [ ] Explorer l'existant technique dans GCP et cartographier ce qui est réutilisable
+- [x] Explorer l'existant technique GCP (`zen-creativeinsights-dev-mg`) et le repo ConnectedHub
+- [ ] **Remonter à Hajar et Abhishek : TikTok et Snapchat ne remontent pas `ad_id`**, donc pas de jointure performance possible sur ces deux plateformes. Prérequis DS avant tout dev multi-plateformes
+- [ ] Faire évoluer les Cloud Run : paramètre de période, notion de projet/client (destinations codées en dur), retour HTTP honnête (elles renvoient 200 en cas d'erreur)
+- [ ] Trancher la règle d'attribution performance `ad_id` vers `asset_id` (un ad porte plusieurs assets, risque de double-compte façon AMC)
+- [ ] Proposer le renversement du modèle : `analysis_json` canonique, colonnes par client en vues dérivées
 - [ ] Clarifier la répartition du dev avec Hajar et Jules (qui fait la couche ConnectedHub, qui garde le backend DS)
 - [ ] Trancher où le module s'arrête : export CSV avec le dashboard de Thomas, ou restitution native
 - [ ] Récupérer la liste de features client de Léonie, jamais formalisée
-- [ ] Cadrer la clé de jointure créa vers données de performance
 - [ ] Trancher avec Eddie où vit l'état du projet : BigQuery comme SIMBA, ou Firestore comme feed-manager
+- [ ] Demander à Hajar où vivent les prompts Gemini et les notebooks (absents du projet GCP exploré)
 
 ## Réseau/Rencontres
 
