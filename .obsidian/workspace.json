@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2.Areas/TODO.md",
+                "file": "2026-08-10.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "TODO"
+              "title": "2026-08-10"
             }
           }
         ]
@@ -186,9 +186,19 @@
               "icon": "git-pull-request",
               "title": "Source Control"
             }
+          },
+          {
+            "id": "86b3c4e9b5f664cd",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {},
+              "icon": "spreadsheet",
+              "title": "Advanced Tables"
+            }
           }
         ],
-        "currentTab": 6
+        "currentTab": 7
       }
     ],
     "direction": "horizontal",
@@ -214,6 +224,15 @@
   },
   "active": "fe2b05c7c67fae94",
   "lastOpenFiles": [
+    "1.Projects/MINE_AMCAnalytics/Sessions/Session 2026-06-19.md",
+    "2026-08-10.md",
+    "2.Areas/TODO.md",
+    "2.Areas/TODO.md.tmp.28380.83a66c6d0ed2",
+    "1.Projects/MINE_CreativeInsights/Creative Insights.md.tmp.28380.85d8b0ff9caf",
+    "1.Projects/MINE_CreativeInsights/Creative Insights.md.tmp.28380.d83fdf423be2",
+    "1.Projects/MINE_CreativeInsights/Creative Insights.md.tmp.28380.9c4fef157c2e",
+    "1.Projects/MINE_CreativeInsights/Existant technique GCP.md",
+    "1.Projects/MINE_CreativeInsights/Existant technique GCP.md.tmp.28380.d887cb6d00d2",
     "2.Areas/TODO.md.tmp.28380.294b71d13a9f",
     "1.Projects/MINE_CreativeInsights/Creative Insights.md.tmp.28380.7e28057a3d03",
     "1.Projects/MINE_CreativeInsights/Creative Insights.md.tmp.28380.7745fbef5bb2",
@@ -222,17 +241,10 @@
     "1.Projects/MINE_CreativeInsights/Creative Insights.md",
     "1.Projects/MINE_CreativeInsights/Réunions/2026-08-10 Cadrage module Creative Insights.md",
     "CONTEXT.md.tmp.28380.e5ed08676286",
-    "CONTEXT.md.tmp.28380.f1aef5b9d418",
-    "CONTEXT.md.tmp.28380.d4aa5fe7ee6c",
-    "CONTEXT.md.tmp.28380.6b0260d87075",
-    "CONTEXT.md.tmp.28380.e1f67120c91a",
-    "CONTEXT.md.tmp.28380.09088b0b2044",
-    "3.Resources/Vault - Architecture & Conventions.md.tmp.28380.bd556df6881e",
     "3.Resources/Onboardings/VERISURE_CreativeInsights/Creative Insights Verisure.md",
     "3.Resources/Onboardings/VERISURE_CreativeInsights/Réunions/2026-06-18 Point avec Léonie & Hajar.md",
     "2.Areas/Carrière/2026-08-03 Mentorship x Marcel Session 1 Cleber.md",
     "3.Resources/Onboardings/VERISURE_CreativeInsights/Réunions/2026-08-10 Cadrage module Creative Insights.md",
-    "2.Areas/TODO.md",
     "1.Projects/MINE_AMCAnalytics/Sessions/Session 2026-08-07.md",
     "1.Projects/MINE_AMCAnalytics/Sessions/Session 2026-08-06.md",
     "2.Areas/Bilan.md",
@@ -248,8 +260,6 @@
     "4.Archive/MINE_FeedGenCategorisation/FeedGen Catégorisation.md",
     "4.Archive/PUBLICIS_PassationBasma/Réunions/2026-06-30 Onboarding Audiences LiveRamp.md",
     "4.Archive/PUBLICIS_PassationBasma/Réunions/2026-06-23 Point AI Office - Agent Copilot.md",
-    "4.Archive/PUBLICIS_PassationBasma/Passation Basma.md",
-    "2.Areas/Carrière/2026-08-03 Mentorship x Marcel — Session 1 Cleber.md",
     "Pasted image 20260723173222.png",
     "Pasted image 20260723173205.png",
     "_Attachments/2026-07-09-nicolas-vivies-remerciement-acces-looker.png",
