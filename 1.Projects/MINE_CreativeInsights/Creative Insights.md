@@ -78,8 +78,8 @@ Une partie de la chaîne tourne déjà et a servi sur des cas passés. À cartog
 
 ## Zones d'ombre techniques
 
-1. **Clé de jointure créa vers performance.** « Mapper vidéos, engagement et features » tient en une ligne dans le CR, c'est la partie difficile. Asset ID plateforme, hash de fichier, ou taxonomie de nommage ? Si ce n'est pas résolu, le reste du pipeline ne produit rien d'exploitable.
-2. **Contrat d'ingestion.** Où atterrissent les assets, sous quel format les features sont stockées, qui possède le schéma.
+1. ~~**Clé de jointure créa vers performance.**~~ **Tranché par l'exploration du 10/08, et c'est pire que prévu.** La jointure passe par `ad_id`, colonne que **seul Meta possède**. TikTok et Snapchat ne remontent aucune hiérarchie de campagne, donc la jointure y est impossible aujourd'hui. Reste ouvert : la règle d'attribution, car la performance est à la maille `ad_id` par jour alors que la créa est à la maille `asset_id`, et un ad porte plusieurs assets. Voir [[Existant technique GCP]].
+2. **Contrat d'ingestion.** Instruit le 10/08 : les features sont stockées en **colonnes physiques propres à chaque client** (environ 70 colonnes Verisure), Stellantis a une forme entièrement différente. `analysis_json` existe déjà et doit devenir le stockage canonique, sinon « sorties standardisées » est intenable.
 3. **Coût de l'extraction multimodale.** Un prompt Gemini sur des centaines de vidéos n'est pas gratuit, aucun chiffrage fait.
 4. **Notebooks en backend de production.** Fragile par nature : versioning, exécution, maintenance quand ils cassent.
 5. **Seuil « assez de données »** pour déclencher la notification : non défini, décision DS.
