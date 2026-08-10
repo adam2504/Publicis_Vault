@@ -99,8 +99,8 @@ Une partie de la chaîne tourne déjà et a servi sur des cas passés. À cartog
 
 ## Antécédents
 
-- [[Creative Insights Verisure]] : POC client porté par Hajar et Léonie, `implication: onboardé`. Sa liste de features côté client n'a jamais été écrite.
-- [[Creative Insights Leapmotor]] : piste de module restée en attente, cas d'usage passé d'Abhishek. Reprise par ce projet.
+- **POC Creative Insights Verisure** : porté par Hajar et Léonie, jamais rien produit de mon côté. Note supprimée du vault le 10/08/2026, seuls les contacts subsistent dans [[VERISURE]]. Point à retenir : Léonie détenait une liste de features demandées par le client, jamais formalisée nulle part. C'est la seule expression de besoin client connue sur le sujet, et elle est à récupérer.
+- [[Creative Insights Leapmotor]] : piste de module restée en attente, cas d'usage passé d'Abhishek. Ses cloud functions et ses assets GCS deviennent la brique amont du module. Reprise par ce projet.
 
 ## Réunions
 
