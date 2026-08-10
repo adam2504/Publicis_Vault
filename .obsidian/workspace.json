@@ -27,15 +27,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2.Areas/Carrière/2026-08-03 Mentorship x Marcel Session 1 Cleber.md",
+                "file": "3.Resources/Onboardings/VERISURE_CreativeInsights/Réunions/2026-08-10 Cadrage module Creative Insights.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-08-03 Mentorship x Marcel Session 1 Cleber"
+              "title": "2026-08-10 Cadrage module Creative Insights"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -226,8 +227,13 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "fe2b05c7c67fae94",
+  "active": "c35177a2e7ea8ae0",
   "lastOpenFiles": [
+    "2.Areas/Carrière/2026-08-03 Mentorship x Marcel Session 1 Cleber.md",
+    "2.Areas/TODO.md",
+    "3.Resources/Onboardings/VERISURE_CreativeInsights/Creative Insights Verisure.md.tmp.28380.e5c493aec83b",
+    "3.Resources/Onboardings/VERISURE_CreativeInsights/Réunions/2026-08-10 Cadrage module Creative Insights.md",
+    "3.Resources/Onboardings/VERISURE_CreativeInsights/Réunions/2026-08-10 Cadrage module Creative Insights.md.tmp.28380.f2a0c7ab186d",
     "1.Projects/MINE_AMCAnalytics/AMC Analytics.md.tmp.12928.e367876d5f87",
     "1.Projects/MINE_AMCAnalytics/AMC Analytics.md.tmp.12928.917d8826b241",
     "1.Projects/MINE_AMCAnalytics/AMC Analytics.md.tmp.12928.2160f57ac43c",
@@ -238,12 +244,7 @@
     "1.Projects/MINE_AMCAnalytics/Sessions/Session 2026-08-07.md.tmp.12928.5ec6abc863f6",
     "1.Projects/MINE_AMCAnalytics/Sessions/Session 2026-08-06.md",
     "1.Projects/MINE_AMCAnalytics/Sessions/Session 2026-08-06.md.tmp.12928.fcd5bb218d67",
-    "2.Areas/Carrière/2026-08-03 Mentorship x Marcel Session 1 Cleber.md",
     "2.Areas/Bilan.md",
-    "2.Areas/TODO.md",
-    "CONTEXT.md.tmp.10148.88facfff6066",
-    "3.Resources/Clients/LOREAL.md.tmp.10148.69f4718b013d",
-    "_Templates/Projet.md.tmp.10148.0ccd128e3e75",
     "2.Areas/Idées de Projets/Creative Insights Leapmotor.md",
     "3.Resources/Clients/VERISURE.md",
     "3.Resources/Clients/STELLANTIS.md",
@@ -265,7 +266,6 @@
     "1.Projects/MINE_MMMAIAgent/Tool - cf-budget-allocator.md",
     "Pasted image 20260723173222.png",
     "Pasted image 20260723173205.png",
-    "1.Projects/MINE_MMMAIAgent/Sessions/Session 2026-07-22.md",
     "_Attachments/2026-07-09-nicolas-vivies-remerciement-acces-looker.png",
     "_Attachments/message_basma_slide44.png",
     "_Attachments/message_basma_VB.png",
