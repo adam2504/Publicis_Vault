@@ -63,11 +63,11 @@ Aujourd'hui la chaîne se termine par un CSV parce que c'est le passage de main 
 
 Une partie de la chaîne tourne déjà et a servi sur des cas passés. À cartographier avant tout dev.
 
-- [ ] Cloud Functions Meta, TikTok, Snapchat : localisation GCP, déclencheur, format de sortie, propriétaire
-- [ ] Buckets GCS contenant les assets des cas passés : convention de nommage, volumétrie
-- [ ] Data Platform : ce que c'est exactement, ce qu'elle fait à l'étape 2 (terme absent du vault)
-- [ ] Prompts Gemini existants : où ils sont versionnés, quel modèle, quel coût par asset
-- [ ] Notebooks d'analyse façon SIMBA : où ils tournent, comment ils sont versionnés
+- [x] Cloud Functions Meta, TikTok, Snapchat : ce sont des Cloud Run gen2 dans `zen-creativeinsights-dev-mg`, contrat d'appel et pièges documentés dans [[Existant technique GCP]]
+- [x] Buckets GCS : `creative_assets_<plateforme>/<ad_account_id>/<asset_id>.<format>`, volumétrie relevée (prototype arrêté depuis le 01/06)
+- [x] Data Platform : c'est `zen-dataplatform-pm-prd-amg`, branchée par vue matérialisée avec un compte client codé en dur
+- [ ] Prompts Gemini existants : où ils sont versionnés, quel modèle, quel coût par asset (**non trouvé en CLI**, à demander à Hajar)
+- [ ] Notebooks d'analyse façon SIMBA : où ils tournent, comment ils sont versionnés (**hors du projet GCP exploré**)
 - [ ] Dashboard CSV de Thomas : stack, alimentation, réutilisable ou non
 - [ ] Travaux antérieurs de Brieg et Thomas référencés en réunion (Brieg est parti le 12/06/2026, sans repreneur identifié)
 - [x] **Côté ConnectedHub : fait le 10/08.** SIMBA est le module `custom-bidding`, et les sept étapes de la chaîne cible existent déjà entre `custom-bidding` et `feed-manager`. Voir [[Patterns ConnectedHub réutilisables]]
