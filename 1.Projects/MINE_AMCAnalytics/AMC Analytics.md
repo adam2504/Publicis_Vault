@@ -160,6 +160,7 @@ Le module lit ses données dans **BigQuery** (projet `amira-test`, région **EU*
 
 - [[2026-06-25 Point AMC Khadija]]
 - [[2026-07-07 Onboarding AMC Khadija]]
+- [[2026-08-10 Retours Jules Workspace Pivot]]
 
 ## Ressources
 
