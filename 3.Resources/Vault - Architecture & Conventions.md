@@ -47,7 +47,7 @@ MINE_AMCAnalytics
 MINE_FeedGenCategorisation
 LOREAL_BrandStore
 LOREAL_ViralBeauty
-VERISURE_CreativeInsights
+MINE_CreativeInsights
 ```
 
 Clients connus : `LOREAL`, `MINE`, `VERISURE`, `PUBLICIS`, `STELLANTIS`, `LEAPMOTOR`
