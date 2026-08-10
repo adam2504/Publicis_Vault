@@ -16,6 +16,15 @@ type: area
 - [ ] Traduire dashboards Looker en native React
 - [ ] Ajouter étude Brand Store
 
+## MINE - Creative Insights
+
+- [ ] Demander à Hajar les pointeurs GCP : cloud functions Meta/TikTok/Snapchat, buckets GCS des cas passés
+- [ ] Explorer l'existant technique dans GCP et cartographier ce qui est réutilisable
+- [ ] Clarifier la répartition du dev avec Hajar et Jules (qui fait la couche ConnectedHub, qui garde le backend DS)
+- [ ] Trancher où le module s'arrête : export CSV avec le dashboard de Thomas, ou restitution native
+- [ ] Récupérer la liste de features client de Léonie, jamais formalisée
+- [ ] Cadrer la clé de jointure créa vers données de performance
+
 ## Réseau/Rencontres
 
 - [ ] Parler avec Anael Cabrol
