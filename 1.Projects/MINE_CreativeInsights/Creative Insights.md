@@ -104,6 +104,11 @@ Une partie de la chaîne tourne déjà et a servi sur des cas passés. À cartog
 - **POC Creative Insights Verisure** : porté par Hajar et Léonie, jamais rien produit de mon côté. Note supprimée du vault le 10/08/2026, seuls les contacts subsistent dans [[VERISURE]]. Point à retenir : Léonie détenait une liste de features demandées par le client, jamais formalisée nulle part. C'est la seule expression de besoin client connue sur le sujet, et elle est à récupérer.
 - [[Creative Insights Leapmotor]] : piste de module restée en attente, cas d'usage passé d'Abhishek. Ses cloud functions et ses assets GCS deviennent la brique amont du module. Reprise par ce projet.
 
+## Notes techniques
+
+- [[Existant technique GCP]] : inventaire de `zen-creativeinsights-dev-mg`, contrat des Cloud Run, modèle de données, volumétrie
+- [[Patterns ConnectedHub réutilisables]] : ce que `custom-bidding` (SIMBA) et `feed-manager` fournissent déjà
+
 ## Réunions
 
 - [[2026-08-10 Cadrage module Creative Insights]] : briefing dev, chaîne cible, répartition à confirmer
