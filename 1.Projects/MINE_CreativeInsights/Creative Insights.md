@@ -70,8 +70,9 @@ Une partie de la chaîne tourne déjà et a servi sur des cas passés. À cartog
 - [ ] Notebooks d'analyse façon SIMBA : où ils tournent, comment ils sont versionnés
 - [ ] Dashboard CSV de Thomas : stack, alimentation, réutilisable ou non
 - [ ] Travaux antérieurs de Brieg et Thomas référencés en réunion (Brieg est parti le 12/06/2026, sans repreneur identifié)
+- [x] **Côté ConnectedHub : fait le 10/08.** SIMBA est le module `custom-bidding`, et les sept étapes de la chaîne cible existent déjà entre `custom-bidding` et `feed-manager`. Voir [[Patterns ConnectedHub réutilisables]]
 
-> Adam doit obtenir de Hajar les pointeurs GCP précis avant d'ouvrir quoi que ce soit.
+> Adam doit obtenir de Hajar les pointeurs GCP précis avant d'ouvrir quoi que ce soit. Le reste de la liste concerne l'infra DS, invisible depuis le repo.
 
 ---
 
