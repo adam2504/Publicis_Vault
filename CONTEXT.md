@@ -88,7 +88,9 @@ Module ConnectedHub d'automatisation des Creative Insights. Objectif : rendre se
 | Eddie | Lead dev ConnectedHub — archi frontend/backend, décisions infra | MMM AI Agent, AMC Analytics |
 | Khadija | Data Analyst — dashboards Looker AMC, ingestion BQ | AMC Analytics |
 | Dan | Data Scientist — testing MMM Agent, EVBB Stellantis | MMM AI Agent, EVBB Scoring |
-| Hajar | Data Scientist — testing MMM, AMC modeled audiences, Creative Insights | MMM AI Agent, AMC Analytics |
+| Hajar | Data Scientist — testing MMM, AMC modeled audiences, porte le sujet Creative Insights | MMM AI Agent, AMC Analytics, Creative Insights |
+| Abhishek | Data Scientist PGD (Inde) — cloud functions d'extraction d'assets, notebooks SIMBA, antécédent Leapmotor | Creative Insights |
+| Thomas | Data Analyst Social + L'Oréal — consommateur final des Creative Insights, auteur du dashboard alimenté par CSV | Creative Insights |
 | Manu | AI Office / manager direct DA — Copilot audiences | (transverse) |
 | Inès | Data Strat Stellantis — contact ouverture conseil MMM | MMM AI Agent |
 | Katia | Data Strat Stellantis — contact ouverture conseil MMM | MMM AI Agent |
