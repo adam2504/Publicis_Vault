@@ -39,6 +39,8 @@ Le parcours est `sélection de l'analyse → regroupement des leviers → worksp
 - **Cas d'usage** = un `PivotView` littéral, jamais une impasse : la barre de réglages édite le même objet.
 - **La vue vit dans l'URL** — un tableau filtré est un lien partageable, le bouton retour est un annuler.
 - **Slicers de page** hors de la vue pivot : changer de cas d'usage ne les efface pas, comme un slicer Excel tient à travers tous les TCD d'une feuille.
+- **Graphiques déclarés par cas d'usage** (`Preset.charts`), figés sur la vue du preset. Quatre formes : barres, empilement à 100 %, nuage de points, Sankey. Aucune ne met deux échelles sur un même tracé.
+- **Deux zones, deux portées** : la barre du haut (périmètre + niveau de regroupement) vaut pour les graphiques *et* le tableau ; la barre du bas (lignes, colonnes, mesures, tri, coupures, filtres) ne vaut que pour le tableau.
 
 #### Règles de justesse encodées
 
