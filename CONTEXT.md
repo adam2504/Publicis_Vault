@@ -101,6 +101,7 @@ Module ConnectedHub d'automatisation des Creative Insights. Objectif : rendre se
 
 | Date | Fait |
 |---|---|
+| 2026-08-10 | **Ouverture du projet Creative Insights** (module ConnectedHub, client MINE). Briefing dev par Hajar et Abhishek. Le POC Verisure et la piste Leapmotor sont absorbés : note Verisure supprimée, idée Leapmotor passée en `repris`. |
 | 2026-08-07 | Session AMC Analytics : **trois double-comptes corrigés** (`analysis_level`, `granularity`, slicer sans effet). Vue dans l'URL via `nuqs`. « Place des leviers » lit désormais `Place of channel` du trading. PRs #1720/#1721 mergées, #1722 ouverte. |
 | 2026-08-06 | **Refonte Full Funnel AMC en workspace pivot** suite retour de Jules (« on ne peut pas faire ce qu'on veut »). Deck de slides supprimé. Moteur pur 3 étages avec règles de méthode encodées. 0 divergence vs classeur Jules sur 200 lignes. PR #1719 mergée sur develop. |
 | 2026-07-23 | Feature B (scope écran live) livrée en prod : engine **6241**. L'agent connaît KPI, période, onglet et langue de l'écran. Défaut critique corrigé : bornes de période en dates réelles (colonnes `year`/`week` absentes de BQ). PRs #1688/#1689 mergées. |
