@@ -1,6 +1,6 @@
 ---
 type: idea
-statut: en attente
+statut: repris
 client: LEAPMOTOR
 ---
 
@@ -8,8 +8,8 @@ client: LEAPMOTOR
 
 Plateforme : [[Mine Platform]]
 
-Potentiellement nouveau module sur [[Mine Platform|ConnectedHub]] pour les Creative Insights Leapmotor ?
+> 🔀 **Piste reprise le 10/08/2026** par le module ConnectedHub [[Creative Insights]]. Cette note ne constitue plus une piste ouverte, elle garde la trace de l'origine du sujet.
 
-**Statut** : en attente d'Abhishek. Aucune relance depuis la création de la note.
+Idée initiale : faire des Creative Insights Leapmotor un module de [[Mine Platform|ConnectedHub]]. Restée en attente d'Abhishek pendant des mois, sans relance.
 
-À rapprocher de [[Creative Insights Verisure]] — même famille de sujet (Creative Insights), portée côté DS par Hajar et Léonie.
+Ce qui a débloqué : l'analyse Leapmotor menée par Abhishek a laissé des cloud functions opérationnelles (Meta, TikTok, Snapchat) et des assets dans GCS. Cet existant devient la brique amont du module, et Leapmotor un cas d'usage passé plutôt qu'un projet à lancer.
