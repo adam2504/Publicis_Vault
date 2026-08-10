@@ -4,7 +4,6 @@ date: 2026-08-10
 projet: "[[AMC Analytics]]"
 participants: Jules
 ---
-
 # 2026-08-10 Retours Jules Workspace Pivot
 
 Projet : [[AMC Analytics]]
@@ -23,21 +22,22 @@ Premier passage en revue du workspace pivot par Jules après le merge des PR #17
 
 - **Mono vs multi** : une catégorie vide apparaît en plus, à comprendre et à supprimer.
 - **Nombre de touches** : s'arrêter à 5 ou 6 touches (ou aligner le seuil sur ce que porte le parcours).
-- **Titre de vue** : chaque vue doit afficher en haut la question à laquelle elle répond.
-- **Place des leviers** : allonger le graphique, et ajouter une option d'affichage en absolu (plusieurs barres côte à côte par channel) en complément du relatif.
+- **Titre de vue** : chaque vue doit afficher en haut la question à laquelle elle répond (au dessus des slicers, ptt en gras)
+- **Place des leviers** : allonger le graphique en horizontal, et ajouter une option d'affichage en absolu (plusieurs barres côte à côte par channel) en complément du relatif (via 3 points, comme graphique Investissement global par média dans onglet Resultat dans module MMM)
 - **Score cards** : inverser la hiérarchie, le chiffre du filtre en grand, le total en petit.
+- **Avertissement sur le reach** : retirer le message « "Reach" est un dédoublonné d'utilisateurs : sa somme sur plusieurs parcours est théoriquement fausse, un même utilisateur pouvant figurer dans plusieurs d'entre eux. »
 
 ## Cas d'usage à ajouter
 
 - **Entrée et sortie simultanées** sur les leviers, pour voir si un levier est démarreur ou finisseur.
-- **Analysis levels non exploités** : `global`, `time of`, `campaign performance`. À noter : `campaign performance` va changer dans les futurs templates pour devenir de la donnée découpée par campagne.
+- **Analysis levels non exploités** : `global`, `time of`, `campaign performance`. À noter : `campaign performance` va changer dans les futurs templates pour devenir de la donnée découpée par campagne. (pas encore utiliser ducoup)
 - **Question fréquente à couvrir** : quelles combinaisons de leviers génèrent le plus de reach et de conversions ?
 
 ## Navigation et structure
 
 - **Slicer `analysis level` inutile** : un cas d'usage est d'office lié à un analysis level, donc pas besoin de l'exposer. À la place, créer un onglet d'exploration réellement libre, où tout est réglable.
 - **Export du lien de vue sans intérêt en l'état** : en cliquant sur le lien, on retombe sur le choix du dataset, la vue est perdue.
-- **S'inspirer de Meta Advanced Analytics** : enregistrer les analyses puis y accéder via un historique, pour ne plus repasser par le choix du dataset et le regroupement des leviers à chaque fois.
+- **S'inspirer du module Meta Advanced Analytics** : enregistrer les analyses puis y accéder via un historique, pour ne plus repasser par le choix du dataset et le regroupement des leviers à chaque fois.
 
 ## Actions
 
