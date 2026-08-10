@@ -52,6 +52,19 @@ Module ConnectedHub centralisant les analyses Amazon Marketing Cloud (Full Funne
 
 ---
 
+### 4. Creative Insights — MINE
+**implication : lead** (à confirmer) | discipline : dev + data-science | client : **MINE** — module plateforme transverse
+
+Module ConnectedHub d'automatisation des Creative Insights. Objectif : rendre self-service la chaîne aujourd'hui exécutée à la main par les DS, de la récupération des assets créa (Meta, TikTok, Snapchat) jusqu'à la restitution au Data Analyst.
+
+**Statut (10/08 — cadrage)** : projet ouvert le 10/08 suite à un point de briefing où Hajar et Abhishek ont introduit Adam aux besoins et aux idées de dev. Chaîne actuelle manuelle en 6 étapes (Cloud Functions → Data Platform → features via prompt Gemini → modèle de corrélation → export CSV → analyse par le DA). Chaîne cible cadrée en 7 étapes verrouillées séquentiellement, avec page de suivi. **Les cloud functions existent déjà et ont servi** (analyse Leapmotor d'Abhishek), avec des assets dans des buckets GCS. Le module orchestre de l'existant, il ne part pas de zéro. Aucune ligne de code écrite.
+
+**Prochaine action** : obtenir de Hajar les pointeurs GCP (cloud functions, buckets) et explorer l'existant ; clarifier la répartition du dev avec Hajar et Jules ; trancher où le module s'arrête (export CSV branché sur le dashboard de Thomas, ou restitution native).
+
+**Blocker** : répartition du dev non tranchée — le CR indique qu'Abhishek démarre le développement initial alors que le point servait à briefer Adam sur la couche ConnectedHub. Risque de deux chantiers parallèles. Aucun sponsor ni calendrier : Jules est informé, pas sollicité comme arbitre, et la capacité d'Adam (déjà lead sur deux modules) n'a pas été posée.
+
+---
+
 ## Blockers transverses
 
 | Blocker | Projet(s) | Qui débloque |
