@@ -74,6 +74,8 @@ Module ConnectedHub d'automatisation des Creative Insights. Objectif : rendre se
 | PR #1722 + PR develop→main AMC jamais faite (~59 commits d'avance) | AMC Analytics | Adam |
 | Aucune vérification visuelle du workspace pivot (tests verts, mais module non ouvert) | AMC Analytics | Adam |
 | Ingestion BQ AMC manuelle (registre non automatisé) | AMC Analytics | Khadija (ingestion) |
+| Répartition du dev non tranchée (couche ConnectedHub vs backend DS) | Creative Insights | Hajar + Jules |
+| Pointeurs GCP de l'existant (cloud functions, buckets GCS) non transmis | Creative Insights | Hajar |
 
 ---
 
