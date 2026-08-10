@@ -12,7 +12,7 @@ Client : [[VERISURE]]
 
 Analyse et définition des features pour le projet Creative Insights côté Verisure.
 
-> ⚪ Note principale à compléter au fil du projet.
+> 🔀 **Le sujet est passé en production plateforme.** Depuis le 10/08/2026, l'automatisation des Creative Insights est portée par le module ConnectedHub [[Creative Insights]] (client MINE, transverse). Cette note reste la trace du POC client de Hajar et Léonie, où mon implication est restée `onboardé`. Toute la suite du travail se documente dans le projet module.
 
 ## Personnes clés
 
