@@ -7,7 +7,6 @@ discipline:
 implication: lead
 client: MINE
 ---
-
 # Creative Insights
 
 Plateforme : [[Mine Platform]]

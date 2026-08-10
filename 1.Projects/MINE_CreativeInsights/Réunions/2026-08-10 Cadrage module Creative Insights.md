@@ -2,7 +2,6 @@
 type: meeting
 date: 2026-08-10
 ---
-
 Projet : [[Creative Insights]]
 Plateforme : [[Mine Platform]]
 

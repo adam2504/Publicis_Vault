@@ -4,17 +4,15 @@ type: client
 
 # Verisure
 
-Client télésurveillance. Un seul sujet suivi côté vault : l'analyse et la définition des features Creative Insights.
+Client télésurveillance. Un seul sujet a été suivi côté vault : l'analyse et la définition des features Creative Insights, portée par Hajar et Léonie.
 
 ## Projets
 
-| Projet                   | Discipline   | Implication | Note                                                                             |
-| ------------------------ | ------------ | ----------- | -------------------------------------------------------------------------------- |
-| Creative Insights        | data-science | onboardé    | [[3.Resources/Onboardings/VERISURE_CreativeInsights/Creative Insights Verisure]] |
+Aucun projet actif de mon côté.
 
-> ⚠️ `implication: onboardé` — le livrable est porté par **Hajar** et **Léonie**, pas par moi.
+> 🔀 Le POC Creative Insights Verisure a été supprimé du vault le 10/08/2026 : je n'y ai jamais contribué (`implication: onboardé`, aucune production). Le sujet vit désormais comme module plateforme : [[1.Projects/MINE_CreativeInsights/Creative Insights]] (client MINE).
 >
-> 🔀 Depuis le 10/08/2026, l'automatisation du sujet est passée en module plateforme : [[1.Projects/MINE_CreativeInsights/Creative Insights]] (client MINE). Le POC Verisure reste la trace du besoin client d'origine. À revoir vers mi-septembre 2026 : soit Verisure devient un cas d'usage du module, soit cette note part en `4.Archive/`.
+> Verisure peut redevenir un cas d'usage du module si le besoin client remonte, notamment via la liste de features de Léonie qui n'a jamais été formalisée. Cette note ne garde que les contacts.
 
 ## Contacts
 
