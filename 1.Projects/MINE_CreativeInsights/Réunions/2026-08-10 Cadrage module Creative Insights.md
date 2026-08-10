@@ -3,89 +3,81 @@ type: meeting
 date: 2026-08-10
 ---
 
-Projet : [[Creative Insights Verisure]]
+Projet : [[Creative Insights]]
 Plateforme : [[Mine Platform]]
 
-# 10 Août — Cadrage automatisation Creative Insights (module ConnectedHub)
+# 10 Août — Cadrage module Creative Insights
 
-> ⚪ Note de **préparation**. Le compte-rendu se remplit pendant/après la réunion (sections Décisions et Actions).
+Participants : Hajar (DS, porte le sujet), Abhishek (DS PGD, cloud functions et notebooks), Adam.
 
-Participants : Hajar (DS, porte le POC), Abhishek (DS, PGD, piste Leapmotor), moi.
-Absente à confirmer : Léonie (Data Strat, interlocutrice features côté Verisure).
+**Objet réel du point** : Hajar et Abhishek m'introduisent aux besoins et aux idées de dev d'un module Creative Insights dans ConnectedHub. Ce n'était pas une réunion d'arbitrage, c'était mon briefing de dev.
 
----
-
-## Objet
-
-Transformer les Creative Insights, aujourd'hui un POC porté par les DS, en **module ConnectedHub**. Périmètre d'entrée retenu : **Verisure d'abord**, les autres comptes (Leapmotor) en cas d'usage suivant.
+> Le résumé IA du facilitateur ne m'attribue aucune action et ne mentionne pas ConnectedHub. C'est un artefact du résumé, pas de la réunion.
 
 ---
 
-## Ce que le vault sait déjà
+## Chaîne actuelle, telle qu'elle tourne aujourd'hui
 
-| Élément | État |
-| --- | --- |
-| POC Verisure | Porté par Hajar (DS) et Léonie (Data Strat). Une seule réunion tracée : [[2026-06-18 Point avec Léonie & Hajar]] |
-| Liste de features | Léonie a une liste de features demandées par le client. Elle n'a **jamais été écrite dans le vault** |
-| Piste Leapmotor | [[Creative Insights Leapmotor]], idée de module ConnectedHub, statut « en attente d'Abhishek », **aucune relance depuis la création** |
-| Mon implication | `onboardé` sur Verisure. Aucune contribution au livrable à ce jour |
+| # | Étape | Qui | Outil |
+| --- | --- | --- | --- |
+| 1 | Extraction des assets créa | DS | Cloud Functions (Meta, TikTok, Snapchat) |
+| 2 | Regroupement assets + data client | DS | Data Platform |
+| 3 | Extraction des features | DS | Prompt + Gemini |
+| 4 | Modélisation (corrélation ou autre) | DS | Notebooks |
+| 5 | Export des données | DS | CSV |
+| 6 | Analyse | DA (Thomas) | À partir du CSV |
 
-**Trou de contexte assumé** : je n'ai aucune trace de ce que produit concrètement le POC (quelles données en entrée, quel type d'insight en sortie, sous quelle forme il est livré au client aujourd'hui). C'est le premier bloc de questions.
+Tout est manuel et porté par les DS. Le module vise à rendre cette chaîne self-service.
 
----
+## Chaîne cible cadrée en séance
 
-## Questions à poser
+1. Création de projet : advertiser IDs, plateformes, période
+2. Déclenchement automatique des cloud functions pour télécharger les assets
+3. Étape de validation : sélection des vidéos et images pertinentes
+4. Extraction de features par prompt : prompt par défaut pour les variables de base, upload d'un prompt custom pour les variables sectorielles (texte ou JSON)
+5. Scheduled queries de mapping (vidéos, engagement, features) avec notification quand le volume est suffisant
+6. Notebooks prédéfinis pour l'analyse et la modélisation, sur le modèle de SIMBA
+7. Restitution sur dashboard, avec accès stakeholders
 
-### À Hajar (le POC existant)
-
-- Qu'est-ce qui est produit aujourd'hui, concrètement ? Sortie = fichier, deck, notebook, dashboard ?
-- Quelles données en entrée, et d'où : plateformes média, assets créa, taxonomie de nommage des créas ?
-- Quelle est la partie **manuelle et répétitive** du process actuel ? C'est elle qui définit ce que « automatisation » veut dire ici.
-- À quelle fréquence le livrable est-il refait (par campagne, mensuel, ad hoc) ? Le volume justifie-t-il un module ?
-- Où tourne le code aujourd'hui, et est-il réutilisable en l'état ou à réécrire ?
-- Où en est la liste de features de Léonie, et est-elle arbitrée ou encore une liste de souhaits ?
-
-### À Abhishek (généralisation)
-
-- Le besoin Leapmotor est-il le même que Verisure, ou juste le même mot ?
-- Qu'est-ce qui bloquait depuis la création de la piste : priorité, données, ou absence de demandeur ?
-- Sur SIMBA et FeedGen, existe-t-il déjà de la brique réutilisable côté ingestion ou catégorisation de créas ?
-
-### Aux deux (cadrage module)
-
-- Qui sont les utilisateurs cibles dans ConnectedHub : DS, conseil, ou client final ? Ça change tout le front.
-- Un module transverse multi-clients, ou un module Verisure qu'on généralise ensuite ?
+Principes actés : étapes verrouillées séquentiellement, page de suivi d'avancement dédiée, sorties standardisées pour que les stakeholders sachent à quoi s'attendre.
 
 ---
 
-## Points à trancher
+## Existant réutilisable (point important du briefing)
 
-1. **Automatiser quoi.** Le pipeline de calcul (côté DS), la restitution (côté module), ou les deux. Tant que ce n'est pas tranché, « Creative Insight Automation » ne veut rien dire de précis.
-2. **Mon rôle.** Je passe de `onboardé` à contributeur ou lead, ou je reste en support. Si je porte le module, la note Verisure sort de `3.Resources/Onboardings/` pour aller dans `1.Projects/` (dossier `MINE_CreativeInsights` ou `VERISURE_CreativeInsights` selon le point 3).
-3. **Client de rattachement.** Module plateforme `MINE` vendable à plusieurs comptes, ou livrable `VERISURE` spécifique. Détermine le nommage du dossier et le rattachement au hub.
-4. **Qui possède la logique métier.** Si la définition d'un insight reste chez les DS, le module n'est qu'une couche de restitution et il faut un contrat d'interface clair (table BQ ou API).
-5. **Sponsor et priorité.** À valider avec Jules et Manu avant d'engager du temps de dev : je suis déjà lead sur AMC Analytics et MMM AI Agent.
+Les cloud functions Meta, TikTok et Snapchat **existent déjà et ont déjà servi**. Des cas passés ont laissé des assets dans des buckets GCS, notamment l'analyse Leapmotor menée par Abhishek. Le module ne part donc pas de zéro sur l'amont : il orchestre de l'existant.
 
----
+Sont également cités comme antérieurs et potentiellement réutilisables :
 
-## Ce que j'apporte (à dire si utile)
+- le dashboard interface de Thomas, alimenté par CSV, à intégrer pour minimiser l'effort de dev
+- des travaux de Brieg (parti le 12/06/2026, sans repreneur identifié)
+- les notebooks d'analyse du pattern SIMBA
 
-- Le pattern module ConnectedHub est déjà rodé deux fois : [[1.Projects/MINE_AMCAnalytics/AMC Analytics]] (ingestion BQ, workspace pivot, config Firestore par customer) et [[1.Projects/MINE_MMMAIAgent/MMM AI Agent]] (couche IA sur données modèle).
-- Leçon AMC directement transposable : **ne pas livrer un deck de vues figées**. Le retour de Jules (« on ne peut pas faire ce qu'on veut ») a imposé une refonte complète en workspace. Si les Creative Insights partent en slides figées, on repayera la même refonte.
-- Deuxième leçon AMC : les doubles comptes viennent de l'empilement de niveaux d'analyse dans une même table. À poser dès le contrat d'ingestion, pas après.
+Hajar doit me communiquer les pointeurs GCP précis (projets, cloud functions, buckets) pour que j'explore la partie technique existante.
 
 ---
 
 ## Décisions
 
-> À remplir pendant la réunion.
+- Le sujet devient un **module ConnectedHub** de production, pas un POC client. Périmètre plateforme.
+- **Priorité de dev** : la page de création de projet et la récupération des assets d'abord. Le reste suit.
+- Réutiliser l'existant plutôt que réécrire : cloud functions, notebooks, dashboard de Thomas.
+- Hajar prévient Jules du lancement du projet.
 
----
+## Points non tranchés
+
+1. **Répartition du dev.** Abhishek annonce démarrer le développement initial, alors que le point servait à me briefer sur le module. Qui construit la couche ConnectedHub (page projet, orchestration, gating, restitution) et qui garde le backend DS ? À clarifier avec Hajar et Jules avant que deux chantiers partent en parallèle.
+2. **Où le module s'arrête.** Export CSV avec le dashboard de Thomas branché dessus, ou restitution native dans ConnectedHub. Voir l'analyse dans [[Creative Insights]].
+3. **Premier client de démonstration.** Aucun n'a été nommé. Verisure et Leapmotor sont des antécédents, pas des engagements.
+4. **Sponsor, priorité, calendrier.** Jules est informé, pas sollicité comme arbitre. Je suis déjà lead sur [[1.Projects/MINE_AMCAnalytics/AMC Analytics]] et [[1.Projects/MINE_MMMAIAgent/MMM AI Agent]], la question de la capacité n'a pas été posée.
+5. **Clé de jointure créa vers performance**, contrat d'ingestion, coût de l'extraction Gemini, exécution des notebooks en prod, seuil de volume suffisant. Détaillés dans [[Creative Insights]].
 
 ## Actions
 
-> À remplir pendant la réunion.
-
 | Action | Qui | Pour quand |
 | --- | --- | --- |
-| | | |
+| Prévenir Jules du lancement du projet et du démarrage d'Abhishek | Hajar | Rapide |
+| Transmettre les pointeurs GCP (cloud functions, buckets GCS des cas passés) | Hajar | À demander |
+| Explorer l'existant technique dans GCP une fois les pointeurs reçus | Adam | À planifier |
+| Clarifier la répartition du dev avec Hajar et Jules | Adam | Avant tout code |
+| Démarrer le développement initial | Abhishek | Annoncé en séance |
