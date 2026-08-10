@@ -106,7 +106,7 @@ Le module lit ses données dans **BigQuery** (projet `amira-test`, région **EU*
 - **Feature** : `client/src/features/amazon-marketing-cloud-analytics/`
 - **Backend** : Express — `server/src/features/amazon-marketing-cloud-analytics/`
 - **Data** : BigQuery, projet `amira-test` (EU), dataset `AMC_ConnectedHub_7cR1jE` — voir Architecture data
-- **Branches** : `feature/AMC-Analytics` (accès dashboards, mergée) ; `feat/amc-full-funnel-bigquery` (Full Funnel × BQ, mergée sur `main` — PR #1653/#1654) ; `feat/amc-pivot-workspace` (workspace pivot — PR #1719 à #1722, mergées sur `develop`, **pas encore sur `main`**)
+- **Branches** : `feature/AMC-Analytics` (accès dashboards, mergée) ; `feat/amc-full-funnel-bigquery` (Full Funnel × BQ, mergée sur `main` — PR #1653/#1654) ; `feat/amc-pivot-workspace` (workspace pivot — PR #1719 à #1722 sur `develop`, PR #1723 sur `main`, toutes mergées le 2026-08-10)
 - **Moteur pivot** : `client/src/features/amazon-marketing-cloud-analytics/pivot/` — couche pure, sans React, ~390 tests
 
 ## Décisions clés
