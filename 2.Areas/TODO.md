@@ -24,6 +24,7 @@ type: area
 - [ ] Trancher où le module s'arrête : export CSV avec le dashboard de Thomas, ou restitution native
 - [ ] Récupérer la liste de features client de Léonie, jamais formalisée
 - [ ] Cadrer la clé de jointure créa vers données de performance
+- [ ] Trancher avec Eddie où vit l'état du projet : BigQuery comme SIMBA, ou Firestore comme feed-manager
 
 ## Réseau/Rencontres
 
