@@ -39,7 +39,7 @@ Plateforme interne Publicis — anciennement appelée **Mine**, renommée **Conn
 
 ## Pistes de modules
 
-- [[Creative Insights Leapmotor]] — en attente d'Abhishek
+*(aucune piste ouverte : la piste Creative Insights Leapmotor est devenue le module Creative Insights le 10/08/2026)*
 
 ## Incidents & notes techniques
 
