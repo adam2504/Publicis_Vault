@@ -24,4 +24,3 @@ Analyse et définition des features pour le projet Creative Insights côté Veri
 ## Réunions
 
 - [[2026-06-18 Point avec Léonie & Hajar]]
-- [[2026-08-10 Cadrage module Creative Insights]] — cadrage de l'automatisation en module ConnectedHub (Hajar, Abhishek)
