@@ -139,6 +139,13 @@ Le module lit ses données dans **BigQuery** (projet `amira-test`, région **EU*
 | 2026-08-10 | **Niveau de regroupement en slicer**, `granularity` épinglée et masquée | `granularity = Channel` donne l'axe funnel chez AZZARO et le type de canal chez MUGLER ; les niveaux veulent dire la même chose partout. Elle continue de filtrer, sans quoi Format et Channel additionnent la même population |
 | 2026-08-10 | Couleurs **validées par outil**, jamais jugées à l'œil : une série = une couleur, rampe ordinale plafonnée à 4 pas | Colorer chaque barre par sa catégorie ré-encode ce que la position dit déjà ; au-delà de 4 pas l'écart de luminosité passe sous le seuil de lisibilité |
 | 2026-08-10 | Tiroir « Avancé » supprimé ; dénominateur du taux et base de comparaison retirés de l'UI | Réglages qui ne décidaient rien au quotidien ; le moteur les supporte toujours, un preset peut les demander |
+| 2026-08-11 | Le **niveau d'analyse est imposé** par le cas d'usage pour toute la session, plus jamais offert en slicer | Un cas d'usage y est lié par construction. L'imposer seulement jusqu'à la première modification était une demi-mesure : on pouvait à nouveau mélanger Media Mix et Path to conversion sans le voir |
+| 2026-08-11 | Une entrée **exploration libre**, définie par l'absence de niveau d'analyse | Elle rend le slicer et tous les réglages ; elle ne porte aucun graphique, car un graphique y devrait suivre les réglages, à l'inverse de partout ailleurs |
+| 2026-08-11 | Une ligne que le regroupement ne peut pas placer est **écartée et comptée**, jamais rendue en catégorie | Toute dimension dérivée du parcours renvoie `''` sur un `path` vide ; c'est ce qui affichait une catégorie sans nom à côté de « mono » et « multi » |
+| 2026-08-11 | Une **analyse enregistrée** = jeu de données + regroupement, en Firestore, avec `?a=<id>` dans l'URL | La vue vivait dans l'URL depuis le 7 août mais la donnée en état de composant : tout lien partagé renvoyait au choix du dataset |
+| 2026-08-11 | Le regroupement vit **sur l'analyse**, pas à côté du dataset | Deux analyses sur la même table doivent pouvoir être lues de deux façons sans que l'une réécrive l'autre ; le mapping par table devient la graine |
+| 2026-08-11 | Analyses **privées par défaut**, filtrage côté serveur ; modification au créateur seul | Une analyse en cours est un brouillon. Et qui a cadré une analyse puis partagé son lien ne doit pas en retrouver le regroupement réécrit |
+| 2026-08-11 | **Le dataset d'une analyse est immuable**, pour tout le monde | Le changer laisserait le même identifiant pointer vers d'autres chiffres : tout lien déjà envoyé montrerait silencieusement autre chose |
 
 ## Personnes clés
 
