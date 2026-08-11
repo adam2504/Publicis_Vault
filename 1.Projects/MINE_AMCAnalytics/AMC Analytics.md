@@ -41,6 +41,9 @@ Le parcours est `historique des analyses → (nouvelle : dataset → regroupemen
 - **Slicers de page** hors de la vue pivot : changer de cas d'usage ne les efface pas, comme un slicer Excel tient à travers tous les TCD d'une feuille.
 - **Graphiques déclarés par cas d'usage** (`Preset.charts`), figés sur la vue du preset. Quatre formes : barres, empilement à 100 %, nuage de points, Sankey. Aucune ne met deux échelles sur un même tracé.
 - **Deux zones, deux portées** : la barre du haut (périmètre + niveau de regroupement) vaut pour les graphiques *et* le tableau ; la barre du bas (lignes, colonnes, mesures, tri, coupures, filtres) ne vaut que pour le tableau.
+- **Une analyse enregistrée** = jeu de données + regroupement des leviers, partagée ou privée, portée par `?a=<id>` dans l'URL. C'est elle qui rend le lien de vue résoluble.
+- **Chaque cas d'usage est lié à son niveau d'analyse**, qui lui est imposé et n'est plus offert en slicer. Seule l'**exploration libre** n'en porte aucun : elle rend le slicer et tous les réglages, et ne dessine aucun graphique.
+- **Un cas d'usage peut être une lecture plutôt qu'un établi** (`Preset.summary`) : la Vue d'ensemble n'a ni tableau, ni réglages, ni slicers — les scorecards font la lecture et le catalogue des leviers prend la place du tableau.
 
 #### Règles de justesse encodées
 
