@@ -33,7 +33,7 @@ Depuis août 2026, ce n'est plus un deck de slides figées mais un **workspace p
 
 #### Workspace pivot — principes
 
-Le parcours est `sélection de l'analyse → regroupement des leviers → workspace`.
+Le parcours est `historique des analyses → (nouvelle : dataset → regroupement) → workspace`. Depuis le 2026-08-11 le module ouvre sur **l'historique des analyses enregistrées** et non plus sur le choix du dataset ; ouvrir une entrée mène droit aux cas d'usage.
 
 - **Moteur pur et testé**, en trois étages : normalisation (une fois par analyse) → dérivation (au changement de mapping ou de niveau) → agrégation (à chaque réglage). Calcul côté client, les tables font moins de 50 000 lignes.
 - **Cas d'usage** = un `PivotView` littéral, jamais une impasse : la barre de réglages édite le même objet.
