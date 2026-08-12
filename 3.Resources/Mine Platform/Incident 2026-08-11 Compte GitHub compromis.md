@@ -26,23 +26,23 @@ L'attaque cible les **points d'entrée exécutables** du repo. Elle ne fait rien
 Injecté dans ~25 fichiers par branche, tous exécutables :
 
 ```ts
-import { createRequire } from 'module';
+import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 // ... code légitime inchangé ...
 program.parse();
-eval("global.o='5-745-du';"+atob('<7 345 octets de base64>'))
+eval("global.o='5-745-du';" + atob("<7 345 octets de base64>"));
 ```
 
 `createRequire` sert à retrouver `require()` en contexte ESM, donc à charger des modules Node depuis un fichier module. La couche décodée fait 5 507 octets de JavaScript obfusqué par table de permutation (`var _$_b9af=(function(p,j){…}`).
 
 Cibles et conditions de déclenchement :
 
-| Fichier                              | Ce qui l'exécute                          |
-| ------------------------------------ | ----------------------------------------- |
-| `server/src/index.ts`, `config/index.ts` | `npm run dev` du backend              |
-| `client/postcss.config.mjs`          | tout `npm run dev` / build du client       |
-| 18 × `esbuild.mjs` (cloud functions) | tout build ou déploiement GCP              |
-| `cli/src/index.ts` + scripts serveur | appel du CLI via tsx                       |
+| Fichier                                  | Ce qui l'exécute                     |
+| ---------------------------------------- | ------------------------------------ |
+| `server/src/index.ts`, `config/index.ts` | `npm run dev` du backend             |
+| `client/postcss.config.mjs`              | tout `npm run dev` / build du client |
+| 18 × `esbuild.mjs` (cloud functions)     | tout build ou déploiement GCP        |
+| `cli/src/index.ts` + scripts serveur     | appel du CLI via tsx                 |
 
 **Le point le plus vicieux** : l'attaquant a réécrit des commits existants en conservant auteur, date, message et contenu réel. Mes propres commits sont revenus signés de mon nom, avec mes messages, plus le payload. Un contrôle sur l'auteur ne détecte rien — il faut scanner les diffs ou le contenu des refs.
 
@@ -50,13 +50,13 @@ Cibles et conditions de déclenchement :
 
 ## Ce que j'ai vécu côté contacts
 
-**Eddie Ratignier**, 16h48, alerte l'équipe : le compte d'Adrien semble compromis, il pousse sur toutes les branches avec des payloads obfusqués. À 17h21 : *"Tout le monde aucun merge jusqu'à nouvel ordre."* À 17h54 il me contacte directement pour me demander si je suis sur ma branche locale `chore/amc-jules-feedback-main`, me dit de ne faire ni pull ni fetch, et de chercher des références à `eval(` n'importe où.
+**Eddie Ratignier**, 16h48, alerte l'équipe : le compte d'Adrien semble compromis, il pousse sur toutes les branches avec des payloads obfusqués. À 17h21 : _"Tout le monde aucun merge jusqu'à nouvel ordre."_ À 17h54 il me contacte directement pour me demander si je suis sur ma branche locale `chore/amc-jules-feedback-main`, me dit de ne faire ni pull ni fetch, et de chercher des références à `eval(` n'importe où.
 
-**Antoine Barbet** réagit à 16h58 — *"c'est pas bon du tout ça"*, *"quelles incidences ?"* — et ouvre à 17h35 un ticket GSO (Global Security Office), REQ6524231, livraison estimée au 12 août. Eddie répond à 17h05 que main et prod ne sont pas impactées, mais qu'il ne faut ni utiliser les autres branches, ni les run en local, ni tenter de merge.
+**Antoine Barbet** réagit à 16h58 — _"c'est pas bon du tout ça"_, _"quelles incidences ?"_ — et ouvre à 17h35 un ticket GSO (Global Security Office), REQ6524231, livraison estimée au 12 août. Eddie répond à 17h05 que main et prod ne sont pas impactées, mais qu'il ne faut ni utiliser les autres branches, ni les run en local, ni tenter de merge.
 
-**James Hemery**, 18h47 : *"Ok j'ai fini de restore correctement le git"*, suivi de *"Je pense que ton ordi et celui de Cyrille ont des chances d'être infecté"* et *"Probablement à reset + rotation des keys + mot de passe par sécurité"*. Eddie ajoute à 18h50 : *"adam aussi potentiellement du coup j'imagine"*.
+**James Hemery**, 18h47 : _"Ok j'ai fini de restore correctement le git"_, suivi de _"Je pense que ton ordi et celui de Cyrille ont des chances d'être infecté"_ et _"Probablement à reset + rotation des keys + mot de passe par sécurité"_. Eddie ajoute à 18h50 : _"adam aussi potentiellement du coup j'imagine"_.
 
-Le lendemain 12 août, **Cyrille Masson** demande à 9h12 s'il existe une procédure pour détecter si on est infecté ou pour nettoyer le poste. Antoine à 9h59 : *"il faudra qu'on sache pour le call de demain en tout cas"*.
+Le lendemain 12 août, **Cyrille Masson** demande à 9h12 s'il existe une procédure pour détecter si on est infecté ou pour nettoyer le poste. Antoine à 9h59 : _"il faudra qu'on sache pour le call de demain en tout cas"_.
 
 ---
 
@@ -68,16 +68,16 @@ Les objets malveillants **sont** bien descendus chez moi : l'auto-fetch de VS Co
 
 Mais un fetch écrit dans `.git/objects`, **pas dans le working tree**. Ce sont deux zones distinctes du disque, et seuls checkout, merge, pull, rebase ou cherry-pick matérialisent un blob en vrai fichier source. Le payload n'a donc jamais existé sous forme de fichier exécutable chez moi.
 
-| Contrôle                                              | Résultat                                     |
-| ----------------------------------------------------- | -------------------------------------------- |
-| Index git des fichiers cibles                         | Hash d'origine — jamais passés par l'index    |
-| Reflog HEAD complet du 11/08                          | Aucun checkout d'un ref infecté               |
-| Working tree, toutes extensions                       | Marqueur absent partout                       |
-| Clés Run HKCU/HKLM, dossier Démarrage                 | Rien d'anormal (corporate uniquement)         |
-| Tâches planifiées depuis le 11/08                     | Aucune                                        |
-| Scripts déposés dans APPDATA / Temp / profil          | Aucun d'inexpliqué                            |
-| `.gitconfig`, `.npmrc`, `.git-credentials`, clés SSH  | Inchangé depuis mars / inexistants            |
-| ADC gcloud                                            | Modifié à 11h08, soit **avant** l'arrivée du payload |
+| Contrôle                                             | Résultat                                             |
+| ---------------------------------------------------- | ---------------------------------------------------- |
+| Index git des fichiers cibles                        | Hash d'origine — jamais passés par l'index           |
+| Reflog HEAD complet du 11/08                         | Aucun checkout d'un ref infecté                      |
+| Working tree, toutes extensions                      | Marqueur absent partout                              |
+| Clés Run HKCU/HKLM, dossier Démarrage                | Rien d'anormal (corporate uniquement)                |
+| Tâches planifiées depuis le 11/08                    | Aucune                                               |
+| Scripts déposés dans APPDATA / Temp / profil         | Aucun d'inexpliqué                                   |
+| `.gitconfig`, `.npmrc`, `.git-credentials`, clés SSH | Inchangé depuis mars / inexistants                   |
+| ADC gcloud                                           | Modifié à 11h08, soit **avant** l'arrivée du payload |
 
 Étendue dans ma copie : **148 refs `origin/*` infectés**, 6 sains (`main`, `develop`, `HEAD`, `Feature_FusionVideoAdmin`, `feat/amc-saved-analyses`, `feat/amc-saved-analyses-main`). Mes **14 branches locales : toutes saines**, scannées sur l'intégralité de leur arbre.
 

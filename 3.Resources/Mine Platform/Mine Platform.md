@@ -45,3 +45,4 @@ Plateforme interne Publicis — anciennement appelée **Mine**, renommée **Conn
 
 - [[Workflow Git & Merge]]
 - [[Incident 2026-06-19 Node.js 24.17]]
+- [[Incident 2026-08-11 Compte GitHub compromis]]
