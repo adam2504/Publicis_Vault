@@ -3,6 +3,12 @@ type: area
 ---
 # TODO
 
+## MINE - Incident git (compte compromis 11/08)
+
+- [ ] Attendre la réponse de James : remote assaini ? `main` réécrit pendant la restauration ?
+- [ ] Au feu vert, rebrancher le remote et vérifier avant tout push — cf. [[Incident 2026-08-11 Compte GitHub compromis]] pour la séquence exacte (fetch `main` seul, scan du marqueur, contrôle d'ancêtre de `c0385d487`)
+- [ ] Repousser le seul commit AMC hors `main` (`76dbb7212`, sur `feat/amc-saved-analyses`)
+
 MINE - MMM Module 
 Ajouter dans Simulation -> Optimisation, que l'objectif est journalier, comme pour ventiler un budget
 
