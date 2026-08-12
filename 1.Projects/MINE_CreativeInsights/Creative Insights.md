@@ -112,3 +112,7 @@ Une partie de la chaîne tourne déjà et a servi sur des cas passés. À cartog
 ## Réunions
 
 - [[2026-08-10 Cadrage module Creative Insights]] : briefing dev, chaîne cible, répartition à confirmer
+
+## Dernières sessions
+
+- **2026-08-12** — Étapes 1 et 2 livrées, étape 3 en cours. Projets persistés en BigQuery (dataset `connectedhub` créé), déclenchement Meta branché et **validé de bout en bout** (35 créas récupérées en 1 min 35, fichiers GCS horodatés du jour). Bibliothèque de créas avec filtres et vue agrandie, non commitée. Deux commits locaux : `575304be6` (ossature), `5062ebf88` (persistance et gathering). Ticket IT envoyé pour les droits du service account `interface@`.
