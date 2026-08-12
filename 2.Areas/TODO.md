@@ -9,16 +9,17 @@ type: area
 - [ ] Au feu vert, rebrancher le remote et vérifier avant tout push — cf. [[Incident 2026-08-11 Compte GitHub compromis]] pour la séquence exacte (fetch `main` seul, scan du marqueur, contrôle d'ancêtre de `c0385d487`)
 - [ ] Repousser le seul commit AMC hors `main` (`76dbb7212`, sur `feat/amc-saved-analyses`)
 
-MINE - MMM Module 
+MINE - MMM Module
 Ajouter dans Simulation -> Optimisation, que l'objectif est journalier, comme pour ventiler un budget
 
 ## MINE - MMM AI Agent
 
 - [ ] Réaliser passation/ouverture au conseil, puis demander questions qu'ils ont/client pourrait avoir, ce qu'ils pensent des réponses, ce qui pourrait être améliorer etc
 - [ ] Améliorer l'agent avec feedbacks
-	- [ ] Enrichir le `BUSINESS_CONTEXT` avec les DS (définitions variables/données)
-	- [ ] Tools saturation + allocation (`cf-budget-allocator-prod`) + registre narratif
-	- [ ] Explorer possibilité de knowledge par client
+  - [ ] Enrichir le `BUSINESS_CONTEXT` avec les DS (définitions variables/données)
+  - [ ] Tools saturation + allocation (`cf-budget-allocator-prod`) + registre narratif
+  - [ ] Explorer possibilité de knowledge par client
+
 ## MINE × L'OREAL - AMC Analytics
 
 - [ ] Avancer module avec feedbacks de Jules
