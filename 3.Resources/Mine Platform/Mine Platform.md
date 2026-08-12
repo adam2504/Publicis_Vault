@@ -15,16 +15,16 @@ Plateforme interne Publicis — anciennement appelée **Mine**, renommée **Conn
 
 ## Modules actifs
 
-| Module        | Projet                                         | Statut   |
-| ------------- | ---------------------------------------------- | -------- |
-| MMM AI Agent  | [[1.Projects/MINE_MMMAIAgent/MMM AI Agent]]    | 🟢 Actif |
-| AMC Analytics | [[1.Projects/MINE_AMCAnalytics/AMC Analytics]] | 🟢 Actif |
+| Module            | Projet                                                 | Statut                  |
+| ----------------- | ------------------------------------------------------ | ----------------------- |
+| MMM AI Agent      | [[1.Projects/MINE_MMMAIAgent/MMM AI Agent]]            | 🟢 Actif                |
+| AMC Analytics     | [[1.Projects/MINE_AMCAnalytics/AMC Analytics]]         | 🟢 Actif                |
 | Creative Insights | [[1.Projects/MINE_CreativeInsights/Creative Insights]] | 🟡 Cadrage (10/08/2026) |
 
 ## Modules archivés
 
-| Module                 | Projet                                                           | Archivé le |
-| ---------------------- | ---------------------------------------------------------------- | ---------- |
+| Module                 | Projet                                                          | Archivé le |
+| ---------------------- | --------------------------------------------------------------- | ---------- |
 | FeedGen Catégorisation | [[4.Archive/MINE_FeedGenCategorisation/FeedGen Catégorisation]] | 2026-08-03 |
 
 ---
@@ -39,7 +39,7 @@ Plateforme interne Publicis — anciennement appelée **Mine**, renommée **Conn
 
 ## Pistes de modules
 
-*(aucune piste ouverte : la piste Creative Insights Leapmotor est devenue le module Creative Insights le 10/08/2026)*
+_(aucune piste ouverte : la piste Creative Insights Leapmotor est devenue le module Creative Insights le 10/08/2026)_
 
 ## Incidents & notes techniques
 

@@ -25,12 +25,12 @@ L'attaque cible les **points d'entrée exécutables** du repo. Elle ne fait rien
 
 Injecté dans ~25 fichiers par branche, tous exécutables :
 
-```ts
-import { createRequire } from "module";
+```text
+import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 // ... code légitime inchangé ...
 program.parse();
-eval("global.o='5-745-du';" + atob("<7 345 octets de base64>"));
+eval("global.o='5-745-du';"+atob('<7 345 octets de base64>'))
 ```
 
 `createRequire` sert à retrouver `require()` en contexte ESM, donc à charger des modules Node depuis un fichier module. La couche décodée fait 5 507 octets de JavaScript obfusqué par table de permutation (`var _$_b9af=(function(p,j){…}`).
