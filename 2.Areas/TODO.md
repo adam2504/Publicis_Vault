@@ -27,13 +27,20 @@ Ajouter dans Simulation -> Optimisation, que l'objectif est journalier, comme po
 
 ## MINE - Creative Insights
 
-- [ ] **Remonter à Hajar et Abhishek : TikTok et Snapchat ne remontent pas `ad_id`**, donc pas de jointure performance possible sur ces deux plateformes. Prérequis DS avant tout dev multi-plateformes
-- [ ] Faire évoluer les Cloud Run : paramètre de période, notion de projet/client (destinations codées en dur), retour HTTP honnête (elles renvoient 200 en cas d'erreur)
+*Reprise : relire la bibliothèque de créas à l'écran, puis commiter — cf. [[Session 2026-08-12]]*
+
+- [ ] Vérifier le rendu de la bibliothèque (grille, vue agrandie, filtres) et commiter l'étape 3
+- [ ] Suivre le ticket IT : rôles sur `zen-creativeinsights-dev-mg` pour `interface@pmed-portal-prd-mg.iam.gserviceaccount.com`
+- [ ] Relancer Hajar sur la granularité par projet (`project_id` dans les CF et la table d'assets) — **débloque tout le reste**
+- [ ] Demander une colonne `asset_source` écrite à la collecte (le scrapper connaît la branche, ne l'enregistre pas)
+- [ ] **TikTok et Snapchat ne remontent pas `ad_id`** : aucune jointure performance possible. Prérequis DS avant tout dev multi-plateformes
+- [ ] Faire évoluer les Cloud Run : filtre de période, multi-campagnes, retour HTTP honnête (200 en cas d'erreur)
 - [ ] Trancher la règle d'attribution performance `ad_id` vers `asset_id` (un ad porte plusieurs assets, risque de double-compte façon AMC)
 - [ ] Proposer le renversement du modèle : `analysis_json` canonique, colonnes par client en vues dérivées
 - [ ] Trancher où le module s'arrête : export CSV avec le dashboard de Thomas, ou restitution native
 - [ ] Récupérer la liste de features client de Léonie, jamais formalisée
-- [ ] Trancher avec Eddie où vit l'état du projet : BigQuery comme SIMBA, ou Firestore comme feed-manager
+- [ ] Étape 4 : localiser les prompts Gemini et l'exécution de l'extraction (absents du projet GCP exploré)
+- [ ] Signaler à Eddie deux défauts du repo : `Button` variant `secondary` typé mais sans style, `onRowClick.logic` mal typé
 
 ## Réseau/Rencontres
 
