@@ -1,7 +1,6 @@
 ---
 type: area
 ---
-
 # TODO
 
 ## MINE - Module MMM
@@ -25,7 +24,6 @@ type: area
 
 - [ ] Suivre le ticket IT : rôles sur `zen-creativeinsights-dev-mg` pour `interface@pmed-portal-prd-mg.iam.gserviceaccount.com`
 - [ ] Relancer Hajar sur la granularité par projet (`project_id` dans les CF et la table d'assets) — **débloque tout le reste**
-- [ ] Demander une colonne `asset_source` écrite à la collecte (le scrapper connaît la branche, ne l'enregistre pas)
 - [ ] **TikTok et Snapchat ne remontent pas `ad_id`** : aucune jointure performance possible. Prérequis DS avant tout dev multi-plateformes
 - [ ] Faire évoluer les Cloud Run : filtre de période, multi-campagnes, retour HTTP honnête (200 en cas d'erreur)
 - [ ] Trancher la règle d'attribution performance `ad_id` vers `asset_id` (un ad porte plusieurs assets, risque de double-compte façon AMC)

@@ -166,6 +166,7 @@ Le taux d'upload GCS est en revanche excellent : 1438/1438 sur Meta, 1266/1266 s
 
 1. **Le périmètre d'entrée réaliste est Meta seul.** TikTok et Snapchat ne peuvent pas être analysés en performance tant que leurs Cloud Run ne remontent pas la hiérarchie de campagne. C'est un prérequis à faire porter par Hajar et Abhishek, pas un sujet ConnectedHub.
 2. **Faire évoluer les Cloud Run avant de brancher quoi que ce soit** : ajouter un paramètre de période, une notion de projet ou de client pour ne plus coder la destination en dur, et un retour HTTP honnête.
+	- ✅ **`project_id` validé par Hajar le 13/08** : « si jamais y a des scopes différents pour un même client ». C'est la levée de la contrainte la plus structurante du module, un projet égale un compte annonceur. Reste à cadrer la forme exacte : paramètre d'entrée **et** colonne dans `tb_api_asset_urls`, sinon la moitié du bénéfice est perdue.
 3. **Renverser le modèle de données** : `analysis_json` canonique, colonnes par client en vues dérivées. Sans ça, « sorties standardisées » reste un slogan.
 4. **Trancher la règle d'attribution** performance ad_id vers asset_id avant d'afficher le moindre chiffre.
 5. L'exécution asynchrone plus le suivi de statut est obligatoire côté ConnectedHub, ce n'est pas un confort.
