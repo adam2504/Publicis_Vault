@@ -102,20 +102,26 @@ Sauvegarde du travail non commité au moment de l'incident : `C:\dev\backup-conn
 
 ---
 
-## Ce qui reste en attente
+## Clôture — 13 août
 
-Message envoyé à James pour savoir si le remote est déclaré sain, et surtout **si `main` a été réécrit** pendant sa restauration. Si `c0385d487` n'est plus un ancêtre du nouveau `main`, un rebase sera nécessaire avant tout push.
+James a supprimé toutes les branches infectées, le remote est déclaré propre. `main` et `develop` n'avaient de toute façon pas pu être touchées : **le force push y est interdit**, ce qui explique pourquoi l'attaque n'a atteint que les branches de travail. L'activité GCP reste sous surveillance, l'incident est considéré comme clos.
 
-Séquence de reconnexion prévue :
+Reconnexion faite le 13 août, avec vérification à chaque étape plutôt que sur parole :
 
-```bash
-git remote add origin https://github.com/Publicis-Media-France-FR5140/mine.git
-git fetch origin main
-grep -r "createRequire(import.meta.url)" .          # doit être vide
-git merge-base --is-ancestor c0385d487 origin/main  # sinon rebase nécessaire
-```
+| Contrôle                                       | Résultat                                      |
+| ---------------------------------------------- | --------------------------------------------- |
+| `origin/main` après refetch                    | `c0385d487` — inchangé, ni réécrit ni avancé  |
+| `c0385d487` ancêtre de `origin/main`           | Oui — aucun rebase nécessaire                  |
+| Refs distants après fetch complet              | 12, tous sains (contre ~154 avant l'incident)  |
+| Base d'objets complète après refetch           | 0 occurrence du marqueur sur 68 804 objets     |
 
-Mes branches AMC n'ont pas besoin d'être restaurées côté remote : tout est déjà dans `main`, et la convention veut qu'elles soient supprimées après merge. Un seul commit reste hors `main` (`76dbb7212`), sauvegardé en patch.
+Le commit AMC hors `main` (`76dbb7212`) avait survécu sur `origin/feat/amc-saved-analyses` — rien à repousser. `feat/creative-insights` a été poussée (5 commits, 65 fichiers). Ménage local : 14 branches ramenées à 5, après avoir vérifié que chacune des supprimées était intégralement contenue dans `origin/main` ou `origin/develop`.
+
+### Le contrôle d'implant local
+
+En parallèle, James a diffusé par mail un script PowerShell cherchant le marqueur `_$jsoToArr` dans des applications installées (VS Code, Cursor, GitHub Desktop, Discord, CLI npm) — un vecteur distinct du payload git : un implant qui patche des applications déjà présentes sur le poste. Négatif chez moi, sur 11 fichiers réellement examinés puis 1 710 fichiers `.js` supplémentaires dans les dossiers VS Code postérieurs à l'incident.
+
+**Le script diffusé a un angle mort** : il cherche `Microsoft VS Code\resources\app\...`, or l'installation utilisateur range chaque version dans un sous-dossier hashé (`Microsoft VS Code\4fe60c8b1c\resources\app\...`). Sur mon poste, 7 emplacements lui échappaient. Correctif : ajouter les variantes avec `\*\` dans les chemins, et **afficher les fichiers réellement examinés** — sans ça, un script qui ne trouve rien parce qu'il n'a rien regardé est indiscernable d'un poste sain.
 
 ---
 
