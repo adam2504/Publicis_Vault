@@ -17,7 +17,8 @@ type: area
 
 ## MINE × L'OREAL - AMC Analytics
 
-- [ ] Avancer module avec feedbacks de Jules
+- [ ] Voir avec Khadija la reprise des granularités présentes dans les briefs
+- [ ] Réaliser feedbacks PowerPoint de Jules
 - [ ] Traduire dashboards Looker en native React
 
 ## MINE - Creative Insights
