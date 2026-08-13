@@ -57,6 +57,46 @@ Autres points : la destination est **codée en dur** (table `meta.tb_api_asset_u
 
 ---
 
+## Documentation Confluence (lue le 13/08)
+
+Quatre pages existent et confirment l'essentiel de cette exploration. Elles apportent aussi ce que la CLI ne montrait pas.
+
+**Le code est sur GitHub** : `Publicis-Media-France-FR5140/creative-insights` pour les scrappers, `custom-bidding-simba` pour les classes d'authentification. Filiation SIMBA confirmée une fois de plus.
+
+**Déploiement automatique** : un trigger Cloud Build (`trigger-github-creative-insights`) surveille `main` et redéploie **les trois fonctions à chaque push**. Publier une nouvelle version de la librairie se résume à incrémenter `version` dans `setup.py`. Chaque dossier de fonction a aussi un `cloudbuild-manual.yaml` pour un déploiement isolé.
+
+**Contrat d'appel confirmé**, avec une nuance sur Snapchat dont l'`ad_account_id` est un **UUID**, pas un identifiant numérique.
+
+| Plateforme | Payload |
+| --- | --- |
+| Meta | `ad_account_id` + `page_id` |
+| TikTok | `advertiser_id` |
+| Snapchat | `ad_account_id` (UUID) |
+
+**« Callers should check the body, not just the HTTP status »** est écrit noir sur blanc dans la doc. Le comportement que j'avais pris pour un défaut est donc documenté et assumé.
+
+**Le scrapper Meta accepte un `campaign_status`** (défaut `ACTIVE`) que la Cloud Function n'expose pas. Filtre gratuit à récupérer.
+
+**Les types d'objets Meta sont documentés** et valident la reconstruction faite dans le module : `VIDEO` = vidéo de l'annonceur ou d'un utilisateur Meta, `SHARE` = post Instagram partagé pour l'annonce, `PHOTO` et `STATUS` = posts Facebook partagés pour l'annonce.
+
+---
+
+## La vraie raison de l'absence d'`ad_id` sur TikTok et Snapchat
+
+C'est plus profond qu'une colonne manquante : **les trois scrappers n'interrogent pas le même genre d'API.**
+
+| Plateforme | API utilisée | Ce qu'elle renvoie |
+| --- | --- | --- |
+| Meta | parcours campagnes → ads → créas | la **structure publicitaire**, donc `ad_id` |
+| TikTok | `/v1.3/file/video/ad/search/` | la **bibliothèque vidéo** de l'annonceur |
+| Snapchat | `/v1/adaccounts/<id>/media` | **tous les médias** du compte |
+
+Autrement dit, TikTok et Snapchat répondent « voici tout ce que l'annonceur possède », pas « voici ce qui a été diffusé ». Aucune notion d'annonce, donc aucune jointure vers la performance possible, et **ajouter une colonne n'y changerait rien**.
+
+Ce n'est pas une limite d'API. TikTok expose `/v1.3/ad/get/` et Snapchat ses endpoints d'annonces : la liaison créa vers annonce est atteignable, mais elle demande **un appel supplémentaire**, pas un champ de plus. C'est le vrai chiffrage à donner à Hajar et Abhishek.
+
+---
+
 ## Le problème numéro un : les trois tables ne sont pas les mêmes
 
 `tb_api_asset_urls` porte le même nom dans les trois datasets, mais pas les mêmes colonnes.

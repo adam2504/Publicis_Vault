@@ -9,9 +9,9 @@ type: area
 - [ ] Au feu vert, rebrancher le remote et vérifier avant tout push — cf. [[Incident 2026-08-11 Compte GitHub compromis]] pour la séquence exacte (fetch `main` seul, scan du marqueur, contrôle d'ancêtre de `c0385d487`)
 - [ ] Repousser le seul commit AMC hors `main` (`76dbb7212`, sur `feat/amc-saved-analyses`)
 
-MINE - MMM Module
-Ajouter dans Simulation -> Optimisation, que l'objectif est journalier, comme pour ventiler un budget
+## MINE - Module MMM 
 
+- [ ] Ajouter dans Simulation -> Optimisation, que l'objectif est journalier, comme pour ventiler un budget
 ## MINE - MMM AI Agent
 
 - [ ] Réaliser passation/ouverture au conseil, puis demander questions qu'ils ont/client pourrait avoir, ce qu'ils pensent des réponses, ce qui pourrait être améliorer etc
@@ -27,9 +27,6 @@ Ajouter dans Simulation -> Optimisation, que l'objectif est journalier, comme po
 
 ## MINE - Creative Insights
 
-*Reprise : relire la bibliothèque de créas à l'écran, puis commiter — cf. [[Session 2026-08-12]]*
-
-- [ ] Vérifier le rendu de la bibliothèque (grille, vue agrandie, filtres) et commiter l'étape 3
 - [ ] Suivre le ticket IT : rôles sur `zen-creativeinsights-dev-mg` pour `interface@pmed-portal-prd-mg.iam.gserviceaccount.com`
 - [ ] Relancer Hajar sur la granularité par projet (`project_id` dans les CF et la table d'assets) — **débloque tout le reste**
 - [ ] Demander une colonne `asset_source` écrite à la collecte (le scrapper connaît la branche, ne l'enregistre pas)
