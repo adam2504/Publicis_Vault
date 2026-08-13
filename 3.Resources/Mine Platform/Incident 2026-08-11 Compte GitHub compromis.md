@@ -6,8 +6,9 @@ type: resource
 
 ## Compte GitHub compromis · payload obfusqué force-pushé sur toutes les branches
 
-**Statut** : Poste vérifié sain, repo local purgé — remote en attente de validation
-**Environnement touché** : branches de travail du repo `Publicis-Media-France-FR5140/mine` — `main` et `develop` (donc staging et production) non affectés
+**Statut** : Résolu — clos le 13 août 2026 (poste vérifié sain, repo local purgé, remote nettoyé et revérifié)
+**Durée** : 2 jours (11 août matin → 13 août)
+**Environnement touché** : branches de travail du repo `Publicis-Media-France-FR5140/mine` — `main` et `develop` (donc staging et production) non affectés, le force push y étant interdit
 **Vecteur** : compte GitHub d'Adrien Neto-Ferreira (Yield Studio), `adrnetof_publicis`
 **Modules impactés** : aucun en exécution — l'attaque vise les postes de développement, pas les environnements déployés
 
@@ -108,12 +109,12 @@ James a supprimé toutes les branches infectées, le remote est déclaré propre
 
 Reconnexion faite le 13 août, avec vérification à chaque étape plutôt que sur parole :
 
-| Contrôle                                       | Résultat                                      |
-| ---------------------------------------------- | --------------------------------------------- |
-| `origin/main` après refetch                    | `c0385d487` — inchangé, ni réécrit ni avancé  |
-| `c0385d487` ancêtre de `origin/main`           | Oui — aucun rebase nécessaire                  |
-| Refs distants après fetch complet              | 12, tous sains (contre ~154 avant l'incident)  |
-| Base d'objets complète après refetch           | 0 occurrence du marqueur sur 68 804 objets     |
+| Contrôle                             | Résultat                                      |
+| ------------------------------------ | --------------------------------------------- |
+| `origin/main` après refetch          | `c0385d487` — inchangé, ni réécrit ni avancé  |
+| `c0385d487` ancêtre de `origin/main` | Oui — aucun rebase nécessaire                 |
+| Refs distants après fetch complet    | 12, tous sains (contre ~154 avant l'incident) |
+| Base d'objets complète après refetch | 0 occurrence du marqueur sur 68 804 objets    |
 
 Le commit AMC hors `main` (`76dbb7212`) avait survécu sur `origin/feat/amc-saved-analyses` — rien à repousser. `feat/creative-insights` a été poussée (5 commits, 65 fichiers). Ménage local : 14 branches ramenées à 5, après avoir vérifié que chacune des supprimées était intégralement contenue dans `origin/main` ou `origin/develop`.
 
