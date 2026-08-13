@@ -1,11 +1,13 @@
 ---
 type: area
 ---
+
 # TODO
 
-## MINE - Module MMM 
+## MINE - Module MMM
 
 - [ ] Ajouter dans Simulation -> Optimisation, que l'objectif est journalier, comme pour ventiler un budget
+
 ## MINE - MMM AI Agent
 
 - [ ] Réaliser passation/ouverture au conseil, puis demander questions qu'ils ont/client pourrait avoir, ce qu'ils pensent des réponses, ce qui pourrait être améliorer etc
