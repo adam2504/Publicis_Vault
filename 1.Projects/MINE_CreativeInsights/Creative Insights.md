@@ -106,6 +106,7 @@ Une partie de la chaîne tourne déjà et a servi sur des cas passés. À cartog
 
 ## Notes techniques
 
+- [[Plan modifications DS]] : les 5 évolutions attendues côté Cloud Functions, à destination de Hajar et Abhishek
 - [[Existant technique GCP]] : inventaire de `zen-creativeinsights-dev-mg`, contrat des Cloud Run, modèle de données, volumétrie
 - [[Patterns ConnectedHub réutilisables]] : ce que `custom-bidding` (SIMBA) et `feed-manager` fournissent déjà
 
