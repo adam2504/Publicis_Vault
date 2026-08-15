@@ -17,8 +17,10 @@ type: area
 
 ## MINE × L'OREAL - AMC Analytics
 
-- [ ] Voir avec Khadija la reprise des granularités présentes dans les briefs
+- [ ] Réaliser un tableau des granularités des leviers possibles sur AMC
+- [ ] Prendre en compte ce tableau dans la logique des groupements leviers (attention aux fake doublonnages de data)
 - [ ] Réaliser feedbacks PowerPoint de Jules
+- [ ] Explorer feedbakcs mail de Jules
 - [ ] Traduire dashboards Looker en native React
 
 ## MINE - Creative Insights
@@ -33,8 +35,3 @@ type: area
 - [ ] Récupérer la liste de features client de Léonie, jamais formalisée
 - [ ] Étape 4 : localiser les prompts Gemini et l'exécution de l'extraction (absents du projet GCP exploré)
 - [ ] Signaler à Eddie deux défauts du repo : `Button` variant `secondary` typé mais sans style, `onRowClick.logic` mal typé
-
-## Réseau/Rencontres
-
-- [ ] Parler avec Anael Cabrol
-- [ ] Parler avec Yann Legrand

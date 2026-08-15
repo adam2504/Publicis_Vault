@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2.Areas/TODO.md",
+                "file": "2.Areas/Carrière/Note de Positionnement.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "TODO"
+              "title": "Note de Positionnement"
             }
           },
           {
@@ -212,12 +212,11 @@
             }
           }
         ],
-        "currentTab": 7
+        "currentTab": 6
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -238,8 +237,11 @@
   },
   "active": "fe2b05c7c67fae94",
   "lastOpenFiles": [
-    "1.Projects/MINE_CreativeInsights/Plan modifications DS.md",
+    "2.Areas/Carrière/Email de départ.md",
+    "2.Areas/Carrière/Note de Positionnement.md",
+    "2.Areas/Publicis - Closing Checklist.md",
     "2.Areas/TODO.md",
+    "1.Projects/MINE_CreativeInsights/Plan modifications DS.md",
     "1.Projects/MINE_CreativeInsights/Creative Insights.md.tmp.28380.e4a208d15556",
     "1.Projects/MINE_CreativeInsights/Plan modifications DS.md.tmp.28380.77b10588560f",
     "1.Projects/MINE_CreativeInsights/Sessions/Session 2026-08-13.md.tmp.28380.014515e00678",
@@ -271,8 +273,6 @@
     "2.Areas/Bilan.md",
     "2.Areas/Idées de Projets/Creative Insights Leapmotor.md",
     "3.Resources/Clients/VERISURE.md",
-    "3.Resources/Clients/STELLANTIS.md",
-    "4.Archive/MINE_FeedGenCategorisation/Sessions/Session 2026-07-06.md",
     "Pasted image 20260723173222.png",
     "Pasted image 20260723173205.png",
     "_Attachments/2026-07-09-nicolas-vivies-remerciement-acces-looker.png",
