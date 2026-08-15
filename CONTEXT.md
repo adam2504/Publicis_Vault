@@ -1,6 +1,6 @@
 ---
 type: context
-Dernière mise à jour: 2026-08-12
+Dernière mise à jour: 2026-08-15
 ---
 
 # CONTEXT — Vault d'Adam
@@ -22,7 +22,7 @@ Adam Jouini, apprenti Data & Dev chez Publicis Media (alternance), rattaché à 
 
 Agent IA conversationnel dans le module MMM de ConnectedHub (Vertex AI Agent Engine). Répond aux questions ROI/média des clients sur leurs données MMM. C'est une **feature de la plateforme**, vendue en add-on à tout client ayant un MMM signé — la cible de déploiement est **Stellantis** (Opel DE / Peugeot DE), puis Longchamp.
 
-**Statut (23/07 — aucune session depuis, 20 jours)** : Engine **6241** en prod depuis le 23/07 (`MMM_Agent_v3_live_ui_scope`). Feature B (scope écran live) livrée : l'agent connaît désormais le KPI, la période, l'onglet et la langue affichés à l'écran, et répond dans ce scope par défaut (surchargeable dimension par dimension, annonce le scope sur sa 1re réponse). Défaut critique corrigé en revue de branche : les bornes de période passent en dates réelles (`WHERE date BETWEEN`) — les colonnes `year`/`week` n'existent pas dans `tb_model_contributions`. Guardrails whitelist durcis (`[`, `]`, `;`, `=`, newlines exclus), security review validée. PRs #1688 (`develop`) → #1689 (`main`) mergées. Rollback disponible sur engine `2659` sans redéploiement.
+**Statut (23/07 — aucune session depuis, 23 jours — stalled)** : Engine **6241** en prod depuis le 23/07 (`MMM_Agent_v3_live_ui_scope`). Feature B (scope écran live) livrée : l'agent connaît désormais le KPI, la période, l'onglet et la langue affichés à l'écran, et répond dans ce scope par défaut (surchargeable dimension par dimension, annonce le scope sur sa 1re réponse). Défaut critique corrigé en revue de branche : les bornes de période passent en dates réelles (`WHERE date BETWEEN`) — les colonnes `year`/`week` n'existent pas dans `tb_model_contributions`. Guardrails whitelist durcis (`[`, `]`, `;`, `=`, newlines exclus), security review validée. PRs #1688 (`develop`) → #1689 (`main`) mergées. Rollback disponible sur engine `2659` sans redéploiement.
 
 **Prochaine action** : surveiller le monitoring (`no_answer` + `uiScopeRejected` en prod) ; mettre au backlog le chip de contexte chatbot (`Contexte : ROAS · juin 2025 – mai 2026`) ; relancer le conseil DE Stellantis (Zenith Media — Marit, Janina, Virginia silencieux depuis le mail deck) pour l'initiation agent ; suite du backlog : enrichissement `BUSINESS_CONTEXT` avec les DS (Dan/Hajar), `cf-budget-allocator-prod` en tool, knowledge par client.
 
@@ -35,11 +35,11 @@ Agent IA conversationnel dans le module MMM de ConnectedHub (Vertex AI Agent Eng
 
 Module ConnectedHub centralisant les analyses Amazon Marketing Cloud (Full Funnel depuis BigQuery) et les dashboards Looker (en iframe). Deux types d'utilisateurs : équipes data (Full Funnel) et équipes conseil/traders (dashboards).
 
-**Statut (11/08 — actif)** : Module **complet en production sur `develop` et `main` (branches identiques)**. Chaîne complète de PRs mergées : workspace pivot (#1719-#1723, 10/08), couche graphiques (#1724/#1725 — 4 formes : barres, empilement 100%, nuage de points, Sankey), retours Jules (#1726/#1728 — niveau d'analyse imposé par cas d'usage, entrée exploration libre, deux nouveaux cas d'usage Vue d'ensemble et Débuteur/finisseur, catégorie sans nom corrigée à la racine), analyses enregistrées (#1733/#1736 — Firestore, `?a=<id>` dans l'URL, module qui ouvre désormais sur l'historique des analyses). 413 tests (356 client + 57 serveur), typage propre, build OK. Un commit local (`76dbb7212` sur `feat/amc-saved-analyses`) non poussé — bloqué par l'incident git du 11/08. Dernier retour Jules pendant : les `analysis_level` **`time of`**.
+**Statut (11/08 — actif)** : Module **complet en production sur `develop` et `main` (branches identiques)**. Chaîne complète de PRs mergées : workspace pivot (#1719-#1723, 10/08), couche graphiques (#1724/#1725 — 4 formes : barres, empilement 100%, nuage de points, Sankey), retours Jules (#1726/#1728 — niveau d'analyse imposé par cas d'usage, entrée exploration libre, deux nouveaux cas d'usage Vue d'ensemble et Débuteur/finisseur, catégorie sans nom corrigée à la racine), analyses enregistrées (#1733/#1736 — Firestore, `?a=<id>` dans l'URL, module qui ouvre désormais sur l'historique des analyses). 413 tests (356 client + 57 serveur), typage propre, build OK. L'incident git du 11/08 est résolu depuis le 13/08 — statut du commit `76dbb7212` (`feat/amc-saved-analyses`) à vérifier. Derniers retours Jules en attente : feedbacks PowerPoint et feedbacks mail (dont les `analysis_level` **`time of`**).
 
-**Prochaine action** : résoudre l'incident git et pousser le commit AMC en attente ; traiter le dernier retour Jules (`time of`) ; vérifier le module à l'écran (aucune validation visuelle formelle malgré les tests) ; configurer Firestore + comptes utilisateurs Publicis via Settings ; cadrer le calendrier de migration dashboards Looker → React natif avec Khadija.
+**Prochaine action** : traiter les feedbacks PowerPoint et mail de Jules (`time of`) ; vérifier le commit `76dbb7212` (poussé ou non) ; réaliser un tableau des granularités des leviers AMC possibles et l'intégrer dans la logique des groupements ; vérifier le module à l'écran (aucune validation visuelle formelle malgré les tests) ; configurer Firestore + comptes utilisateurs Publicis via Settings ; cadrer le calendrier de migration dashboards Looker → React natif avec Khadija.
 
-**Blocker** : incident git du 11/08 (remote détaché, attente James). Ingestion BQ et mise à jour du registre sont manuelles. Migration Looker → React dépend du calendrier Khadija.
+**Blocker** : ingestion BQ et mise à jour du registre sont manuelles. Migration Looker → React dépend du calendrier Khadija.
 
 ---
 
@@ -53,15 +53,15 @@ Module ConnectedHub centralisant les analyses Amazon Marketing Cloud (Full Funne
 ---
 
 ### 4. Creative Insights — MINE
-**implication : lead** (à confirmer) | discipline : dev + data-science | client : **MINE** — module plateforme transverse
+**implication : lead** (à confirmer avec Hajar et Jules) | discipline : dev + data-science | client : **MINE** — module plateforme transverse
 
 Module ConnectedHub d'automatisation des Creative Insights. Objectif : rendre self-service la chaîne aujourd'hui exécutée à la main par les DS, de la récupération des assets créa (Meta, TikTok, Snapchat) jusqu'à la restitution au Data Analyst.
 
-**Statut (12/08 — dev actif)** : Première session de dev le 12/08. **Étapes 1 et 2 livrées localement** : projets persistés en BigQuery (dataset `connectedhub` créé dans `zen-creativeinsights-dev-mg`), déclenchement Meta branché et **validé de bout en bout** (35 créas récupérées en 1 min 35, fichiers GCS horodatés du jour). Bibliothèque de créas (étape 3) fonctionnelle mais non commitée — à relire à l'écran avant commit. Deux commits locaux (`575304be6`, `5062ebf88`) — rien poussé, remote détaché depuis l'incident du 11/08. Ticket IT envoyé pour les droits du service account `interface@` sur `zen-creativeinsights-dev-mg` (sans ça : marche en local, pas déployé). Découverte structurante : **un projet = un compte annonceur** (la Cloud Function n'écrit aucun `project_id`, ce qui interdit deux projets sur le même compte). TikTok et Snapchat ne remontent pas `ad_id` : jointure performance impossible sur ces plateformes aujourd'hui.
+**Statut (13/08 — dev actif)** : Incident git résolu — tout ce qui était local est désormais sur GitHub. **Lots 1 et 2 livrés et mergés** : rôles éditeur/administrateur avec circuit de validation (mail SendGrid aux admins, carte d'activité dans la ligne BQ), sélecteur de rôle dans l'admin panel, icône du module (#1738-#1741). Bug de fraîcheur du rôle corrigé : hook `useRole` supprimé, `viewer_role` désormais calculé à la requête serveur — les boutons ne peuvent plus être en désaccord avec les autorisations réelles. **Découverte produit critique** : sans `campaign_id`, le scrapper énumère les 1545 campagnes du compte et se fait throttler par Meta (code 17/80004) — `campaign_id` n'est plus un filtre optionnel, c'est ce qui rend le run exécutable sur un gros compte. **`project_id` validé par Hajar** (13/08). **Lot 3 poussé** (`feat/creative-insights-project-id`, pas encore de PR) : colonne `project_id` créée sur `meta.tb_api_asset_urls`, requêtes avec repli `(project_id = @project_id OR (project_id IS NULL AND ad_account_id = @account_id))` — comportement actuel préservé à l'identique. Plan modifications DS rédigé ([[Plan modifications DS]]), pas encore envoyé à Hajar et Abhishek. Ticket IT toujours en attente (staging non fonctionnel — aucun rôle sur le projet, aucune ACL BQ).
 
-**Prochaine action** : relire et commiter l'étape 3 (bibliothèque de créas) ; attendre réponse Hajar sur le `project_id` dans les CF et la table d'assets (débloque tout le reste) ; suivre ticket IT ; localiser les prompts Gemini existants et l'infrastructure d'exécution pour l'étape 4 (non trouvés dans le projet GCP exploré).
+**Prochaine action** : envoyer le [[Plan modifications DS]] à Hajar et Abhishek (5 évolutions attendues côté Cloud Functions) ; valider à l'écran le lot 2 (boutons admin sans rechargement, nouvelle icône) et le lot 3 (repli SQL) ; ouvrir une PR pour `feat/creative-insights-project-id` ; suivre le ticket IT ; localiser les prompts Gemini et l'infrastructure d'exécution pour l'étape 4 (non trouvés dans le projet GCP exploré).
 
-**Blocker** : incident git du 11/08 (remote détaché, commits non poussés, déploiement bloqué). Ticket IT en attente (service account sans droits). `project_id` absent des Cloud Functions et tables GCS — bloque la granularité par projet et tout le dev aval. TikTok et Snapchat sans `ad_id` : prérequis DS avant tout dev multi-plateformes. Répartition du dev non tranchée (couche ConnectedHub vs backend DS — Abhishek démarre le dev initial selon le CR).
+**Blocker** : Plan DS non encore envoyé (Hajar et Abhishek ne connaissent pas les 5 évolutions attendues). Ticket IT en attente (service account sans droits, staging inaccessible). Fragilité de l'observateur asynchrone : si le process Node redémarre pendant un run long, l'issue n'est pas écrite (correctif durable : Cloud Tasks ou Cloud Run Job). TikTok et Snapchat sans `ad_id` : jointure performance impossible. Répartition du dev non tranchée (couche ConnectedHub vs backend DS). Prompts Gemini et notebooks d'exécution non localisés (étape 4 bloquée).
 
 ---
 
@@ -69,13 +69,14 @@ Module ConnectedHub d'automatisation des Creative Insights. Objectif : rendre se
 
 | Blocker | Projet(s) | Qui débloque |
 |---|---|---|
-| **Incident git 11/08** — compte GitHub compromis, remote détaché, tout push bloqué | Tous (AMC commit non poussé, Creative Insights commits non poussés) | Adam + James |
 | Cadrage "recommandation" agent — option A (deux niveaux interne/client) vs option B (assistant pur, aucune reco) | MMM AI Agent | Baptiste |
 | Conseil DE Stellantis silencieux — Zenith Media ne répond plus depuis le mail deck | MMM AI Agent | Katia + Zenith Media DE |
-| `project_id` absent des Cloud Functions et tables GCS — bloque multi-projets sur un même compte annonceur | Creative Insights | Hajar |
+| Plan modifications DS non envoyé — Hajar et Abhishek ne connaissent pas les 5 évolutions Cloud Function attendues | Creative Insights | Adam (action immédiate) |
+| Ticket IT en attente — droits service account `interface@` sur `zen-creativeinsights-dev-mg`, staging non fonctionnel | Creative Insights | IT / James |
+| Fragilité observateur async — issue du run non écrite si le process Node meurt avant la fin ; correctif durable = Cloud Tasks ou Cloud Run Job | Creative Insights | Hajar + Abhishek (conception) |
 | TikTok et Snapchat ne remontent pas `ad_id` — jointure performance impossible | Creative Insights | Hajar + Abhishek |
-| Ticket IT en attente (droits service account `interface@` sur `zen-creativeinsights-dev-mg`) | Creative Insights | IT / James |
-| Prompts Gemini et notebooks d'exécution non localisés (étape 4 bloquée) | Creative Insights | Hajar |
+| `project_id` — concept validé par Hajar (13/08), forme exacte (paramètre d'entrée + colonne) à cadrer formellement dans le Plan DS | Creative Insights | Hajar |
+| Prompts Gemini et notebooks d'exécution non localisés — étape 4 (extraction features) bloquée | Creative Insights | Hajar |
 | Répartition du dev non tranchée (couche ConnectedHub vs backend DS) | Creative Insights | Hajar + Jules |
 | Ingestion BQ AMC manuelle (registre non automatisé) | AMC Analytics | Khadija (ingestion) |
 
@@ -106,11 +107,11 @@ Module ConnectedHub d'automatisation des Creative Insights. Objectif : rendre se
 
 | Date | Fait |
 |---|---|
-| 2026-08-12 | **Creative Insights — première session de dev.** Étapes 1 et 2 livrées localement : projets en BigQuery, déclenchement Meta validé de bout en bout (35 créas, 1 min 35). Étape 3 (bibliothèque de créas) fonctionnelle, non commitée. Deux commits locaux non poussés (remote détaché). Découverte structurante : un projet = un compte annonceur (pas de `project_id` dans les CF). |
-| 2026-08-11 | **Incident git — compte GitHub compromis.** Remote détaché, tout push bloqué. Attente réponse de James (remote assaini ? `main` réécrit ?). Commits Creative Insights et commit AMC restent locaux. |
+| 2026-08-13 | **Creative Insights — deuxième session de dev.** Lots 1 et 2 mergés : rôles éditeur/administrateur, circuit de validation, mail admins, icône module (#1738-#1741). Bug de fraîcheur du rôle corrigé (`viewer_role` calculé côté serveur). Découverte critique : sans `campaign_id`, Meta throttle le compte entier (1545 campagnes énumérées, code 17/80004) — `campaign_id` obligatoire. `project_id` validé par Hajar. Lot 3 poussé : colonne `project_id` + repli SQL, comportement actuel préservé. Incident git résolu. |
+| 2026-08-12 | **Creative Insights — première session de dev.** Étapes 1 et 2 livrées localement : projets en BigQuery, déclenchement Meta validé de bout en bout (35 créas, 1 min 35). Étape 3 (bibliothèque de créas) fonctionnelle, non commitée. Découverte structurante : un projet = un compte annonceur (pas de `project_id` dans les CF). |
+| 2026-08-11 | **Incident git — compte GitHub compromis.** Remote détaché, tout push bloqué. Incident résolu le 13/08 (remote de nouveau accessible). |
 | 2026-08-11 | Session AMC Analytics : **retours Jules (10/11 actions)** — niveau d'analyse imposé par cas d'usage, entrée exploration libre, Vue d'ensemble, Débuteur/finisseur. **Analyses enregistrées** (Firestore, `?a=<id>` dans l'URL, lien partageable fonctionnel). PRs #1726/#1728 et #1733/#1736 mergées — module identique sur `develop` et `main`, en production. |
 | 2026-08-10 | Session AMC Analytics : **couche graphiques** (PR #1724/#1725 — Sankey, nuage de points volume×ROAS, barres, empilement 100%). Double axe refusé par principe. Graphiques figés sur la vue du preset, réglages descendus sous eux. |
-| 2026-07-23 | **Feature B MMM livrée en prod** : engine **6241**. L'agent connaît KPI, période, onglet et langue de l'écran. Défaut critique corrigé : bornes de période en dates réelles (colonnes `year`/`week` absentes de BQ). PRs #1688/#1689 mergées. |
 
 ---
 
