@@ -124,12 +124,12 @@ Les pièges, tous appris à la dure entre le 20 et le 23/07 :
 
 Quatre sources, dont deux rétroactives et gratuites, ce qui est le point important.
 
-| Source | Contenu | Rétroactif |
-| --- | --- | --- |
-| Logs backend (`pmed-portal-prd-mg`) | `authors` (où le pipeline meurt), `lastChunk`, `streamErrors`, `adkSessionId`, `status` | oui |
-| GCS `mmm-agent-chat-logs` | Résumé d'échange, `adkSessionId` comme clé de jointure | oui |
-| **Sessions API** (clé `adkSessionId`) | Events internes : author par sous-agent, tool calls, SQL | **oui, et gratuit** |
-| Trace Explorer | Timing, waterfall, structure des spans (~48 spans, ~47 s/question) | non |
+| Source                                | Contenu                                                                                 | Rétroactif          |
+| ------------------------------------- | --------------------------------------------------------------------------------------- | ------------------- |
+| Logs backend (`pmed-portal-prd-mg`)   | `authors` (où le pipeline meurt), `lastChunk`, `streamErrors`, `adkSessionId`, `status` | oui                 |
+| GCS `mmm-agent-chat-logs`             | Résumé d'échange, `adkSessionId` comme clé de jointure                                  | oui                 |
+| **Sessions API** (clé `adkSessionId`) | Events internes : author par sous-agent, tool calls, SQL                                | **oui, et gratuit** |
+| Trace Explorer                        | Timing, waterfall, structure des spans (~48 spans, ~47 s/question)                      | non                 |
 
 Triage :
 
@@ -188,4 +188,10 @@ Pour qu'il ne se retrouve pas à porter des sujets qui ne sont pas les siens.
 
 ## Compte-rendu
 
-_À compléter après le point._
+_À faire 
+
+Deployter le code dans le repo Github
+Enlever les commentaires du code
+Faire la liste des roles necessaires pour Dan
+Ecrire la doc complete dans Confluence
+Modifier email d'alerte avec Dan
