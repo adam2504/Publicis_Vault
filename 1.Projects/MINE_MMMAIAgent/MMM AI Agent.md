@@ -111,6 +111,7 @@ Projet désarchivé le 23/06/2026. Baptiste (futur head of études et mesures) a
 - [[2026-04-15 Point avec Brieg]]
 - [[2026-04-20 Point avec Brieg et Hajar]]
 - [[2026-04-27 Point avec Brieg]]
+- [[2026-08-18 Passation agent avec Dan]]
 
 ## Dernières sessions
 
