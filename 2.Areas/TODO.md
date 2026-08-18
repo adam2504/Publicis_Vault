@@ -3,10 +3,6 @@ type: area
 ---
 # TODO
 
-## MINE - Module MMM
-
-- [ ] Ajouter dans Simulation -> Optimisation, que l'objectif est journalier, comme pour ventiler un budget
-
 ## MINE - MMM AI Agent
 
 - [ ] Réaliser passation/ouverture au conseil, puis demander questions qu'ils ont/client pourrait avoir, ce qu'ils pensent des réponses, ce qui pourrait être améliorer etc
@@ -17,8 +13,6 @@ type: area
 
 ## MINE × L'OREAL - AMC Analytics
 
-- [ ] Réaliser un tableau des granularités des leviers possibles sur AMC
-- [ ] Prendre en compte ce tableau dans la logique des groupements leviers (attention aux fake doublonnages de data)
 - [ ] Réaliser feedbacks PowerPoint de Jules
 - [ ] Explorer feedbakcs mail de Jules
 - [ ] Traduire dashboards Looker en native React
