@@ -5,6 +5,16 @@ type: area
 
 ## MINE - MMM AI Agent
 
+### Passation à Dan (deadline 21/08, dernier jour)
+
+- [ ] Pousser le code dans le repo GitHub d'équipe `Publicis-Media-France-FR5140/MMM_AI_Agent` (repo vide, remote actuel = compte perso `adam2504`)
+- [ ] Enlever les commentaires du code
+- [ ] Faire la liste des rôles GCP nécessaires pour Dan
+- [ ] Écrire la doc complète dans Confluence
+- [ ] Modifier l'email d'alerte `no_answer` avec Dan (channel `5134431245708235828`, pointe sur `adajouin@publicisgroupe.net`)
+
+### Backlog produit (transmis)
+
 - [ ] Réaliser passation/ouverture au conseil, puis demander questions qu'ils ont/client pourrait avoir, ce qu'ils pensent des réponses, ce qui pourrait être améliorer etc
 - [ ] Améliorer l'agent avec feedbacks
   - [ ] Enrichir le `BUSINESS_CONTEXT` avec les DS (définitions variables/données)

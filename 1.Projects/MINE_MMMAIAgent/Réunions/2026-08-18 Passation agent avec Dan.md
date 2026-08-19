@@ -190,7 +190,7 @@ Pour qu'il ne se retrouve pas à porter des sujets qui ne sont pas les siens.
 
 _À faire 
 
-Deployter le code dans le repo Github
+Deployter le code dans le repo Github (https://github.com/Publicis-Media-France-FR5140/MMM_AI_Agent.git)
 Enlever les commentaires du code
 Faire la liste des roles necessaires pour Dan
 Ecrire la doc complete dans Confluence
