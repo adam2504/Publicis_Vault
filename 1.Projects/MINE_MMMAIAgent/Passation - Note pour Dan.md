@@ -2,17 +2,6 @@
 type: note
 projet: MMM AI Agent
 ---
-
-> Note de travail : contenu destiné à **Dan**, à lui envoyer tel quel (mail ou message). Copier à partir du titre ci-dessous, sans cette frontmatter ni ce bloc.
-
-# Agent MMM — ce que tu reprends
-
-Salut Dan,
-
-Je pars le 21/08, donc voici tout ce qu'il te faut pour reprendre l'agent sans avoir à me relancer. C'est volontairement court : la doc technique complète est sur Confluence, ici je te donne l'état réel, l'ordre dans lequel attaquer, et les choses que tu ne devinerais pas.
-
----
-
 ## 1. Ce que tu reprends, et ce que tu ne reprends pas
 
 L'agent a deux moitiés. **Tu reprends la première.**
@@ -54,9 +43,7 @@ Ce qui est ouvert, dans l'ordre où je m'y remettrais : enrichir le contexte mé
 ## 3. Par quoi commencer, dans cet ordre
 
 1. **Demander tes accès tout de suite.** C'est le plus long et ça bloque tout le reste. La liste précise est dans la page Confluence. Attention, il y a **deux projets GCP** : `med-dtam-prd-mg` pour l'agent, et `pmed-portal-prd-mg` pour les logs de diagnostic. Le second passe par l'IT ou par Eddie, c'est le circuit le plus lent, lance le en premier.
-2. **Cloner le repo et lancer les tests** (`python -m pytest tests -q`). Si les 35 passent, ton environnement est bon.
-3. **Lire `MMM_Agent/agent.py` en entier.** Tout l'agent tient dans ce fichier, prompts compris. Une heure de lecture te donne 90% du sujet.
-4. **Faire un déploiement pendant que je suis encore là.** C'est le seul point de cette liste qui a une date : si tu bloques sur un piège de déploiement après le 21/08, tu perdras une journée à le retrouver seul. Si tu ne dois faire qu'une chose avec moi, fais celle là.
+2. **Lire `MMM_Agent/agent.py` en entier.** Tout l'agent tient dans ce fichier, prompts compris. 
 
 ---
 
@@ -75,8 +62,7 @@ Ceux là ne se devinent pas, ils m'ont tous coûté du temps.
 
 ## 5. Ce qui va casser tout seul si personne n'y touche
 
-- **Mon compte disparaît le 04/09.** L'alerte `no_answer` a déjà été rebasculée sur toi (tu es destinataire depuis le 19/08), mais mon adresse est encore rattachée en parallèle. Elle doit être retirée avant cette date.
-- **L'ADC expire d'un jour à l'autre.** Quand une commande gcloud échoue sans raison apparente, `gcloud auth application-default login` est le premier réflexe, avant de chercher plus loin.
+- **Mon compte disparaît le 04/09.** L'alerte `no_answer` a déjà été rebasculée sur toi (tu es destinataire depuis le 19/08), mais mon adresse est encore rattachée en parallèle. 
 - **Le filtre du Trace Explorer contient l'ID de l'engine** (`service.name = 6241382153116975104`). À mettre à jour à chaque bascule d'engine, sinon tu lis le bruit d'une Cloud Function qui n'a rien à voir.
 
 ---
@@ -100,12 +86,23 @@ Deux choses, si tu ne devais en retenir que ça.
 
 ---
 
-## 8. Ce qui n'est pas ton problème
+## 8. Le contexte produit, pour que tu saches où va l'agent
 
-Pour que tu ne repartes pas en pensant porter le produit entier : le pricing et le positionnement de l'add-on, l'ouverture commerciale aux clients, la mémoire persistante des conversations et le chip de contexte dans le chatbot (côté ConnectedHub), et l'arbitrage produit sur la recommandation. Tu portes l'agent, pas l'offre.
+Tu ne portes pas l'offre, mais tu as besoin de ce contexte pour arbitrer ce que tu développes.
 
----
+**Ce qu'on vend aujourd'hui**, c'est le modèle MMM et son analyse, restituée au client par les data strats en slides. Le module ConnectedHub n'est pas encore un produit client. L'agent sert donc pour l'instant **en interne**, aux data strats, en sanity-check sur leur propre analyse : valider une intuition, pas découvrir.
 
-Bonne reprise, et n'hésite pas à me pinger sur LinkedIn si un truc reste obscur après mon départ.
+**La cible**, c'est d'ouvrir le module aux clients et de leur vendre l'assistant en **add-on payant**. Le flag payant est déjà en place dans le code, avec une preview si le client n'y a pas droit. Ce n'est pas une hypothèse lointaine, c'est ce pour quoi la feature a été construite.
 
-Adam
+**Le pricing envisagé** : abonnement fixe mensuel autour de 400 à 600 € par client, avec un fair-use vers 3 000 questions par mois. Le fixe colle à la structure de coût, qui est fixe à 75%, et le fair-use protège du power user. Le coût technique n'est qu'un **plancher de marge**, on vend à la valeur : aujourd'hui le client dépend d'une restitution manuelle du data strat, donc si l'agent remplace 2 à 4 heures de data strat par mois, ça vaut déjà 200 à 600 € mensuels. Trois inconnues restent à lever avant de figer un prix : le prix du module MMM de base, le fait de savoir si l'agent est un add-on ou un produit d'appel, et le nombre de clients cibles.
+
+### Les prochaines étapes produit
+
+1. **Trancher jusqu'où l'agent recommande** (Baptiste). Deux options : recommandation pleine en interne mais faits seuls côté client, ou assistant pur sans recommandation nulle part. C'est le blocage principal, il traîne depuis juillet et il conditionne aussi ton backlog technique.
+2. **Ouvrir l'agent aux équipes conseil sur un MMM client signé.** C'est le vrai prochain jalon, et il n'est pas technique. La trajectoire retenue est « conseil d'abord, client ensuite », validée par Fabien Bourrely et Baptiste. La cible est **Stellantis** (Opel DE et Peugeot DE) : le modèle est disponible, rien ne bloque côté data, mais le conseil DE ne répond plus depuis l'envoi du deck. Sur Longchamp, le MMM v2 vient d'être signé mais il n'y a pas encore de modèle, donc rien à montrer avant.
+3. **Puis seulement l'ouverture client**, qui suppose une couche pédagogique solide. Le précédent Jacadi, un client à qui on a donné un accès direct à l'interface sans accompagnement, a produit un flot de questions. Ouvrir sans vulgariser reproduirait ça à l'échelle.
+
+La disponibilité annoncée en interne était **fin d'été**, sous réserve du go de validation. Cette date est à réactualiser avec Baptiste, elle date d'avant mon départ.
+
+Ce qui reste hors de ton périmètre malgré tout : le pricing, l'ouverture commerciale, et côté ConnectedHub la mémoire persistante des conversations et le chip de contexte du chatbot.
+
