@@ -48,8 +48,8 @@ Apres envoi de la doc. Laisser quelques jours pour lecture avant de planifier.
 
 Avant de rendre le laptop le 3 septembre.
 
-- [ ] `~/.claude/settings.json` : copier les hooks vault sync (PreToolUse + PostToolUse)
-- [ ] `~/.claude/` : skills personnels si tu en as cree sur le laptop pro
+- [x] `~/.claude/settings.json` : copier les hooks vault sync (PreToolUse + PostToolUse)
+- [x] `~/.claude/` : skills personnels si tu en as cree sur le laptop pro
 
 ---
 

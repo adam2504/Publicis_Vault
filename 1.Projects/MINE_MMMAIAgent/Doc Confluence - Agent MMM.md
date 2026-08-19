@@ -291,4 +291,4 @@ Agent POC: Dan Phan (danphan2@publicisgroupe.net)
 
 ConnectedHub POC: Eddie Ratignier (eddratig@publicisgroupe.net)
 
-Original author: Adam Jouini, September 2024 to September 2026. Built the agent, wrote this page, then left. Gone, unlike the fallback regex. Please keep it that way. ([linkedin.com/in/adam-jouini](https://www.linkedin.com/in/adam-jouini))
+Original author: Adam Jouini, September 2024 to September 2026. Built the agent, wrote this page, then left.  ([linkedin.com/in/adam-jouini](https://www.linkedin.com/in/adam-jouini))

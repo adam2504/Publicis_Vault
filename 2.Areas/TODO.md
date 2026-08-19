@@ -3,28 +3,6 @@ type: area
 ---
 # TODO
 
-## MINE - MMM AI Agent
-
-### Passation à Dan (deadline 21/08, dernier jour)
-
-- [x] Pousser le code dans le repo GitHub d'équipe `Publicis-Media-France-FR5140/MMM_AI_Agent`
-- [x] Enlever les commentaires du code
-- [x] Faire la liste des rôles GCP nécessaires pour Dan
-- [x] Rédiger la doc d'équipe — **reste à la coller dans Confluence**
-- [x] Rédiger la note de passation adressée à Dan — **reste à la lui envoyer**
-- [x] Modifier l'email d'alerte `no_answer` — channel de Dan rattaché en parallèle
-- [ ] **Retirer mon channel d'alerte `5134431245708235828`** avant le 04/09 (confirmation de réception par Dan abandonnée : provoquer un `no_answer` est trop laborieux)
-- [ ] **Envoyer la demande d'accès GCP pour Dan** (`danphan2@publicisgroupe.net`) — deux projets, `pmed-portal-prd-mg` est le circuit le plus lent
-- [ ] Donner à Dan le droit d'écriture sur le repo GitHub
-
-### Backlog produit (transmis)
-
-- [ ] Réaliser passation/ouverture au conseil, puis demander questions qu'ils ont/client pourrait avoir, ce qu'ils pensent des réponses, ce qui pourrait être améliorer etc
-- [ ] Améliorer l'agent avec feedbacks
-  - [ ] Enrichir le `BUSINESS_CONTEXT` avec les DS (définitions variables/données)
-  - [ ] Tools saturation + allocation (`cf-budget-allocator-prod`) + registre narratif
-  - [ ] Explorer possibilité de knowledge par client
-
 ## MINE × L'OREAL - AMC Analytics
 
 - [ ] Réaliser feedbacks PowerPoint de Jules
