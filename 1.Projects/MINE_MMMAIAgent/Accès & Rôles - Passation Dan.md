@@ -62,7 +62,7 @@ Ne pas confondre les deux listes : Dan a besoin de droits pour **piloter** l'age
 
 ## À vérifier avant d'envoyer la demande
 
-- [ ] L'adresse exacte de Dan chez Publicis Groupe (pas dans le vault)
+- [x] ~~L'adresse exacte de Dan~~ — `dan.phan@publicismedia.com`, reste à confirmer que c'est l'identité GCP
 - [ ] Le nom du bucket de staging utilisé par `adk deploy` (relevé à la prochaine exécution, il apparaît dans la sortie de la commande)
 - [ ] Que la policy `527257283050504576` est bien dans `pmed-portal-prd-mg` et non dans `med-dtam-prd-mg`
 - [ ] Les rôles déjà détenus par Dan sur les deux projets, pour ne demander que le delta
