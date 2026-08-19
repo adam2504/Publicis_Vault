@@ -9,7 +9,7 @@ projet: MMM AI Agent
 
 ## Introduction
 
-The MMM AI Agent is a conversational assistant embedded in the Marketing Mix Modeling module of Mine. It answers questions about a client's MMM results in natural language, such as ROAS per media, contributions, period comparisons or saturation, without requiring the user to read a chart or ask a data strategist.
+The MMM AI Agent is a conversational assistant embedded in the Marketing Mix Modeling module of ConnectedHub. It answers questions about a client's MMM results in natural language, such as ROAS per media, contributions, period comparisons or saturation, without requiring the user to read a chart or ask a data strategist.
 
 The agent is a multi-agent pipeline built with the Google Agent Development Kit (ADK) and deployed on Vertex AI Agent Engine. It queries the same BigQuery data that feeds the Results page described in *3. Integration in Mine*.
 
