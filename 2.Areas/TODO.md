@@ -10,7 +10,8 @@ type: area
 - [x] Pousser le code dans le repo GitHub d'équipe `Publicis-Media-France-FR5140/MMM_AI_Agent`
 - [x] Enlever les commentaires du code
 - [x] Faire la liste des rôles GCP nécessaires pour Dan
-- [x] Rédiger la doc complète — **reste à la coller dans Confluence**
+- [x] Rédiger la doc d'équipe — **reste à la coller dans Confluence**
+- [x] Rédiger la note de passation adressée à Dan — **reste à la lui envoyer**
 - [x] Modifier l'email d'alerte `no_answer` — channel de Dan rattaché en parallèle
 - [ ] **Retirer mon channel d'alerte `5134431245708235828`** avant le 04/09 (confirmation de réception par Dan abandonnée : provoquer un `no_answer` est trop laborieux)
 - [ ] **Envoyer la demande d'accès GCP pour Dan** (`danphan2@publicisgroupe.net`) — deux projets, `pmed-portal-prd-mg` est le circuit le plus lent
