@@ -7,11 +7,14 @@ type: area
 
 ### Passation à Dan (deadline 21/08, dernier jour)
 
-- [ ] Pousser le code dans le repo GitHub d'équipe `Publicis-Media-France-FR5140/MMM_AI_Agent` (repo vide, remote actuel = compte perso `adam2504`)
-- [ ] Enlever les commentaires du code
-- [ ] Faire la liste des rôles GCP nécessaires pour Dan
-- [ ] Écrire la doc complète dans Confluence
-- [ ] Modifier l'email d'alerte `no_answer` avec Dan (channel `5134431245708235828`, pointe sur `adajouin@publicisgroupe.net`)
+- [x] Pousser le code dans le repo GitHub d'équipe `Publicis-Media-France-FR5140/MMM_AI_Agent`
+- [x] Enlever les commentaires du code
+- [x] Faire la liste des rôles GCP nécessaires pour Dan
+- [x] Rédiger la doc complète — **reste à la coller dans Confluence**
+- [x] Modifier l'email d'alerte `no_answer` — channel de Dan rattaché en parallèle
+- [ ] **Confirmer avec Dan qu'il reçoit l'alerte, puis retirer mon channel `5134431245708235828`** (avant le 04/09)
+- [ ] **Envoyer la demande d'accès GCP pour Dan** (`danphan2@publicisgroupe.net`) — deux projets, `pmed-portal-prd-mg` est le circuit le plus lent
+- [ ] Donner à Dan le droit d'écriture sur le repo GitHub
 
 ### Backlog produit (transmis)
 
