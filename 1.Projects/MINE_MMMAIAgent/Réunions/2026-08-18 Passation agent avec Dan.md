@@ -188,10 +188,20 @@ Pour qu'il ne se retrouve pas à porter des sujets qui ne sont pas les siens.
 
 ## Compte-rendu
 
-_À faire 
+Le point a tranché la question bloquante : **le code part sur un repo GitHub d'équipe**, `https://github.com/Publicis-Media-France-FR5140/MMM_AI_Agent.git` (organisation `Publicis-Media-France-FR5140`, repo **internal**, vide à ce jour). Le remote actuel du dépôt local pointe encore sur le compte perso `adam2504/MMM_AI_Agent`.
 
-Deployter le code dans le repo Github (https://github.com/Publicis-Media-France-FR5140/MMM_AI_Agent.git)
-Enlever les commentaires du code
-Faire la liste des roles necessaires pour Dan
-Ecrire la doc complete dans Confluence
-Modifier email d'alerte avec Dan
+La doc de référence ne reste pas dans le vault : elle est **réécrite dans Confluence**, accessible à l'équipe.
+
+### Mes actions (deadline 21/08, dernier jour)
+
+- [ ] **Pousser le code** dans `Publicis-Media-France-FR5140/MMM_AI_Agent`
+- [ ] **Enlever les commentaires du code**
+- [ ] **Lister les rôles GCP nécessaires à Dan** (projets `med-dtam-prd-mg` et `pmed-portal-prd-mg`, plus `iam.serviceAccountUser` sur `mmm-agent-sa`)
+- [ ] **Écrire la doc complète dans Confluence**
+- [ ] **Modifier l'email d'alerte avec Dan** (channel `5134431245708235828`, aujourd'hui `adajouin@publicisgroupe.net`)
+
+### Points d'attention relevés en préparant ces actions
+
+- **Hygiène du dépôt avant le push** : pas de `.gitignore`, et sont actuellement suivis `MMM_Agent/.adk/session.db` (450 Ko de sessions locales d'avril), `MMM_Agent/__pycache__/*.pyc`, `.claude/settings.local.json` et `docs/superpowers/`. Le `MMM_Agent/.env` suivi ne contient **aucun secret** (uniquement projet, région et flags de télémétrie), il peut rester ou passer en `.env.example`.
+- **Ordre des actions** : nettoyer avant de pousser, sinon l'historique du repo d'équipe part avec les fichiers à retirer.
+- **Rôles : deux projets, pas un.** Le déploiement et l'agent vivent dans `med-dtam-prd-mg`, mais les logs backend et la métrique `mmm_agent_exchange` qui servent au triage des `no_answer` sont dans `pmed-portal-prd-mg`. Un accès au seul projet DTAM ne permet pas de diagnostiquer.
