@@ -6,7 +6,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cd \"/Users/adam/Desktop/Vie Pro/Publicis_Vault\" && if ! git pull --ff-only origin main 2>/dev/null; then echo '{\"systemMessage\": \"⚠️ Vault pull failed — local and remote have diverged. Run: git pull --rebase origin main\"}'; fi",
+            "shell": "bash",
+            "command": "VAULT=\"/Users/adam/Desktop/Vie Pro/Publicis_Vault\"; [ -d \"$VAULT\" ] || exit 0; cd \"$VAULT\" || exit 0; if ! git pull --ff-only origin main 2>/dev/null; then echo '{\"systemMessage\": \"WARN Vault pull failed - local and remote have diverged. Run: git pull --rebase origin main\"}'; fi",
             "timeout": 15,
             "statusMessage": "Pulling latest vault..."
           }
@@ -19,7 +20,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cd \"/Users/adam/Desktop/Vie Pro/Publicis_Vault\" && if ! git diff --quiet || ! git diff --staged --quiet || [ -n \"$(git ls-files --others --exclude-standard)\" ]; then git add -A; if ! git commit -m \"vault backup: $(date '+%Y-%m-%d %H:%M:%S')\" 2>/dev/null; then echo '{\"systemMessage\": \"⚠️ Vault commit failed — check git status in the vault.\"}'; elif ! git push origin main 2>/dev/null; then echo '{\"systemMessage\": \"⚠️ Vault push failed — remote is ahead. Run: git pull --rebase origin main && git push\"}'; fi; fi",
+            "shell": "bash",
+            "command": "VAULT=\"/Users/adam/Desktop/Vie Pro/Publicis_Vault\"; [ -d \"$VAULT\" ] || exit 0; cd \"$VAULT\" || exit 0; if ! git diff --quiet || ! git diff --staged --quiet || [ -n \"$(git ls-files --others --exclude-standard)\" ]; then git add -A; if ! git commit -m \"vault backup: $(date '+%Y-%m-%d %H:%M:%S')\" 2>/dev/null; then echo '{\"systemMessage\": \"WARN Vault commit failed - check git status in the vault.\"}'; elif ! git push origin main 2>/dev/null; then echo '{\"systemMessage\": \"WARN Vault push failed - remote is ahead. Run: git pull --rebase origin main && git push\"}'; fi; fi",
             "timeout": 30,
             "statusMessage": "Syncing vault to GitHub..."
           }
