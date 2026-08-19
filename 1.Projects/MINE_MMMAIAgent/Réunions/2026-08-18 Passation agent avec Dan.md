@@ -198,7 +198,7 @@ La doc de référence ne reste pas dans le vault : elle est **réécrite dans Co
 - [x] **Enlever les commentaires du code** — fait le 19/08. Tous les commentaires `#` retirés des 5 fichiers Python, docstrings conservées. 95 lignes en moins. Vérifié par comparaison d'AST (identique avant/après, donc rien d'autre que des commentaires n'a bougé) et par les 35 tests, tous verts
 - [x] **Lister les rôles GCP nécessaires à Dan** — [[Accès & Rôles - Passation Dan]]
 - [x] **Écrire la doc complète** — rédigée, reste à coller dans Confluence
-- [ ] **Modifier l'email d'alerte avec Dan** (channel `5134431245708235828`, aujourd'hui `adajouin@publicisgroupe.net`)
+- [x] **Modifier l'email d'alerte** — fait le 19/08. Channel `8248908768259935024` créé sur `danphan2@publicisgroupe.net` et rattaché à la policy **en parallèle** de l'ancien. Reste à confirmer la réception avec Dan, puis à retirer le channel historique `5134431245708235828` avant le 04/09. Détail dans [[Accès & Rôles - Passation Dan]]
 
 ### Points d'attention relevés en préparant ces actions
 
