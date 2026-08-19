@@ -12,7 +12,7 @@ type: area
 - [x] Faire la liste des rôles GCP nécessaires pour Dan
 - [x] Rédiger la doc complète — **reste à la coller dans Confluence**
 - [x] Modifier l'email d'alerte `no_answer` — channel de Dan rattaché en parallèle
-- [ ] **Confirmer avec Dan qu'il reçoit l'alerte, puis retirer mon channel `5134431245708235828`** (avant le 04/09)
+- [ ] **Retirer mon channel d'alerte `5134431245708235828`** avant le 04/09 (confirmation de réception par Dan abandonnée : provoquer un `no_answer` est trop laborieux)
 - [ ] **Envoyer la demande d'accès GCP pour Dan** (`danphan2@publicisgroupe.net`) — deux projets, `pmed-portal-prd-mg` est le circuit le plus lent
 - [ ] Donner à Dan le droit d'écriture sur le repo GitHub
 
