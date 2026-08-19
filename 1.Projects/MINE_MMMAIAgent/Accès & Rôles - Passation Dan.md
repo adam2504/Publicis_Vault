@@ -48,18 +48,31 @@ Liste établie le 19/08/2026 pour la passation. Objectif : Dan doit pouvoir **d�
 | **Confluence** | Droit d'édition sur l'espace qui porte la doc de l'agent |
 | **Alerte `no_answer`** | Le notification channel `5134431245708235828` pointe aujourd'hui sur `adajouin@publicisgroupe.net`. À rebasculer sur Dan, ou mieux sur une alias d'équipe qui survit au prochain départ |
 
-### Procédure — rebasculer l'alerte
+### Alerte `no_answer` — état au 19/08/2026
 
-À faire **avec Dan**, pour qu'il voie où ça se règle et reçoive le premier mail de test.
+Policy `alertPolicies/527257283050504576` (*MMM agent — no_answer (log-based)*), projet `pmed-portal-prd-mg`, **active**.
 
-1. Console → **Monitoring → Alerting**, projet `pmed-portal-prd-mg` → policy *MMM agent — no_answer (log-based)* (`alertPolicies/527257283050504576`).
-2. **Créer un nouveau notification channel** de type Email plutôt que modifier l'existant. L'ancien (`5134431245708235828`) reste en place le temps de vérifier que le nouveau reçoit bien, on le retire ensuite.
-3. Destinataire : **une alias d'équipe si elle existe**, sinon `danphan2@publicisgroupe.net`. L'alias est préférable, sinon le prochain départ repose exactement le même problème. Confirmer au passage avec Dan que c'est bien la boîte qu'il lit au quotidien : une alerte qui arrive dans une boîte secondaire est une alerte perdue.
-4. Rattacher le nouveau channel à la policy, **sans retirer l'ancien tout de suite**.
-5. Vérifier la réception : soit attendre un `no_answer` réel, soit poser une question multi-canaux dans le module pour en provoquer un (le bug est intermittent, donc pas garanti du premier coup).
-6. Une fois la réception confirmée, **retirer l'ancien channel** de la policy.
+| Channel | Destinataire | Statut |
+| --- | --- | --- |
+| `5134431245708235828` | `adajouin@publicisgroupe.net` | Historique, **à retirer** une fois la réception de Dan confirmée |
+| `8248908768259935024` | `danphan2@publicisgroupe.net` | **Créé et rattaché le 19/08.** `enabled: true`, même forme que le channel historique qui fonctionne (pas de `verificationStatus`, donc aucune étape de validation à faire) |
 
-> Ne pas se contenter de changer l'adresse du channel existant : si la modification échoue en silence, plus personne ne reçoit rien et ça ne se voit que le jour d'un incident.
+Les deux reçoivent en parallèle aujourd'hui. Le choix du parallèle plutôt que d'une modification en place est délibéré : si le nouveau channel ne délivrait pas, une bascule sèche aurait laissé l'alerte sans destinataire, et ça ne se serait vu que le jour d'un incident.
+
+**Ce qui reste à faire :**
+
+1. **Confirmer avec Dan qu'il reçoit.** Soit attendre un `no_answer` réel, soit en provoquer un avec une question multi-canaux dans le module (le bug est intermittent, donc pas garanti du premier coup).
+2. **Retirer le channel `5134431245708235828`** de la policy une fois la réception confirmée. À faire avant le 04/09, sinon l'alerte continue de partir vers une boîte fermée.
+3. Idéalement, remplacer à terme l'adresse nominative de Dan par **une alias d'équipe**, sinon le prochain départ repose exactement le même problème. Vérifier au passage que `danphan2@` est bien la boîte qu'il lit au quotidien : une alerte qui arrive dans une boîte secondaire est une alerte perdue.
+
+Commande de retrait de l'ancien channel, le moment venu :
+
+```bash
+curl -X PATCH -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+  -H "Content-Type: application/json" \
+  -d '{"notificationChannels":["projects/pmed-portal-prd-mg/notificationChannels/8248908768259935024"]}' \
+  "https://monitoring.googleapis.com/v3/projects/pmed-portal-prd-mg/alertPolicies/527257283050504576?updateMask=notificationChannels"
+```
 
 ---
 
