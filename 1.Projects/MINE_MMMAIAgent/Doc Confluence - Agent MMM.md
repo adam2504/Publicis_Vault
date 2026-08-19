@@ -3,359 +3,291 @@ type: note
 projet: MMM AI Agent
 ---
 
-> Note de travail : contenu destiné à **Confluence**. Copier à partir du titre ci-dessous, sans cette frontmatter ni ce bloc. Aucun wikilink dedans, la page est autonome hors du vault.
+> Note de travail : contenu destiné à **Confluence**, page « 5. MMM AI Agent », en anglais, calé sur le style des pages 1 et 3. Copier à partir du titre ci-dessous, sans cette frontmatter ni ce bloc. Les lignes en italique `Screenshot of…` sont des emplacements où insérer une capture.
 
-# MMM AI Agent — documentation technique
+# 5. MMM AI Agent
 
-> **Périmètre de cette page** : l'**agent** seul, c'est à dire le pipeline multi-agents Google ADK déployé sur Vertex AI Agent Engine dans le projet `med-dtam-prd-mg`.
-> L'**intégration dans ConnectedHub** (route backend, frontend React, feature flag, gestion des sessions) est documentée à part et suivie par l'équipe ConnectedHub.
-> Rédigée le 19/08/2026 dans le cadre de la passation. Référent à partir du 22/08 : Dan.
+## Introduction
 
----
+The MMM AI Agent is a conversational assistant embedded in the Marketing Mix Modeling module of Mine. It answers questions about a client's MMM results in natural language, such as ROAS per media, contributions, period comparisons or saturation, without requiring the user to read a chart or ask a data strategist.
 
-## 1. En une page
+The agent is a multi-agent pipeline built with the Google Agent Development Kit (ADK) and deployed on Vertex AI Agent Engine. It queries the same BigQuery data that feeds the Results page described in *3. Integration in Mine*.
 
-L'agent est un assistant conversationnel branché dans le module MMM de ConnectedHub. Il répond en langage naturel à des questions sur les données MMM d'un client, ROAS et contributions par média, comparaisons de périodes, saturation, sans que l'utilisateur ait à passer par la console GCP ou par un data strat.
+It is a paid add-on: access is controlled by a feature flag per client. Clients without the flag see a preview instead of the assistant.
 
-| | |
-| --- | --- |
-| Projet GCP | `med-dtam-prd-mg` |
-| Région | `europe-west1` (contrainte RGPD) |
-| Framework | Google ADK, pinné `google-adk==1.26.0` |
-| Runtime | Vertex AI Agent Engine (Reasoning Engine) |
-| Service account | `mmm-agent-sa@med-dtam-prd-mg.iam.gserviceaccount.com` |
-| Table source | `med-dtam-prd-mg.mine.tb_model_contributions` |
-| Repo | `github.com/Publicis-Media-France-FR5140/MMM_AI_Agent` |
-| Engine en prod | `6241382153116975104`, display name `MMM_Agent_v3_live_ui_scope` |
-| Engine de rollback | `2659…`, version du 22/07 |
+*Screenshot of an example of the AI Assistant tab:*
 
-Coût : environ **$35/mois de runtime fixe** (facturé même sans usage, 24h/24) plus environ **$0,05 par question**. La structure est à 75% fixe, ce qui veut dire qu'un engine oublié coûte autant qu'un engine utilisé.
+## Scope of this page
 
----
+The agent has two halves, documented separately:
 
-## 2. Le contrat d'entrée
+* **This page** covers the agent itself: the ADK pipeline, its prompts, its security model, and how to deploy, monitor and troubleshoot it. It lives in the `med-dtam-prd-mg` project.
+* ***3. Integration in Mine*** covers the Mine interface. The backend route, the React frontend, the feature flag and the session handling belong there.
 
-C'est la frontière entre l'agent et ConnectedHub. Tout message reçu par l'agent a cette forme :
+The boundary between the two halves is the format of the message the agent receives:
 
 ```
 [MINE_CLIENT_ID: opel_fr]
 [MINE_UI_CONTEXT: kpi=…; kpi_label=…; period=2025-06-02..2026-05-11; tab=results; lang=fr]
-Quel est mon meilleur média en ROAS ?
+Which media has the best ROAS?
 ```
 
-- **Ligne 1, obligatoire** : le `client_id`. Il est dérivé côté serveur à partir de la session authentifiée, **jamais** fourni par l'utilisateur. C'est le pivot de toute l'isolation inter-client.
-- **Ligne 2, optionnelle** : le scope de l'écran au moment de l'envoi (KPI, période, onglet, langue). L'objet entier peut être absent, et ça arrive en trafic normal, pas seulement en cas limite.
-- **Le reste** : la question.
+The first line is mandatory and carries the client identifier, derived server side from the authenticated session and never supplied by the user. The second line is optional and describes what the user had on screen when they sent the message. Everything below is the question.
 
-Toute évolution de ce format se décide **conjointement** avec l'équipe ConnectedHub. Un changement unilatéral d'un côté casse l'autre.
+Changing this format requires a coordinated change on both sides. A one sided change breaks the other half silently.
 
----
+## Environment
 
-## 3. Architecture du pipeline
+| | |
+| --- | --- |
+| GCP project | `med-dtam-prd-mg` |
+| Region | `europe-west1` (GDPR constraint) |
+| Framework | `google-adk`, pinned to `1.26.0` |
+| Runtime | Vertex AI Agent Engine (Reasoning Engine) |
+| Service account | `mmm-agent-sa@med-dtam-prd-mg.iam.gserviceaccount.com` |
+| Source table | `med-dtam-prd-mg.mine.tb_model_contributions` |
+| Repository | `github.com/Publicis-Media-France-FR5140/MMM_AI_Agent` |
+| Engine in production | `6241382153116975104`, display name `MMM_Agent_v3_live_ui_scope` |
+| Rollback engine | `2659…`, available without redeployment |
 
-L'agent n'est pas un agent unique avec un gros prompt. C'est une chaîne de **9 `LlmAgent`**, dont chacun a un rôle étroit et un toolset restreint.
+## Architecture
+
+The agent is not a single model with a large prompt. It is a chain of nine `LlmAgent` instances, each with a narrow role and a restricted set of tools.
 
 ```
-MMM_agent (Flash) — gatekeeper et routeur
-│   Évalue si la question est assez précise. Sinon, demande une clarification.
-│   Sinon, transfère à data_pipeline.
+MMM_agent (Flash) — gatekeeper and router
+│   Decides whether the question is precise enough. If not, it asks for
+│   clarification. If it is, it transfers to data_pipeline.
 │
 └── data_pipeline (SequentialAgent)
       ├── context_setter_agent (Flash) → extract_and_set_client_context
-      │     Regex Python : extrait le client_id vers le session state
+      │     Python regex, writes client_id to session state
       ├── schema_agent (Flash) → get_table_info
-      │     Schéma live de la table BigQuery
+      │     Live schema of the BigQuery table
       ├── discovery_agent (Flash) → run_discovery
-      │     SQL hardcodé. Vérités terrain : KPIs disponibles, training_date
-      │     par KPI, canaux par KPI
-      ├── refinement_loop (LoopAgent, max 3 itérations)
-      │     ├── query_writer_agent (Pro) — écrit le SQL, aucun outil
+      │     Hardcoded SQL. Ground truth: available KPIs, training_date per
+      │     KPI, channels per KPI
+      ├── refinement_loop (LoopAgent, max 3 iterations)
+      │     ├── query_writer_agent (Pro) — writes SQL, has no tools
       │     ├── sql_guard (SequentialAgent)
       │     │     ├── filter_checker_agent (Flash) → validate_client_filter
       │     │     └── executor_agent (Flash) → execute_sql (WriteMode.BLOCKED)
       │     └── validator_agent (Flash) → exit_loop
-      └── answer_agent (Pro) — synthèse en langage naturel
+      └── answer_agent (Pro) — natural language synthesis
 ```
 
-**9 à 17 appels LLM par question**, dont 2 en `gemini-2.5-pro` (`query_writer_agent` et `answer_agent`). Environ 47 secondes pour une réponse normale. Ce sont ces deux appels Pro et le contexte accumulé qui dominent le coût.
+A single question triggers 9 to 17 LLM calls, two of which run on `gemini-2.5-pro` (`query_writer_agent` and `answer_agent`). A normal answer takes about 47 seconds.
 
-### Pourquoi cette découpe
+Three design choices are structural and should be understood before modifying anything:
 
-Trois choix structurants, à connaître avant de modifier quoi que ce soit :
+1. **`context_setter_agent` is the first step of a `SequentialAgent`**, not a tool the root agent has to remember to call. Ordering is therefore enforced by the framework rather than by an instruction a model may ignore. This is what guarantees the client identifier is in session state before any query runs.
+2. **Writing SQL is separated from executing it.** `query_writer_agent` has no tools and produces text. This is what allows `filter_checker_agent` to validate the query before it reaches BigQuery.
+3. **`sql_guard` is a `SequentialAgent`**, which guarantees the checker runs before the executor. Structural again, not instructional.
 
-1. **`context_setter_agent` est le premier maillon d'un `SequentialAgent`**, et pas un outil que le root agent doit penser à appeler. L'ordre est donc **structurel**, pas dépendant d'une instruction que le LLM peut ignorer. C'est ce qui garantit que le `client_id` est toujours en session state avant la moindre requête.
-2. **L'écriture du SQL est séparée de son exécution** (`query_writer_agent` n'a aucun outil, il produit du texte). C'est ce qui permet à `filter_checker_agent` de valider la requête **avant** qu'elle atteigne BigQuery.
-3. **`sql_guard` est un `SequentialAgent`**, ce qui garantit que le checker tourne avant l'executor. Là encore, structurel plutôt qu'instructionnel.
+### Business context scoping
 
----
+The business knowledge given to the agent is not one monolithic block. It is split into composable blocks (`CTX_INTRO`, `CTX_DISPLAY`, `CTX_DISCOVERY_NOTE`, `CTX_SQL_RULES`, `CTX_FIELDS`, `CTX_METRICS`, `CTX_KPI_SELECTION`), assembled into three profiles and injected selectively.
 
-## 4. Le contexte métier, scopé par sous-agent
-
-Le contexte métier n'est pas un bloc monolithique. Il est découpé en blocs composables (`CTX_INTRO`, `CTX_DISPLAY`, `CTX_DISCOVERY_NOTE`, `CTX_SQL_RULES`, `CTX_FIELDS`, `CTX_METRICS`, `CTX_KPI_SELECTION`), assemblés en trois profils et injectés sélectivement.
-
-| Agent | Contexte injecté |
+| Agent | Context injected |
 | --- | --- |
-| `schema_agent` | **aucun** (`CTX_NONE`), plus « exactly one tool: get_table_info » |
-| `discovery_agent` | `CTX_NO_SQL`, plus « exactly one tool: run_discovery » |
-| `query_writer_agent` | `CTX_FULL` **+ `CTX_UI_SCOPE`** |
+| `schema_agent` | none (`CTX_NONE`), plus "exactly one tool: `get_table_info`" |
+| `discovery_agent` | `CTX_NO_SQL`, plus "exactly one tool: `run_discovery`" |
+| `query_writer_agent` | `CTX_FULL` and `CTX_UI_SCOPE` |
 | `validator_agent` | `CTX_NO_SQL` |
-| `answer_agent` | `CTX_NO_SQL` **+ `CTX_MODULE_VIZ` + `CTX_UI_SCOPE`** |
-| `root_agent` | `CTX_NO_SQL` **+ `CTX_MODULE_VIZ` + `CTX_UI_SCOPE`** |
+| `answer_agent` | `CTX_NO_SQL`, `CTX_MODULE_VIZ` and `CTX_UI_SCOPE` |
+| `root_agent` | `CTX_NO_SQL`, `CTX_MODULE_VIZ` and `CTX_UI_SCOPE` |
 
-**La règle à respecter** : `CTX_SQL_RULES` et la syntaxe SQL ne vont **qu'au** `query_writer_agent`. Donner des règles SQL à un agent qui n'a pas d'outil d'exécution lui donne l'amorce pour halluciner du SQL et des résultats. Ce découpage est le correctif d'un vrai problème d'hallucination constaté en juillet, ce n'est pas une élégance.
+The rule to preserve: `CTX_SQL_RULES` and SQL syntax go to `query_writer_agent` only. Giving SQL rules to an agent that has no execution tool gives it the material to hallucinate both a query and its results. This split is the fix for an actual hallucination problem observed in July 2026, not a stylistic preference.
 
-### Les blocs particuliers
+Two blocks deserve a note:
 
-- **`CTX_MODULE_VIZ`** : décrit les graphiques du module et leurs contrôles, onglet par onglet, pour que l'agent aide à **lire** les graphiques. Bilingue EN et FR, les libellés étant sourcés des fichiers i18n de l'application. Générique, aucune variable client. Injecté dans `answer_agent` et `root_agent` seulement.
-- **`CTX_UI_SCOPE`** : le scope écran, avec ses 9 règles de comportement. Les deux qui comptent le plus : le scope est un **défaut, pas une contrainte** (ce que l'utilisateur formule explicitement gagne toujours, dimension par dimension), et seule la ligne du **message courant** compte, les tours précédents étant de l'historique et jamais une source de défaut.
-- **`run_discovery` reste volontairement non scopé** par le scope écran. Il dit ce qui **existe** (KPIs, dates, canaux), donc le scoper casserait les réponses à « qu'est ce que je peux regarder d'autre ? ».
-- **Le routage du root est durci** : dès qu'un chiffre est nécessaire, il délègue à `data_pipeline`, même si la question nomme aussi un graphique. Il ne répond seul que sur des questions d'interface pures. Sans ça, il répondait « chart only » à des questions data.
+* **`CTX_MODULE_VIZ`** describes the module's charts and controls, tab by tab, so the agent can help users read them. It is bilingual, with labels sourced from the application i18n files, and generic, with no client specific variables.
+* **`CTX_UI_SCOPE`** describes how to use the on screen scope. Two rules matter most: the scope is a **default and not a constraint**, so anything the user states explicitly always wins, dimension by dimension; and only the line on the **current message** counts, earlier turns being history rather than a source of defaults.
 
----
+`run_discovery` is deliberately left outside the on screen scope. It reports what **exists** for the client, so scoping it would break answers to questions such as "what else can I look at?".
 
-## 5. Isolation inter-client
+## Client isolation
 
-**C'est le point le plus sensible du système.** La table BigQuery contient tous les clients. L'isolation ne repose pas sur des tables séparées mais sur l'injection du `client_id` côté serveur, plus plusieurs couches Python que le LLM ne peut pas contourner.
+The BigQuery table holds every client. Isolation does not rely on separate tables. It relies on server side injection of the client identifier plus several Python layers the model cannot bypass.
 
-| Couche | Mécanisme | Force |
+| Layer | Mechanism | Strength |
 | --- | --- | --- |
-| Backend ConnectedHub | Préfixe `[MINE_CLIENT_ID: <id>]`, **toujours en première ligne** | Dure, côté serveur |
-| `extract_and_set_client_context` | Regex Python, **leftmost match** | Dure |
-| `run_discovery` | SQL hardcodé `WHERE client_id = @client_id` | Dure |
-| `validate_client_filter` | Vérification Python avant toute exécution BigQuery | Dure |
-| `sql_guard` | `SequentialAgent` qui garantit checker avant executor | Dure |
-| `query_writer_agent` | Instruction d'inclure `client_id` dans le SQL | Souple |
+| Mine backend | Prefixes `[MINE_CLIENT_ID: <id>]`, always as the first line | Hard, server side |
+| `extract_and_set_client_context` | Python regex, leftmost match | Hard |
+| `run_discovery` | Hardcoded `WHERE client_id = @client_id` | Hard |
+| `validate_client_filter` | Python check before any BigQuery call | Hard |
+| `sql_guard` | `SequentialAgent` enforcing checker before executor | Hard |
+| `query_writer_agent` | Instructed to include `client_id` in the SQL | Soft |
 
-Validé en test par Dan le 07/07/2026 : depuis Opel DE, une requête sur Peugeot a été refusée proprement.
+Tested on 7 July 2026: from an Opel DE session, a query targeting Peugeot was rejected cleanly.
 
-### Ce qui donne réellement la garantie
+### What actually provides the guarantee
 
-**C'est le leftmost match, pas l'ancrage de la regex.** Le backend émet toujours sa ligne en premier, donc la première occurrence trouvée dans le message est toujours la valeur dérivée du serveur. Un marqueur forgé plus loin dans le texte utilisateur ne peut pas détourner l'extraction.
+The guarantee comes from the **leftmost match**, not from the anchoring of the regex. The backend always emits its line first, so the first match found in the message is always the server derived value. A forged marker placed further down in user text cannot hijack the extraction.
 
-Le code contient deux motifs :
+The code holds two patterns:
 
 ```python
 CLIENT_ID_RE = re.compile(r'^\[MINE_CLIENT_ID:\s*([^\]\n]+)\]\s*$', re.MULTILINE)
 CLIENT_ID_RE_FALLBACK = re.compile(r'\[MINE_CLIENT_ID:\s*([^\]]+)\]')
 ```
 
-> ### Avertissement, à lire avant toute modification de cette regex
->
-> **Supprimer le repli `CLIENT_ID_RE_FALLBACK` est une régression, pas un durcissement.**
->
-> Le `raw_message` n'est pas lu directement sur le réseau, il est transmis par `context_setter_agent`, c'est à dire **par un LLM** à qui on demande de recopier verbatim le texte du premier message utilisateur. Un modèle peut ajouter un préambule, encadrer la ligne de guillemets, ou laisser une espace en tête. Le motif ancré ne tolère rien de tout ça.
->
-> Sans le repli, l'extraction renvoie alors une erreur fatale et **toutes** les questions data cassent, pas seulement celles qui portent un scope.
->
-> L'ancrage est de la défense en profondeur par dessus le leftmost match, il n'est pas la source de la garantie. Le test `tests/test_ui_scope.py` verrouille ce comportement, ne pas le contourner.
+**Removing the fallback is a regression, not a hardening.** The raw message is not read off the wire directly. It is passed along by `context_setter_agent`, which is an LLM asked to forward the text of the user message verbatim. A model may add a preamble, wrap the line in quotes, or leave leading whitespace, none of which the anchored pattern tolerates. Without the fallback, extraction returns a fatal error and **every** data question fails, not only those carrying a scope. The anchor is defence in depth on top of the leftmost match. It is not the source of the guarantee. This behaviour is locked by a test in `tests/test_ui_scope.py`.
 
-### Le scope écran est du contenu non fiable
+### The on screen scope is untrusted input
 
-Le `ui_context` vient du navigateur, et il atterrit juste à côté du garde-fou d'isolation. La protection est côté backend ConnectedHub, en **whitelist stricte avec rejet** et non nettoyage :
+`ui_context` originates in the browser and lands next to the isolation guard, so it is validated in the Mine backend with a strict whitelist that **rejects** rather than sanitises:
 
-- Libellés : `^[\p{L}\p{N} _\-./&'(),%:+|]{1,64}$`. Dates : `^\d{4}-\d{2}-\d{2}$`. Énumérations fermées pour `tab` et `lang`.
-- Exclure `[`, `]`, `;`, `=` et les retours à la ligne rend un faux marqueur **structurellement inexprimable**. **C'est toute la propriété de sécurité, ne jamais la relâcher.**
-- Rejet champ par champ : un `tab` invalide est ignoré, il ne casse jamais la conversation. Les champs rejetés sont loggés, sinon un rejet systématique serait invisible.
+* Labels must match `^[\p{L}\p{N} _\-./&'(),%:+|]{1,64}$`, dates must match `^\d{4}-\d{2}-\d{2}$`, and `tab` and `lang` are closed enumerations.
+* Excluding `[`, `]`, `;`, `=` and newlines makes a forged marker structurally inexpressible. This is the entire security property and must not be relaxed.
+* Rejection is field by field, so an invalid `tab` is ignored and never breaks the conversation. Rejected fields are logged, otherwise a systematic rejection would be invisible.
 
----
-
-## 6. Le repo
-
-`github.com/Publicis-Media-France-FR5140/MMM_AI_Agent`, branche `main`.
+## Repository and tests
 
 ```
 MMM_Agent/
-  agent.py                     tout le pipeline, les blocs CTX_* et les tools
-  agent_tester.py              script d'interrogation en local
-  requirements.txt             c'est CELUI-CI que lit adk deploy
-  .env                         projet, région, flags de télémétrie (aucun secret)
-  .agent_engine_config.json    display_name, description, service account
+  agent.py                     the whole pipeline, the CTX_* blocks and the tools
+  agent_tester.py              local query script
+  requirements.txt             this is the file adk deploy reads
+  .env                         project, region and telemetry flags, no secrets
+  .agent_engine_config.json    display name, description, service account
 tests/                         35 tests, pytest
-requirements.txt               dépendances racine
-requirements-dev.txt           outillage de test
 ```
-
-Lancer les tests :
 
 ```bash
 python -m pytest tests -q
 ```
 
-Les tests ne sont pas décoratifs : ils verrouillent les propriétés qu'une modification de prompt casserait sans erreur visible. `test_context_scoping.py` vérifie que chaque interprète reçoit bien son profil de contexte, `test_ui_scope.py` verrouille le leftmost match et les 9 règles du scope, `test_module_viz.py` vérifie que le root délègue toujours les questions data malgré le bloc viz.
+The tests are not decorative. They lock properties that a prompt change would break without raising an error. `test_context_scoping.py` checks that each interpreter receives its intended context profile, `test_ui_scope.py` locks the leftmost match and the nine scope rules, and `test_module_viz.py` checks that the root agent still delegates data questions despite carrying the visualization block.
 
-> Les docstrings de `extract_and_set_client_context`, `run_discovery` et `validate_client_filter` **sont lues par l'ADK** et envoyées au modèle comme description des outils. Les modifier change le comportement de l'agent. Ce ne sont pas de simples commentaires.
+The docstrings of `extract_and_set_client_context`, `run_discovery` and `validate_client_filter` are read by the ADK and sent to the model as the tool descriptions. Editing them changes the agent's behaviour. They are not ordinary comments.
 
----
+## Deployment
 
-## 7. Déployer
+Refresh application default credentials first. They expire from one day to the next, and this is the first thing to check when a command fails for no apparent reason.
 
-### Prérequis
+```bash
+gcloud auth application-default login
+```
 
-- `gcloud auth application-default login`. **L'ADC expire d'un jour à l'autre**, c'est la première chose à vérifier quand une commande échoue sans raison apparente.
-- Les rôles listés au §10.
-
-### Commandes
-
-Créer un nouvel engine :
+Create a new engine:
 
 ```bash
 PYTHONUTF8=1 adk deploy agent_engine MMM_Agent --validate-agent-import
 ```
 
-Mettre à jour un engine existant, sans re-pointer le backend :
+Update an existing engine in place:
 
 ```bash
 adk deploy … --agent_engine_id <id> --project med-dtam-prd-mg
 ```
 
-### Les pièges
+### Pitfalls
 
-Tous constatés en production entre le 20 et le 23 juillet 2026.
+All of the following were observed in production between 20 and 23 July 2026.
 
-| Piège | Ce qui se passe si on l'oublie |
+| Pitfall | What happens if missed |
 | --- | --- |
-| `google-adk` doit être pinné `==1.26.0` dans **`MMM_Agent/requirements.txt`**, pas celui de la racine | `adk deploy` lit le requirements du dossier agent. Sans pin, `google-adk 2.x` s'installe et l'engine **crash au démarrage** sur `google.cloud.dataplex_v1` manquant |
-| `--validate-agent-import` | Valide l'import **avant** de créer l'engine. Sans ce flag, on crée un engine mort qu'il faut ensuite retrouver et supprimer |
-| `PYTHONUTF8=1` | Sur console Windows en cp1252, le caractère de fin plante l'affichage et la commande annonce « Deploy failed » **alors que l'engine a bien été créé**. Piège coûteux, on redéploie inutilement |
-| `--project` explicite sur un update en place | Sans lui, 404 sur le mauvais projet |
-| `--display_name` n'est appliqué **que** quand il est passé | Un update sans le flag retombe sur le `display_name` de `.agent_engine_config.json` et **écrase silencieusement** le nom versionné. Le nom versionné vit donc dans ce fichier, **à bumper à chaque nouvelle version** |
+| `google-adk` must stay pinned to `1.26.0` in `MMM_Agent/requirements.txt`, not the root one | `adk deploy` reads the agent folder's requirements. Without the pin, version 2.x is installed and the engine crashes on startup with a missing `google.cloud.dataplex_v1` |
+| `--validate-agent-import` | Validates the import before creating the engine. Without it, a dead engine is created and has to be found and deleted later |
+| `PYTHONUTF8=1` | On a Windows console in cp1252, the final character breaks the output and the command reports "Deploy failed" although the engine was created. Leads to pointless redeployments and orphan engines |
+| Explicit `--project` on an in place update | Without it, the call 404s against the wrong project |
+| `--display_name` only applies when passed | An update without the flag falls back to the display name in `.agent_engine_config.json` and silently overwrites the versioned name. The versioned name therefore lives in that file and must be bumped for each new version |
 
-### Nouvel engine ou update en place
+### New engine or in place update
 
-**Créer un nouvel engine** dès que le changement touche **tout le trafic** et pas seulement la fonctionnalité ajoutée, et que la vérification ne peut se faire qu'après déploiement.
+Create a **new engine** whenever the change affects all traffic rather than only the feature being added, and whenever verification is only possible after deployment.
 
-Le cas d'école est le correctif de la regex `client_id` : un update en place de la production aurait exposé tous les clients avant toute vérification possible. La bonne séquence est alors : nouvel engine, test en local pointé dessus, puis bascule par PR côté ConnectedHub.
+The reference case is the `client_id` regex fix: updating production in place would have exposed every client before any verification was possible. The correct sequence there is a new engine, local testing pointed at it, then a cutover through a pull request on the Mine side.
 
-À l'inverse, un changement **inerte** tant que la production ne pointe pas dessus peut être poussé en place sans risque.
+Conversely, a change that is inert until production points at it can safely be pushed in place.
 
-### Gestion des engines
+### Engine lifecycle
 
-**Règle : exactement deux engines vivants**, la production et son rollback. On ne supprime l'ancien qu'une fois le nouveau prouvé en monitoring.
+Keep exactly two live engines, production and its rollback. Delete the old one only once the new one has proven itself in monitoring.
 
-Ce n'est pas de l'hygiène gratuite : chaque engine déployé facture son runtime en continu, environ $35 par mois **même inutilisé**. Les engines `6073…` et `7899…` ont été supprimés le 23/07 pour cette raison.
+This is not cosmetic. Every deployed engine bills its runtime continuously, around $35 per month even when idle. Engines `6073…` and `7899…` were deleted on 23 July 2026 for this reason.
 
-Historique : `6073…` (avril), puis `7899…` (scoping du contexte, 20/07), puis `2659…` (aide graphiques et correctifs, 22/07, rollback actuel), puis `6241…` (scope écran live, 23/07, production actuelle).
+## Monitoring and troubleshooting
 
----
+### Sources
 
-## 8. Diagnostiquer
-
-### Les quatre sources
-
-| Source | Contenu | Rétroactif |
+| Source | Content | Retroactive |
 | --- | --- | --- |
-| **Logs backend** (`pmed-portal-prd-mg`) | `authors`, `lastChunk`, `streamErrors`, `adkSessionId`, `status` | oui |
-| **GCS** `mmm-agent-chat-logs` (`med-dtam-prd-mg`) | Un JSON par échange, avec `adkSessionId` comme clé de jointure | oui |
-| **Sessions API** de l'Agent Engine | Events internes : author par sous-agent, appels d'outils, SQL, réponses | **oui, et gratuit** |
-| **Trace Explorer** | Timing, waterfall, structure. Environ 48 spans par question | non, seulement depuis le grant du 08/07 |
+| Backend logs (`pmed-portal-prd-mg`) | `authors`, `lastChunk`, `streamErrors`, `adkSessionId`, `status` | yes |
+| GCS `mmm-agent-chat-logs` (`med-dtam-prd-mg`) | One JSON per exchange, with `adkSessionId` as the join key | yes |
+| Agent Engine Sessions API | Internal events: author per sub-agent, tool calls, SQL, answers | yes, and free |
+| Trace Explorer | Timing, waterfall, structure. About 48 spans per question | no |
 
-Attention, **les logs backend sont dans un autre projet GCP** que l'agent. C'est la raison pour laquelle l'accès aux deux projets est nécessaire.
+Backend logs live in a **different GCP project** from the agent, which is why troubleshooting requires access to both projects.
 
-### Recette pour un `no_answer`
+### Diagnosing a `no_answer`
 
-1. **Repérer**, via l'alerte mail ou la requête de triage :
+1. Locate the exchange, from the email alert or from this logging query, then collect `authors` and `adkSessionId`:
    ```
    jsonPayload.metric="mmm_agent_exchange" AND jsonPayload.status="no_answer"
    ```
-   Récupérer `authors` et `adkSessionId`.
-2. **Localiser** : le champ `authors` (par exemple `MMM_agent>context_setter_agent>schema_agent`) donne directement le dernier sous-agent atteint, donc l'endroit où le pipeline meurt.
-3. **Creuser** : Sessions API sur l'`adkSessionId`, qui donne les events internes même si aucune trace n'existe.
+2. Read `authors`. A value such as `MMM_agent>context_setter_agent>schema_agent` names the last sub-agent reached, which is where the pipeline died.
+3. Query the Sessions API on the `adkSessionId` for the internal events. This works even when no trace exists.
    ```
    GET https://europe-west1-aiplatform.googleapis.com/v1beta1/projects/med-dtam-prd-mg/locations/europe-west1/reasoningEngines/6241382153116975104/sessions/<adkSessionId>/events
    ```
-4. **Performance seulement** : Trace Explorer. Une durée courte, environ 10 secondes contre 47 normalement, avec un waterfall tronqué, signe un raté amont.
+4. Use Trace Explorer for performance only. A short duration, around 10 seconds instead of 47, with a truncated waterfall, indicates an upstream failure.
 
-> Deux avertissements. Le **span status est toujours `UNSET`**, c'est le comportement normal en OpenTelemetry et l'ADK ne stampe pas `ERROR` sur un échec : ne jamais diagnostiquer par le status, se fier à `lastChunk` et `streamErrors`. Et le filtre du Trace Explorer est `service.name = 6241382153116975104`, **à mettre à jour à chaque bascule d'engine**, sinon on lit le bruit de la Cloud Function d'allocation budget.
+Two warnings. Span status is always `UNSET`, which is normal OpenTelemetry behaviour since the ADK does not stamp `ERROR` on failure, so never diagnose from the status. And the Trace Explorer filter is `service.name = 6241382153116975104`, which must be updated at every engine cutover, otherwise the view shows noise from the `cf-budget-allocator` cloud function instead.
 
-### L'alerte
+### Alerting
 
-Policy log-based `alertPolicies/527257283050504576`, nommée *MMM agent — no_answer (log-based)*. Elle se déclenche sur chaque ligne de log `no_answer` et **extrait `authors`, `adkSessionId` et `customerId` dans la notification**, ce qui permet de trier directement depuis le mail. Rate limit de 5 minutes.
+A log based alert policy named *MMM agent — no_answer (log-based)* fires on every `no_answer` log line and extracts `authors`, `adkSessionId` and `customerId` into the notification, so triage can start from the email itself. Rate limited to one notification per five minutes.
 
-La métrique log-based `mmm_agent_exchange` (DELTA/INT64, labels `status` et `customerId`) reste disponible pour construire des dashboards.
+The log based metric `mmm_agent_exchange` (DELTA/INT64, labelled by `status` and `customerId`) remains available for dashboards.
 
----
+## Cost
 
-## 9. Coût
+The cost structure is roughly 75% fixed.
 
-Structure à environ 75% fixe.
-
-| Poste | Nature | Montant |
+| Item | Nature | Amount |
 | --- | --- | --- |
-| Agent Engine runtime | **Fixe**, 24h/24, même sans usage | environ $35/mois |
-| Tokens Gemini | Variable, par question | environ $0,05, jusqu'à $0,10 avec retries |
-| Artifact Registry, GCS, Scheduler, Secret Manager | Continu | environ $6/mois |
+| Agent Engine runtime | Fixed, billed continuously even when idle | about $35 per month |
+| Gemini tokens | Variable, per question | about $0.05, up to $0.10 with retries |
+| Artifact Registry, GCS, Scheduler, Secret Manager | Continuous | about $6 per month |
 
-Par client, un seul client portant toute la base fixe : environ $85/mois à 1 000 questions, $185 à 3 000, $335 et plus à 6 000.
+Per client, with a single client carrying the entire fixed base: about $85 per month at 1 000 questions, $185 at 3 000, and $335 or more at 6 000.
 
-Leviers si le coût devient un sujet : passer `answer_agent` de Pro à Flash, ou réduire `max_query_result_rows=200` avant l'appel de synthèse.
+Levers if cost becomes a concern: move `answer_agent` from Pro to Flash, or reduce `max_query_result_rows=200` before the synthesis call.
 
-> **Écarté explicitement** : alléger le contexte métier pour économiser des tokens. La décision est inverse, on l'**enrichit** pour la qualité de réponse. La qualité prime sur ce micro gain.
+Trimming the business context to save tokens has been explicitly ruled out. The decision goes the other way: it is being enriched to improve answer quality.
 
-Observabilité : environ 2,5 millions de spans gratuits par mois, soit environ 52 000 questions. À tous les volumes envisagés aujourd'hui, le coût de tracing est nul.
+Tracing is free at current volumes. About 2.5 million spans per month are included, which covers roughly 52 000 questions.
 
----
+## Known issues and limitations
 
-## 10. Accès et rôles
-
-Deux projets GCP, c'est le point à ne pas rater.
-
-### `med-dtam-prd-mg`
-
-| Rôle | Pour quoi faire |
-| --- | --- |
-| `roles/aiplatform.user` | Créer, mettre à jour, supprimer les engines. Appeler `streamQuery`. Lire la Sessions API |
-| `roles/iam.serviceAccountUser` **sur `mmm-agent-sa`** | Déployer un engine qui **tourne sous** ce SA. **Piège le plus courant** : sans ce rôle, `adk deploy` échoue en `PERMISSION_DENIED` alors même que `aiplatform.user` est accordé |
-| `roles/storage.objectAdmin` sur le bucket de staging | `adk deploy` y dépose le package |
-| `roles/storage.objectViewer` sur `mmm-agent-chat-logs` | Relire un échange complet |
-| `roles/bigquery.dataViewer` et `roles/bigquery.jobUser` | Rejouer les requêtes à la main |
-| `roles/cloudtrace.user` | Lire le Trace Explorer |
-
-### `pmed-portal-prd-mg`
-
-| Rôle | Pour quoi faire |
-| --- | --- |
-| `roles/logging.viewer` | Lire les logs `mmm_agent_exchange`. **Sans lui, la recette de diagnostic ne démarre pas** |
-| `roles/monitoring.viewer` | Métrique log-based et incidents |
-| `roles/monitoring.editor` | Gérer la policy d'alerte et son destinataire |
-
-### Le service account, à ne pas confondre
-
-`mmm-agent-sa@med-dtam-prd-mg.iam.gserviceaccount.com` porte les 7 rôles dont l'agent a besoin **à l'exécution** : `aiplatform.user`, `bigquery.dataViewer`, `bigquery.jobUser`, `cloudtrace.agent`, `logging.logWriter`, `monitoring.metricWriter`, `telemetry.tracesWriter`. Rien à y changer. Un humain a besoin de droits pour **piloter** l'agent, le SA a besoin de droits pour le **faire tourner**.
-
----
-
-## 11. Bugs et limites connus
-
-| Sujet | Gravité | Détail |
+| Item | Severity | Detail |
 | --- | --- | --- |
-| Sessions backend en mémoire | Limite connue | La `Map` en mémoire du backend ConnectedHub perd les sessions au redémarrage. La mémoire persistante par utilisateur est un chantier ouvert. **Côté intégration, pas côté agent** |
-| `context_setter_agent` dit « premier message » | Fragilité de formulation | Son instruction demande le texte du **premier** message utilisateur, alors que la règle de récence du scope exige le message **courant**. En pratique ça fonctionne, vérifié le 23/07, parce que les agents lisent la ligne dans le transcript. Mais si un jour une réponse porte sur un KPI périmé, c'est là qu'il faut regarder. La correction tient en une ligne |
-| `ui_scope` en session state jamais lu | Code mort | `extract_and_set_client_context` écrit `tool_context.state["ui_scope"]`, mais aucun agent ne lit cette clé. Le scope circule en réalité par le **transcript**. Inoffensif, mais ne pas croire que modifier cette clé change le comportement |
-| Colonne marché | Imprécision documentée | `level` **est** la clé marché dans tout le système : la Cloud Function d'allocation fait `level = request_json["market"]`, et le frontend groupe ses scopes par `d.level`. La description dans `CTX_FIELDS` (« granularité de l'analyse ») est au mieux incomplète. Retirer `market` des règles SQL de l'agent reste le bon choix, sa table étant `tb_model_contributions` et aucun client multi marché n'existant aujourd'hui, mais à reprendre le jour où un client multi marché arrive |
+| Backend sessions held in memory | Known limitation | The Mine backend keeps sessions in an in memory map, so they are lost when the backend restarts. Persistent per user memory is an open item. This sits on the Mine side, not the agent side |
+| `context_setter_agent` says "first message" | Wording fragility | Its instruction asks for the text of the **first** user message, while the recency rule of `CTX_UI_SCOPE` requires the **current** one. It works in practice, verified on 23 July 2026, because agents read the line from the transcript. If an answer ever uses a stale KPI, this is where to look. The fix is one line |
+| `ui_scope` in session state is never read | Dead code | `extract_and_set_client_context` writes `tool_context.state["ui_scope"]`, but no agent reads that key. The scope actually travels through the transcript. Harmless, but do not expect changing this key to change behaviour |
+| Market column | Documented inaccuracy | `level` is the market key across the system: `cf-budget-allocator` reads `level = request_json["market"]`, and the frontend groups its scopes by `level`. The description in `CTX_FIELDS`, "granularity of the analysis", is incomplete at best. Leaving `market` out of the agent's SQL rules remains correct, since its table is `tb_model_contributions` and no multi market client exists today, but this must be revisited when one does |
 
----
+## Roadmap
 
-## 12. Ce qui reste ouvert
+* **Enrich the business context** with variable and data definitions from the data science team. Testing showed that users need to know what a variable *means* and why a performance moved, more than they need another number. Highest value item in the backlog.
+* **Add `cf-budget-allocator` as an agent tool**, covering saturation and budget allocation questions. Nothing implemented yet. Three traps produce wrong numbers without raising an error: `bounds`, `inflations` and the response are **positional** arrays with no media names, `inflations` is expressed in **percent** rather than as a ratio, and `t` is a **start index** rather than a duration. The media order is derived from `tb_model_configuration` and must never be composed by the model. Requires `roles/run.invoker` on that single service.
+* **Per client knowledge**: sector, competitors and client specific framing. This converges with the media expertise and the educational layer needed before opening the module to clients, and should be treated as one project rather than three.
+* **Access decision, pending**: how far the agent is allowed to recommend rather than state facts. This is structural and gates the budget allocation tool, since launching an optimization is a recommendation rather than a fact.
 
-### Backlog agent
+## Note for the DTAM team
 
-- **Enrichir le contexte métier** avec les définitions des variables et des données du modèle. C'est le point de reprise le plus naturel côté data science, et le besoin le plus remonté en phase de testing.
-- **Brancher `cf-budget-allocator-prod` comme outil**. Rien n'implémenté, cadrage complet disponible. Trois pièges qui produisent des chiffres faux sans lever d'erreur : tout est **positionnel** (bornes, inflations et réponse sont des tableaux sans nom de média), `inflations` est en **pourcents** et non en ratio, et `t` est un **indice de départ** et non une durée. L'ordre des médias se dérive de `tb_model_configuration`, il ne se devine pas, et le LLM ne doit jamais composer ces tableaux. Prérequis : `roles/run.invoker` sur ce seul service, à ne demander que le jour où le sujet démarre.
-- **Knowledge par client** : contexte secteur, concurrents, cadrage par `client_id`. Chantier v2, à traiter d'un bloc avec la couche pédagogique et l'expertise média, pas en silos.
-
-### Décisions produit non tranchées
-
-- **Jusqu'où l'agent recommande.** Deux options sur la table : deux niveaux selon le compte (recommandation pleine en interne, faits seuls côté client), ou assistant pur sans aucune recommandation. Arbitrage attendu de Baptiste. C'est **structurant** : en option assistant pur, l'outil d'allocation budget ne pourrait que lire et expliquer une allocation, jamais en proposer une.
-- **Ouverture au conseil sur un MMM live**, en commençant par Stellantis (Opel DE et Peugeot DE). Jalon terrain, pas technique.
-
----
-
-## 13. Sources signalées à d'autres équipes
-
-À rappeler aux data scientists propriétaires de `cf-budget-allocator-prod` : la fonction **interpole le `client_id` directement dans le SQL**, sans paramètre, et s'exécute avec le service account `internal@med-dtam-prd-mg`.
+`cf-budget-allocator` interpolates the client identifier directly into its SQL, without parameters, and runs with the `internal@med-dtam-prd-mg` service account.
 
 ```python
 WHERE client_id = '{client_id}' AND level = '{level}' AND kpi = '{kpi}'
 ```
 
-Aujourd'hui sans risque, la valeur venant du backend ConnectedHub. Mais le jour où une valeur issue d'un LLM atteindrait ce payload, ce serait une injection SQL exploitable. C'est ce qui fait passer la règle « injecter le `client_id` depuis le session state » du statut de bonne pratique à celui d'obligation.
+This is safe today because the value always comes from the Mine backend. It would become an exploitable SQL injection the day a value originating from a model reached that payload, which is why injecting the client identifier from session state is a requirement rather than a good practice.
+
+## Contacts
+
+Agent POC: Dan Phan (danphan2@publicisgroupe.net)
+
+Mine POC: Eddie Ratignier (eddratig@publicisgroupe.net)

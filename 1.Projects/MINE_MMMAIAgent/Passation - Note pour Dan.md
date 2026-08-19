@@ -102,7 +102,5 @@ Tu ne portes pas l'offre, mais tu as besoin de ce contexte pour arbitrer ce que 
 2. **Ouvrir l'agent aux équipes conseil sur un MMM client signé.** C'est le vrai prochain jalon, et il n'est pas technique. La trajectoire retenue est « conseil d'abord, client ensuite », validée par Fabien Bourrely et Baptiste. La cible est **Stellantis** (Opel DE et Peugeot DE) : le modèle est disponible, rien ne bloque côté data, mais le conseil DE ne répond plus depuis l'envoi du deck. Sur Longchamp, le MMM v2 vient d'être signé mais il n'y a pas encore de modèle, donc rien à montrer avant.
 3. **Puis seulement l'ouverture client**, qui suppose une couche pédagogique solide. Le précédent Jacadi, un client à qui on a donné un accès direct à l'interface sans accompagnement, a produit un flot de questions. Ouvrir sans vulgariser reproduirait ça à l'échelle.
 
-La disponibilité annoncée en interne était **fin d'été**, sous réserve du go de validation. Cette date est à réactualiser avec Baptiste, elle date d'avant mon départ.
-
 Ce qui reste hors de ton périmètre malgré tout : le pricing, l'ouverture commerciale, et côté ConnectedHub la mémoire persistante des conversations et le chip de contexte du chatbot.
 
