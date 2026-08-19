@@ -48,6 +48,19 @@ Liste établie le 19/08/2026 pour la passation. Objectif : Dan doit pouvoir **d�
 | **Confluence** | Droit d'édition sur l'espace qui porte la doc de l'agent |
 | **Alerte `no_answer`** | Le notification channel `5134431245708235828` pointe aujourd'hui sur `adajouin@publicisgroupe.net`. À rebasculer sur Dan, ou mieux sur une alias d'équipe qui survit au prochain départ |
 
+### Procédure — rebasculer l'alerte
+
+À faire **avec Dan**, pour qu'il voie où ça se règle et reçoive le premier mail de test.
+
+1. Console → **Monitoring → Alerting**, projet `pmed-portal-prd-mg` → policy *MMM agent — no_answer (log-based)* (`alertPolicies/527257283050504576`).
+2. **Créer un nouveau notification channel** de type Email plutôt que modifier l'existant. L'ancien (`5134431245708235828`) reste en place le temps de vérifier que le nouveau reçoit bien, on le retire ensuite.
+3. Destinataire : **une alias d'équipe si elle existe**, sinon `dan.phan@publicismedia.com`. L'alias est préférable, sinon le prochain départ repose exactement le même problème.
+4. Rattacher le nouveau channel à la policy, **sans retirer l'ancien tout de suite**.
+5. Vérifier la réception : soit attendre un `no_answer` réel, soit poser une question multi-canaux dans le module pour en provoquer un (le bug est intermittent, donc pas garanti du premier coup).
+6. Une fois la réception confirmée, **retirer l'ancien channel** de la policy.
+
+> Ne pas se contenter de changer l'adresse du channel existant : si la modification échoue en silence, plus personne ne reçoit rien et ça ne se voit que le jour d'un incident.
+
 ---
 
 ## Le SA de l'agent, pour mémoire
