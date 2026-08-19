@@ -54,7 +54,7 @@ Liste établie le 19/08/2026 pour la passation. Objectif : Dan doit pouvoir **d�
 
 1. Console → **Monitoring → Alerting**, projet `pmed-portal-prd-mg` → policy *MMM agent — no_answer (log-based)* (`alertPolicies/527257283050504576`).
 2. **Créer un nouveau notification channel** de type Email plutôt que modifier l'existant. L'ancien (`5134431245708235828`) reste en place le temps de vérifier que le nouveau reçoit bien, on le retire ensuite.
-3. Destinataire : **une alias d'équipe si elle existe**, sinon `dan.phan@publicismedia.com`. L'alias est préférable, sinon le prochain départ repose exactement le même problème.
+3. Destinataire : **une alias d'équipe si elle existe**, sinon `danphan2@publicisgroupe.net`. L'alias est préférable, sinon le prochain départ repose exactement le même problème. Confirmer au passage avec Dan que c'est bien la boîte qu'il lit au quotidien : une alerte qui arrive dans une boîte secondaire est une alerte perdue.
 4. Rattacher le nouveau channel à la policy, **sans retirer l'ancien tout de suite**.
 5. Vérifier la réception : soit attendre un `no_answer` réel, soit poser une question multi-canaux dans le module pour en provoquer un (le bug est intermittent, donc pas garanti du premier coup).
 6. Une fois la réception confirmée, **retirer l'ancien channel** de la policy.
