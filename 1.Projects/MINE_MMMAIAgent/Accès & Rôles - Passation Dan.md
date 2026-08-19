@@ -9,9 +9,9 @@ Projet : [[MMM AI Agent]]
 
 Liste établie le 19/08/2026 pour la passation. Objectif : Dan doit pouvoir **déployer**, **diagnostiquer** et **faire évoluer** l'agent seul, sans dépendre d'un compte qui n'existera plus après le 04/09.
 
-**Bénéficiaire** : Dan Phan, `dan.phan@publicismedia.com`
+**Bénéficiaire** : Dan Phan, identité GCP `danphan2@publicisgroupe.net`
 
-> ⚠️ Domaine différent du mien (`adajouin@publicisgroupe.net`). À vérifier avant d'envoyer la demande : c'est bien cette identité qui porte les accès GCP de Dan, et pas un compte `@publicisgroupe.net`. Une demande d'IAM sur la mauvaise identité passe silencieusement et n'ouvre rien.
+> Son autre adresse, `dan.phan@publicismedia.com`, n'est **pas** l'identité qui porte les accès GCP. Toute demande d'IAM se fait sur `danphan2@publicisgroupe.net` : une demande sur la mauvaise identité est acceptée sans rien ouvrir, et ça ne se voit qu'au premier déploiement raté.
 
 > Le point non intuitif : ça touche **deux projets GCP**. L'agent vit dans `med-dtam-prd-mg`, mais les logs qui servent au diagnostic des `no_answer` sont écrits par le backend ConnectedHub dans `pmed-portal-prd-mg`. Un accès au seul projet DTAM permet de déployer, pas de diagnostiquer.
 
