@@ -2,9 +2,6 @@
 type: note
 projet: MMM AI Agent
 ---
-
-> Note de travail : contenu destiné à **Confluence**, page « 5. MMM AI Agent », en anglais, calé sur le style des pages 1 et 3. Copier à partir du titre ci-dessous, sans cette frontmatter ni ce bloc. Les lignes en italique `Screenshot of…` sont des emplacements où insérer une capture.
-
 # 5. MMM AI Agent
 
 ## Introduction
@@ -24,7 +21,7 @@ It is a paid add-on: access is controlled by a feature flag per client. Clients 
 The agent has two halves, documented separately:
 
 * **This page** covers the agent itself: the ADK pipeline, its prompts, its security model, and how to deploy, monitor and troubleshoot it. It lives in the `med-dtam-prd-mg` project.
-* ***3. Integration in Mine*** covers the Mine interface. The backend route, the React frontend, the feature flag and the session handling belong there.
+* ***3. Integration in Mine*** covers the ConnectedHub interface. The backend route, the React frontend, the feature flag and the session handling belong there.
 
 The boundary between the two halves is the format of the message the agent receives:
 
@@ -114,7 +111,7 @@ The BigQuery table holds every client. Isolation does not rely on separate table
 
 | Layer | Mechanism | Strength |
 | --- | --- | --- |
-| Mine backend | Prefixes `[MINE_CLIENT_ID: <id>]`, always as the first line | Hard, server side |
+| ConnectedHub backend | Prefixes `[MINE_CLIENT_ID: <id>]`, always as the first line | Hard, server side |
 | `extract_and_set_client_context` | Python regex, leftmost match | Hard |
 | `run_discovery` | Hardcoded `WHERE client_id = @client_id` | Hard |
 | `validate_client_filter` | Python check before any BigQuery call | Hard |
@@ -138,7 +135,7 @@ CLIENT_ID_RE_FALLBACK = re.compile(r'\[MINE_CLIENT_ID:\s*([^\]]+)\]')
 
 ### The on screen scope is untrusted input
 
-`ui_context` originates in the browser and lands next to the isolation guard, so it is validated in the Mine backend with a strict whitelist that **rejects** rather than sanitises:
+`ui_context` originates in the browser and lands next to the isolation guard, so it is validated in the ConnectedHub backend with a strict whitelist that **rejects** rather than sanitises:
 
 * Labels must match `^[\p{L}\p{N} _\-./&'(),%:+|]{1,64}$`, dates must match `^\d{4}-\d{2}-\d{2}$`, and `tab` and `lang` are closed enumerations.
 * Excluding `[`, `]`, `;`, `=` and newlines makes a forged marker structurally inexpressible. This is the entire security property and must not be relaxed.
@@ -200,7 +197,7 @@ All of the following were observed in production between 20 and 23 July 2026.
 
 Create a **new engine** whenever the change affects all traffic rather than only the feature being added, and whenever verification is only possible after deployment.
 
-The reference case is the `client_id` regex fix: updating production in place would have exposed every client before any verification was possible. The correct sequence there is a new engine, local testing pointed at it, then a cutover through a pull request on the Mine side.
+The reference case is the `client_id` regex fix: updating production in place would have exposed every client before any verification was possible. The correct sequence there is a new engine, local testing pointed at it, then a cutover through a pull request on the ConnectedHub side.
 
 Conversely, a change that is inert until production points at it can safely be pushed in place.
 
@@ -266,7 +263,7 @@ Tracing is free at current volumes. About 2.5 million spans per month are includ
 
 | Item | Severity | Detail |
 | --- | --- | --- |
-| Backend sessions held in memory | Known limitation | The Mine backend keeps sessions in an in memory map, so they are lost when the backend restarts. Persistent per user memory is an open item. This sits on the Mine side, not the agent side |
+| Backend sessions held in memory | Known limitation | The ConnectedHub backend keeps sessions in an in memory map, so they are lost when the backend restarts. Persistent per user memory is an open item. This sits on the ConnectedHub side, not the agent side |
 | `context_setter_agent` says "first message" | Wording fragility | Its instruction asks for the text of the **first** user message, while the recency rule of `CTX_UI_SCOPE` requires the **current** one. It works in practice, verified on 23 July 2026, because agents read the line from the transcript. If an answer ever uses a stale KPI, this is where to look. The fix is one line |
 | `ui_scope` in session state is never read | Dead code | `extract_and_set_client_context` writes `tool_context.state["ui_scope"]`, but no agent reads that key. The scope actually travels through the transcript. Harmless, but do not expect changing this key to change behaviour |
 | Market column | Documented inaccuracy | `level` is the market key across the system: `cf-budget-allocator` reads `level = request_json["market"]`, and the frontend groups its scopes by `level`. The description in `CTX_FIELDS`, "granularity of the analysis", is incomplete at best. Leaving `market` out of the agent's SQL rules remains correct, since its table is `tb_model_contributions` and no multi market client exists today, but this must be revisited when one does |
@@ -286,10 +283,12 @@ Tracing is free at current volumes. About 2.5 million spans per month are includ
 WHERE client_id = '{client_id}' AND level = '{level}' AND kpi = '{kpi}'
 ```
 
-This is safe today because the value always comes from the Mine backend. It would become an exploitable SQL injection the day a value originating from a model reached that payload, which is why injecting the client identifier from session state is a requirement rather than a good practice.
+This is safe today because the value always comes from the ConnectedHub backend. It would become an exploitable SQL injection the day a value originating from a model reached that payload, which is why injecting the client identifier from session state is a requirement rather than a good practice.
 
 ## Contacts
 
 Agent POC: Dan Phan (danphan2@publicisgroupe.net)
 
-Mine POC: Eddie Ratignier (eddratig@publicisgroupe.net)
+ConnectedHub POC: Eddie Ratignier (eddratig@publicisgroupe.net)
+
+Original author: Adam Jouini, September 2024 to September 2026. Built the agent, wrote this page, then left. Gone, unlike the fallback regex. Please keep it that way. ([linkedin.com/in/adam-jouini](https://www.linkedin.com/in/adam-jouini))
