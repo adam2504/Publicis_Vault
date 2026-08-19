@@ -194,10 +194,10 @@ La doc de référence ne reste pas dans le vault : elle est **réécrite dans Co
 
 ### Mes actions (deadline 21/08, dernier jour)
 
-- [ ] **Pousser le code** dans `Publicis-Media-France-FR5140/MMM_AI_Agent`
-- [ ] **Enlever les commentaires du code**
-- [ ] **Lister les rôles GCP nécessaires à Dan** (projets `med-dtam-prd-mg` et `pmed-portal-prd-mg`, plus `iam.serviceAccountUser` sur `mmm-agent-sa`)
-- [ ] **Écrire la doc complète dans Confluence**
+- [x] **Pousser le code** dans `Publicis-Media-France-FR5140/MMM_AI_Agent` — fait le 19/08. `main` local remis à niveau sur `feat/live-ui-scope` (22 commits d'avance), 2 commits de passation ajoutés, 29 commits poussés. L'ancien remote perso est conservé en local sous le nom `perso`
+- [x] **Enlever les commentaires du code** — fait le 19/08. Tous les commentaires `#` retirés des 5 fichiers Python, docstrings conservées. 95 lignes en moins. Vérifié par comparaison d'AST (identique avant/après, donc rien d'autre que des commentaires n'a bougé) et par les 35 tests, tous verts
+- [x] **Lister les rôles GCP nécessaires à Dan** — [[Accès & Rôles - Passation Dan]]
+- [x] **Écrire la doc complète** — rédigée, reste à coller dans Confluence
 - [ ] **Modifier l'email d'alerte avec Dan** (channel `5134431245708235828`, aujourd'hui `adajouin@publicisgroupe.net`)
 
 ### Points d'attention relevés en préparant ces actions
