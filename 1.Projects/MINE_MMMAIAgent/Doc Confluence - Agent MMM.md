@@ -13,6 +13,8 @@ The MMM AI Agent is a conversational assistant embedded in the Marketing Mix Mod
 
 The agent is a multi-agent pipeline built with the Google Agent Development Kit (ADK) and deployed on Vertex AI Agent Engine. It queries the same BigQuery data that feeds the Results page described in *3. Integration in Mine*.
 
+> ConnectedHub is the current name of the platform previously called Mine. Older pages in this space, and several technical identifiers such as the `MINE_CLIENT_ID` prefix and the `mine` BigQuery dataset, still carry the former name. They refer to the same platform.
+
 It is a paid add-on: access is controlled by a feature flag per client. Clients without the flag see a preview instead of the assistant.
 
 *Screenshot of an example of the AI Assistant tab:*
