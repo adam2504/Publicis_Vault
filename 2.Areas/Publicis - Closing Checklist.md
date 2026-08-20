@@ -27,7 +27,7 @@ Ces elements seront **inaccessibles apres le 3 septembre**. A faire le plus tot 
 A faire **avant** les reunions de handover, pour que les gens aient le temps de lire.
 
 - [ ] **AMC Analytics** : contexte, architecture, comment ca tourne en prod, ce qui manque encore
-- [ ] **MMM Agent (Google ADK / Vertex AI)** : contexte du projet, architecture agents, deploiement Vertex AI Agent Engine, acces
+- [x] **MMM Agent (Google ADK / Vertex AI)** : contexte du projet, architecture agents, deploiement Vertex AI Agent Engine, acces
 - [ ] **Creative Insights** 
 - [ ] Commenter le code la ou c'est le moins clair (pas exhaustif, focus sur les parties non-evidentes)
 

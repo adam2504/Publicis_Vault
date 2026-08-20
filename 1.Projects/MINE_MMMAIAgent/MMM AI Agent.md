@@ -15,7 +15,7 @@ Plateforme : [[Mine Platform]] · Déploiement visé : [[STELLANTIS]] (Opel DE /
 
 Ajout d'un assistant IA conversationnel dans le module MMM de ConnectedHub. L'agent répond à des questions sur les données MMM du client (ROI par média, comparaisons périodiques, etc.) en accédant aux données via Vertex AI Agent Engine.
 
-> 🧭 **Project Brief** — contexte produit & business (ce fichier). Le technique (pipeline, intégration ConnectedHub, observabilité, coût, bugs) est dans [[Architecture technique]]. Les notions métier MMM (variables, décomposition, saturation) sont dans [[MMM — Notions]]. La passation à Dan tient en trois notes : [[Passation - Note pour Dan]] (adressée à lui), [[Doc Confluence - Agent MMM]] (référence d'équipe) et [[Accès & Rôles - Passation Dan]] (accès à ouvrir).
+> 🧭 **Project Brief** — contexte produit & business (ce fichier). Le technique (pipeline, intégration ConnectedHub, observabilité, coût, bugs) est dans [[Architecture technique]]. Les notions métier MMM (variables, décomposition, saturation) sont dans [[MMM — Notions]]. La passation tient en quatre notes : [[Passation - Note pour Dan]] (agent, adressée à lui), [[Passation - Note pour Eddie]] (intégration ConnectedHub, adressée à lui), [[Doc Confluence - Agent MMM]] (référence d'équipe) et [[Accès & Rôles - Passation Dan]] (accès à ouvrir).
 
 ---
 
