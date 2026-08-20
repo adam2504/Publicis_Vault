@@ -32,6 +32,8 @@ Arborescence : `gs://creative_assets_<plateforme>/<ad_account_id>/<asset_id>.<as
 
 ---
 
+> ⚠️ **Ce document décrit le service des DS. Depuis le 20/08, le module n'utilise plus le sien.** Voir [[Session 2026-08-20]] : `cf-gather-meta-assets-ci` est notre copie, écrivant dans `connectedhub.tb_meta_asset_urls`, avec le `project_id`, le `DELETE` corrigé, le `KeyError` de pagination réglé, le multi-campagnes et un mode comptage. Les pièges listés ci-dessous restent vrais du service d'origine, que les DS utilisent toujours.
+
 ## Contrat d'appel des Cloud Run
 
 Source récupérée depuis `gs://run-sources-zen-creativeinsights-dev-mg-europe-west1/`. Pour Meta :

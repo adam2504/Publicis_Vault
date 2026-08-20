@@ -11,11 +11,83 @@ client: MINE
 
 Plateforme : [[Mine Platform]]
 
-Module ConnectedHub d'automatisation des Creative Insights : industrialiser en self-service la chaîne aujourd'hui exécutée à la main par les Data Scientists, de la récupération des assets créa jusqu'à la restitution au Data Analyst.
+## Le projet en clair
 
-Périmètre plateforme (transverse, pas mono-client). Plateformes média couvertes à l'entrée : Meta, TikTok, Snapchat.
+**Comprendre ce qui, dans une créa publicitaire, fait qu'une campagne marche.**
 
-> ⚠️ **Répartition du dev non tranchée.** Le CR du 10/08 indique qu'Abhishek démarre le développement initial, alors que le point servait à me briefer sur le module ConnectedHub. `implication: lead` reflète que je porte la couche plateforme, à confirmer avec Hajar et Jules.
+Un annonceur diffuse des dizaines ou des centaines de visuels et de vidéos sur Meta, TikTok et Snapchat. Certains performent, d'autres non. Les outils habituels disent *quelle* créa a bien marché, mais jamais **pourquoi** : est-ce le prix affiché à l'écran, la présence d'un visage, la durée de la vidéo, le fait qu'on y montre le produit en main ?
+
+Ce projet rend la créa elle-même mesurable. Il la transforme en un ensemble de variables décrites, puis confronte ces variables à la performance réellement obtenue. On passe ainsi de « cette vidéo a bien marché » à « les créas qui affichent un prix final convertissent mieux », ce qui est **reproductible** par le client sur ses prochaines campagnes.
+
+### La chaîne
+
+1. **Récupérer les créas** depuis les plateformes, via leurs APIs (Meta, TikTok, Snapchat)
+2. **Les lire avec un LLM** pour en extraire des variables typées : présence humaine, palette dominante, type d'accroche commerciale, durée, mentions légales, et ainsi de suite
+3. **Récupérer la performance** côté client, à la maille de l'annonce
+4. **Croiser les deux** et comparer la performance par modalité de variable
+5. **Livrer au Data Analyst**, qui interprète et construit l'analyse remise au client
+
+### Comment la performance est mesurée
+
+Pas en volume brut, ce qui ne dirait rien : une créa peu diffusée générerait mécaniquement peu de résultats. La métrique retenue est le **lift**, soit le rapport entre les conversions observées et celles qu'on aurait attendues au vu des impressions reçues.
+
+Ça neutralise le poids média et isole ce qui revient à la créa elle-même. Les créas trop peu exposées sont écartées, faute de sens statistique.
+
+### Ce que le client reçoit
+
+Une liste de ce qui marche et de ce qui ne marche pas, **chiffrée et actionnable**. Extrait d'une analyse réelle, sur 73 créas Verisure :
+
+> **Ce qui marche** : les vidéos de 24 à 29 secondes obtiennent un KPI de 0,042 contre 0,022 pour les autres (N=13 contre 34). Les créas comportant un témoignage client atteignent 0,035 contre 0,019 (N=20 contre 52).
+>
+> **Ce qui ne marche pas** : les vidéos de 4 à 20 secondes tombent à 0,013 contre 0,033 pour les autres.
+
+Chaque constat porte son **effectif** et sépare explicitement ce qui relève de la créa de ce qui relève du média ou du type d'achat, deux causes qu'il serait facile de confondre.
+
+Sur ce cas Verisure, la méthode est de la **comparaison de moyennes par modalité**, et non de la modélisation. Ça se défend sur 73 créas, où un modèle donnerait une fausse impression de rigueur : les livrables signalent d'ailleurs eux-mêmes les biais et les effectifs faibles.
+
+> ⚠️ **Ce n'est pas la seule méthode pratiquée.** De la modélisation a bien été faite sur d'autres cas d'usage. Le choix dépend du volume disponible et de la question posée, et le module doit donc pouvoir porter les deux, pas seulement le descriptif.
+
+### Pourquoi ce projet existe
+
+**C'est une prestation, pas un outil interne.** L'analyse de créas fait partie de ce que Publicis Media propose à ses annonceurs, au titre de son métier d'agence média. Ce n'est donc pas un confort d'équipe : la qualité, la répétabilité et le délai de production ont une portée commerciale directe.
+
+**Et aujourd'hui, chaque étude est artisanale.** Un Data Scientist monte le pipeline dans des notebooks pour un client donné, puis passe la main au Data Analyst par un export CSV. Deux équipes, deux outils, un transfert manuel, et rien de réutilisable d'une étude à l'autre.
+
+L'industrialisation vise donc deux choses à la fois : **rendre le travail des DS répétable**, et **réunir dans un même endroit ce que se partagent aujourd'hui deux métiers**. Le module met la partie data science et la partie analyse dans [[Mine Platform|ConnectedHub]], là où les analystes travaillent déjà sur le reste de leurs campagnes. Un analyste crée un projet, choisit son périmètre et lance la chaîne sans écrire de code.
+
+Le périmètre est transverse, pas mono-client.
+
+### Ce qui rend le sujet difficile
+
+**Les créas sont multimodales.** Analyser une vidéo demande un modèle capable de la regarder, pas seulement d'en lire les métadonnées.
+
+**Les variables doivent être comparables entre créas**, sinon rien ne se corrèle. D'où un dictionnaire de features typées et un schéma de sortie contraint, plutôt qu'un texte libre.
+
+**Un LLM n'est pas déterministe.** Le pipeline des DS interroge le modèle trois fois par créa et consolide par vote majoritaire, ou par médiane pour les valeurs numériques. Sans ça, deux lectures de la même vidéo pourraient donner deux réponses différentes, et la corrélation porterait sur du bruit.
+
+**Le croisement avec la performance est le vrai point dur.** La performance se mesure à la maille de l'annonce et par jour, la créa à la maille de l'asset, et une annonce porte plusieurs assets. La règle d'attribution entre les deux n'est pas tranchée.
+
+---
+
+## État d'avancement au 20/08/2026
+
+**Les étapes 1 à 4 du cadrage sont construites et fonctionnent.** Le module crée des projets, déclenche la collecte Meta, présente la bibliothèque de créas avec sélection, et extrait des features par prompt d'industrie. Tout est vérifié sur données réelles.
+
+**Les étapes 5 à 7 n'existent pas** : mapping avec la performance, notebooks d'analyse, restitution.
+
+| Étape | État |
+| --- | --- |
+| 1. Création de projet | livrée, avec contrôle de périmètre avant collecte |
+| 2. Récupération des assets | livrée, Meta uniquement |
+| 3. Validation / sélection | livrée |
+| 4. Extraction de features | livrée |
+| 5. Mapping avec la performance | **bloquée**, voir zones d'ombre |
+| 6. Analyse (notebooks) | non commencée |
+| 7. Restitution | non tranchée, voir le point de design ci-dessous |
+
+**Seul Meta est câblé.** TikTok et Snapchat ont un formulaire mais aucune collecte, et surtout aucune jointure performance possible (voir zones d'ombre).
+
+> ⚠️ **Le code n'est ni poussé ni mergé au 20/08.** Quatorze commits locaux sur `feat/creative-insights-scoping`. Ce qui est en production s'arrête aux rôles et à la bibliothèque de créas, livrés le 13/08.
 
 ---
 
@@ -32,13 +104,13 @@ Périmètre plateforme (transverse, pas mono-client). Plateformes média couvert
 
 ## Chaîne cible (module)
 
-1. **Création de projet** : advertiser IDs, plateformes, période
-2. **Récupération des assets** : déclenchement automatique des Cloud Functions existantes
-3. **Validation** : sélection humaine des vidéos et images à analyser
-4. **Extraction de features** : prompt par défaut, plus upload d'un prompt custom pour les variables sectorielles (texte ou JSON)
-5. **Mapping** : scheduled queries reliant vidéos, données d'engagement et features, avec notification quand le volume est suffisant
-6. **Analyse** : notebooks prédéfinis, sur le modèle de SIMBA
-7. **Restitution** : dashboard, accès stakeholders
+1. ✅ **Création de projet** : advertiser IDs, plateformes, période
+2. ✅ **Récupération des assets** : déclenchement automatique des Cloud Functions existantes
+3. ✅ **Validation** : sélection humaine des vidéos et images à analyser
+4. ✅ **Extraction de features** : prompt par défaut, plus prompts par industrie
+5. ⛔ **Mapping** : scheduled queries reliant vidéos, données d'engagement et features, avec notification quand le volume est suffisant
+6. ⬜ **Analyse** : notebooks prédéfinis, sur le modèle de SIMBA
+7. ⬜ **Restitution** : dashboard, accès stakeholders
 
 Étapes verrouillées séquentiellement : une étape ne s'ouvre que si la précédente est terminée. Page de suivi d'avancement dédiée. Sorties standardisées, pour que chacun sache ce qu'il obtient en fin d'analyse.
 
@@ -53,8 +125,6 @@ Aujourd'hui la chaîne se termine par un CSV parce que c'est le passage de main 
 | Reproduire la frontière | Le module produit un export propre, on branche le dashboard CSV existant de Thomas dessus. Effort de dev minimal, la valeur ajoutée reste l'automatisation amont. |
 | Supprimer la frontière | Restitution native dans ConnectedHub, le DA travaille dans l'app. Plus de dev, mais c'est ce qui fait du module un produit et pas un ordonnanceur. |
 
-**Précédent à ne pas répéter** : sur [[1.Projects/MINE_AMCAnalytics/AMC Analytics]], le deck de vues figées a dû être entièrement refait en workspace après le retour de Jules (« on ne peut pas faire ce qu'on veut »). Sorties standardisées ne doit pas dériver vers sorties figées.
-
 **Premier utilisateur réel du module : Thomas** (Data Analyst), pas Verisure ni Leapmotor. Il n'était pas dans la réunion de cadrage.
 
 ---
@@ -66,13 +136,10 @@ Une partie de la chaîne tourne déjà et a servi sur des cas passés. À cartog
 - [x] Cloud Functions Meta, TikTok, Snapchat : ce sont des Cloud Run gen2 dans `zen-creativeinsights-dev-mg`, contrat d'appel et pièges documentés dans [[Existant technique GCP]]
 - [x] Buckets GCS : `creative_assets_<plateforme>/<ad_account_id>/<asset_id>.<format>`, volumétrie relevée (prototype arrêté depuis le 01/06)
 - [x] Data Platform : c'est `zen-dataplatform-pm-prd-amg`, branchée par vue matérialisée avec un compte client codé en dur
-- [ ] Prompts Gemini existants : où ils sont versionnés, quel modèle, quel coût par asset (**non trouvé en CLI**, à demander à Hajar)
-- [ ] Notebooks d'analyse façon SIMBA : où ils tournent, comment ils sont versionnés (**hors du projet GCP exploré**)
+- [x] **Prompts Gemini et notebooks : trouvés le 19/08**, dans [creative-insights-analysis](https://github.com/Publicis-Media-France-FR5140/creative-insights-analysis). Ce n'est pas un notebook mais un package Python structuré, avec un dictionnaire de 54 features typées et un pipeline Vertex AI. Le modèle est `gemini-2.5-flash`, le coût mesuré est de l'ordre de 8 900 tokens par image et 12 200 par vidéo. Détail dans [[Session 2026-08-20]]
 - [ ] Dashboard CSV de Thomas : stack, alimentation, réutilisable ou non
 - [ ] Travaux antérieurs de Brieg et Thomas référencés en réunion (Brieg est parti le 12/06/2026, sans repreneur identifié)
 - [x] **Côté ConnectedHub : fait le 10/08.** SIMBA est le module `custom-bidding`, et les sept étapes de la chaîne cible existent déjà entre `custom-bidding` et `feed-manager`. Voir [[Patterns ConnectedHub réutilisables]]
-
-> Adam doit obtenir de Hajar les pointeurs GCP précis avant d'ouvrir quoi que ce soit. Le reste de la liste concerne l'infra DS, invisible depuis le repo.
 
 ---
 
@@ -80,10 +147,28 @@ Une partie de la chaîne tourne déjà et a servi sur des cas passés. À cartog
 
 1. ~~**Clé de jointure créa vers performance.**~~ **Tranché par l'exploration du 10/08, et c'est pire que prévu.** La jointure passe par `ad_id`, colonne que **seul Meta possède**. TikTok et Snapchat ne remontent aucune hiérarchie de campagne, donc la jointure y est impossible aujourd'hui. Reste ouvert : la règle d'attribution, car la performance est à la maille `ad_id` par jour alors que la créa est à la maille `asset_id`, et un ad porte plusieurs assets. Voir [[Existant technique GCP]].
 2. **Contrat d'ingestion.** Instruit le 10/08 : les features sont stockées en **colonnes physiques propres à chaque client** (environ 70 colonnes Verisure), Stellantis a une forme entièrement différente. `analysis_json` existe déjà et doit devenir le stockage canonique, sinon « sorties standardisées » est intenable.
-3. **Coût de l'extraction multimodale.** Un prompt Gemini sur des centaines de vidéos n'est pas gratuit, aucun chiffrage fait.
+3. ~~**Coût de l'extraction multimodale.**~~ **Chiffré le 19/08** : environ 8 900 tokens pour une image, 12 200 pour une vidéo, soit une dizaine d'euros pour une passe complète sur 1 456 créas. Ce n'est pas le coût qui contraint, c'est la durée : 6 h en séquentiel, ramenées à une vingtaine de minutes avec une concurrence de 16.
 4. **Notebooks en backend de production.** Fragile par nature : versioning, exécution, maintenance quand ils cassent.
-5. **Seuil « assez de données »** pour déclencher la notification : non défini, décision DS.
-6. **Où vit l'état du projet.** SIMBA le met en BigQuery, feed-manager en Firestore. Les deux modules du repo ont fait des choix opposés, il faut trancher avec Eddie. Détail dans [[Patterns ConnectedHub réutilisables]].
+5. **Seuil « assez de données »** pour déclencher la notification : non défini, décision DS. C'est un prérequis de l'étape 5.
+6. ~~**Où vit l'état du projet.**~~ **Tranché : BigQuery**, façon SIMBA, parce que les DS lisent les projets depuis leurs pipelines, hors de l'application. Seuls les prompts sont en Firestore, façon feed-manager, n'ayant aucun consommateur hors de l'app.
+
+---
+
+## Décisions structurantes
+
+Les décisions durables, avec leur raison. Le comment est dans les sessions, le pourquoi est ici.
+
+**Un projet est défini par son périmètre de collecte, pas par un compte annonceur.** C'était la contrainte la plus lourde du départ : la Cloud Function n'écrivait aucun identifiant de projet, donc les créas d'un projet étaient toutes celles de son compte. Sur le compte de test, un projet ayant collecté 35 créas en affichait 1 456. Levé le 20/08 en écrivant `project_id` nous-mêmes.
+
+**Les features sont typées et le schéma de réponse en est dérivé.** C'est ce qui rend deux créas comparables. Un prompt en texte libre aurait produit des sorties inexploitables. Repris du pipeline des DS, qui a raison sur ce point.
+
+**Les prompts vivent par industrie, pas par client ni par projet.** Un prompt par projet casserait la comparabilité, qui est la raison d'être du typage. La notion d'industrie ne peut pas venir du champ `business` des annonceurs : il n'est renseigné que sur 55 sur 300, en texte libre, avec des doublons et des coquilles. Elle est donc portée par le prompt.
+
+**L'extraction est séparée de l'analyse de performance**, alors que le pipeline des DS les fait dans le même appel. Les features n'ont pas besoin des chiffres de performance, donc l'extraction tourne dès la collecte au lieu d'attendre une jointure qui reste bloquée.
+
+**Ce qui se déduit ne se stocke pas.** L'avancement, le caractère bloqué d'un run, le rôle de l'appelant, l'état global du projet : tout est dérivé côté serveur. Un compteur stocké finit toujours par diverger de la réalité, et une donnée dupliquée oblige chaque étape à penser à la mettre à jour.
+
+**Toute dépense passe par un accord.** Collecte et extraction coûtent, l'une du quota API, l'autre de l'argent. Un éditeur demande, un administrateur décide. La modification d'un projet, elle, ne coûte rien et n'est donc pas soumise à validation : la tracer dans le journal d'activité suffit.
 
 ---
 
@@ -103,6 +188,24 @@ Une partie de la chaîne tourne déjà et a servi sur des cas passés. À cartog
 
 - **POC Creative Insights Verisure** : porté par Hajar et Léonie, jamais rien produit de mon côté. Note supprimée du vault le 10/08/2026, seuls les contacts subsistent dans [[VERISURE]]. Point à retenir : Léonie détenait une liste de features demandées par le client, jamais formalisée nulle part. C'est la seule expression de besoin client connue sur le sujet, et elle est à récupérer.
 - [[Creative Insights Leapmotor]] : piste de module restée en attente, cas d'usage passé d'Abhishek. Ses cloud functions et ses assets GCS deviennent la brique amont du module. Reprise par ce projet.
+
+## Reprise du projet
+
+Ce qu'il faut savoir pour reprendre, au-delà du code.
+
+**Le module utilise sa propre copie de la Cloud Function.** Depuis le 20/08, la collecte passe par `cf-gather-meta-assets-ci` et écrit dans `connectedhub.tb_meta_asset_urls`, pas dans le service ni la table des DS. C'est une **divergence de code assumée** : leur service reste intact et ils continuent de l'utiliser, mais les corrections qu'on y a apportées ne sont pas chez eux.
+
+> ⚠️ **Hajar n'en a pas été informée au 20/08.** C'est la première chose à faire. Le [[Plan modifications DS]] décrit encore comme des demandes plusieurs corrections qu'on a nous-mêmes livrées, il est à réécrire avant tout envoi.
+
+**Ce qu'on a corrigé de leur côté et qu'ils n'ont pas** : le `project_id` écrit en colonne, le `DELETE` d'idempotence qui ne filtrait que sur `asset_id` (bug actif chez eux, une créa partagée entre deux comptes voit sa ligne supprimée par une collecte sur l'autre), le `KeyError` de pagination qui fait tomber toute la fonction dès que Meta répond une erreur, et le multi-campagnes.
+
+**Ce qu'on ne peut pas corriger** : `main.py` n'est qu'une coquille, le travail réel vient de deux paquets privés Artifact Registry (`simba` et `creative-insights`). Tout ce qui est dans les paquets, notamment la temporisation sur le quota et le filtre de période, reste du ressort des DS.
+
+**Le prompt d'amorçage est calibré Verisure** et c'est le seul de la bibliothèque. Il fonctionne techniquement sur n'importe quelle créa, mais ses features sectorielles (détection de cambriolage, règles de prix) ne veulent rien dire hors du secteur. **La pertinence des extractions n'a jamais été validée sur un vrai jeu Verisure.**
+
+**Le compte de test n'est pas Verisure.** C'est un compte immobilier, `1349117765200572`, dont les campagnes s'appellent `Site4`, `Hubert`, `Seloger`. Il contient 16 575 annonces, dont seules 1 431 ont jamais été collectées par le prototype.
+
+**Un piège de la plateforme, sans rapport avec ce module** : un job nocturne retire des utilisateurs tout outil absent du registre déployé en production. Un module en cours de développement disparaît donc chaque nuit des comptes de ceux qui le testent. Voir [[Session 2026-08-20]].
 
 ## Notes techniques
 
