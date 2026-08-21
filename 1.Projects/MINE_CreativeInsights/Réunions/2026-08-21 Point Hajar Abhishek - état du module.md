@@ -41,9 +41,7 @@ Parcours à montrer, dans cet ordre :
 
 ## 2. Les trois plateformes : ce qui marche, ce qui bloque
 
-C'est la question qui viendra, et **la réponse a changé depuis la semaine dernière**.
-
-**Les trois plateformes collectent.** Meta, TikTok et Snapchat sont câblées et remplissent la bibliothèque. Il faut le dire clairement, parce que la dernière fois j'annonçais Meta seul.
+**Les trois plateformes collectent.** Meta, TikTok et Snapchat sont câblées et remplissent la bibliothèque.
 
 Ce qui les sépare n'est pas la collecte, c'est le **rattachement à la performance**. Les trois scrappers n'interrogent pas la même classe d'API :
 
@@ -178,4 +176,40 @@ Le troisième point est **une découverte d'aujourd'hui**, et elle mérite d'êt
 
 ## Compte rendu
 
-*À compléter après la réunion.*
+Démo complète déroulée comme prévu : accueil, création de projet avec contrôle de périmètre, collecte, bibliothèque de créas, bibliothèque de prompts, puis l'interface vue par un non-admin. Aucune objection sur l'architecture des écrans ni sur le modèle de rôles.
+
+L'annonce sur GCP est passée sans friction. La copie des Cloud Functions plutôt que leur modification a été reçue comme la bonne décision, pour la traçabilité et parce qu'elle laisse leurs pipelines intacts. Ils ont bien noté que les créas elles-mêmes restent dans leurs buckets existants, et que le seul bucket créé sert aux vignettes.
+
+### Le vrai sujet de la réunion, qui n'était pas celui que j'avais préparé
+
+J'arrivais avec la question « Cloud Function ou accès en lecture ». Hajar a déplacé le débat ailleurs : **la sélection manuelle des créas ne passe pas à l'échelle**. Cocher des assets un par un sur un projet qui en compte plusieurs centaines n'est pas un usage tenable, et elle veut que la sélection soit **pilotée par la performance** plutôt que faite à la main.
+
+Abhishek a répondu par une proposition qui débloque la question d'origine : que **l'utilisateur désigne lui-même une table** contenant les données d'engagement, qu'elle vienne de la Data Platform ou d'une table créée via Adverity.
+
+C'est structurant, et ça valide l'intuition de la préparation. On n'attend plus une Cloud Function pour prototyper : **le projet gagne un identifiant de table**, et l'intégration devient manuelle ou automatique selon ce que l'utilisateur fournit. La dépendance à leur disponibilité tombe.
+
+### Ce que cette proposition ne résout pas
+
+Deux choses à garder en tête, parce qu'elles n'ont pas été soulevées en séance :
+
+- **La règle d'attribution reste à trancher.** La performance est à la maille annonce par jour, la créa à la maille asset, et une annonce porte plusieurs assets. Désigner une table dit d'où viennent les chiffres, pas comment les répartir. La question reste entière.
+- **La clé de jointure manque toujours sur TikTok et Snapchat.** Leurs scrappers lisent une médiathèque et ne connaissent aucune annonce, donc aucune table d'engagement ne pourra s'y rattacher. La proposition résout la source, pas la clé.
+
+### Ce qui n'a pas été abordé
+
+À reprendre, aucun de ces points n'ayant été traité faute de temps :
+
+- Les **droits manquants en production**, les trois du tableau plus haut. Rien n'a été demandé en séance.
+- **Snapchat qui ne renvoie rien** sur le compte de test.
+- La **maille des prompts**, par industrie ou par client.
+- Le **job nocturne** et la liste de features de Léonie.
+
+### Demandes retenues pour moi
+
+- **Filtrer la bibliothèque par valeur de feature.** Besoin exprimé par Hajar : un data strategist doit pouvoir retrouver rapidement les créas illustrant une caractéristique précise pour les mettre dans une présentation. C'est l'usage concret du module côté métier, et ça n'existe pas aujourd'hui.
+- **Déposer un fichier de prompt** en plus de l'éditeur JSON. Proposé par moi, approuvé par les deux. Les deux entrées cohabitent.
+
+### De leur côté
+
+- Hajar et Abhishek affinent l'approche de la sélection automatique et du rattachement à la performance **pendant mes congés**.
+- Ils décident s'ils intègrent mes correctifs dans leurs Cloud Functions officielles ou s'ils maintiennent les copies séparément. C'est la suite logique de ce que je leur ai remonté.

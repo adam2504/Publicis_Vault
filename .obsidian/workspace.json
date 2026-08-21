@@ -50,7 +50,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -109,7 +109,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 293.5
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "6c6f7d492fc04625",
@@ -251,11 +252,13 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "038dc7a74cb27c32",
+  "active": "25c70699d1c664be",
   "lastOpenFiles": [
+    "1.Projects/MINE_CreativeInsights/Réunions/2026-08-21 Point Hajar Abhishek - état du module.md",
+    "1.Projects/MINE_CreativeInsights/Réunions/2026-08-21 Point Hajar Abhishek - état du module.md.tmp.28380.30721d5b6551",
+    "1.Projects/MINE_CreativeInsights/Réunions/2026-08-21 Point Hajar Abhishek - état du module.md.tmp.28380.17ee73ff944e",
     "2.Areas/Networking/2026-08-21 Point Hajar — Worldline Credit Risk.md",
     "conflict-files-obsidian-git.md",
-    "1.Projects/MINE_CreativeInsights/Réunions/2026-08-21 Point Hajar Abhishek - état du module.md",
     "1.Projects/MINE_CreativeInsights/Réunions/2026-08-10 Cadrage module Creative Insights.md",
     "1.Projects/MINE_CreativeInsights/Creative Insights.md",
     "1.Projects/MINE_CreativeInsights/Réunions/2026-08-21 Point Hajar Abhishek - état du module.md.tmp.28380.176acafbdc41",
@@ -277,8 +280,6 @@
     "1.Projects/MINE_MMMAIAgent/Doc Confluence - Agent MMM.md.tmp.32360.428d0826644e",
     "1.Projects/MINE_MMMAIAgent/Passation - Note pour Dan.md",
     "1.Projects/MINE_MMMAIAgent/Passation - Note pour Dan.md.tmp.32360.1646e7a934be",
-    "2.Areas/TODO.md.tmp.32360.e037ec86437b",
-    "1.Projects/MINE_MMMAIAgent/MMM AI Agent.md.tmp.32360.a564542c3af8",
     "1.Projects/MINE_AMCAnalytics/Sessions/Session 2026-08-18.md",
     "1.Projects/MINE_AMCAnalytics/Sessions/Session 2026-08-17.md",
     "2.Areas/Carrière/Note de Positionnement.md",
@@ -288,7 +289,6 @@
     "1.Projects/MINE_CreativeInsights/Sessions/Session 2026-08-12.md",
     "1.Projects/MINE_AMCAnalytics/Sessions/Session 2026-08-11.md",
     "3.Resources/Mine Platform/Incident 2026-08-11 Compte GitHub compromis.md",
-    "1.Projects/MINE_AMCAnalytics/Réunions/2026-08-10 Retours Jules Workspace Pivot.md",
     "Pasted image 20260723173222.png",
     "Pasted image 20260723173205.png",
     "_Attachments/2026-07-09-nicolas-vivies-remerciement-acces-looker.png",
