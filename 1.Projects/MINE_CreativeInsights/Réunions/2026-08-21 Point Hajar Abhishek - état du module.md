@@ -9,7 +9,7 @@ Plateforme : [[Mine Platform]]
 
 # 2026-08-21 Point Hajar et Abhishek, état du module
 
-**Note de préparation.** Le compte rendu sera ajouté en bas après la réunion.
+Les sections qui suivent sont la **note de préparation**, conservée telle quelle. Le **compte rendu** est en bas.
 
 ## Ce que je veux en sortir
 
