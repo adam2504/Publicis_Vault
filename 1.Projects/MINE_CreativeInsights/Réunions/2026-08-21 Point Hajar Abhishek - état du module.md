@@ -110,7 +110,7 @@ Deux changements propres à Meta :
 | Garde sur la pagination | **bug actif chez eux** : `_get_next_pages` lit `data` sans vérifier, donc une erreur Meta en cours de pagination fait tomber toute la fonction |
 | Multi-campagnes | le formulaire collectait une liste dont seule la première entrée était envoyée |
 
-**Trois de ces corrections sont des bugs de leurs services actuels**, pas des ajouts pour nous. C'est l'angle à privilégier : on leur remonte des correctifs, on ne fait pas bande à part.
+Sur ces quatre changements, **deux sont des bugs de leurs services actuels** : le `DELETE` non filtré, qui touche les trois plateformes, et la garde sur la pagination, propre à Meta. Les deux autres sont des ajouts pour nous. C'est l'angle à privilégier : on leur remonte des correctifs, on ne fait pas bande à part.
 
 **Tables séparées**, parce que leur `DELETE` non filtré tourne toujours : une table partagée laisserait leurs collectes emporter nos lignes.
 
