@@ -215,6 +215,7 @@ Ce qu'il faut savoir pour reprendre, au-delà du code.
 
 ## Réunions
 
+- [[2026-08-21 Point Hajar Abhishek - état du module]] : démo, retours UI, annonce des créations GCP, déblocage de la performance
 - [[2026-08-10 Cadrage module Creative Insights]] : briefing dev, chaîne cible, répartition à confirmer
 
 ## Dernières sessions

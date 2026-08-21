@@ -83,8 +83,6 @@ Questions ouvertes, pas des validations :
 
 **Modifié chez eux :** une colonne `project_id` ajoutée à `meta.tb_api_asset_urls`. Elle est restée **à NULL sur les 1481 lignes**, puisqu'on a finalement basculé sur notre propre table. Proposer de la retirer.
 
-**Aucun bucket créé.** On réutilise `creative_assets_meta`, avec les mêmes chemins, donc rien n'est retéléchargé ni dupliqué.
-
 ### La copie de leur Cloud Function
 
 Le point à expliquer clairement. `cf-gather-meta-assets-ci` est **leur code**, déployé sous un autre nom, avec quatre changements. Leur service n'a pas été touché, sa dernière révision date toujours du 1er juin.
