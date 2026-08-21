@@ -4,25 +4,25 @@
     "type": "split",
     "children": [
       {
-        "id": "fdb554de6bc031b4",
+        "id": "e6f0168ae23fb455",
         "type": "tabs",
         "children": [
           {
-            "id": "fe2b05c7c67fae94",
+            "id": "cdedca85bb3098ec",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2.Areas/TODO.md",
+                "file": "2.Areas/Publicis - Closing Checklist.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "TODO"
+              "title": "Publicis - Closing Checklist"
             }
           },
           {
-            "id": "038dc7a74cb27c32",
+            "id": "3f59a17ef24406d6",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -56,12 +56,10 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false,
-                "showSearch": false,
-                "searchQuery": ""
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "Explorateur de fichiers"
             }
           },
           {
@@ -201,81 +199,72 @@
               "icon": "git-pull-request",
               "title": "Source Control"
             }
-          },
-          {
-            "id": "86b3c4e9b5f664cd",
-            "type": "leaf",
-            "state": {
-              "type": "advanced-tables-toolbar",
-              "state": {},
-              "icon": "spreadsheet",
-              "title": "Advanced Tables"
-            }
           }
         ],
         "currentTab": 6
       }
     ],
     "direction": "horizontal",
-    "width": 200,
+    "width": 338.5,
     "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
+      "switcher:Ouvrir le sélecteur rapide": false,
+      "graph:Ouvrir la vue graphique": false,
+      "canvas:Créer une nouvelle toile": false,
+      "daily-notes:Ouvrir la note quotidienne": false,
+      "command-palette:Ouvrir la palette de commandes": false,
+      "bases:Créer une nouvelle base": false,
+      "templater-obsidian:Templater": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
       "evc-team-relay:Relay settings": false,
       "obsidian-git:Open Git source control": false,
       "pdf-plus:PDF++: Toggle auto-copy": false,
       "pdf-plus:PDF++: Toggle auto-focus": false,
-      "pdf-plus:PDF++: Toggle auto-paste": false,
-      "templater-obsidian:Templater": false,
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "command-palette:Open command palette": false,
-      "bases:Create new base": false,
-      "table-editor-obsidian:Advanced Tables Toolbar": false
+      "pdf-plus:PDF++: Toggle auto-paste": false
     }
   },
-  "active": "038dc7a74cb27c32",
+  "active": "3f59a17ef24406d6",
   "lastOpenFiles": [
-    "2.Areas/TODO.md",
     "1.Projects/MINE_MMMAIAgent/Réunions/2026-08-18 Passation agent avec Dan.md",
-    "1.Projects/MINE_MMMAIAgent/Doc Confluence - Agent MMM.md",
-    "1.Projects/MINE_MMMAIAgent/Doc Confluence - Agent MMM.md.tmp.32360.2aed9a638fb9",
-    "1.Projects/MINE_MMMAIAgent/Doc Confluence - Agent MMM.md.tmp.32360.7f9b722b20c5",
-    "1.Projects/MINE_MMMAIAgent/Doc Confluence - Agent MMM.md.tmp.32360.428d0826644e",
+    "1.Projects/MINE_MMMAIAgent/Passation - Note pour Eddie.md",
     "1.Projects/MINE_MMMAIAgent/Passation - Note pour Dan.md",
-    "1.Projects/MINE_MMMAIAgent/Passation - Note pour Dan.md.tmp.32360.1646e7a934be",
-    "2.Areas/TODO.md.tmp.32360.e037ec86437b",
-    "1.Projects/MINE_MMMAIAgent/MMM AI Agent.md.tmp.32360.a564542c3af8",
-    "1.Projects/MINE_MMMAIAgent/Passation - Note pour Dan.md.tmp.32360.0ba807fc0ebe",
-    "2.Areas/TODO.md.tmp.32360.53c27b7f4b46",
+    "1.Projects/MINE_MMMAIAgent/Doc Confluence - Agent MMM.md",
     "1.Projects/MINE_MMMAIAgent/Accès & Rôles - Passation Dan.md",
-    "2.Areas/TODO.md.tmp.32360.4d23948a2b5a",
-    "1.Projects/MINE_MMMAIAgent/Réunions/2026-08-18 Passation agent avec Dan.md.tmp.32360.2b308201c09d",
     "1.Projects/MINE_AMCAnalytics/Sessions/Session 2026-08-18.md",
-    "1.Projects/MINE_CreativeInsights/Réunions/2026-08-10 Cadrage module Creative Insights.md",
     "1.Projects/MINE_AMCAnalytics/Sessions/Session 2026-08-17.md",
+    "2.Areas/TODO.md",
     "2.Areas/Publicis - Closing Checklist.md",
-    "2.Areas/Carrière/Note de Positionnement.md",
-    "2.Areas/Carrière/Email de départ.md",
-    "1.Projects/MINE_CreativeInsights/Plan modifications DS.md",
-    "1.Projects/MINE_CreativeInsights/Sessions/Session 2026-08-13.md",
-    "1.Projects/MINE_CreativeInsights/Sessions/Session 2026-08-12.md",
-    "1.Projects/MINE_AMCAnalytics/Sessions/Session 2026-08-11.md",
+    "conflict-files-obsidian-git.md",
+    "4.Archive/PUBLICIS_PassationBasma/Réunions/2026-06-30 Onboarding Audiences LiveRamp.md",
+    "4.Archive/PUBLICIS_PassationBasma/Réunions/2026-06-23 Point AI Office - Agent Copilot.md",
+    "4.Archive/PUBLICIS_PassationBasma/Réunions",
+    "4.Archive/PUBLICIS_PassationBasma/Passation Basma.md",
+    "4.Archive/PUBLICIS_PassationBasma",
+    "4.Archive/MINE_FeedGenCategorisation/Sessions/Session 2026-07-06.md",
+    "4.Archive/MINE_FeedGenCategorisation/Sessions/Session 2026-07-05.md",
+    "4.Archive/MINE_FeedGenCategorisation/Sessions/Session 2026-07-02.md",
+    "4.Archive/MINE_FeedGenCategorisation/Sessions/Session 2026-06-26.md",
+    "4.Archive/MINE_FeedGenCategorisation/Sessions/Session 2026-06-25.md",
+    "4.Archive/MINE_FeedGenCategorisation/Sessions/Session 2026-06-24.md",
+    "4.Archive/MINE_FeedGenCategorisation/Sessions",
+    "4.Archive/MINE_FeedGenCategorisation/FeedGen Catégorisation.md",
+    "4.Archive/MINE_FeedGenCategorisation",
     "3.Resources/Mine Platform/Incident 2026-08-11 Compte GitHub compromis.md",
-    "1.Projects/MINE_AMCAnalytics/Réunions/2026-08-10 Retours Jules Workspace Pivot.md",
-    "1.Projects/MINE_AMCAnalytics/Sessions/Session 2026-08-10.md",
-    "2026-08-10.md",
-    "1.Projects/MINE_AMCAnalytics/Sessions/Session 2026-06-19.md",
-    "1.Projects/MINE_CreativeInsights/Existant technique GCP.md",
-    "1.Projects/MINE_CreativeInsights/Patterns ConnectedHub réutilisables.md",
-    "1.Projects/MINE_CreativeInsights/Creative Insights.md",
-    "3.Resources/Onboardings/VERISURE_CreativeInsights/Creative Insights Verisure.md",
-    "3.Resources/Onboardings/VERISURE_CreativeInsights/Réunions/2026-06-18 Point avec Léonie & Hajar.md",
-    "Pasted image 20260723173222.png",
+    "3.Resources/Clients/VERISURE.md",
+    "3.Resources/Clients/STELLANTIS.md",
+    "2.Areas/Idées de Projets/Creative Insights Leapmotor.md",
+    "2.Areas/Carrière/Email de départ.md",
+    "2.Areas/Carrière/2026-08-03 Mentorship x Marcel Session 1 Cleber.md",
+    "1.Projects/MINE_CreativeInsights/Réunions",
+    "1.Projects/MINE_CreativeInsights/Sessions",
+    "1.Projects/MINE_CreativeInsights",
     "Pasted image 20260723173205.png",
+    "Pasted image 20260723173222.png",
+    "1.Projects/MINE_MMMAIAgent/Testing Conseil (proxy client).md.tmp.39496.7304092e7715",
+    "1.Projects/MINE_MMMAIAgent/Architecture technique.md.tmp.39496.f6bfcca4a36a",
+    "1.Projects/MINE_MMMAIAgent/Architecture technique.md.tmp.39496.df9253508e2e",
     "_Attachments/2026-07-09-nicolas-vivies-remerciement-acces-looker.png",
     "_Attachments/message_basma_slide44.png",
     "_Attachments/message_basma_VB.png",
