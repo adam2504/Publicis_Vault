@@ -53,11 +53,44 @@ date: 2026-08-21
 
 ## À voir / rechercher
 
-- Tous les KPIs credit risk au niveau particuliers (vs. entreprises)
-- AML/KYC : définition précise, implications concrètes, comment ça s'applique aux particuliers
-- Vérifier s'il y a un critère d'image/standing sur qui peut obtenir une carte Amex
-- Partenariats d'Amex avec des entreprises sur les solutions utilisées : ce qui est fait en interne, sous-traité, ou en partenariat
-- Explorer les équipes proches chez Amex (credit analyst, hybrid risk, etc.) pour avoir le point de vue des experts métier
+**KPIs credit risk niveau particuliers :**
+- Taux de délinquence (% du solde en retard vs. solde total actif), avec des buckets 30-59, 60-89, 90-119 jours de retard
+- Taux de défaut ou charge-off (crédit passé en perte)
+- Taux d'utilisation de la carte (somme des soldes / somme des plafonds accordés)
+- Facteurs qui influencent ces KPIs : taux d'intérêt, chômage, niveau d'endettement, accès au crédit pour profils plus risqués
+
+**AML/KYC pour particuliers :**
+- KYC, vérifier et authentifier l'identité du client à l'ouverture de compte, et évaluer son niveau de risque individuel
+- Concrètement pour une demande de carte : vérification identité (pièce d'identité), adresse, revenus, croisement avec bases de données (bureaux de crédit)
+- Screening automatique contre listes de sanctions, PEP (personnes politiquement exposées), médias négatifs
+- Pas un one-shot, monitoring continu des transactions après l'ouverture du compte
+- KYC est un sous-composant de l'AML (dispositif anti-blanchiment plus large)
+
+**Critère d'image/standing sur les cartes Amex :**
+- Score FICO généralement 670+ pour les cartes d'entrée de gamme (Blue Cash Everyday), 690+ pour le milieu de gamme (Gold, Blue Cash Preferred), 720+ pour le haut de gamme (Platinum, Centurion/Black)
+- Pas de seuil de revenu minimum officiellement communiqué, mais revenu pris en compte dans la décision (salaire, sécurité sociale, chômage, pension, revenus d'investissement)
+- Condition de base : 18 ans minimum, bon crédit, revenu suffisant pour couvrir les paiements mensuels, SSN ou ITIN
+
+**Partenariats Amex :**
+- Deux modèles de cartes co-brand. D'un côté Amex est l'émetteur/souscripteur (ex. Delta, Hilton, Charles Schwab, Lowe's, via Centurion Bank) et porte le risque de crédit. De l'autre une banque partenaire est l'émetteur (ex. Bank of America, ex-MBNA), porte le risque et gère le compte sur ses propres systèmes en utilisant le réseau et la marque Amex
+- Historiquement Amex avait environ 80 partenariats d'émission dans environ 90 pays
+
+**Équipes proches côté risk chez Amex (pour le rôle Credit Risk Data Analyst) :**
+- Credit Risk Analyst au sein du CRU (Credit Risk Unit). Note et souscrit les expositions de crédit par région, industrie et business line, calcule la probabilité de défaut (PD) et la perte en cas de défaut (LGD), rédige des mémos de risque, doit connaître Bâle et le cycle macroéconomique
+- Ce rôle CRU semble plus orienté institutionnel/corporate (cartes entreprise, facilités de working capital) que particuliers, à vérifier si le rôle visé (particuliers) dépend d'une autre équipe (ex. Consumer Risk / US Consumer Services)
+
+## Sources
+
+- [Consumer credit risk](https://en.wikipedia.org/wiki/Consumer_credit_risk)
+- [Credit Card Delinquency Rates and Charge-Offs](https://wallethub.com/edu/cc/credit-card-charge-off-delinquency-statistics/25536)
+- [What is AML and KYC in Payments?](https://www.clearlypayments.com/blog/what-is-aml-and-kyc-in-payments/)
+- [Credit Card Application KYC Requirements Explained](https://www.vouched.id/learn/blog/credit-card-application-kyc)
+- [What is KYC in Banking? - Experian Insights](https://www.experian.com/blogs/insights/what-is-kyc-in-banking/)
+- [American Express Credit Score Requirements by Card](https://wallethub.com/answers/cc/american-express-credit-score-requirements-1000338-2140726659/)
+- [Requirements to Get a Credit Card - American Express](https://www.americanexpress.com/en-us/credit-cards/credit-intel/credit-card-requirements/)
+- [Credit Risk Analyst @ American Express](https://jobs.anitab.org/companies/american-express/jobs/54699088-credit-risk-analyst)
+- [Analyst-Risk Management - American Express Careers](https://careers.americanexpress.com/en/sites/CX_1/job/26011119/)
+- [The Anatomy of a Co-Branded Credit Card](https://thefinancebuff.com/anatomy-co-branded-credit-card.html)
 
 ## Suite éventuelle
 
