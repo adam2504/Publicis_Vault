@@ -1,6 +1,6 @@
 ---
 type: context
-Dernière mise à jour: 2026-08-19
+Dernière mise à jour: 2026-08-22
 ---
 
 # CONTEXT — Vault d'Adam
@@ -11,7 +11,7 @@ Dernière mise à jour: 2026-08-19
 
 ## Qui est Adam
 
-Adam Jouini, apprenti Data & Dev chez Publicis Media (alternance), rattaché à la plateforme **ConnectedHub** (produit interne Mine). Il travaille au croisement du développement (React/Node.js/backend), de la data science (Vertex AI, embeddings, agents) et de l'analyse de données (AMC, MMM, audiences LiveRamp). Orientation data science exprimée lors du point évolution de juin 2026. Jules a dit explicitement vouloir proposer un poste à la sortie de l'alternance, en citant l'agent MMM et AMC Analytics comme réalisations commercialement visibles. **Dernier jour de travail : 21/08/2026.**
+Adam Jouini, apprenti Data & Dev chez Publicis Media (alternance), rattaché à la plateforme **ConnectedHub** (produit interne Mine). Il travaille au croisement du développement (React/Node.js/backend), de la data science (Vertex AI, embeddings, agents) et de l'analyse de données (AMC, MMM, audiences LiveRamp). Orientation data science exprimée lors du point évolution de juin 2026. Jules a dit explicitement vouloir proposer un poste à la sortie de l'alternance, en citant l'agent MMM et AMC Analytics comme réalisations commercialement visibles. **Dernier jour de travail : 21/08/2026. Adam n'est plus en poste depuis le 22/08/2026.**
 
 ---
 
@@ -22,11 +22,11 @@ Adam Jouini, apprenti Data & Dev chez Publicis Media (alternance), rattaché à 
 
 Agent IA conversationnel dans le module MMM de ConnectedHub (Vertex AI Agent Engine). Feature de la plateforme vendue en add-on à tout client ayant un MMM signé — cible de déploiement : Stellantis (Opel DE / Peugeot DE), puis Longchamp.
 
-**Statut (19/08 — passation active, dernier jour Adam le 21/08)** : Engine `6241` en prod (`MMM_Agent_v3_live_ui_scope`). Feature B (scope écran live) livrée et en prod depuis le 23/07. **Passation à Dan en cours (côté agent — pipeline ADK, Vertex AI)** : point tenu le 18/08. Actions complétées le 19/08 : code poussé dans le repo d'équipe `Publicis-Media-France-FR5140/MMM_AI_Agent` (29 commits, `main` remis à niveau sur `feat/live-ui-scope`) ; commentaires Python retirés (95 lignes, AST identique, 35 tests verts) ; alerte `no_answer` redirigée vers Dan en parallèle (channel `8248908768259935024` créé sur `danphan2@publicisgroupe.net` — ancien channel `5134431245708235828` à retirer avant le 04/09 après confirmation de réception) ; doc Confluence rédigée (reste à coller). **Côté intégration ConnectedHub** (backend `agent.ts`, SSE, feature flag, sessions) : second point à caler avec Eddie — pas encore fait.
+**Statut (21/08 — passation terminée, Adam parti)** : Engine `6241` en prod (`MMM_Agent_v3_live_ui_scope`). Feature B (scope écran live) en prod depuis le 23/07. Passation côté agent terminée : code poussé dans `Publicis-Media-France-FR5140/MMM_AI_Agent` (29 commits, `main` remis à niveau), commentaires Python retirés, alerte `no_answer` redirigée vers Dan (channel `8248908768259935024` créé — ancien channel `5134431245708235828` à retirer avant le 04/09 après confirmation de réception), doc Confluence rédigée (reste à coller). **Passation intégration ConnectedHub (backend `agent.ts`, SSE, feature flag, sessions) non finalisée** avant le départ d'Adam — point avec Eddie non tenu avant le 21/08.
 
-**Prochaine action** : Confirmer la réception de l'alerte `no_answer` avec Dan avant le 21/08. Retirer l'ancien channel d'alerte avant le 04/09. Caler le point de passation intégration avec Eddie avant le 21/08.
+**Prochaine action (pour l'équipe)** : Coller la doc Confluence (Dan). Retirer l'ancien channel d'alerte avant le 04/09 après confirmation réception. Caler le point passation intégration avec Eddie (frontière agent / ConnectedHub, backend `agent.ts`, SSE, feature flag, sessions).
 
-**Blocker** : Passation intégration ConnectedHub (Eddie) non encore calée. Cadrage "recommandation" (option A/B) toujours non tranché — remis à Baptiste post-passation. Conseil DE Stellantis (Zenith Media) silencieux depuis le mail deck — remis à Katia/Inès.
+**Blocker** : Passation intégration ConnectedHub (Eddie) non calée avant le départ d'Adam. Cadrage "recommandation" (option A/B) remis à Baptiste post-passation. Conseil DE Stellantis (Zenith Media) silencieux depuis le mail deck — à relancer par Katia/Inès.
 
 ---
 
@@ -35,9 +35,9 @@ Agent IA conversationnel dans le module MMM de ConnectedHub (Vertex AI Agent Eng
 
 Module ConnectedHub centralisant les analyses Amazon Marketing Cloud (workspace pivot depuis BigQuery) et les dashboards Looker (en iframe).
 
-**Statut (18/08 — actif, PRs en attente de merge)** : Sessions des 17 et 18/08 très denses. **PRs #1749 (→ main) et #1750 (→ develop) ouvertes le 18/08**, pas encore mergées — contenu strictement AMC, 40 fichiers chacune. Travaux du 17-18/08 : tableau réécrit sur TanStack (en-tête à deux étages, redimensionnement, tri, lignes TOTAL / TOTAL FILTRÉ collées en tête, virtualisation au-delà de 150 lignes) ; filtres unifiés (seuils et coupures dans le même panneau) ; scorecards propres à chaque cas d'usage (répondent à la question posée, pas aux mesures de la vue — découverte : « Beginner » et « Finisher » donnaient toujours le même chiffre, remplacés par part de parcours solo et levier ouvrant/fermant le plus) ; entonnoir Vue d'ensemble à 4 niveaux (largeurs sans encodage quantitatif, même raisonnement que le Venn) ; Venn de synergie à géométrie fixe (proportionnel rejeté) ; noms KPI lisibles à l'écran, colonne source au survol. Découverte structurante via Khadija (17/08) : **un `path` vide = suppression de confidentialité AMC** (cohorte trop petite — AMC masque la dimension mais renvoie les métriques) ; la somme des parcours n'égalera jamais le total de l'étude — encodé dans le moteur (`Cut { count, measures }`). Bug latent corrigé : `readSum` lisait uniquement `impressions_cost`, `cost` valait 0 en silence sur toute extraction nommant sa colonne `spend`. **433 tests client au vert** (depuis le 17/08).
+**Statut (18/08 — PRs en attente, Adam parti le 21/08)** : **PRs #1749 (→ main) et #1750 (→ develop) ouvertes le 18/08**, pas encore mergées — contenu strictement AMC, 40 fichiers chacune. Travaux des 17-18/08 : tableau réécrit sur TanStack (en-tête à deux étages, redimensionnement, tri, lignes TOTAL / TOTAL FILTRÉ collées en tête, virtualisation au-delà de 150 lignes) ; filtres unifiés (seuils et coupures dans le même panneau) ; scorecards propres à chaque cas d'usage ; entonnoir Vue d'ensemble à 4 niveaux (largeurs sans encodage quantitatif) ; Venn de synergie à géométrie fixe ; noms KPI lisibles à l'écran, colonne source au survol. 433 tests client au vert.
 
-**Prochaine action** : Merger #1750 → develop en premier, vérifier en staging, puis #1749 → main. Signaler à Eddie : prop `modal` manquante sur `Combobox` partagé (bloquant pour les filtres en Dialog), `Button variant="secondary"` typé sans style, `onRowClick.logic` mal typé. Validation Jules non encore faite. Vérifier si « Av. CVR » de Jules = taux du total ou moyenne des taux (écart visible sur slide). Traiter les feedbacks mail restants (`time of`).
+**Prochaine action (pour l'équipe)** : Merger #1750 → develop en premier, vérifier en staging, puis #1749 → main. Signaler à Eddie : prop `modal` manquante sur `Combobox` partagé (bloquant pour les filtres en Dialog), `Button variant="secondary"` typé sans style, `onRowClick.logic` mal typé. Validation Jules non encore faite.
 
 **Blocker** : PRs #1749/#1750 non mergées (validation Jules manquante). Ingestion BQ et registre toujours manuels. Migration Looker → React dépend du calendrier Khadija.
 
@@ -57,11 +57,11 @@ Module ConnectedHub centralisant les analyses Amazon Marketing Cloud (workspace 
 
 Module ConnectedHub d'automatisation des Creative Insights. Objectif : self-service de la chaîne DS manuelle (récupération assets créa Meta/TikTok/Snapchat → extraction features Gemini → restitution DA).
 
-**Statut (13/08 — stalled depuis 6 jours)** : Lots 1 et 2 mergés (#1738-#1741) : rôles éditeur/administrateur, circuit de validation mail, icône module, `viewer_role` calculé côté serveur. Lot 3 poussé (`feat/creative-insights-project-id`, pas encore de PR) : colonne `project_id` créée sur `meta.tb_api_asset_urls`, requêtes avec repli SQL — comportement actuel préservé. Plan modifications DS rédigé, **pas encore envoyé à Hajar et Abhishek**. Ticket IT toujours sans réponse, staging non fonctionnel. Découverte critique (13/08) : sans `campaign_id`, Meta throttle sur les 1545 campagnes du compte — `campaign_id` obligatoire. Adam part le 21/08 : continuité du projet à organiser.
+**Statut (21/08 — point Hajar/Abhishek, dernier jour Adam)** : **Étapes 1 à 4 livrées et démontrées le 21/08.** Étapes 5 à 7 non commencées. Démo complète avec Hajar et Abhishek le 21/08 : bonne réception, architecture des écrans et modèle de rôles validés sans objection. Annonce de la copie des Cloud Functions passée sans friction. **Architecture étape 5 débloquée** : sur proposition d'Abhishek, le projet gagnera un identifiant de table de performance (BQ ou Adverity), ce qui remplace l'attente d'une Cloud Function de Hajar et permet de prototyper. Hajar et Abhishek travaillent sur l'approche de sélection automatique et de rattachement à la performance **pendant les congés d'Adam**. **14 commits locaux non poussés** sur `feat/creative-insights-scoping` (66 fichiers, 4 359 insertions), aucune PR ouverte. Droits DEV en place depuis le 19/08. **3 droits PROD non encore demandés** (ticket non ouvert en séance le 21/08) : `roles/aiplatform.user` sur `zen-creativeinsights-dev-mg`, `Storage Object Viewer` sur `creative_assets_tiktok` et `creative_assets_snapchat`, pour `interface@pmed-portal-prd-mg.iam.gserviceaccount.com`. Nouvelles demandes issues de la réunion : filtrer la bibliothèque de créas par valeur de feature (besoin Hajar) ; import fichier de prompt en plus de l'éditeur JSON.
 
-**Prochaine action** : Envoyer le [[Plan modifications DS]] à Hajar et Abhishek (bloquant pour tout le reste côté DS). Ouvrir une PR pour `feat/creative-insights-project-id`. Suivre le ticket IT. Localiser les prompts Gemini et notebooks d'exécution (étape 4).
+**Prochaine action** : Pousser les 14 commits sur une branche basée sur `origin/develop` et ouvrir une PR. Réécrire le [[Plan modifications DS]] avant tout envoi (il présente encore comme demandes des choses livrées entre-temps). Ouvrir un ticket IT pour les 3 droits PROD manquants. Récupérer la liste de features de Léonie (jamais formalisée).
 
-**Blocker** : Plan DS non envoyé (Hajar et Abhishek ne connaissent pas les 5 évolutions Cloud Function attendues). Ticket IT en attente (service account sans droits, staging inaccessible). Prompts Gemini et notebooks non localisés (étape 4 bloquée). TikTok et Snapchat sans `ad_id` — jointure performance impossible. Fragilité observateur async (correctif durable = Cloud Tasks). Répartition dev non tranchée (couche ConnectedHub vs backend DS).
+**Blocker** : 14 commits non poussés (risque de divergence / perte). Plan modifications DS à réécrire avant envoi — Hajar et Abhishek ne savent pas encore ce qui a été livré. Règle d'attribution performance (`ad_id` → `asset_id`) non tranchée — bloque l'étape 5. TikTok et Snapchat sans clé de jointure performance (`ad_id` absent) — évolution du scrapper nécessaire, pas un simple correctif. 3 droits PROD non encore demandés (ticket à ouvrir).
 
 ---
 
@@ -69,18 +69,18 @@ Module ConnectedHub d'automatisation des Creative Insights. Objectif : self-serv
 
 | Blocker | Projet(s) | Qui débloque |
 |---|---|---|
-| Passation intégration ConnectedHub non calée — backend `agent.ts`, SSE, feature flag, sessions | MMM AI Agent | Eddie (point à caler avant le 21/08) |
-| Ancien channel alerte `no_answer` (`5134431245708235828`) à retirer avant le 04/09 | MMM AI Agent | Adam (après confirmation réception par Dan) |
+| Passation intégration ConnectedHub non finalisée — backend `agent.ts`, SSE, feature flag, sessions | MMM AI Agent | Eddie (à contacter post-départ Adam) |
+| Ancien channel alerte `no_answer` (`5134431245708235828`) à retirer avant le 04/09 | MMM AI Agent | Dan (après confirmation réception) |
 | Cadrage "recommandation" agent — option A (deux niveaux interne/client) vs option B (assistant pur, aucune reco) | MMM AI Agent | Baptiste (post-passation Adam) |
 | Conseil DE Stellantis silencieux — Zenith Media ne répond plus depuis le mail deck | MMM AI Agent | Katia + Zenith Media DE |
 | PRs #1749/#1750 non mergées — validation Jules en attente | AMC Analytics | Jules |
 | Prop `modal` manquante sur `Combobox` partagé — filtres incliquables dans Dialog | AMC Analytics | Eddie |
 | Ingestion BQ AMC manuelle (registre non automatisé) | AMC Analytics | Khadija (ingestion) |
-| Plan modifications DS non envoyé — Hajar et Abhishek ne connaissent pas les 5 évolutions Cloud Function attendues | Creative Insights | Adam (action immédiate avant le 21/08) |
-| Ticket IT en attente — droits service account `interface@` sur `zen-creativeinsights-dev-mg`, staging non fonctionnel | Creative Insights | IT / James |
-| TikTok et Snapchat ne remontent pas `ad_id` — jointure performance impossible | Creative Insights | Hajar + Abhishek |
-| Prompts Gemini et notebooks d'exécution non localisés — étape 4 (extraction features) bloquée | Creative Insights | Hajar |
-| Répartition du dev non tranchée (couche ConnectedHub vs backend DS) | Creative Insights | Hajar + Jules |
+| 14 commits non poussés sur `feat/creative-insights-scoping`, aucune PR ouverte | Creative Insights | (action immédiate — risque de divergence) |
+| Plan modifications DS à réécrire avant envoi — présente comme demandes des choses livrées entre-temps | Creative Insights | (à réécrire avant envoi à Hajar/Abhishek) |
+| 3 droits PROD non encore demandés : `roles/aiplatform.user` + `Storage Object Viewer` TikTok/Snapchat | Creative Insights | IT / James (nouveau ticket) |
+| Règle d'attribution performance (`ad_id` → `asset_id`, un ad porte plusieurs assets) non tranchée | Creative Insights | Hajar + Abhishek |
+| TikTok et Snapchat sans clé de jointure performance — évolution du scrapper nécessaire, pas un correctif | Creative Insights | Hajar + Abhishek |
 
 ---
 
@@ -92,7 +92,7 @@ Module ConnectedHub d'automatisation des Creative Insights. Objectif : self-serv
 | Baptiste | Head of Data (futur pôle études & mesure) — go agent, cadrage reco | MMM AI Agent |
 | Eddie | Lead dev ConnectedHub — archi frontend/backend, décisions infra | MMM AI Agent, AMC Analytics |
 | Khadija | Data Analyst — dashboards Looker AMC, ingestion BQ | AMC Analytics |
-| Dan | Data Scientist — reprend le MMM Agent (passation en cours depuis le 18/08) | MMM AI Agent |
+| Dan | Data Scientist — reprend le MMM Agent (passation terminée au 21/08) | MMM AI Agent |
 | Hajar | Data Scientist — testing MMM, AMC modeled audiences, porte le sujet Creative Insights | MMM AI Agent, AMC Analytics, Creative Insights |
 | Abhishek | Data Scientist PGD (Inde) — cloud functions d'extraction d'assets, notebooks SIMBA | Creative Insights |
 | Thomas | Data Analyst Social + L'Oréal — consommateur final des Creative Insights, auteur du dashboard CSV | Creative Insights |
@@ -109,11 +109,11 @@ Module ConnectedHub d'automatisation des Creative Insights. Objectif : self-serv
 
 | Date | Fait |
 |---|---|
+| 2026-08-21 | **Dernier jour d'Adam + Point Creative Insights Hajar/Abhishek.** Démo complète du module déroulée (accueil, création de projet, collecte, bibliothèque, prompts). Architecture des écrans et modèle de rôles validés sans objection. Hajar recentre le sujet : la sélection manuelle ne passe pas à l'échelle, elle veut une sélection pilotée par la performance. Abhishek propose que le projet désigne lui-même une table de performance (BQ ou Adverity) — débloque le prototype sans attendre leur Cloud Function. Annonce GCP (copie des CF, dataset `connectedhub`, correctifs) accueillie sans friction. 3 droits PROD non demandés en séance. Hajar et Abhishek travaillent sur l'approche pendant les congés. |
+| 2026-08-20 | **Creative Insights — grosse session (17-20/08), étape 4 livrée.** Bibliothèque de prompts par industrie, extraction Vertex AI gemini-2.5-flash avec schéma typé dérivé du dictionnaire de 54 features, worker à concurrence 16 et reprenable. Cloud Function dupliquée en `cf-gather-meta-assets-ci` (4 correctifs : `project_id`, `DELETE` d'idempotence, `KeyError` de pagination, multi-campagnes). 14 commits locaux non poussés, aucune PR ouverte. Droits IT enfin posés sur le bon bénéficiaire (19/08, après deux erreurs). Job nocturne découvert : retire chaque nuit tout outil absent du registre prod. |
 | 2026-08-19 | **Passation MMM Agent — actions du jour.** Code poussé dans `Publicis-Media-France-FR5140/MMM_AI_Agent` (29 commits, main remis à niveau). Commentaires Python retirés (95 lignes, AST identique, 35 tests verts). Alerte `no_answer` redirigée vers Dan (channel additionnel créé — ancien à retirer avant le 04/09 après confirmation). Doc Confluence rédigée (reste à coller). |
-| 2026-08-18 | **Point passation Dan (MMM Agent) + session AMC longue.** Passation : frontière agent / intégration posée, backlog transmis à Dan (`BUSINESS_CONTEXT`, `cf-budget-allocator-prod`, knowledge client), intégration ConnectedHub remise à Eddie (second point à caler). AMC : tableau TanStack, filtres unifiés, scorecards par cas d'usage, virtualisation, Venn synergie (géométrie fixe), noms KPI lisibles → PRs #1749 (→ main) et #1750 (→ develop) ouvertes, 40 fichiers chacune. |
-| 2026-08-17 | **Session AMC — retours PowerPoint Jules.** Entonnoir Vue d'ensemble (4 niveaux, largeurs sans encodage quantitatif). Double axe `barsWithLine` opt-in par preset (borné — révision partielle de la règle du 10/08). Colonnes façon ConnectedFeed (`MeasureManager`, glisser-déposer, barre de contenu au-dessus du tableau). Découverte structurante via Khadija : un `path` vide = seuil de confidentialité AMC (masque dimension, conserve métriques) — la somme des parcours n'égale jamais le total de l'étude, encodé dans le moteur. Bug latent corrigé : `readSum` ne lisait pas `spend` (alias de `cost`). |
-| 2026-08-13 | **Creative Insights — deuxième session de dev.** Lots 1 et 2 mergés : rôles éditeur/administrateur, circuit de validation, mail admins, icône module (#1738-#1741). Bug de fraîcheur du rôle corrigé (`viewer_role` calculé côté serveur). Découverte critique : sans `campaign_id`, Meta throttle le compte entier (1545 campagnes, code 17/80004) — `campaign_id` obligatoire. Lot 3 poussé : colonne `project_id` + repli SQL, comportement actuel préservé. |
-| 2026-08-11 | **Session AMC Analytics** : retours Jules (10/11 actions), analyses enregistrées (Firestore, `?a=<id>` dans l'URL). PRs #1726/#1728 et #1733/#1736 mergées — module identique sur `develop` et `main`, en production. |
+| 2026-08-18 | **Point passation Dan (MMM Agent) + session AMC longue.** Passation : frontière agent / intégration posée, backlog transmis à Dan, intégration ConnectedHub remise à Eddie (point non tenu avant le 21/08). AMC : tableau TanStack, filtres unifiés, scorecards par cas d'usage, virtualisation, Venn synergie (géométrie fixe) → PRs #1749 (→ main) et #1750 (→ develop) ouvertes, 40 fichiers chacune. |
+| 2026-08-17 | **Session AMC — retours PowerPoint Jules.** Entonnoir Vue d'ensemble (4 niveaux, largeurs sans encodage quantitatif). Double axe `barsWithLine` opt-in par preset. Colonnes façon ConnectedFeed (`MeasureManager`, glisser-déposer). Découverte structurante via Khadija : un `path` vide = seuil de confidentialité AMC — somme des parcours ≠ total de l'étude, encodé dans le moteur. Bug latent corrigé : `readSum` ne lisait pas `spend` (alias de `cost`). |
 
 ---
 
