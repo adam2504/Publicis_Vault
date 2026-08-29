@@ -1,6 +1,6 @@
 ---
 type: context
-Dernière mise à jour: 2026-08-26
+Dernière mise à jour: 2026-08-29
 ---
 
 # CONTEXT — Vault d'Adam
@@ -37,7 +37,7 @@ Module ConnectedHub centralisant les analyses Amazon Marketing Cloud (workspace 
 
 **Statut (18/08 — PRs en attente, Adam parti le 21/08)** : **PRs #1749 (→ main) et #1750 (→ develop) ouvertes le 18/08**, pas encore mergées — contenu strictement AMC, 40 fichiers chacune. Travaux des 17-18/08 : tableau réécrit sur TanStack (en-tête à deux étages, redimensionnement, tri, lignes TOTAL / TOTAL FILTRÉ collées en tête, virtualisation au-delà de 150 lignes) ; filtres unifiés (seuils et coupures dans le même panneau) ; scorecards propres à chaque cas d'usage ; entonnoir Vue d'ensemble à 4 niveaux (largeurs sans encodage quantitatif) ; Venn de synergie à géométrie fixe ; noms KPI lisibles à l'écran, colonne source au survol. 433 tests client au vert.
 
-**Prochaine action (pour l'équipe)** : Merger #1750 → develop en premier, vérifier en staging, puis #1749 → main. Signaler à Eddie : prop `modal` manquante sur `Combobox` partagé (bloquant pour les filtres en Dialog), `Button variant="secondary"` typé sans style, `onRowClick.logic` mal typé. Validation Jules non encore faite.
+**Prochaine action (pour l'équipe)** : Merger #1750 → develop en premier, vérifier en staging, puis #1749 → main. Explorer les feedbacks mail de Jules (ouverts dans le TODO au départ d'Adam). Signaler à Eddie : prop `modal` manquante sur `Combobox` partagé (bloquant pour les filtres en Dialog), `Button variant="secondary"` typé sans style, `onRowClick.logic` mal typé. Validation Jules non encore faite.
 
 **Blocker** : PRs #1749/#1750 non mergées (validation Jules manquante). Ingestion BQ et registre toujours manuels. Migration Looker → React dépend du calendrier Khadija.
 
@@ -74,6 +74,7 @@ Module ConnectedHub d'automatisation des Creative Insights. Objectif : self-serv
 | Cadrage "recommandation" agent — option A (deux niveaux interne/client) vs option B (assistant pur, aucune reco) | MMM AI Agent | Baptiste (post-passation Adam) |
 | Conseil DE Stellantis silencieux — Zenith Media ne répond plus depuis le mail deck | MMM AI Agent | Katia + Zenith Media DE |
 | PRs #1749/#1750 non mergées — validation Jules en attente | AMC Analytics | Jules |
+| Feedbacks mail de Jules non encore explorés | AMC Analytics | (à prendre en charge post-Adam) |
 | Prop `modal` manquante sur `Combobox` partagé — filtres incliquables dans Dialog | AMC Analytics | Eddie |
 | Ingestion BQ AMC manuelle (registre non automatisé) | AMC Analytics | Khadija (ingestion) |
 | 14 commits non poussés sur `feat/creative-insights-scoping`, aucune PR ouverte | Creative Insights | (action immédiate — risque de divergence) |
