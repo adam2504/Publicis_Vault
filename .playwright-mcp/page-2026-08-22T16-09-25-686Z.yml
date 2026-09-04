@@ -1,0 +1,96 @@
+- generic [ref=f3e2]:
+  - navigation [ref=f3e3]:
+    - generic [ref=f3e4]:
+      - generic [ref=f3e5]:
+        - link [ref=f3e6] [cursor=pointer]:
+          - /url: /e68b8640/
+          - img "Logo" [ref=f3e8]
+        - button "LONGCHAMP / Longchamp" [ref=f3e10]:
+          - img "LONGCHAMP" [ref=f3e12]
+          - generic [ref=f3e13]: LONGCHAMP
+          - generic [ref=f3e14]: /
+          - img "Longchamp" [ref=f3e16]
+          - generic [ref=f3e17]: Longchamp
+      - generic [ref=f3e20]:
+        - heading "Search something..." [level=2] [ref=f3e261]
+        - button "Search something..." [ref=f3e262]
+        - button "Notifications" [ref=f3e27]:
+          - generic [ref=f3e31]:
+            - paragraph
+        - button "Dark mode" [ref=f3e32]
+        - button [ref=f3e35]:
+          - generic "Profil" [ref=f3e36]:
+            - img "User picture" [ref=f3e37]
+  - main [ref=f3e38]:
+    - generic [ref=f3e40]:
+      - generic [ref=f3e43]:
+        - list [ref=f3e45]:
+          - listitem [ref=f3e46]:
+            - link "Model" [ref=f3e263] [cursor=pointer]:
+              - /url: /e68b8640/marketing-mix-modeling/model
+          - listitem [ref=f3e55]:
+            - link "Context" [ref=f3e264] [cursor=pointer]:
+              - /url: /e68b8640/marketing-mix-modeling/context
+          - listitem [ref=f3e64]:
+            - link "Results" [ref=f3e265] [cursor=pointer]:
+              - /url: /e68b8640/marketing-mix-modeling/results
+          - listitem [ref=f3e71]:
+            - link "Predictive" [ref=f3e266] [cursor=pointer]:
+              - /url: /e68b8640/marketing-mix-modeling/predictive
+          - listitem [ref=f3e76]:
+            - link "Simulation" [ref=f3e77] [cursor=pointer]:
+              - /url: /e68b8640/marketing-mix-modeling/simulation
+          - listitem [ref=f3e85]:
+            - link "AI Assistant" [ref=f3e267] [cursor=pointer]:
+              - /url: /e68b8640/marketing-mix-modeling/chatbot
+          - listitem [ref=f3e92]:
+            - link "Settings" [ref=f3e268] [cursor=pointer]:
+              - /url: /e68b8640/marketing-mix-modeling/settings
+          - listitem [ref=f3e99]:
+            - button "Download" [ref=f3e269] [cursor=pointer]
+        - generic [ref=f3e107]:
+          - paragraph [ref=f3e108]: Market
+          - text: France
+          - combobox [ref=f3e109]:
+            - generic [ref=f3e110]: KPI
+            - generic [ref=f3e112]:
+              - button "Nylon sales amount revenue" [ref=f3e113] [cursor=pointer]
+              - textbox [ref=f3e118]: filled
+          - generic [ref=f3e119]:
+            - generic [ref=f3e121]:
+              - generic [ref=f3e122]: Period
+              - textbox "Period" [ref=f3e270]:
+                - /placeholder: Empty
+                - text: 2024-W25
+            - textbox [ref=f3e130]:
+              - /placeholder: Empty
+              - text: 2025-W25
+        - button "Toggle Sidebar" [ref=f3e134]
+      - main [ref=f3e135]:
+        - main [ref=f3e136]:
+          - generic [ref=f3e271]:
+            - navigation "Breadcrumbs" [ref=f3e272]:
+              - list [ref=f3e273]:
+                - listitem [ref=f3e274]:
+                  - link "ConnectedHub" [ref=f3e275] [cursor=pointer]:
+                    - /url: /e68b8640/
+                - listitem [ref=f3e278]:
+                  - link "Marketing Mix Modeling" [ref=f3e279] [cursor=pointer]:
+                    - /url: /e68b8640/marketing-mix-modeling/
+                - listitem [ref=f3e282]:
+                  - paragraph [ref=f3e283]: AI Assistant
+            - heading "AI Assistant" [level=1] [ref=f3e286]
+          - generic [ref=f3e287]:
+            - button "New conversation" [active] [ref=f3e289] [cursor=pointer]
+            - generic [ref=f3e290]:
+              - generic [ref=f3e297]:
+                - paragraph [ref=f3e299]: Hi! I'm your MMM assistant. Ask me about your ROAS and media performance, budget scenarios, or how to read any chart in the module.
+                - button "Copy to clipboard" [ref=f3e300] [cursor=pointer]
+              - generic [ref=f3e305]:
+                - button "Which media channel has the best ROAS?" [ref=f3e306] [cursor=pointer]
+                - button "How do I read the saturation curves?" [ref=f3e307] [cursor=pointer]
+                - button "Where can I simulate a budget reallocation?" [ref=f3e308] [cursor=pointer]
+            - generic [ref=f3e310]:
+              - textbox "Ask a question…" [ref=f3e311]
+              - button [disabled] [ref=f3e312]
+  - region "Notifications alt+T"

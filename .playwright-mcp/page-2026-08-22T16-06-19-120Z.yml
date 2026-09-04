@@ -1,0 +1,81 @@
+- generic [ref=f2e2]:
+  - navigation [ref=f2e3]:
+    - generic [ref=f2e4]:
+      - generic [ref=f2e5]:
+        - link [ref=f2e6] [cursor=pointer]:
+          - /url: /e68b8640/
+          - img "Logo" [ref=f2e8]
+        - button "LONGCHAMP / Longchamp" [ref=f2e10]:
+          - img "LONGCHAMP" [ref=f2e12]
+          - generic [ref=f2e13]: LONGCHAMP
+          - generic [ref=f2e14]: /
+          - img "Longchamp" [ref=f2e16]
+          - generic [ref=f2e17]: Longchamp
+      - generic [ref=f2e20]:
+        - heading "Rechercher quelque chose..." [level=2] [ref=f2e22]
+        - button "Rechercher quelque chose..." [ref=f2e23]
+        - button "Notifications" [ref=f2e27]:
+          - generic [ref=f2e31]:
+            - paragraph
+        - button "Dark mode" [ref=f2e32]
+        - button [ref=f2e35]:
+          - generic "Profil" [ref=f2e36]:
+            - img "User picture" [ref=f2e37]
+  - generic [ref=f2e38]:
+    - generic [ref=f2e41]:
+      - button "Masquer la barre latérale" [ref=f2e43]
+      - generic [ref=f2e49]:
+        - generic [ref=f2e51]:
+          - link "Analyser & mesurer" [ref=f2e52] [cursor=pointer]:
+            - /url: /e68b8640/categories/analyze-measure
+          - button [ref=f2e53]
+        - generic [ref=f2e57]:
+          - link "Optimiser & activer" [ref=f2e58] [cursor=pointer]:
+            - /url: /e68b8640/categories/optimize-activate
+          - button [ref=f2e59]
+    - main [ref=f2e62]:
+      - main [ref=f2e63]:
+        - generic [ref=f2e65]:
+          - generic [ref=f2e68]:
+            - list [ref=f2e70]:
+              - listitem [ref=f2e71]:
+                - link "Modèle" [ref=f2e72] [cursor=pointer]:
+                  - /url: /e68b8640/marketing-mix-modeling/model
+              - listitem [ref=f2e80]:
+                - link "Contexte" [ref=f2e81] [cursor=pointer]:
+                  - /url: /e68b8640/marketing-mix-modeling/context
+              - listitem [ref=f2e89]:
+                - link "Résultats" [ref=f2e90] [cursor=pointer]:
+                  - /url: /e68b8640/marketing-mix-modeling/results
+              - listitem [ref=f2e96]:
+                - link "Prédictif" [ref=f2e97] [cursor=pointer]:
+                  - /url: /e68b8640/marketing-mix-modeling/predictive
+              - listitem [ref=f2e101]:
+                - link "Simulation" [ref=f2e102] [cursor=pointer]:
+                  - /url: /e68b8640/marketing-mix-modeling/simulation
+              - listitem [ref=f2e110]:
+                - link "Assistant IA" [ref=f2e111] [cursor=pointer]:
+                  - /url: /e68b8640/marketing-mix-modeling/chatbot
+              - listitem [ref=f2e117]:
+                - link "Paramètres" [ref=f2e118] [cursor=pointer]:
+                  - /url: /e68b8640/marketing-mix-modeling/settings
+              - listitem [ref=f2e124]:
+                - button "Télécharger" [disabled]
+            - button "Toggle Sidebar" [ref=f2e126]
+          - main [ref=f2e127]:
+            - main [ref=f2e128]:
+              - generic [ref=f2e129]:
+                - navigation "Breadcrumbs" [ref=f2e130]:
+                  - list [ref=f2e131]:
+                    - listitem [ref=f2e132]:
+                      - link "ConnectedHub" [ref=f2e133] [cursor=pointer]:
+                        - /url: /e68b8640/
+                    - listitem [ref=f2e136]:
+                      - link "Marketing Mix Modeling" [ref=f2e137] [cursor=pointer]:
+                        - /url: /e68b8640/marketing-mix-modeling/
+                    - listitem [ref=f2e140]:
+                      - paragraph [ref=f2e141]: Assistant IA
+                - heading "Assistant IA" [level=1] [ref=f2e144]
+              - status [ref=f2e149]:
+                - generic [ref=f2e155]: Chargement...
+  - region "Notifications alt+T"
