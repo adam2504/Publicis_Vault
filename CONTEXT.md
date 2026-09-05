@@ -1,6 +1,6 @@
 ---
 type: context
-Dernière mise à jour: 2026-09-02
+Dernière mise à jour: 2026-09-05
 ---
 
 # CONTEXT — Vault d'Adam
@@ -24,7 +24,7 @@ Agent IA conversationnel dans le module MMM de ConnectedHub (Vertex AI Agent Eng
 
 **Statut (21/08 — passation terminée, Adam parti)** : Engine `6241` en prod (`MMM_Agent_v3_live_ui_scope`). Feature B (scope écran live) en prod depuis le 23/07. Passation côté agent terminée : code poussé dans `Publicis-Media-France-FR5140/MMM_AI_Agent` (29 commits, `main` remis à niveau), commentaires Python retirés, alerte `no_answer` redirigée vers Dan (channel `8248908768259935024` créé — ancien channel `5134431245708235828` à retirer **avant le 04/09** après confirmation de réception — date dans 2 jours au 02/09), doc Confluence rédigée (reste à coller). **Passation intégration ConnectedHub (backend `agent.ts`, SSE, feature flag, sessions) non finalisée** avant le départ d'Adam — point avec Eddie non tenu avant le 21/08.
 
-**Prochaine action (pour l'équipe)** : Retirer l'ancien channel d'alerte avant le 04/09 après confirmation réception (Dan). Coller la doc Confluence (Dan). Caler le point passation intégration avec Eddie (frontière agent / ConnectedHub, backend `agent.ts`, SSE, feature flag, sessions).
+**Prochaine action (pour l'équipe)** : Vérifier si l'ancien channel d'alerte (`5134431245708235828`) a bien été retiré — délai 04/09 passé, statut non confirmé dans le vault. Coller la doc Confluence (Dan). Caler le point passation intégration avec Eddie (frontière agent / ConnectedHub, backend `agent.ts`, SSE, feature flag, sessions).
 
 **Blocker** : Passation intégration ConnectedHub (Eddie) non calée avant le départ d'Adam. Cadrage "recommandation" (option A/B) remis à Baptiste post-passation. Conseil DE Stellantis (Zenith Media) silencieux depuis le mail deck — à relancer par Katia/Inès.
 
@@ -69,7 +69,7 @@ Module ConnectedHub d'automatisation des Creative Insights. Objectif : self-serv
 
 | Blocker | Projet(s) | Qui débloque |
 |---|---|---|
-| ⚠️ Ancien channel alerte `no_answer` (`5134431245708235828`) à retirer **avant le 04/09** (dans 2 jours) | MMM AI Agent | Dan (après confirmation réception) |
+| ~~⚠️ Ancien channel alerte `no_answer` (`5134431245708235828`) à retirer avant le 04/09~~ — **délai passé (05/09), statut non confirmé dans le vault** | MMM AI Agent | Dan (à vérifier) |
 | Passation intégration ConnectedHub non finalisée — backend `agent.ts`, SSE, feature flag, sessions | MMM AI Agent | Eddie (à contacter post-départ Adam) |
 | Cadrage "recommandation" agent — option A (deux niveaux interne/client) vs option B (assistant pur, aucune reco) | MMM AI Agent | Baptiste (post-passation Adam) |
 | Conseil DE Stellantis silencieux — Zenith Media ne répond plus depuis le mail deck | MMM AI Agent | Katia + Zenith Media DE |
