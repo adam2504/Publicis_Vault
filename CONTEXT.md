@@ -1,6 +1,6 @@
 ---
 type: context
-Dernière mise à jour: 2026-09-05
+Dernière mise à jour: 2026-09-09
 ---
 
 # CONTEXT — Vault d'Adam
@@ -22,9 +22,9 @@ Adam Jouini, apprenti Data & Dev chez Publicis Media (alternance), rattaché à 
 
 Agent IA conversationnel dans le module MMM de ConnectedHub (Vertex AI Agent Engine). Feature de la plateforme vendue en add-on à tout client ayant un MMM signé — cible de déploiement : Stellantis (Opel DE / Peugeot DE), puis Longchamp.
 
-**Statut (21/08 — passation terminée, Adam parti)** : Engine `6241` en prod (`MMM_Agent_v3_live_ui_scope`). Feature B (scope écran live) en prod depuis le 23/07. Passation côté agent terminée : code poussé dans `Publicis-Media-France-FR5140/MMM_AI_Agent` (29 commits, `main` remis à niveau), commentaires Python retirés, alerte `no_answer` redirigée vers Dan (channel `8248908768259935024` créé — ancien channel `5134431245708235828` à retirer **avant le 04/09** après confirmation de réception — date dans 2 jours au 02/09), doc Confluence rédigée (reste à coller). **Passation intégration ConnectedHub (backend `agent.ts`, SSE, feature flag, sessions) non finalisée** avant le départ d'Adam — point avec Eddie non tenu avant le 21/08.
+**Statut (21/08 — passation terminée, Adam parti)** : Engine `6241` en prod (`MMM_Agent_v3_live_ui_scope`). Feature B (scope écran live) en prod depuis le 23/07. Passation côté agent terminée : code poussé dans `Publicis-Media-France-FR5140/MMM_AI_Agent` (29 commits, `main` remis à niveau), commentaires Python retirés, alerte `no_answer` redirigée vers Dan (channel `8248908768259935024` créé — ancien channel `5134431245708235828` à retirer après confirmation de réception — délai 04/09 dépassé, statut toujours non confirmé dans le vault), doc Confluence rédigée (reste à coller). **Passation intégration ConnectedHub (backend `agent.ts`, SSE, feature flag, sessions) non finalisée** avant le départ d'Adam — point avec Eddie non tenu avant le 21/08.
 
-**Prochaine action (pour l'équipe)** : Vérifier si l'ancien channel d'alerte (`5134431245708235828`) a bien été retiré — délai 04/09 passé, statut non confirmé dans le vault. Coller la doc Confluence (Dan). Caler le point passation intégration avec Eddie (frontière agent / ConnectedHub, backend `agent.ts`, SSE, feature flag, sessions).
+**Prochaine action (pour l'équipe)** : Vérifier si l'ancien channel d'alerte (`5134431245708235828`) a bien été retiré — délai 04/09 largement dépassé, statut non confirmé. Coller la doc Confluence (Dan). Caler le point passation intégration avec Eddie (frontière agent / ConnectedHub, backend `agent.ts`, SSE, feature flag, sessions).
 
 **Blocker** : Passation intégration ConnectedHub (Eddie) non calée avant le départ d'Adam. Cadrage "recommandation" (option A/B) remis à Baptiste post-passation. Conseil DE Stellantis (Zenith Media) silencieux depuis le mail deck — à relancer par Katia/Inès.
 
@@ -69,7 +69,7 @@ Module ConnectedHub d'automatisation des Creative Insights. Objectif : self-serv
 
 | Blocker | Projet(s) | Qui débloque |
 |---|---|---|
-| ~~⚠️ Ancien channel alerte `no_answer` (`5134431245708235828`) à retirer avant le 04/09~~ — **délai passé (05/09), statut non confirmé dans le vault** | MMM AI Agent | Dan (à vérifier) |
+| ⚠️ Ancien channel alerte `no_answer` (`5134431245708235828`) à retirer — délai 04/09 **largement dépassé (09/09)**, statut non confirmé | MMM AI Agent | Dan (à vérifier) |
 | Passation intégration ConnectedHub non finalisée — backend `agent.ts`, SSE, feature flag, sessions | MMM AI Agent | Eddie (à contacter post-départ Adam) |
 | Cadrage "recommandation" agent — option A (deux niveaux interne/client) vs option B (assistant pur, aucune reco) | MMM AI Agent | Baptiste (post-passation Adam) |
 | Conseil DE Stellantis silencieux — Zenith Media ne répond plus depuis le mail deck | MMM AI Agent | Katia + Zenith Media DE |
@@ -112,7 +112,7 @@ Module ConnectedHub d'automatisation des Creative Insights. Objectif : self-serv
 |---|---|
 | 2026-08-21 | **Dernier jour d'Adam + Point Creative Insights Hajar/Abhishek.** Démo complète du module déroulée (accueil, création de projet, collecte, bibliothèque, prompts). Architecture des écrans et modèle de rôles validés sans objection. Hajar recentre le sujet : la sélection manuelle ne passe pas à l'échelle, elle veut une sélection pilotée par la performance. Abhishek propose que le projet désigne lui-même une table de performance (BQ ou Adverity) — débloque le prototype sans attendre leur Cloud Function. Annonce GCP (copie des CF, dataset `connectedhub`, correctifs) accueillie sans friction. 3 droits PROD non demandés en séance. Hajar et Abhishek travaillent sur l'approche. |
 | 2026-08-20 | **Creative Insights — grosse session (17-20/08), étape 4 livrée.** Bibliothèque de prompts par industrie, extraction Vertex AI gemini-2.5-flash avec schéma typé dérivé du dictionnaire de 54 features, worker à concurrence 16 et reprenable. Cloud Function dupliquée en `cf-gather-meta-assets-ci` (4 correctifs). 14 commits locaux non poussés, aucune PR ouverte. Droits IT enfin posés sur le bon bénéficiaire (19/08, après deux erreurs). Job nocturne découvert : retire chaque nuit tout outil absent du registre prod. |
-| 2026-08-19 | **Passation MMM Agent — actions du jour.** Code poussé dans `Publicis-Media-France-FR5140/MMM_AI_Agent` (29 commits, main remis à niveau). Commentaires Python retirés (95 lignes, AST identique, 35 tests verts). Alerte `no_answer` redirigée vers Dan (channel additionnel créé — ancien à retirer **avant le 04/09** après confirmation). Doc Confluence rédigée (reste à coller). |
+| 2026-08-19 | **Passation MMM Agent — actions du jour.** Code poussé dans `Publicis-Media-France-FR5140/MMM_AI_Agent` (29 commits, main remis à niveau). Commentaires Python retirés (95 lignes, AST identique, 35 tests verts). Alerte `no_answer` redirigée vers Dan (channel additionnel créé — ancien à retirer après confirmation, délai 04/09 dépassé). Doc Confluence rédigée (reste à coller). |
 | 2026-08-18 | **Point passation Dan (MMM Agent) + session AMC longue.** Passation : frontière agent / intégration posée, backlog transmis à Dan, intégration ConnectedHub remise à Eddie (point non tenu avant le 21/08). AMC : tableau TanStack, filtres unifiés, scorecards par cas d'usage, virtualisation, Venn synergie (géométrie fixe) → PRs #1749 (→ main) et #1750 (→ develop) ouvertes, 40 fichiers chacune. |
 | 2026-08-17 | **Session AMC — retours PowerPoint Jules.** Entonnoir Vue d'ensemble (4 niveaux, largeurs sans encodage quantitatif). Double axe `barsWithLine` opt-in par preset. Colonnes façon ConnectedFeed (`MeasureManager`, glisser-déposer). Découverte structurante via Khadija : un `path` vide = seuil de confidentialité AMC — somme des parcours ≠ total de l'étude, encodé dans le moteur. Bug latent corrigé : `readSum` ne lisait pas `spend` (alias de `cost`). |
 
