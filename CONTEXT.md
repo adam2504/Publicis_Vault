@@ -1,6 +1,6 @@
 ---
 type: context
-Dernière mise à jour: 2026-09-12
+Dernière mise à jour: 2026-09-16
 ---
 
 # CONTEXT — Vault d'Adam
@@ -69,7 +69,7 @@ Module ConnectedHub d'automatisation des Creative Insights. Objectif : self-serv
 
 | Blocker | Projet(s) | Qui débloque |
 |---|---|---|
-| ⚠️ Ancien channel alerte `no_answer` (`5134431245708235828`) à retirer — délai 04/09 **largement dépassé (12/09)**, statut non confirmé | MMM AI Agent | Dan (à vérifier) |
+| ⚠️ Ancien channel alerte `no_answer` (`5134431245708235828`) à retirer — délai 04/09 **largement dépassé (16/09)**, statut non confirmé | MMM AI Agent | Dan (à vérifier) |
 | Passation intégration ConnectedHub non finalisée — backend `agent.ts`, SSE, feature flag, sessions | MMM AI Agent | Eddie (à contacter post-départ Adam) |
 | Cadrage "recommandation" agent — option A (deux niveaux interne/client) vs option B (assistant pur, aucune reco) | MMM AI Agent | Baptiste (post-passation Adam) |
 | Conseil DE Stellantis silencieux — Zenith Media ne répond plus depuis le mail deck | MMM AI Agent | Katia + Zenith Media DE |
